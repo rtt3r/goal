@@ -7,6 +7,7 @@
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
+		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Vantage.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
@@ -25,7 +26,7 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
 		<PackageReference Include="FluentValidation" Version="10.3.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />

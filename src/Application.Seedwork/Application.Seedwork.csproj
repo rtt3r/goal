@@ -8,6 +8,7 @@
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
+		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Vantage.Application.Seedwork</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
@@ -15,7 +16,6 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Application seedwork layer for Domain Driven Design</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<Company>Vantage Tecnologia e Serviços</Company>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageLicenseExpression></PackageLicenseExpression>
 	</PropertyGroup>
@@ -28,7 +28,7 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
 	</ItemGroup>
 
