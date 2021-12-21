@@ -37,8 +37,6 @@ namespace Vantage.Infra.Http.Swagger
         }
 
         private static string LowerCaseEverythingButParameters(string key)
-        {
-            return string.Join('/', key.Split('/').Select(x => x.Contains("{") ? x : x.ToLower()));
-        }
+            => string.Join('/', key.Split('/').Select(x => x.Contains('{') ? x : x.ToLower()));
     }
 }

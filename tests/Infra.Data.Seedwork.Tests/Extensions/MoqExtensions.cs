@@ -44,7 +44,10 @@ namespace Vantage.Infra.Data.Tests.Extensions
             where TEntity : class
         {
             mock.Setup(m => m.AsQueryable()).Returns(mock.Object);
+
+#if NET5_0
             mock.Setup(m => m.AsAsyncEnumerable()).Returns(mock.Object);
+#endif
         }
 
         private static void ConfigureQueryableCalls<TEntity>(
