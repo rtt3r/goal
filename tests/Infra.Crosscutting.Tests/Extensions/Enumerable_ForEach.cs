@@ -53,15 +53,15 @@ namespace Vantage.Infra.Crosscutting.Tests.Extensions
         [Fact]
         public void NotThrowExceptionGivenNotEmptyObjectEnumerable()
         {
-            var source = new ArrayList(new TestObject1[]
+            TestObject1[] source = new[]
             {
                 new TestObject1 { Id = 1 },
                 new TestObject1 { Id = 2 }
-            });
+            };
 
             source.ForEach(p =>
             {
-                var obj = (TestObject1)p;
+                TestObject1 obj = p;
                 obj.Value = obj.Id.ToString();
             });
 
@@ -73,7 +73,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Extensions
         [Fact]
         public void NotThrowExceptionGivenEmptyObjectEnumerable()
         {
-            var source = new ArrayList(Array.Empty<TestObject1>());
+            TestObject1[] source = Array.Empty<TestObject1>();
             source.ForEach(p => { });
 
             source.Should().NotBeNull().And.BeEmpty();

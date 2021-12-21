@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,12 +18,11 @@ namespace Vantage.Infra.Data.Tests.Mocks
         public ValueTask DisposeAsync()
         {
             _enumerator.Dispose();
+            GC.SuppressFinalize(this);
+
             return new();
         }
 
-        public ValueTask<bool> MoveNextAsync()
-        {
-            return new(_enumerator.MoveNext());
-        }
+        public ValueTask<bool> MoveNextAsync() => new(_enumerator.MoveNext());
     }
 }

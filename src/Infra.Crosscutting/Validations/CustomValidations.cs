@@ -20,7 +20,7 @@ namespace Vantage.Infra.Crosscutting.Validations
                 return false;
             }
 
-            tempCnpj = formatedCnpj.Substring(0, 12);
+            tempCnpj = formatedCnpj[..12];
             sum = 0;
 
             for (int i = 0; i < 12; i++)
@@ -62,7 +62,7 @@ namespace Vantage.Infra.Crosscutting.Validations
                 return false;
             }
 
-            tempCpf = formatedCpf.Substring(0, 9);
+            tempCpf = formatedCpf[..9];
             sum = 0;
 
             for (int i = 0; i < 9; i++)
