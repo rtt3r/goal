@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Ensuring
+namespace Vantage.Infra.Crosscutting.Tests.Ensuring
 {
     public class Ensure_NotNullOrWhiteSpace
     {

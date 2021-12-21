@@ -1,8 +1,8 @@
 using System;
-using Ritter.Infra.Crosscutting;
-using Ritter.Infra.Crosscutting.Specifications;
+using Vantage.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting.Specifications;
 
-namespace Ritter.Domain.Business
+namespace Vantage.Domain.Business
 {
     public abstract class BusinessRule<TEntity> : IBusinessRule<TEntity>
         where TEntity : class

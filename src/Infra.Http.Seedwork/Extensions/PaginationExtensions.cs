@@ -1,7 +1,7 @@
-using Ritter.Infra.Crosscutting.Collections;
-using Ritter.Infra.Http.Controllers.Requests;
+using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Http.Controllers.Requests;
 
-namespace Ritter.Infra.Http.Extensions
+namespace Vantage.Infra.Http.Extensions
 {
     public static class PaginationExtensions
     {

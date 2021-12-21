@@ -1,10 +1,10 @@
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Tests.Mocks;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using System;
 using System.Linq.Expressions;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
     public class Expression_GetPropertyName
     {

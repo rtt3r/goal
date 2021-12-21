@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Ritter.Infra.Crosscutting
+namespace Vantage.Infra.Crosscutting
 {
     [DebuggerStepThrough]
     public static class Ensure

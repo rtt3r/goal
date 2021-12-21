@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Ritter.Domain.Tests.ValueObjects.Mocks;
+using Vantage.Domain.Tests.ValueObjects.Mocks;
 using Xunit;
 
-namespace Ritter.Domain.Tests.ValueObjects
+namespace Vantage.Domain.Tests.ValueObjects
 {
     public class Entity_EqualityOperator
     {

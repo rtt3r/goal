@@ -1,4 +1,4 @@
-namespace Ritter.Domain.Services
+namespace Vantage.Domain.Services
 {
     public abstract class DomainService : IDomainService
     {

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ritter.Infra.Crosscutting.Collections;
-using Ritter.Infra.Crosscutting.Specifications;
+using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Specifications;
 
-namespace Ritter.Domain
+namespace Vantage.Domain
 {
     public interface ISqlRepository<TEntity, TKey> : IRepository
         where TEntity : class

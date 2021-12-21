@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
-using Ritter.Application.Extensions;
-using Ritter.Infra.Crosscutting.Adapters;
+using Vantage.Application.Extensions;
+using Vantage.Infra.Crosscutting.Adapters;
 using Xunit;
 
 namespace Application.Seedwork.Tests.Extensions

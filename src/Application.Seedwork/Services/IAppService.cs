@@ -1,4 +1,4 @@
-namespace Ritter.Application.Services
+namespace Vantage.Application.Services
 {
     public interface IAppService
     {

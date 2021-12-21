@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Ritter.Infra.Http.Controllers
+namespace Vantage.Infra.Http.Controllers
 {
     public class InternalServerErrorObjectResult : ObjectResult
     {

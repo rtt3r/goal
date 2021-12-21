@@ -1,6 +1,6 @@
 using System;
 
-namespace Ritter.Domain
+namespace Vantage.Domain
 {
     public interface IUnitOfWork : IDisposable
     {

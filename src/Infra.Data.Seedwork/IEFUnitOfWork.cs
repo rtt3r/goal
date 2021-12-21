@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Ritter.Domain;
+using Vantage.Domain;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Ritter.Infra.Data
+namespace Vantage.Infra.Data
 {
     public interface IEFUnitOfWork : IUnitOfWork
     {

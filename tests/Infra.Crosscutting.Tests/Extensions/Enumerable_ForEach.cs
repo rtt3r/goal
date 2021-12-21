@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Tests.Mocks;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
     public class Enumerable_ForEach
     {

@@ -1,9 +1,9 @@
 using System;
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Tests.Mocks;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Ensuring
+namespace Vantage.Infra.Crosscutting.Tests.Ensuring
 {
     public class Ensure_Argument_NotNullOrEmpty
     {

@@ -1,9 +1,9 @@
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Specifications;
-using Ritter.Infra.Crosscutting.Tests.Mocks;
+using Vantage.Infra.Crosscutting.Specifications;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Specifications
+namespace Vantage.Infra.Crosscutting.Tests.Specifications
 {
     public class DirectSpecification_SatisfiedBy
     {

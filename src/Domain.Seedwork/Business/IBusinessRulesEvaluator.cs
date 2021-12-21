@@ -1,4 +1,4 @@
-namespace Ritter.Domain.Business
+namespace Vantage.Domain.Business
 {
     public interface IBusinessRulesEvaluator<in TEntity>
     {

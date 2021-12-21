@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Ritter.Infra.Http.Swagger
+namespace Vantage.Infra.Http.Swagger
 {
     internal static class OperationFilterContextExtensions
     {

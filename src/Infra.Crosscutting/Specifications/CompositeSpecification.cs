@@ -1,4 +1,4 @@
-namespace Ritter.Infra.Crosscutting.Specifications
+namespace Vantage.Infra.Crosscutting.Specifications
 {
     public abstract class CompositeSpecification<TEntity> : Specification<TEntity>
          where TEntity : class

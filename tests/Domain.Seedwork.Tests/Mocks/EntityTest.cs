@@ -1,4 +1,4 @@
-namespace Ritter.Domain.Tests.Mocks
+namespace Vantage.Domain.Tests.Mocks
 {
     internal class EntityTest : Domain.Entity
     {

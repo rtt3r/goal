@@ -1,4 +1,4 @@
-namespace Ritter.Infra.Crosscutting.Tests.Mocks
+namespace Vantage.Infra.Crosscutting.Tests.Mocks
 {
     internal class TestObject2
     {

@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Ritter.Domain;
-using Ritter.Infra.Crosscutting;
-using Ritter.Infra.Crosscutting.Collections;
-using Ritter.Infra.Crosscutting.Specifications;
+using Vantage.Domain;
+using Vantage.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Specifications;
 
-namespace Ritter.Infra.Data
+namespace Vantage.Infra.Data
 {
     public abstract class EFRepository<TEntity, TKey> : Repository, ISqlRepository<TEntity, TKey>
         where TEntity : class

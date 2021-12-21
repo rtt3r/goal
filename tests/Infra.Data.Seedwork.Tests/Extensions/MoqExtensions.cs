@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Ritter.Domain;
-using Ritter.Infra.Data.Tests.Mocks;
+using Vantage.Domain;
+using Vantage.Infra.Data.Tests.Mocks;
 
-namespace Ritter.Infra.Data.Tests.Extensions
+namespace Vantage.Infra.Data.Tests.Extensions
 {
     public static class MoqExtensions
     {

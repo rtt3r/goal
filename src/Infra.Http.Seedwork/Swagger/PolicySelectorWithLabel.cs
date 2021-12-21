@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Ritter.Infra.Http.Swagger
+namespace Vantage.Infra.Http.Swagger
 {
     public sealed class PolicySelectorWithLabel<T> where T : Attribute
     {

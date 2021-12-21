@@ -1,9 +1,9 @@
 using System.Linq;
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Extensions;
+using Vantage.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
     public class Type_GetAllTypesOf
     {

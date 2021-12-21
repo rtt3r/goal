@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Ritter.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Tests.Mocks
 {
     public class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
     {

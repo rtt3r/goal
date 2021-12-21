@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Collections;
-using Ritter.Infra.Crosscutting.Tests.Mocks;
+using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Paginng
+namespace Vantage.Infra.Crosscutting.Tests.Paginng
 {
     public class Pagination_Paginate
     {

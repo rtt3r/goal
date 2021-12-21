@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using Ritter.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting;
 
 namespace System
 {

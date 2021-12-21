@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Ritter.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

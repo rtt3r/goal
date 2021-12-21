@@ -1,4 +1,4 @@
-namespace Ritter.Domain.Tests.ValueObjects.Mocks
+namespace Vantage.Domain.Tests.ValueObjects.Mocks
 {
     internal class ValueObject3 : ValueObject
     {

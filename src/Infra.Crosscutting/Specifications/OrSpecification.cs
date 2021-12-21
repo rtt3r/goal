@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Ritter.Infra.Crosscutting.Specifications
+namespace Vantage.Infra.Crosscutting.Specifications
 {
     public sealed class OrSpecification<TEntity> : CompositeSpecification<TEntity>
          where TEntity : class

@@ -1,5 +1,5 @@
-using Ritter.Infra.Crosscutting;
-using Ritter.Infra.Crosscutting.Adapters;
+using Vantage.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting.Adapters;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

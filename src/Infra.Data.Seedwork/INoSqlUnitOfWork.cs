@@ -1,6 +1,6 @@
-using Ritter.Domain;
+using Vantage.Domain;
 
-namespace Ritter.Infra.Data
+namespace Vantage.Infra.Data
 {
     public interface INoSqlUnitOfWork : IUnitOfWork
     {

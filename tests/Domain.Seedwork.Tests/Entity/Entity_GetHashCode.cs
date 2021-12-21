@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Ritter.Domain.Tests.Mocks;
+using Vantage.Domain.Tests.Mocks;
 using Xunit;
 
-namespace Ritter.Domain.Tests.Entity
+namespace Vantage.Domain.Tests.Entity
 {
     public class Entity_GetHashCode
     {

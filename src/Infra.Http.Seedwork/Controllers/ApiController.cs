@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Ritter.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Collections;
 
-namespace Ritter.Infra.Http.Controllers
+namespace Vantage.Infra.Http.Controllers
 {
     public class ApiController : ControllerBase
     {

@@ -1,6 +1,6 @@
-using Ritter.Domain;
+using Vantage.Domain;
 
-namespace Ritter.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Tests.Mocks
 {
     public class Test : Entity
     {

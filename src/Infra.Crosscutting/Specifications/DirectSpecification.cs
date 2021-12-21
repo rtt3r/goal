@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Ritter.Infra.Crosscutting.Specifications
+namespace Vantage.Infra.Crosscutting.Specifications
 {
     public class DirectSpecification<TEntity> : Specification<TEntity>
         where TEntity : class

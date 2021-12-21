@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
     public class Attribute_GetAttributeFromEnumType
     {

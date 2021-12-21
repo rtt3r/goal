@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Ritter.Infra.Crosscutting.Specifications
+namespace Vantage.Infra.Crosscutting.Specifications
 {
     public sealed class NotSpecification<TEntity> : Specification<TEntity>
         where TEntity : class

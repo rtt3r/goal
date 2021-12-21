@@ -2,7 +2,7 @@ using FluentAssertions;
 using System.Globalization;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
 
     public class CultureInfo_IsEqual

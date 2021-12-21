@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Ritter.Infra.Crosscutting.Adapters;
-using Ritter.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Adapters;
+using Vantage.Infra.Crosscutting.Collections;
 
-namespace Ritter.Application.Extensions
+namespace Vantage.Application.Extensions
 {
     public static class ProjectionsExtensionMethods
     {

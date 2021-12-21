@@ -1,4 +1,4 @@
-using Ritter.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting;
 
 namespace System.Linq.Expressions
 {

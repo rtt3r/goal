@@ -1,4 +1,4 @@
-namespace Ritter.Domain
+namespace Vantage.Domain
 {
     public interface IEntity<out TKey>
     {

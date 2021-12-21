@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Ritter.Infra.Crosscutting.Tests.Mocks
+namespace Vantage.Infra.Crosscutting.Tests.Mocks
 {
     [Display]
     internal class TestObject1

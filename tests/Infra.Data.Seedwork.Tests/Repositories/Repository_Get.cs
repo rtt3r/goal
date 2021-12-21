@@ -1,14 +1,14 @@
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Ritter.Domain;
-using Ritter.Infra.Data.Tests.Extensions;
-using Ritter.Infra.Data.Tests.Mocks;
+using Vantage.Domain;
+using Vantage.Infra.Data.Tests.Extensions;
+using Vantage.Infra.Data.Tests.Mocks;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Ritter.Infra.Data.Tests.Repositories
+namespace Vantage.Infra.Data.Tests.Repositories
 {
     public class Repository_Get
     {

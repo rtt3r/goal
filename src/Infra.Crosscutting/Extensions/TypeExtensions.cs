@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Ritter.Infra.Crosscutting.Extensions
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static class TypeExtensions
     {

@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
     public class Stream_ToByteArray
     {

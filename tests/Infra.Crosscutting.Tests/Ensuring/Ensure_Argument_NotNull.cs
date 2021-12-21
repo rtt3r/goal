@@ -1,10 +1,10 @@
 using FluentAssertions;
-using Ritter.Infra.Crosscutting;
-using Ritter.Infra.Crosscutting.Tests.Mocks;
+using Vantage.Infra.Crosscutting;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using System;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Ensuring
+namespace Vantage.Infra.Crosscutting.Tests.Ensuring
 {
     public class Ensure_Argument_NotNull
     {

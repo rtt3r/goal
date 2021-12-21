@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Ritter.Infra.Http.Swagger
+namespace Vantage.Infra.Http.Swagger
 {
     public sealed class AppendAuthorizeToSummaryOperationFilter<T> : IOperationFilter where T : Attribute
     {

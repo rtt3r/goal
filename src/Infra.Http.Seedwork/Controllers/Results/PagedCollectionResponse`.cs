@@ -1,6 +1,6 @@
-using Ritter.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Collections;
 
-namespace Ritter.Infra.Http.Controllers.Results
+namespace Vantage.Infra.Http.Controllers.Results
 {
     public abstract class PagedCollectionResponse<T> where T : class, IPagedCollection
     {

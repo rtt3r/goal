@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using FluentAssertions;
-using Ritter.Domain.Business;
-using Ritter.Infra.Crosscutting.Specifications;
+using Vantage.Domain.Business;
+using Vantage.Infra.Crosscutting.Specifications;
 using Xunit;
 
 namespace Domain.Seedwork.Tests.Business

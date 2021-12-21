@@ -1,11 +1,11 @@
 using System;
 using FluentAssertions;
 using Moq;
-using Ritter.Domain;
-using Ritter.Infra.Data.Tests.Mocks;
+using Vantage.Domain;
+using Vantage.Infra.Data.Tests.Mocks;
 using Xunit;
 
-namespace Ritter.Infra.Data.Tests.Repositories
+namespace Vantage.Infra.Data.Tests.Repositories
 {
     public class Repository_Constructor
     {

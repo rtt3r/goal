@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using FluentAssertions;
 using Xunit;
 
-namespace Ritter.Infra.Crosscutting.Tests.Extensions
+namespace Vantage.Infra.Crosscutting.Tests.Extensions
 {
     public class Enum_GetDisplayName
     {

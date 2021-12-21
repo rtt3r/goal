@@ -1,7 +1,7 @@
-using Ritter.Domain;
-using Ritter.Infra.Crosscutting;
+using Vantage.Domain;
+using Vantage.Infra.Crosscutting;
 
-namespace Ritter.Infra.Data
+namespace Vantage.Infra.Data
 {
     public abstract class Repository : IRepository
     {

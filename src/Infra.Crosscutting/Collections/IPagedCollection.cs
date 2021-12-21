@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Ritter.Infra.Crosscutting.Collections
+namespace Vantage.Infra.Crosscutting.Collections
 {
     public interface IPagedCollection : IEnumerable
     {

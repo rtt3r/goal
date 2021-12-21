@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Ritter.Infra.Crosscutting.Collections;
-using Ritter.Infra.Http.Controllers.Results;
+using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Http.Controllers.Results;
 
-namespace Ritter.Infra.Http.Controllers
+namespace Vantage.Infra.Http.Controllers
 {
     public class OkPagedCollectionResult : OkObjectResult
     {

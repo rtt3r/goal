@@ -1,6 +1,6 @@
 using System.Globalization;
 using FluentAssertions;
-using Ritter.Infra.Crosscutting.Localization;
+using Vantage.Infra.Crosscutting.Localization;
 using Xunit;
 
 namespace Infra.Crosscutting.Tests.Localization

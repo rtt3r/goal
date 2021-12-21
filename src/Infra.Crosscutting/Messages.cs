@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Ritter.Infra.Crosscutting
+namespace Vantage.Infra.Crosscutting
 {
     [DebuggerStepThrough]
     public static class Messages

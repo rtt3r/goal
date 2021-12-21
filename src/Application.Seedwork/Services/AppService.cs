@@ -1,6 +1,6 @@
 using System.Transactions;
 
-namespace Ritter.Application.Services
+namespace Vantage.Application.Services
 {
     public abstract class AppService : IAppService
     {

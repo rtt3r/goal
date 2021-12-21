@@ -1,6 +1,6 @@
-using Ritter.Domain;
+using Vantage.Domain;
 
-namespace Ritter.Application.Tests.Mocks
+namespace Vantage.Application.Tests.Mocks
 {
     internal class EntityTest : Entity
     {

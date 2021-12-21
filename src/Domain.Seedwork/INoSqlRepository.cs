@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Ritter.Domain
+namespace Vantage.Domain
 {
     public interface INoSqlRepository<TEntity> : IRepository
     {

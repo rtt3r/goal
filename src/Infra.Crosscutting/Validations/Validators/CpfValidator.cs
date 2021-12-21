@@ -1,7 +1,7 @@
-﻿using FluentValidation;
+using FluentValidation;
 using FluentValidation.Validators;
 
-namespace Ritter.Infra.Crosscutting.Validations.Validators
+namespace Vantage.Infra.Crosscutting.Validations.Validators
 {
     public class CpfValidator<T> : PropertyValidator<T, string>, IPropertyValidator
     {

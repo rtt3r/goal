@@ -1,4 +1,4 @@
-namespace Ritter.Application.Tests.Mocks
+namespace Vantage.Application.Tests.Mocks
 {
     internal class ProjectionTest
     {

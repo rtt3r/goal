@@ -1,7 +1,7 @@
-using Ritter.Domain;
-using Ritter.Infra.Data;
+using Vantage.Domain;
+using Vantage.Infra.Data;
 
-namespace Ritter.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Tests.Mocks
 {
     internal class TestRepository : Repository
     {

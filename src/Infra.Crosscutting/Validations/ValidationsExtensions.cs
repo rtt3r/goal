@@ -1,4 +1,4 @@
-using Ritter.Infra.Crosscutting.Validations.Validators;
+using Vantage.Infra.Crosscutting.Validations.Validators;
 
 namespace FluentValidation
 {
