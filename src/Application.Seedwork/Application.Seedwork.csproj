@@ -5,9 +5,9 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Vantage.Application</RootNamespace>
 		<AssemblyName>Vantage.Application.Seedwork</AssemblyName>
-		<VersionPrefix>1.0.0</VersionPrefix>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<Authors>Anderson Vantage de Souza</Authors>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<AssemblyVersion>0.0.1.0</AssemblyVersion>
+		<Authors>Ritter Soluções em TI</Authors>
 		<PackageId>Vantage.Application.Seedwork</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
@@ -16,7 +16,7 @@
 		<Description>Application seedwork layer for Domain Driven Design</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<Company>Vantage Tecnologia e Serviços</Company>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageLicenseExpression></PackageLicenseExpression>
 	</PropertyGroup>
 
@@ -38,7 +38,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\LICENSE">
+		<None Include="..\..\LICENSE.txt">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>

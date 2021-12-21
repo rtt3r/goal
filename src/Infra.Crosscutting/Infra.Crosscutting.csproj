@@ -4,16 +4,16 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Vantage.Infra.Crosscutting</RootNamespace>
 		<AssemblyName>Vantage.Infra.Crosscutting</AssemblyName>
-		<VersionPrefix>1.0.0</VersionPrefix>
-		<AssemblyVersion>1.0.0.0</AssemblyVersion>
-		<Authors>Anderson Vantage de Souza</Authors>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<AssemblyVersion>0.0.1.0</AssemblyVersion>
+		<Authors>Ritter Soluções em TI</Authors>
 		<PackageId>Vantage.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Crosscutting layer for Domain Driven Design</Description>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\..\LICENSE">
+		<None Include="..\..\LICENSE.txt">
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
