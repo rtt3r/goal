@@ -5,13 +5,13 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Vantage.Application</RootNamespace>
 		<AssemblyName>Vantage.Application.Seedwork</AssemblyName>
-		<VersionPrefix>6.0.0</VersionPrefix>
-		<AssemblyVersion>6.0.0.0</AssemblyVersion>
+		<VersionPrefix>1.0.0</VersionPrefix>
+		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Authors>Anderson Vantage de Souza</Authors>
 		<PackageId>Vantage.Application.Seedwork</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
-		<RepositoryUrl>https://github.com/aritters/Vantage</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/aritters/Vantage</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Application seedwork layer for Domain Driven Design</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
