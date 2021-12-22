@@ -1,5 +1,5 @@
-using System;
 using FluentAssertions;
+using Vantage.Infra.Crosscutting.Extensions;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Extensions

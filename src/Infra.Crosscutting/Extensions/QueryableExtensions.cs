@@ -1,6 +1,7 @@
+using System.Linq;
 using System.Linq.Expressions;
 
-namespace System.Linq
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static class QueryableExtensions
     {
@@ -25,7 +26,7 @@ namespace System.Linq
             MemberExpression property = null;
             LambdaExpression sort = null;
 
-            foreach (var propName in propertyName.Split('.'))
+            foreach (string propName in propertyName.Split('.'))
             {
                 property = Expression.PropertyOrField((Expression)property ?? param, propName);
                 sort = Expression.Lambda(property, param);

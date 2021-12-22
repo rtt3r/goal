@@ -17,7 +17,7 @@ namespace Vantage.Infra.Crosscutting.Specifications
 
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            var replacement = map.GetValueOrDefault(node);
+            ParameterExpression replacement = map.GetValueOrDefault(node);
             node = replacement;
 
             return base.VisitParameter(node);

@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Http.Controllers.Results;
 
-namespace Vantage.Infra.Http.Controllers
+namespace Vantage.Infra.Http.Controllers.Results
 {
     public class OkPagedCollectionResult : OkObjectResult
     {

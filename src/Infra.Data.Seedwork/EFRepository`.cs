@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Vantage.Domain;
 using Vantage.Infra.Crosscutting;
 using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Extensions;
 using Vantage.Infra.Crosscutting.Specifications;
 
 namespace Vantage.Infra.Data

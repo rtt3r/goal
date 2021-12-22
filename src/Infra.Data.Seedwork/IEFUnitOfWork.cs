@@ -1,7 +1,7 @@
-using Microsoft.EntityFrameworkCore;
-using Vantage.Domain;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Vantage.Domain;
 
 namespace Vantage.Infra.Data
 {

@@ -16,7 +16,7 @@ namespace Vantage.Infra.Crosscutting.Specifications
                 })
                 .ToDictionary(p => p.SecondParameter, p => p.FirstParameter);
 
-            var secondBody = ParameterRebinder.ReplaceParameters(map, second.Body);
+            Expression secondBody = ParameterRebinder.ReplaceParameters(map, second.Body);
 
             return Expression.Lambda<T>(merge(first.Body, secondBody), first.Parameters);
         }

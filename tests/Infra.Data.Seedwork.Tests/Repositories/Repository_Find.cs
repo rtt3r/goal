@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Vantage.Domain;
 using Vantage.Infra.Crosscutting.Collections;
+using Vantage.Infra.Crosscutting.Extensions;
 using Vantage.Infra.Crosscutting.Specifications;
 using Vantage.Infra.Data.Seedwork.Tests.Extensions;
 using Vantage.Infra.Data.Seedwork.Tests.Mocks;

@@ -1,9 +1,9 @@
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
-using Vantage.Infra.Crosscutting;
 
-namespace System
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static class EnumExtensions
     {

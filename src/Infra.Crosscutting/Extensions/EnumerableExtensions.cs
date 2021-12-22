@@ -1,9 +1,11 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Vantage.Infra.Crosscutting;
 using Vantage.Infra.Crosscutting.Collections;
 
-namespace System.Collections.Generic
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static class EnumerableExtensions
     {
@@ -33,7 +35,7 @@ namespace System.Collections.Generic
             return source;
         }
 
-        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, IPagination page) => Paginate<T>(values.AsQueryable(), page);
+        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, IPagination page) => values.AsQueryable().Paginate(page);
 
         public static IQueryable<T> Paginate<T>(this IQueryable<T> dataList, IPagination page)
         {
@@ -52,19 +54,19 @@ namespace System.Collections.Generic
             return queryableList;
         }
 
-        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, IPagination page) => await PaginateAsync<T>(values.AsQueryable(), page);
+        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, IPagination page) => await values.AsQueryable().PaginateAsync(page);
 
         public static async Task<IQueryable<T>> PaginateAsync<T>(this IQueryable<T> dataList, IPagination page) => await Task.FromResult(dataList.Paginate(page));
 
-        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, IPagination page) => PaginateList<T>(values.AsQueryable(), page);
+        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, IPagination page) => values.AsQueryable().PaginateList(page);
 
         public static IPagedCollection<T> PaginateList<T>(this IQueryable<T> dataList, IPagination page)
         {
             Ensure.Argument.NotNull(page, nameof(page));
-            return new PagedList<T>(dataList.Paginate<T>(page).ToList(), dataList.Count());
+            return new PagedList<T>(dataList.Paginate(page).ToList(), dataList.Count());
         }
 
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, IPagination page) => await PaginateListAsync<T>(values.AsQueryable(), page);
+        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, IPagination page) => await values.AsQueryable().PaginateListAsync(page);
 
         public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IQueryable<T> dataList, IPagination page) => await Task.FromResult(dataList.PaginateList(page));
 

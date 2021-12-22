@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace System
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static class ObjectExtensions
     {
@@ -45,10 +46,7 @@ namespace System
             return dictionary;
         }
 
-        public static TType ConvertTo<TType>(this object value)
-        {
-            return (TType)Convert.ChangeType(value, typeof(TType));
-        }
+        public static TType ConvertTo<TType>(this object value) => (TType)Convert.ChangeType(value, typeof(TType));
 
         public static TType ConvertTo<TType>(this object value, TType defaultValue)
         {
@@ -70,9 +68,6 @@ namespace System
         }
 
         public static bool IsDefined<TAttribute>(this object source)
-            where TAttribute : Attribute
-        {
-            return source.GetAttribute<TAttribute>() != null;
-        }
+            where TAttribute : Attribute => source.GetAttribute<TAttribute>() != null;
     }
 }

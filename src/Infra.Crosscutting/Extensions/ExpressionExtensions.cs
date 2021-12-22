@@ -1,6 +1,7 @@
-using Vantage.Infra.Crosscutting;
+using System;
+using System.Linq.Expressions;
 
-namespace System.Linq.Expressions
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static partial class ExtensionManager
     {
@@ -9,10 +10,14 @@ namespace System.Linq.Expressions
             Ensure.Argument.NotNull(predicate, nameof(predicate));
 
             if (predicate.Body is MemberExpression memberExpression)
+            {
                 return memberExpression.Member.Name;
+            }
 
             if (predicate.Body is UnaryExpression unaryExpression)
+            {
                 return (unaryExpression.Operand as MemberExpression).Member.Name;
+            }
 
             throw new ArgumentException($"Expression not supported.", nameof(predicate));
         }

@@ -1,9 +1,10 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using Vantage.Infra.Crosscutting;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Vantage.Infra.Http.DependencyInjection
 {
     public static class DependencyInjectionExtensions
     {

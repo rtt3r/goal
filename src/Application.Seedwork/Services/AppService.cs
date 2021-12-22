@@ -4,10 +4,7 @@ namespace Vantage.Application.Services
 {
     public abstract class AppService : IAppService
     {
-        protected static TransactionScope CreateTransactionScope()
-        {
-            return CreateTransactionScope(IsolationLevel.ReadCommitted);
-        }
+        protected static TransactionScope CreateTransactionScope() => CreateTransactionScope(IsolationLevel.ReadCommitted);
 
         protected static TransactionScope CreateTransactionScope(IsolationLevel isolationLevel)
         {

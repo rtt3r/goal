@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
+using Vantage.Infra.Crosscutting.Extensions;
 using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 

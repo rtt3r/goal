@@ -1,13 +1,13 @@
 namespace Vantage.Infra.Crosscutting.Collections
 {
-	public interface IPagination
-	{
-		int PageIndex { get; }
+    public interface IPagination
+    {
+        int PageIndex { get; }
 
-		int PageSize { get; }
+        int PageSize { get; }
 
-		string OrderByName { get; }
+        string OrderByName { get; }
 
-		bool Ascending { get; }
-	}
+        bool Ascending { get; }
+    }
 }

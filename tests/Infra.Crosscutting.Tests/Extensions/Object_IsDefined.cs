@@ -1,7 +1,7 @@
-using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using FluentAssertions;
+using Vantage.Infra.Crosscutting.Extensions;
 using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 

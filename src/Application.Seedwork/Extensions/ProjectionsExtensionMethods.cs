@@ -7,30 +7,18 @@ namespace Vantage.Application.Extensions
     public static class ProjectionsExtensionMethods
     {
         public static TProjection ProjectAs<TProjection>(this ITypeAdapter adapter, object source)
-            where TProjection : class, new()
-        {
-            return adapter.Adapt<TProjection>(source);
-        }
+            where TProjection : class, new() => adapter.Adapt<TProjection>(source);
 
         public static TProjection ProjectAs<TSource, TProjection>(this ITypeAdapter adapter, TSource source)
             where TSource : class
-            where TProjection : class, new()
-        {
-            return adapter.ProjectAs<TProjection>(source);
-        }
+            where TProjection : class, new() => adapter.ProjectAs<TProjection>(source);
 
         public static ICollection<TProjection> ProjectAsCollection<TProjection>(this ITypeAdapter adapter, IEnumerable<object> source)
-            where TProjection : class, new()
-        {
-            return adapter.Adapt<List<TProjection>>(source);
-        }
+            where TProjection : class, new() => adapter.Adapt<List<TProjection>>(source);
 
         public static ICollection<TProjection> ProjectAsCollection<TSource, TProjection>(this ITypeAdapter adapter, IEnumerable<TSource> source)
             where TSource : class
-            where TProjection : class, new()
-        {
-            return adapter.ProjectAsCollection<TProjection>(source);
-        }
+            where TProjection : class, new() => adapter.ProjectAsCollection<TProjection>(source);
 
         public static IPagedCollection<TProjection> ProjectAsPagedCollection<TProjection>(this ITypeAdapter adapter, IPagedCollection<object> source)
             where TProjection : class, new()
@@ -41,9 +29,6 @@ namespace Vantage.Application.Extensions
 
         public static IPagedCollection<TProjection> ProjectAsPagedCollection<TSource, TProjection>(this ITypeAdapter adapter, IPagedCollection<TSource> source)
             where TSource : class
-            where TProjection : class, new()
-        {
-            return adapter.ProjectAsPagedCollection<TProjection>(source);
-        }
+            where TProjection : class, new() => adapter.ProjectAsPagedCollection<TProjection>(source);
     }
 }

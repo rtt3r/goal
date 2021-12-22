@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using FluentAssertions;
+using Vantage.Infra.Crosscutting.Extensions;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Extensions

@@ -40,15 +40,8 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Extensions
             return mock;
         }
 
-        private static void ConfigureDbSetCalls<TEntity>(this Mock<DbSet<TEntity>> mock)
-            where TEntity : class
-        {
-            mock.Setup(m => m.AsQueryable()).Returns(mock.Object);
-
-#if NET5_0
-            mock.Setup(m => m.AsAsyncEnumerable()).Returns(mock.Object);
-#endif
-        }
+        private static void ConfigureDbSetCalls<TEntity>(this Mock<DbSet<TEntity>> mock) where TEntity : class
+            => mock.Setup(m => m.AsAsyncEnumerable()).Returns(mock.Object.AsAsyncEnumerable());
 
         private static void ConfigureQueryableCalls<TEntity>(
             this Mock<IQueryable<TEntity>> mock,

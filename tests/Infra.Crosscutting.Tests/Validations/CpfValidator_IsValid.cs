@@ -2,6 +2,7 @@ using System.Linq;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
+using Vantage.Infra.Crosscutting.Validations;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Validations

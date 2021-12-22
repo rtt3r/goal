@@ -1,7 +1,8 @@
+using Microsoft.Extensions.DependencyInjection;
 using Vantage.Infra.Crosscutting;
 using Vantage.Infra.Crosscutting.Adapters;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Vantage.Infra.Http.Extensions
 {
     public static class ServiceCollectionExtensions
     {

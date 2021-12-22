@@ -2,7 +2,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace System
+namespace Vantage.Infra.Crosscutting.Extensions
 {
     public static class StringExtensions
     {

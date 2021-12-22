@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
@@ -33,9 +32,6 @@ namespace Vantage.Infra.Http.Swagger
             filter = new AppendAuthorizeToSummaryOperationFilter<AuthorizeAttribute>(new[] { policySelector, rolesSelector }.AsEnumerable());
         }
 
-        public void Apply(OpenApiOperation operation, OperationFilterContext context)
-        {
-            filter.Apply(operation, context);
-        }
+        public void Apply(OpenApiOperation operation, OperationFilterContext context) => filter.Apply(operation, context);
     }
 }
