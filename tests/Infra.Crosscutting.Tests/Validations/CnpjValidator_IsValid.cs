@@ -4,7 +4,7 @@ using FluentValidation;
 using FluentValidation.Results;
 using Xunit;
 
-namespace Infra.Crosscutting.Tests.Validations
+namespace Vantage.Infra.Crosscutting.Tests.Validations
 {
     public class CnpjValidator_IsValid
     {

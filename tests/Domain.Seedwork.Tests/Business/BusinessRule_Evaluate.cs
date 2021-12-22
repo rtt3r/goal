@@ -4,7 +4,7 @@ using Vantage.Domain.Business;
 using Vantage.Infra.Crosscutting.Specifications;
 using Xunit;
 
-namespace Domain.Seedwork.Tests.Business
+namespace Vantage.Domain.Seedwork.Tests.Business
 {
     public class BusinessRule_Evaluate
     {
@@ -40,7 +40,7 @@ namespace Domain.Seedwork.Tests.Business
         public void DontEvaluateRuleWhenSpecificationIsNotSatisfied()
         {
             var entity = new TestEntity();
-            var rule = new TestBusinessRule(!(new TrueSpecification<TestEntity>()), e => { e.Evaluated = true; });
+            var rule = new TestBusinessRule(!new TrueSpecification<TestEntity>(), e => { e.Evaluated = true; });
 
             entity.Evaluated.Should().BeFalse();
 

@@ -7,7 +7,7 @@ using Vantage.Domain.Business;
 using Vantage.Infra.Crosscutting.Specifications;
 using Xunit;
 
-namespace Domain.Seedwork.Tests.Business
+namespace Vantage.Domain.Seedwork.Tests.Business
 {
     public class BusinessRulesEvaluator_Evaluate
     {

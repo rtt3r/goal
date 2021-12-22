@@ -4,7 +4,7 @@ using Vantage.Application.Extensions;
 using Vantage.Infra.Crosscutting.Adapters;
 using Xunit;
 
-namespace Application.Seedwork.Tests.Extensions
+namespace Vantage.Application.Seedwork.Tests.Extensions
 {
     public class Projection_ProjectAs
     {

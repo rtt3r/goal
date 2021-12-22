@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Vantage.Domain.Tests.Mocks;
+using Vantage.Domain.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Domain.Tests.Entity
+namespace Vantage.Domain.Seedwork.Tests.Entity
 {
     public class Entity_Equals
     {

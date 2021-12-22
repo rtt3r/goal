@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Vantage.Domain.Tests.ValueObjects.Mocks;
+using Vantage.Domain.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Domain.Tests.ValueObjects
+namespace Vantage.Domain.Seedwork.Tests.ValueObjects
 {
     public class ValueObject_GetHashCode
     {
@@ -10,7 +10,7 @@ namespace Vantage.Domain.Tests.ValueObjects
         public void GetHashGivenObjectWithNotNullProperties()
         {
             //Given
-            ValueObject1 obj1 = new ValueObject1()
+            var obj1 = new ValueObject1()
             {
                 Id = 1,
                 Value = "test"
@@ -27,7 +27,7 @@ namespace Vantage.Domain.Tests.ValueObjects
         public void GetHashGivenObjectWithNullProperties()
         {
             //Given
-            ValueObject1 obj1 = new ValueObject1()
+            var obj1 = new ValueObject1()
             {
                 Id = 1,
                 Value = null
@@ -44,7 +44,7 @@ namespace Vantage.Domain.Tests.ValueObjects
         public void GetHashGivenObjectWithoutProperties()
         {
             //Given
-            ValueObject2 obj1 = new ValueObject2();
+            var obj1 = new ValueObject2();
 
             //When
             int hash = obj1.GetHashCode();

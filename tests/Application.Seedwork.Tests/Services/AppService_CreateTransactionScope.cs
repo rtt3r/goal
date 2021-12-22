@@ -4,7 +4,7 @@ using FluentAssertions;
 using Vantage.Application.Services;
 using Xunit;
 
-namespace Vantage.Application.Tests.Services
+namespace Vantage.Application.Seedwork.Tests.Services
 {
     public class AppService_CreateTransactionScope
     {

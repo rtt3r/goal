@@ -1,6 +1,6 @@
 using Vantage.Domain;
 
-namespace Vantage.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
 {
     public class Test : Entity
     {
@@ -23,14 +23,8 @@ namespace Vantage.Infra.Data.Tests.Mocks
         {
         }
 
-        public void Deactivate()
-        {
-            Active = false;
-        }
+        public void Deactivate() => Active = false;
 
-        public void SetId(long id)
-        {
-            Id = id;
-        }
+        public void SetId(long id) => Id = id;
     }
 }

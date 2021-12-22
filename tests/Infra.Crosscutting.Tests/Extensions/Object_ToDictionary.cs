@@ -1,7 +1,7 @@
-using FluentAssertions;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
 using System;
 using System.Collections.Generic;
+using FluentAssertions;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Extensions
@@ -11,7 +11,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Extensions
         [Fact]
         public void ReturnDictionaryGivenNotNullObject()
         {
-            TestObject1 object1 = new TestObject1 { Id = 1 };
+            var object1 = new TestObject1 { Id = 1 };
             IDictionary<string, object> dictionary = object1.ToDictionary();
 
             dictionary.Should().NotBeNull().And.ContainKey("Id").And.ContainKey("Value");
@@ -31,7 +31,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Extensions
         [Fact]
         public void ReturnGenericDictonaryGivenNotNullObject()
         {
-            TestObject1 object1 = new TestObject1 { Id = 1 };
+            var object1 = new TestObject1 { Id = 1 };
             IDictionary<string, string> dictionary = object1.ToDictionary<string>();
 
             dictionary.Should().NotBeNull().And.ContainKey("Id").And.ContainKey("Value");
@@ -51,7 +51,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Extensions
         [Fact]
         public void ReturnDictionaryWithNullValuesGivenTypeMismatchObject()
         {
-            TestObject1 object1 = new TestObject1 { Id = 1, Value = "Test" };
+            var object1 = new TestObject1 { Id = 1, Value = "Test" };
             IDictionary<string, int> dictionary = object1.ToDictionary<int>();
 
             dictionary.Should().NotBeNull().And.ContainKey("Id").And.ContainKey("Value");

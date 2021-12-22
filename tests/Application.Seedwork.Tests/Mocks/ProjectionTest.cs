@@ -1,4 +1,4 @@
-namespace Vantage.Application.Tests.Mocks
+namespace Vantage.Application.Seedwork.Tests.Mocks
 {
     internal class ProjectionTest
     {

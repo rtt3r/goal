@@ -1,6 +1,6 @@
 using Vantage.Domain;
 
-namespace Vantage.Application.Tests.Mocks
+namespace Vantage.Application.Seedwork.Tests.Mocks
 {
     internal class EntityTest : Entity
     {
@@ -15,9 +15,6 @@ namespace Vantage.Application.Tests.Mocks
             Id = id;
         }
 
-        public void SetId(int id)
-        {
-            Id = id;
-        }
+        public void SetId(int id) => Id = id;
     }
 }

@@ -1,4 +1,4 @@
-namespace Vantage.Domain.Tests.ValueObjects.Mocks
+namespace Vantage.Domain.Seedwork.Tests.Mocks
 {
     internal class ValueObject2 : ValueObject
     {

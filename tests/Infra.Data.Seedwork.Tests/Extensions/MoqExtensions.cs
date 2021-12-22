@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Vantage.Domain;
-using Vantage.Infra.Data.Tests.Mocks;
+using Vantage.Infra.Data.Seedwork.Tests.Mocks;
 
-namespace Vantage.Infra.Data.Tests.Extensions
+namespace Vantage.Infra.Data.Seedwork.Tests.Extensions
 {
     public static class MoqExtensions
     {

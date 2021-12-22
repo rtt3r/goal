@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Vantage.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
 {
     public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>, IAsyncQueryProvider
     {
@@ -23,10 +23,7 @@ namespace Vantage.Infra.Data.Tests.Mocks
             _enumerable = enumerable;
         }
 
-        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
-        {
-            return new TestAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
-        }
+        public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default) => new TestAsyncEnumerator<T>(this.AsEnumerable().GetEnumerator());
 
         public IQueryable CreateQuery(Expression expression)
         {
@@ -41,20 +38,11 @@ namespace Vantage.Infra.Data.Tests.Mocks
             return new TestAsyncEnumerable<T>(expression);
         }
 
-        public IQueryable<TEntity> CreateQuery<TEntity>(Expression expression)
-        {
-            return new TestAsyncEnumerable<TEntity>(expression);
-        }
+        public IQueryable<TEntity> CreateQuery<TEntity>(Expression expression) => new TestAsyncEnumerable<TEntity>(expression);
 
-        public object Execute(Expression expression)
-        {
-            return CompileExpressionItem<object>(expression);
-        }
+        public object Execute(Expression expression) => CompileExpressionItem<object>(expression);
 
-        public TResult Execute<TResult>(Expression expression)
-        {
-            return CompileExpressionItem<TResult>(expression);
-        }
+        public TResult Execute<TResult>(Expression expression) => CompileExpressionItem<TResult>(expression);
 
         public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
         {
@@ -75,13 +63,21 @@ namespace Vantage.Infra.Data.Tests.Mocks
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            if (_enumerable == null) _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
+            if (_enumerable == null)
+            {
+                _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
+            }
+
             return _enumerable.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            if (_enumerable == null) _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
+            if (_enumerable == null)
+            {
+                _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
+            }
+
             return _enumerable.GetEnumerator();
         }
 

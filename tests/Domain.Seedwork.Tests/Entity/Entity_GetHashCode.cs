@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Vantage.Domain.Tests.Mocks;
+using Vantage.Domain.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Domain.Tests.Entity
+namespace Vantage.Domain.Seedwork.Tests.Entity
 {
     public class Entity_GetHashCode
     {
@@ -23,7 +23,7 @@ namespace Vantage.Domain.Tests.Entity
         public void ReturnNewHashGivenIntransient()
         {
             //Given
-            EntityTest entity = new EntityTest();
+            var entity = new EntityTest();
 
             //When
             int currentHash = entity.GetHashCode();

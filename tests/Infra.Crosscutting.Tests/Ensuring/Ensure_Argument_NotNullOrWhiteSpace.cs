@@ -18,7 +18,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void EnsureGivenNotNullStringAndAParamName()
         {
-            TestObject1 obj = new TestObject1() { Value = "test" };
+            var obj = new TestObject1() { Value = "test" };
 
             Action act = () => Ensure.Argument.NotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value));
             act.Should().NotThrow<ArgumentException>();
@@ -28,7 +28,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void EnsureGivenNotNullStringAndAParamNameAndAMessage()
         {
-            TestObject1 obj = new TestObject1() { Value = "test" };
+            var obj = new TestObject1() { Value = "test" };
 
             Action act = () => Ensure.Argument.NotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value), "Test");
             act.Should().NotThrow<ArgumentException>();
@@ -46,7 +46,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void ThrowArgumentNullExceptionGivenNullStringAndAParamName()
         {
-            TestObject1 obj = new TestObject1();
+            var obj = new TestObject1();
 
             Action act = () => Ensure.Argument.NotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value));
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
@@ -56,7 +56,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void ThrowArgumentNullExceptionGivenNullStringAndAParamNameAndAMessage()
         {
-            TestObject1 obj = new TestObject1();
+            var obj = new TestObject1();
 
             Action act = () => Ensure.Argument.NotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value), "Test");
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
@@ -74,7 +74,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void ThrowArgumentNullExceptionGivenEmptyStringAndAParamName()
         {
-            TestObject1 obj = new TestObject1() { Value = "" };
+            var obj = new TestObject1() { Value = "" };
 
             Action act = () => Ensure.Argument.NotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value));
             act.Should().Throw<ArgumentException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
@@ -84,7 +84,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void ThrowArgumentNullExceptionGivenEmptyStringAndAParamNameAndAMessage()
         {
-            TestObject1 obj = new TestObject1() { Value = "" };
+            var obj = new TestObject1() { Value = "" };
 
             Action act = () => Ensure.Argument.NotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value), "Test");
             act.Should().Throw<ArgumentException>().And.ParamName.Should().Be(nameof(TestObject1.Value));

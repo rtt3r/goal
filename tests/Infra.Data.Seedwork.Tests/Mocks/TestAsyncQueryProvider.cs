@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Vantage.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
 {
     internal class TestAsyncQueryProvider<TEntity> : IAsyncQueryProvider
     {
@@ -15,29 +15,14 @@ namespace Vantage.Infra.Data.Tests.Mocks
             this.queryProvider = queryProvider;
         }
 
-        public IQueryable CreateQuery(Expression expression)
-        {
-            return new TestAsyncEnumerable<TEntity>(expression);
-        }
+        public IQueryable CreateQuery(Expression expression) => new TestAsyncEnumerable<TEntity>(expression);
 
-        public IQueryable<TElement> CreateQuery<TElement>(Expression expression)
-        {
-            return new TestAsyncEnumerable<TElement>(expression);
-        }
+        public IQueryable<TElement> CreateQuery<TElement>(Expression expression) => new TestAsyncEnumerable<TElement>(expression);
 
-        public object Execute(Expression expression)
-        {
-            return queryProvider.Execute(expression);
-        }
+        public object Execute(Expression expression) => queryProvider.Execute(expression);
 
-        public TResult Execute<TResult>(Expression expression)
-        {
-            return queryProvider.Execute<TResult>(expression);
-        }
+        public TResult Execute<TResult>(Expression expression) => queryProvider.Execute<TResult>(expression);
 
-        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default)
-        {
-            return Task.Run(() => Execute<TResult>(expression), cancellationToken).GetAwaiter().GetResult();
-        }
+        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default) => Task.Run(() => Execute<TResult>(expression), cancellationToken).GetAwaiter().GetResult();
     }
 }

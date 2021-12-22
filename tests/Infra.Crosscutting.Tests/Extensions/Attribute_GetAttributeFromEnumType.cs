@@ -1,6 +1,6 @@
-using FluentAssertions;
 using System;
 using System.ComponentModel.DataAnnotations;
+using FluentAssertions;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Extensions

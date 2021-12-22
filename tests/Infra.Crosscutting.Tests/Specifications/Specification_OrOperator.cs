@@ -1,7 +1,7 @@
+using System;
 using FluentAssertions;
 using Vantage.Infra.Crosscutting.Specifications;
 using Vantage.Infra.Crosscutting.Tests.Mocks;
-using System;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Specifications
@@ -14,7 +14,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Specifications
             var spec1 = new TrueSpecification<TestObject1>();
             var spec2 = new DirectSpecification<TestObject1>(e => e.Id == 1);
 
-            var orSpec = spec1 || spec2;
+            Specification<TestObject1> orSpec = spec1 || spec2;
 
             orSpec.Should().BeOfType<OrSpecification<TestObject1>>();
             orSpec.IsSatisfiedBy(new TestObject1()).Should().BeTrue();
@@ -26,7 +26,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Specifications
             var spec1 = new TrueSpecification<TestObject1>();
             var spec2 = new DirectSpecification<TestObject1>(e => e.Id == 1);
 
-            var orSpec = spec1 || spec2;
+            Specification<TestObject1> orSpec = spec1 || spec2;
 
             orSpec.Should().BeOfType<OrSpecification<TestObject1>>();
             orSpec.IsSatisfiedBy(new TestObject1(1)).Should().BeTrue();

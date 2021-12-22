@@ -5,7 +5,7 @@ using Vantage.Infra.Crosscutting.Collections;
 using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Paging
+namespace Vantage.Infra.Crosscutting.Tests.Paginng
 {
     public class Pagination_PaginateList
     {
@@ -105,10 +105,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Paging
             paginateResult.TotalCount.Should().Be(100);
         }
 
-        private static IQueryable<TestObject1> GetQuery()
-        {
-            return GetQuery(100);
-        }
+        private static IQueryable<TestObject1> GetQuery() => GetQuery(100);
 
         private static IQueryable<TestObject1> GetQuery(int length)
         {

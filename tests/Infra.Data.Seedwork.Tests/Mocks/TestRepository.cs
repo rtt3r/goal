@@ -1,7 +1,6 @@
 using Vantage.Domain;
-using Vantage.Infra.Data;
 
-namespace Vantage.Infra.Data.Tests.Mocks
+namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
 {
     internal class TestRepository : Repository
     {

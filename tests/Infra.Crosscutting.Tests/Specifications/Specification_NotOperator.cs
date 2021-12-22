@@ -1,7 +1,7 @@
+using System;
 using FluentAssertions;
 using Vantage.Infra.Crosscutting.Specifications;
 using Vantage.Infra.Crosscutting.Tests.Mocks;
-using System;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Specifications
@@ -13,7 +13,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Specifications
         {
             var spec2 = new DirectSpecification<TestObject1>(e => e.Id == 0);
 
-            var notSpec = !spec2;
+            Specification<TestObject1> notSpec = !spec2;
 
             notSpec.Should().BeOfType<NotSpecification<TestObject1>>();
             notSpec.IsSatisfiedBy(new TestObject1()).Should().BeFalse();
@@ -24,7 +24,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Specifications
         {
             var spec2 = new DirectSpecification<TestObject1>(e => e.Id == 0);
 
-            var notSpec = !spec2;
+            Specification<TestObject1> notSpec = !spec2;
 
             notSpec.Should().BeOfType<NotSpecification<TestObject1>>();
             notSpec.IsSatisfiedBy(new TestObject1(1)).Should().BeTrue();
@@ -37,7 +37,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Specifications
 
             Action act = () =>
             {
-                var notSpec = !spec2;
+                Specification<TestObject1> notSpec = !spec2;
             };
 
             act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'originalSpecification')");

@@ -1,4 +1,4 @@
-﻿namespace Infra.Crosscutting.Tests.Validations
+﻿namespace Vantage.Infra.Crosscutting.Tests.Validations
 {
     public class Person
     {

@@ -1,5 +1,5 @@
-using FluentAssertions;
 using System;
+using FluentAssertions;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Ensuring
@@ -10,7 +10,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         public void ThrowExceptionGivenNullCollection()
         {
             int[] collection = null;
-            Action act = () => Ensure.Items<int>(collection, p => p == 0);
+            Action act = () => Ensure.Items(collection, p => p == 0);
             act.Should().Throw<Exception>().And.Message.Should().Be("");
         }
 
@@ -18,7 +18,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         public void ThrowExceptionNotMatchPredicate()
         {
             int[] collection = new[] { 0 };
-            Action act = () => Ensure.Items<int>(collection, p => p > 0);
+            Action act = () => Ensure.Items(collection, p => p > 0);
             act.Should().Throw<Exception>().And.Message.Should().Be("");
         }
 
@@ -26,7 +26,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         public void ThrowExceptionGivenNullCollectionAndMessage()
         {
             int[] collection = null;
-            Action act = () => Ensure.Items<int>(collection, p => p == 0, "Test");
+            Action act = () => Ensure.Items(collection, p => p == 0, "Test");
             act.Should().Throw<Exception>().And.Message.Should().Be("Test");
         }
 
@@ -34,15 +34,15 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         public void ThrowExceptionNotMatchPredicateGivenMessage()
         {
             int[] collection = new[] { 0 };
-            Action act = () => Ensure.Items<int>(collection, p => p > 0, "Test");
+            Action act = () => Ensure.Items(collection, p => p > 0, "Test");
             act.Should().Throw<Exception>().And.Message.Should().Be("Test");
         }
-        
+
         [Fact]
         public void EnsureMatchPredicate()
         {
             int[] collection = new[] { 0 };
-            Action act = () => Ensure.Items<int>(collection, p => p == 0);
+            Action act = () => Ensure.Items(collection, p => p == 0);
             act.Should().NotThrow<Exception>();
         }
     }

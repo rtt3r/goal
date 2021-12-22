@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Vantage.Domain.Tests.ValueObjects.Mocks;
+using Vantage.Domain.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Domain.Tests.ValueObjects
+namespace Vantage.Domain.Seedwork.Tests.ValueObjects
 {
     public class Entity_EqualityOperator
     {
@@ -10,8 +10,8 @@ namespace Vantage.Domain.Tests.ValueObjects
         public void ReturnFalseGivenNotNullObjects()
         {
             //Given
-            ValueObject1 obj1 = new ValueObject1 { Id = 1, Value = "value" };
-            ValueObject1 obj2 = new ValueObject1 { Id = 2, Value = "value1" };
+            var obj1 = new ValueObject1 { Id = 1, Value = "value" };
+            var obj2 = new ValueObject1 { Id = 2, Value = "value1" };
 
             //When
             bool areEquals = obj1 == obj2;
@@ -24,8 +24,8 @@ namespace Vantage.Domain.Tests.ValueObjects
         public void ReturnTrueGivenNotNullObjects()
         {
             //Given
-            ValueObject1 obj1 = new ValueObject1 { Id = 1, Value = "value" };
-            ValueObject1 obj2 = new ValueObject1 { Id = 1, Value = "value" };
+            var obj1 = new ValueObject1 { Id = 1, Value = "value" };
+            var obj2 = new ValueObject1 { Id = 1, Value = "value" };
 
             //When
             bool areEquals = obj1 == obj2;
@@ -39,7 +39,7 @@ namespace Vantage.Domain.Tests.ValueObjects
         {
             //Given
             ValueObject1 obj1 = null;
-            ValueObject1 obj2 = new ValueObject1 { Id = 2, Value = "value1" };
+            var obj2 = new ValueObject1 { Id = 2, Value = "value1" };
 
             //When
             bool areEquals = obj1 == obj2;
@@ -52,7 +52,7 @@ namespace Vantage.Domain.Tests.ValueObjects
         public void ReturnFalseGivenNullRightObjects()
         {
             //Given
-            ValueObject1 obj1 = new ValueObject1 { Id = 1, Value = "value" };
+            var obj1 = new ValueObject1 { Id = 1, Value = "value" };
             ValueObject1 obj2 = null;
 
             //When

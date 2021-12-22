@@ -7,11 +7,11 @@ using Moq;
 using Vantage.Domain;
 using Vantage.Infra.Crosscutting.Collections;
 using Vantage.Infra.Crosscutting.Specifications;
-using Vantage.Infra.Data.Tests.Extensions;
-using Vantage.Infra.Data.Tests.Mocks;
+using Vantage.Infra.Data.Seedwork.Tests.Extensions;
+using Vantage.Infra.Data.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Data.Tests.Repositories
+namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
 {
     public class Repository_Find
     {
@@ -742,9 +742,6 @@ namespace Vantage.Infra.Data.Tests.Repositories
             return tests;
         }
 
-        private static List<Test> MockTests()
-        {
-            return MockTests(5);
-        }
+        private static List<Test> MockTests() => MockTests(5);
     }
 }

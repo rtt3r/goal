@@ -1,16 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Vantage.Domain;
 using Vantage.Infra.Crosscutting.Specifications;
-using Vantage.Infra.Data.Tests.Extensions;
-using Vantage.Infra.Data.Tests.Mocks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Vantage.Infra.Data.Seedwork.Tests.Extensions;
+using Vantage.Infra.Data.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Data.Tests.Repositories
+namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
 {
     public class Repository_Any
     {
@@ -21,7 +21,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
@@ -38,7 +38,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
@@ -55,7 +55,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
@@ -72,7 +72,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
@@ -90,7 +90,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
@@ -109,7 +109,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
@@ -128,7 +128,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
@@ -147,7 +147,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
             mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
@@ -161,7 +161,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
         [Fact]
         public void ThrowsArgumentNullExceptionGivenNullSpecification()
         {
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
 
             Action act = () =>
             {
@@ -176,7 +176,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
         [Fact]
         public void ThrowsArgumentNullExceptionGivenNullSpecificationAsync()
         {
-            Mock<IEFUnitOfWork> mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
 
             Action act = () =>
             {
@@ -190,7 +190,7 @@ namespace Vantage.Infra.Data.Tests.Repositories
 
         private static List<Test> MockTests(int count)
         {
-            List<Test> tests = new List<Test>();
+            var tests = new List<Test>();
 
             for (int i = 1; i <= count; i++)
             {
@@ -200,9 +200,6 @@ namespace Vantage.Infra.Data.Tests.Repositories
             return tests;
         }
 
-        private static List<Test> MockTests()
-        {
-            return MockTests(5);
-        }
+        private static List<Test> MockTests() => MockTests(5);
     }
 }

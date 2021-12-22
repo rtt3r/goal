@@ -3,7 +3,7 @@ using FluentAssertions;
 using Vantage.Infra.Crosscutting.Localization;
 using Xunit;
 
-namespace Infra.Crosscutting.Tests.Localization
+namespace Vantage.Infra.Crosscutting.Tests.Localization
 {
     public class ApplicationCultures_GetCultures
     {

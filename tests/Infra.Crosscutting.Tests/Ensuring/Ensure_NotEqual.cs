@@ -1,7 +1,6 @@
-using FluentAssertions;
-using Vantage.Infra.Crosscutting;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
 using System;
+using FluentAssertions;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Ensuring
@@ -11,8 +10,8 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void ThrowsExceptionGivenEqualsPrimitives()
         {
-            var a = 1;
-            var b = 1;
+            int a = 1;
+            int b = 1;
 
             Action act = () => Ensure.NotEqual(a, b);
             act.Should().Throw<Exception>().And.Message.Should().Be(Messages.BothValuesMustNotBeEqual);
@@ -22,7 +21,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         public void ThrowsExceptionGivenEqualsNonPrimitives()
         {
             var a = new TestObject1();
-            var b = a;
+            TestObject1 b = a;
 
             Action act = () => Ensure.NotEqual(a, b);
             act.Should().Throw<Exception>().And.Message.Should().Be(Messages.BothValuesMustNotBeEqual);
@@ -49,8 +48,8 @@ namespace Vantage.Infra.Crosscutting.Tests.Ensuring
         [Fact]
         public void EnsureGivenNotEqualsPrimitives()
         {
-            var a = 1;
-            var b = 2;
+            int a = 1;
+            int b = 2;
 
             Action act = () => Ensure.NotEqual(a, b);
             act.Should().NotThrow<Exception>();

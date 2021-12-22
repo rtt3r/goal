@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Vantage.Domain.Tests.Mocks;
+using Vantage.Domain.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Domain.Tests.Entity
+namespace Vantage.Domain.Seedwork.Tests.Entity
 {
     public class Entity_InequalityOperator
     {
@@ -10,8 +10,8 @@ namespace Vantage.Domain.Tests.Entity
         public void ReturnTrueGivenNotNullObjects()
         {
             //Given
-            EntityTest obj1 = new EntityTest(3);
-            EntityTest obj2 = new EntityTest(4);
+            var obj1 = new EntityTest(3);
+            var obj2 = new EntityTest(4);
 
             //When
             bool areEquals = obj1 != obj2;
@@ -24,8 +24,8 @@ namespace Vantage.Domain.Tests.Entity
         public void ReturnFalseGivenNotNullObjects()
         {
             //Given
-            EntityTest obj1 = new EntityTest(3);
-            EntityTest obj2 = new EntityTest(3);
+            var obj1 = new EntityTest(3);
+            var obj2 = new EntityTest(3);
 
             //When
             bool areEquals = obj1 != obj2;
@@ -39,7 +39,7 @@ namespace Vantage.Domain.Tests.Entity
         {
             //Given
             EntityTest obj1 = null;
-            EntityTest obj2 = new EntityTest(3);
+            var obj2 = new EntityTest(3);
 
             //When
             bool areEquals = obj1 != obj2;
@@ -52,7 +52,7 @@ namespace Vantage.Domain.Tests.Entity
         public void ReturnTrueGivenNullRightObjects()
         {
             //Given
-            EntityTest obj1 = new EntityTest(3);
+            var obj1 = new EntityTest(3);
             EntityTest obj2 = null;
 
             //When

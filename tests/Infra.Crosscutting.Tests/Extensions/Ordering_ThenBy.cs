@@ -30,10 +30,7 @@ namespace Vantage.Infra.Crosscutting.Tests.Extensions
             result.Last().Id.Should().Be(query.Last().Id);
         }
 
-        private static IQueryable<TestObject1> GetQuery()
-        {
-            return GetQuery(100);
-        }
+        private static IQueryable<TestObject1> GetQuery() => GetQuery(100);
 
         private static IQueryable<TestObject1> GetQuery(int length)
         {

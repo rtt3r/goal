@@ -1,7 +1,7 @@
-using FluentAssertions;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
 using System;
 using System.Linq.Expressions;
+using FluentAssertions;
+using Vantage.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
 namespace Vantage.Infra.Crosscutting.Tests.Extensions

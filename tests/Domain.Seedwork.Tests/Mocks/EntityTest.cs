@@ -1,4 +1,4 @@
-namespace Vantage.Domain.Tests.Mocks
+namespace Vantage.Domain.Seedwork.Tests.Mocks
 {
     internal class EntityTest : Domain.Entity
     {
@@ -13,9 +13,6 @@ namespace Vantage.Domain.Tests.Mocks
             Id = id;
         }
 
-        public void SetId(int id)
-        {
-            Id = id;
-        }
+        public void SetId(int id) => Id = id;
     }
 }
