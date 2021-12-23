@@ -7,19 +7,6 @@ namespace Vantage.Domain.Seedwork.Tests.Entity
     public class Entity_GetHashCode
     {
         [Fact]
-        public void ReturnNewHashGivenTransient()
-        {
-            //Given
-            IEntity entity = new EntityTest();
-
-            //When
-            int hash = entity.GetHashCode();
-
-            //Then
-            hash.Should().Be(entity.Id.GetHashCode() ^ 31);
-        }
-
-        [Fact]
         public void ReturnNewHashGivenIntransient()
         {
             //Given

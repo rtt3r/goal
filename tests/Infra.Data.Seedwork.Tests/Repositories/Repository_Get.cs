@@ -21,13 +21,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             Test test = testRepository.Find(1);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
             test.Id.Should().Be(1);
         }
@@ -41,14 +41,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockDbContext = new Mock<DbContext>();
 
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             Test test = testRepository.Find(6);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();
         }
 
@@ -61,13 +61,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             Test test = testRepository.FindAsync(1).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
             test.Id.Should().Be(1);
         }
@@ -81,13 +81,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             Test test = testRepository.FindAsync(6).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();
         }
 

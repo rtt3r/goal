@@ -25,13 +25,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.Find();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
         }
 
@@ -42,13 +42,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.Find();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
         }
 
@@ -61,13 +61,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.FindAsync().GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
         }
 
@@ -78,13 +78,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.FindAsync().GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
         }
 
@@ -98,14 +98,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.Find(spec);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveSameCount(mockedTests.Where(p => p.Active));
         }
 
@@ -119,13 +119,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             Action act = () =>
             {
                 ISpecification<Test> spec = null;
-                ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Find(spec);
             };
 
@@ -142,26 +142,26 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.FindAsync(spec).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveSameCount(mockedTests.Where(p => p.Active));
         }
 
         [Fact]
         public void ThrowsArgumentNullExceptionGivenNullSpecificationAsync()
         {
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockDbContext = new Mock<DbContext>();
 
             Action act = () =>
             {
                 ISpecification<Test> spec = null;
-                ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.FindAsync(spec).GetAwaiter().GetResult();
             };
 
@@ -177,14 +177,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.Find(spec);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
         }
 
@@ -197,15 +197,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
 
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.FindAsync(spec).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
         }
 
@@ -218,14 +218,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[0]);
@@ -241,14 +241,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[99]);
@@ -264,14 +264,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[0]);
@@ -287,14 +287,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[99]);
@@ -310,14 +310,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(1, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[10]);
@@ -333,14 +333,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(1, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[89]);
@@ -356,14 +356,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(1, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[10]);
@@ -379,14 +379,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(1, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
             tests.TotalCount.Should().Be(100);
             tests.First().Should().Be(mockedTests[89]);
@@ -402,14 +402,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
             tests.TotalCount.Should().Be(9);
             tests.First().Should().Be(mockedTests[0]);
@@ -425,14 +425,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
             tests.TotalCount.Should().Be(9);
             tests.First().Should().Be(mockedTests[0]);
@@ -448,14 +448,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
             tests.TotalCount.Should().Be(9);
             tests.First().Should().Be(mockedTests[8]);
@@ -471,14 +471,14 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
             tests.TotalCount.Should().Be(9);
             tests.First().Should().Be(mockedTests[8]);
@@ -496,15 +496,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[1]);
@@ -522,15 +522,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(-1, -1);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(98);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[1]);
@@ -540,13 +540,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
         [Fact]
         public void ThrowsArgumentNullExceptionGivenSpecificationAndNullPagination()
         {
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockDbContext = new Mock<DbContext>();
 
             Action act = () =>
             {
                 ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
                 IPagination pagination = null;
-                ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Find(spec, pagination);
             };
 
@@ -556,13 +556,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
         [Fact]
         public void ThrowsArgumentNullExceptionGivenSpecificationAndNullPaginationAsync()
         {
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockDbContext = new Mock<DbContext>();
 
             Action act = () =>
             {
                 ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
                 IPagination pagination = null;
-                ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
             };
 
@@ -572,13 +572,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
         [Fact]
         public void ThrowsArgumentNullExceptionGivenPaginationAndNullSpecification()
         {
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockDbContext = new Mock<DbContext>();
 
             Action act = () =>
             {
                 ISpecification<Test> spec = null;
                 IPagination pagination = new Pagination(0, 10);
-                ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Find(spec, pagination);
             };
 
@@ -588,13 +588,13 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
         [Fact]
         public void ThrowsArgumentNullExceptionGivenPaginationAndNullSpecificationAsync()
         {
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
+            var mockDbContext = new Mock<DbContext>();
 
             Action act = () =>
             {
                 ISpecification<Test> spec = null;
                 IPagination pagination = new Pagination(0, 10);
-                ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
             };
 
@@ -612,15 +612,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[1]);
@@ -638,15 +638,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[98]);
@@ -664,15 +664,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10, "Id", false);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[98]);
@@ -690,15 +690,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(9, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(8);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[91]);
@@ -716,15 +716,15 @@ namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
-            var mockUnitOfWork = new Mock<IEFUnitOfWork>();
-            mockUnitOfWork.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
+            var mockDbContext = new Mock<DbContext>();
+            mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(9, 10);
-            ISqlRepository<Test> testRepository = new GenericTestRepository(mockUnitOfWork.Object);
+            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
 
-            mockUnitOfWork.Verify(x => x.Set<Test>(), Times.Once);
+            mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(8);
             tests.TotalCount.Should().Be(98);
             tests.First().Should().Be(mockedTests[91]);

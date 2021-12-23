@@ -4,5 +4,6 @@ namespace Vantage.Domain
 {
     public interface IUnitOfWork : IDisposable
     {
+        bool Commit();
     }
 }

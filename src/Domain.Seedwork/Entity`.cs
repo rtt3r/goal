@@ -6,8 +6,6 @@ namespace Vantage.Domain
 
         protected Entity() { }
 
-        public bool IsTransient() => Id.Equals(default(TKey));
-
         public override bool Equals(object obj)
         {
             if (obj is null)
@@ -22,11 +20,6 @@ namespace Vantage.Domain
                     return true;
                 }
 
-                if (item.IsTransient() || IsTransient())
-                {
-                    return false;
-                }
-
                 return item.Id.Equals(Id);
             }
 
@@ -37,12 +30,7 @@ namespace Vantage.Domain
         {
             unchecked
             {
-                if (IsTransient())
-                {
-                    return Id.GetHashCode() ^ 31;
-                }
-
-                return (Id.GetHashCode() * 397) ^ Id.GetHashCode();
+                return (GetType().GetHashCode() * 397) ^ Id.GetHashCode();
             }
         }
 

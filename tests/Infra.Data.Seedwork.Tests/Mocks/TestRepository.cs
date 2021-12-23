@@ -1,11 +1,11 @@
-using Vantage.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
 {
-    internal class TestRepository : Repository
+    internal class TestRepository : Repository<Test>
     {
-        public TestRepository(IUnitOfWork unitOfWork)
-            : base(unitOfWork)
+        public TestRepository(DbContext context)
+            : base(context)
         {
         }
     }

@@ -103,19 +103,5 @@ namespace Vantage.Domain.Seedwork.Tests.Entity
             //Then
             areEquals.Should().BeTrue();
         }
-
-        [Fact]
-        public void ReturnFalseGivenBothTransient()
-        {
-            //Given
-            IEntity entity1 = new EntityTest();
-            IEntity entity2 = new EntityTest();
-
-            //When
-            bool areEquals = entity1.Equals(entity2);
-
-            //Then
-            areEquals.Should().BeFalse();
-        }
     }
 }
