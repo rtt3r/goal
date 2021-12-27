@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Vantage.Infra.Crosscutting.Specifications
+namespace Goal.Infra.Crosscutting.Specifications
 {
     public sealed class TrueSpecification<TEntity> : Specification<TEntity>
         where TEntity : class

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 
-namespace Vantage.Infra.Crosscutting.Extensions
+namespace Goal.Infra.Crosscutting.Extensions
 {
     public static class EnumExtensions
     {

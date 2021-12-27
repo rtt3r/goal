@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Vantage.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 
-namespace Vantage.Infra.Crosscutting.Extensions
+namespace Goal.Infra.Crosscutting.Extensions
 {
     public static class EnumerableExtensions
     {

@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Moq;
-using Vantage.Application.Extensions;
-using Vantage.Infra.Crosscutting.Adapters;
+using Goal.Application.Extensions;
+using Goal.Infra.Crosscutting.Adapters;
 using Xunit;
 
-namespace Vantage.Application.Seedwork.Tests.Extensions
+namespace Goal.Application.Seedwork.Tests.Extensions
 {
     public class Projection_ProjectAs
     {

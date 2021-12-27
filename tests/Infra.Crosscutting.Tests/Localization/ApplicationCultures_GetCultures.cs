@@ -1,9 +1,9 @@
 using System.Globalization;
 using FluentAssertions;
-using Vantage.Infra.Crosscutting.Localization;
+using Goal.Infra.Crosscutting.Localization;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Localization
+namespace Goal.Infra.Crosscutting.Tests.Localization
 {
     public class ApplicationCultures_GetCultures
     {

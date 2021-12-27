@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Vantage.Domain.Notifications
+namespace Goal.Domain.Notifications
 {
     public class DomainNotificationHandler : IDomainNotificationHandler
     {

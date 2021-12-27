@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Vantage.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Infra.Crosscutting.Tests.Extensions
 {
     public class String_PadLeft
     {

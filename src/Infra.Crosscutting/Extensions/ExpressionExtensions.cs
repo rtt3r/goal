@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Vantage.Infra.Crosscutting.Extensions
+namespace Goal.Infra.Crosscutting.Extensions
 {
     public static partial class ExtensionManager
     {

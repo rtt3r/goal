@@ -4,12 +4,12 @@ using System.Linq;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Vantage.Domain;
-using Vantage.Infra.Data.Seedwork.Tests.Extensions;
-using Vantage.Infra.Data.Seedwork.Tests.Mocks;
+using Goal.Domain;
+using Goal.Infra.Data.Seedwork.Tests.Extensions;
+using Goal.Infra.Data.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
+namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 {
     public class Repository_Update
     {

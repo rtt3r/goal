@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Moq;
-using Vantage.Application.Extensions;
-using Vantage.Infra.Crosscutting.Adapters;
-using Vantage.Infra.Crosscutting.Collections;
+using Goal.Application.Extensions;
+using Goal.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Collections;
 using Xunit;
 
-namespace Vantage.Application.Seedwork.Tests.Extensions
+namespace Goal.Application.Seedwork.Tests.Extensions
 {
     public class Projection_ProjectAsPagedCollection
     {

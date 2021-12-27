@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Vantage.Infra.Crosscutting.Specifications
+namespace Goal.Infra.Crosscutting.Specifications
 {
     public static class ExpressionBuilder
     {

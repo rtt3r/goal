@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Vantage.Infra.Crosscutting.Adapters;
-using Vantage.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Collections;
 
-namespace Vantage.Application.Extensions
+namespace Goal.Application.Extensions
 {
     public static class ProjectionsExtensionMethods
     {

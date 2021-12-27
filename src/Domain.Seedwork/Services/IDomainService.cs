@@ -1,4 +1,4 @@
-namespace Vantage.Domain.Services
+namespace Goal.Domain.Services
 {
     public interface IDomainService
     {

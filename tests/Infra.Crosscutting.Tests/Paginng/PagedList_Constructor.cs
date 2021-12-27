@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Paginng
+namespace Goal.Infra.Crosscutting.Tests.Paginng
 {
     public class PagedList_Constructor
     {

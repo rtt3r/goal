@@ -1,4 +1,4 @@
-namespace Vantage.Domain.Events
+namespace Goal.Domain.Events
 {
     public interface IEventStore
     {

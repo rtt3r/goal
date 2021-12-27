@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Ensuring
+namespace Goal.Infra.Crosscutting.Tests.Ensuring
 {
     public class Ensure_Argument_Is
     {

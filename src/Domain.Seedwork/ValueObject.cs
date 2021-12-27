@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Vantage.Domain
+namespace Goal.Domain
 {
     public class ValueObject : IEquatable<ValueObject>
     {

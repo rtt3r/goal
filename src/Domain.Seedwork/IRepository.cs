@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Crosscutting.Specifications;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Specifications;
 
-namespace Vantage.Domain
+namespace Goal.Domain
 {
     public interface IRepository<TEntity, TKey> : IDisposable
         where TEntity : class

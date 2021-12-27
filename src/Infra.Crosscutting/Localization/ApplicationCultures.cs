@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Vantage.Infra.Crosscutting.Localization
+namespace Goal.Infra.Crosscutting.Localization
 {
     public static class ApplicationCultures
     {

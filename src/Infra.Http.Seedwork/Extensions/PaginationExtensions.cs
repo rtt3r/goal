@@ -1,7 +1,7 @@
-using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Http.Controllers.Requests;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Http.Controllers.Requests;
 
-namespace Vantage.Infra.Http.Extensions
+namespace Goal.Infra.Http.Extensions
 {
     public static class PaginationExtensions
     {

@@ -1,11 +1,11 @@
 using System.Linq;
 using FluentAssertions;
-using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Crosscutting.Extensions;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Infra.Crosscutting.Tests.Extensions
 {
     public class Enumerable_SelectPaged
     {

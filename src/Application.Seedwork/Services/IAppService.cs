@@ -1,4 +1,4 @@
-namespace Vantage.Application.Services
+namespace Goal.Application.Services
 {
     public interface IAppService
     {

@@ -1,4 +1,4 @@
-namespace Vantage.Infra.Http.Controllers.Requests
+namespace Goal.Infra.Http.Controllers.Requests
 {
     public sealed class PaginationRequest
     {

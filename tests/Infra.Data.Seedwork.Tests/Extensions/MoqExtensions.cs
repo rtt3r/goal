@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Vantage.Domain;
-using Vantage.Infra.Data.Seedwork.Tests.Mocks;
+using Goal.Domain;
+using Goal.Infra.Data.Seedwork.Tests.Mocks;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Extensions
+namespace Goal.Infra.Data.Seedwork.Tests.Extensions
 {
     public static class MoqExtensions
     {

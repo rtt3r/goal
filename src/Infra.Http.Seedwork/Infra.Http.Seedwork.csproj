@@ -3,13 +3,13 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Vantage.Infra.Http</RootNamespace>
-		<AssemblyName>Vantage.Infra.Http.Seedwork</AssemblyName>
+		<RootNamespace>Goal.Infra.Http</RootNamespace>
+		<AssemblyName>Goal.Infra.Http.Seedwork</AssemblyName>
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Vantage.Infra.Http.Seedwork</PackageId>
+		<PackageId>Goal.Infra.Http.Seedwork</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>

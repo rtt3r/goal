@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
+namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 {
     internal class TestAsyncQueryProvider<TEntity> : IAsyncQueryProvider
     {

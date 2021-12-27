@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Vantage.Domain.Commands;
-using Vantage.Domain.Events;
+using Goal.Domain.Commands;
+using Goal.Domain.Events;
 
-namespace Vantage.Domain.Bus
+namespace Goal.Domain.Bus
 {
     public interface IMediatorHandler
     {

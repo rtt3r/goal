@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Vantage.Infra.Http.Swagger
+namespace Goal.Infra.Http.Swagger
 {
     public class LowerCaseDocumentFilter : IDocumentFilter
     {

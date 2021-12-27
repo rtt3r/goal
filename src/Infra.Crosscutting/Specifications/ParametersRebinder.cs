@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Vantage.Infra.Crosscutting.Specifications
+namespace Goal.Infra.Crosscutting.Specifications
 {
     internal sealed class ParameterRebinder : ExpressionVisitor
     {

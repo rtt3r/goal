@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Vantage.Infra.Crosscutting.Validations
+namespace Goal.Infra.Crosscutting.Validations
 {
     public static class CustomValidations
     {

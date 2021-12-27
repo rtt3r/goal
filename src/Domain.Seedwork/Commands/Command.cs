@@ -1,8 +1,8 @@
 using System;
 using FluentValidation.Results;
-using Vantage.Domain.Events;
+using Goal.Domain.Events;
 
-namespace Vantage.Domain.Commands
+namespace Goal.Domain.Commands
 {
     public abstract class Command : Message
     {

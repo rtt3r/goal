@@ -2,10 +2,10 @@ using System.Linq;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using Vantage.Infra.Crosscutting.Validations;
+using Goal.Infra.Crosscutting.Validations;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Validations
+namespace Goal.Infra.Crosscutting.Tests.Validations
 {
     public class CpfValidator_IsValid
     {

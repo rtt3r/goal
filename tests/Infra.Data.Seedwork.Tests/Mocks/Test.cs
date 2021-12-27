@@ -1,6 +1,6 @@
-using Vantage.Domain;
+using Goal.Domain;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
+namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 {
     public class Test : Entity
     {

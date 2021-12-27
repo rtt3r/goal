@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Http.Controllers.Results;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Http.Controllers.Results;
 
-namespace Vantage.Infra.Http.Controllers
+namespace Goal.Infra.Http.Controllers
 {
     public class ApiController : ControllerBase
     {

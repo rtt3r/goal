@@ -1,10 +1,10 @@
 using System;
 using FluentAssertions;
-using Vantage.Infra.Crosscutting.Specifications;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
+using Goal.Infra.Crosscutting.Specifications;
+using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Specifications
+namespace Goal.Infra.Crosscutting.Tests.Specifications
 {
     public class DirectSpecification_Constructor
     {

@@ -1,7 +1,7 @@
 using System;
-using Vantage.Domain.Events;
+using Goal.Domain.Events;
 
-namespace Vantage.Domain.Notifications
+namespace Goal.Domain.Notifications
 {
     public class DomainNotification : Event
     {

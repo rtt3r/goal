@@ -1,4 +1,4 @@
-namespace Vantage.Infra.Crosscutting.Collections
+namespace Goal.Infra.Crosscutting.Collections
 {
     public interface IPagination
     {

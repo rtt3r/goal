@@ -1,4 +1,4 @@
-namespace Vantage.Infra.Crosscutting.Adapters
+namespace Goal.Infra.Crosscutting.Adapters
 {
     /// <summary>
     /// Base contract for map dto to aggregate or aggregate to dto.

@@ -1,7 +1,7 @@
 using FluentValidation;
-using Vantage.Infra.Crosscutting.Validations.Validators;
+using Goal.Infra.Crosscutting.Validations.Validators;
 
-namespace Vantage.Infra.Crosscutting.Validations
+namespace Goal.Infra.Crosscutting.Validations
 {
     public static class ValidationsExtensions
     {

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Vantage.Domain;
+using Goal.Domain;
 
-namespace Vantage.Infra.Data
+namespace Goal.Infra.Data
 {
     public abstract class Repository<TEntity> : Repository<TEntity, long>, IRepository<TEntity>
         where TEntity : class

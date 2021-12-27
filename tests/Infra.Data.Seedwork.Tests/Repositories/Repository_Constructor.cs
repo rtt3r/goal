@@ -2,10 +2,10 @@ using System;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Vantage.Infra.Data.Seedwork.Tests.Mocks;
+using Goal.Infra.Data.Seedwork.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Repositories
+namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 {
     public class Repository_Constructor
     {

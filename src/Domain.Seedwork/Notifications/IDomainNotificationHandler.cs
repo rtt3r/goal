@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace Vantage.Domain.Notifications
+namespace Goal.Domain.Notifications
 {
     public interface IDomainNotificationHandler : INotificationHandler<DomainNotification>
     {

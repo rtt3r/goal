@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
+namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 {
     internal class TestRepository : Repository<Test>
     {

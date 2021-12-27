@@ -2,13 +2,13 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Vantage.Infra.Crosscutting</RootNamespace>
-		<AssemblyName>Vantage.Infra.Crosscutting</AssemblyName>
+		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
+		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Vantage.Infra.Crosscutting</PackageId>
+		<PackageId>Goal.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>

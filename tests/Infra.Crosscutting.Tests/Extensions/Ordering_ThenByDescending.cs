@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Vantage.Infra.Crosscutting.Extensions;
-using Vantage.Infra.Crosscutting.Tests.Mocks;
+using Goal.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Vantage.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Infra.Crosscutting.Tests.Extensions
 {
     public class Ordering_ThenByDescending
     {

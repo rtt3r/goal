@@ -1,10 +1,10 @@
 using System;
 using System.Transactions;
 using FluentAssertions;
-using Vantage.Application.Services;
+using Goal.Application.Services;
 using Xunit;
 
-namespace Vantage.Application.Seedwork.Tests.Services
+namespace Goal.Application.Seedwork.Tests.Services
 {
     public class AppService_CreateTransactionScope
     {

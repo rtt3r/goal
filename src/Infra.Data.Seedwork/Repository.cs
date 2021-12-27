@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Vantage.Domain;
-using Vantage.Infra.Crosscutting;
-using Vantage.Infra.Crosscutting.Collections;
-using Vantage.Infra.Crosscutting.Extensions;
-using Vantage.Infra.Crosscutting.Specifications;
+using Goal.Domain;
+using Goal.Infra.Crosscutting;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Specifications;
 
-namespace Vantage.Infra.Data
+namespace Goal.Infra.Data
 {
     public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey>
         where TEntity : class

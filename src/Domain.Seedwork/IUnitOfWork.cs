@@ -1,6 +1,6 @@
 using System;
 
-namespace Vantage.Domain
+namespace Goal.Domain
 {
     public interface IUnitOfWork : IDisposable
     {

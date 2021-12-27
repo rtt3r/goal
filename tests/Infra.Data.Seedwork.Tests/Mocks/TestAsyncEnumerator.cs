@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Vantage.Infra.Data.Seedwork.Tests.Mocks
+namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 {
     public class TestAsyncEnumerator<T> : IAsyncEnumerator<T>
     {

@@ -1,6 +1,6 @@
 using System.Transactions;
 
-namespace Vantage.Application.Services
+namespace Goal.Application.Services
 {
     public abstract class AppService : IAppService
     {

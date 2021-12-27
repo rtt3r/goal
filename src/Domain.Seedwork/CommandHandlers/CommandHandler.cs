@@ -1,8 +1,8 @@
-using Vantage.Domain.Bus;
-using Vantage.Domain.Commands;
-using Vantage.Domain.Notifications;
+using Goal.Domain.Bus;
+using Goal.Domain.Commands;
+using Goal.Domain.Notifications;
 
-namespace Vantage.Domain.CommandHandlers
+namespace Goal.Domain.CommandHandlers
 {
     public class CommandHandler
     {

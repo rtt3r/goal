@@ -1,6 +1,6 @@
-using Vantage.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 
-namespace Vantage.Infra.Http.Controllers.Results
+namespace Goal.Infra.Http.Controllers.Results
 {
     public abstract class PagedCollectionResponse<T> where T : class, IPagedCollection
     {

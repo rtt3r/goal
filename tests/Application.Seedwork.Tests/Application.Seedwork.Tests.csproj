@@ -4,7 +4,7 @@
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
-		<RootNamespace>Vantage.Application.Seedwork.Tests</RootNamespace>
+		<RootNamespace>Goal.Application.Seedwork.Tests</RootNamespace>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
