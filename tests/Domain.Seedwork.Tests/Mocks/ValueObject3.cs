@@ -1,3 +1,5 @@
+using Goal.Domain.Aggregates;
+
 namespace Goal.Domain.Seedwork.Tests.Mocks
 {
     internal class ValueObject3 : ValueObject

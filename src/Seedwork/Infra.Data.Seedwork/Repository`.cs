@@ -1,4 +1,4 @@
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data

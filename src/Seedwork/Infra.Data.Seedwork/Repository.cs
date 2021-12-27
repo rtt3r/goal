@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 using Goal.Infra.Crosscutting;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;

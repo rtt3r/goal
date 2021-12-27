@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Goal.Domain
+namespace Goal.Domain.Aggregates
 {
     public class ValueObject : IEquatable<ValueObject>
     {
@@ -44,7 +44,7 @@ namespace Goal.Domain
                     object left = p.GetValue(this, null);
                     object right = p.GetValue(obj, null);
 
-                    return object.Equals(left, right);
+                    return Equals(left, right);
                 });
             }
 
@@ -67,11 +67,11 @@ namespace Goal.Domain
 
                     if (value is null)
                     {
-                        hashCode = hashCode ^ (index * 13);
+                        hashCode = hashCode ^ index * 13;
                     }
                     else
                     {
-                        hashCode = hashCode * ((changeMultiplier) ? 59 : 114) + value.GetHashCode();
+                        hashCode = hashCode * (changeMultiplier ? 59 : 114) + value.GetHashCode();
                         changeMultiplier = !changeMultiplier;
                     }
                 }

@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Goal.Domain.Events
+namespace Goal.Domain.Messages
 {
     public abstract class Message : IRequest<bool>
     {

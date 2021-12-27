@@ -1,4 +1,4 @@
-namespace Goal.Domain
+namespace Goal.Domain.Aggregates
 {
     public abstract class Entity<TKey> : IEntity<TKey>
     {
@@ -30,7 +30,7 @@ namespace Goal.Domain
         {
             unchecked
             {
-                return (GetType().GetHashCode() * 397) ^ Id.GetHashCode();
+                return GetType().GetHashCode() * 397 ^ Id.GetHashCode();
             }
         }
 

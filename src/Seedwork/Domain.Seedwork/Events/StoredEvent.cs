@@ -6,7 +6,6 @@ namespace Goal.Domain.Events
     {
         public StoredEvent(Event @event, string data, string user)
         {
-            Id = Guid.NewGuid();
             AggregateId = @event.AggregateId;
             MessageType = @event.MessageType;
             Data = data;
@@ -16,7 +15,7 @@ namespace Goal.Domain.Events
         // EF Constructor
         protected StoredEvent() { }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
 
         public string Data { get; private set; }
 

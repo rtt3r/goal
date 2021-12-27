@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Crosscutting.Specifications;

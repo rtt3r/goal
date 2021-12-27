@@ -1,4 +1,5 @@
 using FluentAssertions;
+using Goal.Domain.Aggregates;
 using Goal.Domain.Seedwork.Tests.Mocks;
 using Xunit;
 

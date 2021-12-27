@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Specifications;
 
-namespace Goal.Domain
+namespace Goal.Domain.Aggregates
 {
     public interface IRepository<TEntity, TKey> : IDisposable
         where TEntity : class

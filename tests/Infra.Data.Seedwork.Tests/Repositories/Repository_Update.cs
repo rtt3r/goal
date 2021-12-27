@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 using Goal.Infra.Data.Seedwork.Tests.Extensions;
 using Goal.Infra.Data.Seedwork.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,5 @@
 using System;
+using Goal.Domain.Messages;
 using MediatR;
 
 namespace Goal.Domain.Events

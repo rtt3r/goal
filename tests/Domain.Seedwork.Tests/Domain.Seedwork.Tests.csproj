@@ -33,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Domain.Seedwork\Domain.Seedwork.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Domain.Seedwork\Domain.Seedwork.csproj" />
 	</ItemGroup>
 
 </Project>

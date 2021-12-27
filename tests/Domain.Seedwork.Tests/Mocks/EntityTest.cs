@@ -1,6 +1,6 @@
 namespace Goal.Domain.Seedwork.Tests.Mocks
 {
-    internal class EntityTest : Domain.Entity
+    internal class EntityTest : Aggregates.Entity
     {
         public EntityTest()
             : base()

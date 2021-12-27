@@ -35,7 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Infra.Data.Seedwork\Infra.Data.Seedwork.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Infra.Data.Seedwork\Infra.Data.Seedwork.csproj" />
 	</ItemGroup>
 
 </Project>
