@@ -1,6 +1,6 @@
-using Microsoft.Extensions.DependencyInjection;
 using Goal.Infra.Crosscutting;
 using Goal.Infra.Crosscutting.Adapters;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Infra.Http.Extensions
 {

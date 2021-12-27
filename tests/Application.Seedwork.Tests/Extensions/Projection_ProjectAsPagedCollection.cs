@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using Moq;
 using Goal.Application.Extensions;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
+using Moq;
 using Xunit;
 
 namespace Goal.Application.Seedwork.Tests.Extensions

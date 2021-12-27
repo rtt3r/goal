@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using Goal.Domain;
 using Goal.Infra.Data.Seedwork.Tests.Mocks;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 
 namespace Goal.Infra.Data.Seedwork.Tests.Extensions
 {

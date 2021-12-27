@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Http.Controllers.Results;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Goal.Infra.Http.Controllers
 {

@@ -1,6 +1,6 @@
 using System;
-using Microsoft.EntityFrameworkCore;
 using Goal.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data
 {

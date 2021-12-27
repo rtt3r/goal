@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Goal.Domain;
 using Goal.Infra.Crosscutting;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Crosscutting.Specifications;
+using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data
 {

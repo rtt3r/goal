@@ -1,7 +1,7 @@
 using FluentAssertions;
-using Moq;
 using Goal.Application.Extensions;
 using Goal.Infra.Crosscutting.Adapters;
+using Moq;
 using Xunit;
 
 namespace Goal.Application.Seedwork.Tests.Extensions

@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Microsoft.Extensions.DependencyInjection;
 using Goal.Infra.Crosscutting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Infra.Http.DependencyInjection
 {

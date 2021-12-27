@@ -27,7 +27,7 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<ItemGroup >
+	<ItemGroup>
 		<PackageReference Include="MediatR" Version="9.0.0" />
 		<PackageReference Include="FluentValidation" Version="10.3.6" />
 	</ItemGroup>

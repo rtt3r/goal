@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
-using Moq;
 using Goal.Domain;
 using Goal.Infra.Data.Seedwork.Tests.Extensions;
 using Goal.Infra.Data.Seedwork.Tests.Mocks;
+using Microsoft.EntityFrameworkCore;
+using Moq;
 using Xunit;
 
 namespace Goal.Infra.Data.Seedwork.Tests.Repositories

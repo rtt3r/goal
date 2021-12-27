@@ -1,8 +1,8 @@
 using System;
 using FluentAssertions;
+using Goal.Infra.Data.Seedwork.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using Goal.Infra.Data.Seedwork.Tests.Mocks;
 using Xunit;
 
 namespace Goal.Infra.Data.Seedwork.Tests.Repositories
