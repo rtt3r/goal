@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 using Goal.Infra.Http.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Goal.DemoCqrsCqrs.Api.Swagger
+namespace Goal.DemoCqrs.Api.Swagger
 {
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {

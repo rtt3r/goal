@@ -1,8 +1,8 @@
 using AutoMapper;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Responses;
-using Goal.DemoCqrsCqrs.Domain.Aggregates.People;
+using Goal.DemoCqrs.Application.DTO.People.Responses;
+using Goal.DemoCqrs.Domain.Aggregates.People;
 
-namespace Goal.DemoCqrsCqrs.Application.Adapters.Profiles
+namespace Goal.DemoCqrs.Application.Adapters.Profiles
 {
     public class PersonProfile : Profile
     {

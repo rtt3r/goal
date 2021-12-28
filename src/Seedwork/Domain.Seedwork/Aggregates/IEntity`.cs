@@ -1,7 +1,7 @@
 namespace Goal.Domain.Aggregates
 {
-    public interface IEntity<out TKey>
+    public interface IEntity<out TKey> : IEntity
     {
-        TKey Id { get; }
+        new TKey Id { get; }
     }
 }

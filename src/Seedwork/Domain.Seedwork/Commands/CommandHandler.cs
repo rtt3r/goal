@@ -1,14 +1,15 @@
+using System.Threading.Tasks;
 using FluentValidation.Results;
 using Goal.Domain.Bus;
 using Goal.Domain.Notifications;
 
 namespace Goal.Domain.Commands
 {
-    public class CommandHandler
+    public abstract class CommandHandler
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IBusHandler busHandler;
-        private readonly INotificationHandler notificationHandler;
+        protected readonly IUnitOfWork unitOfWork;
+        protected readonly IBusHandler busHandler;
+        protected readonly INotificationHandler notificationHandler;
 
         public CommandHandler(
             IUnitOfWork unitOfWork,
@@ -20,15 +21,15 @@ namespace Goal.Domain.Commands
             this.notificationHandler = notificationHandler;
         }
 
-        protected void NotifyValidationErrors(Command message)
+        protected async Task NotifyValidationErrors(Command message)
         {
             foreach (ValidationFailure error in message.ValidationResult.Errors)
             {
-                busHandler.RaiseEvent(new Notification(message.MessageType, error.ErrorMessage));
+                await busHandler.RaiseEvent(new Notification(message.MessageType, error.ErrorMessage));
             }
         }
 
-        public bool Commit()
+        public async Task<bool> Commit()
         {
             if (notificationHandler.HasNotifications())
             {
@@ -40,7 +41,7 @@ namespace Goal.Domain.Commands
                 return true;
             }
 
-            busHandler.RaiseEvent(new Notification("Commit", "We had a problem during saving your data."));
+            await busHandler.RaiseEvent(new Notification("Commit", "We had a problem during saving your data."));
             return false;
         }
     }

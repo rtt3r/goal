@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using Goal.Application.Services;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Requests;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Responses;
+using Goal.DemoCqrs.Application.DTO.People.Requests;
+using Goal.DemoCqrs.Application.DTO.People.Responses;
 using Goal.Infra.Crosscutting.Collections;
 
-namespace Goal.DemoCqrsCqrs.Application.People
+namespace Goal.DemoCqrs.Application.People
 {
     public interface IPersonAppService : IAppService
     {

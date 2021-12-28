@@ -1,6 +1,7 @@
 using Goal.Application.Services;
 using Goal.Demo.Application.People;
 using Goal.Demo.Infra.Data;
+using Goal.Demo.Infra.Data.Repositories;
 using Goal.Domain;
 using Goal.Domain.Aggregates;
 using Goal.Infra.Data;

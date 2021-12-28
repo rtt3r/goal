@@ -7,7 +7,7 @@ using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Demo.Infra.Data
+namespace Goal.Demo.Infra.Data.Repositories
 {
     public class PersonRepository : Repository<Person, string>, IPersonRepository
     {

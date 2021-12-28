@@ -1,9 +1,9 @@
 using System;
 using Goal.Domain.Aggregates;
 
-namespace Goal.DemoCqrsCqrs.Domain.Aggregates.People
+namespace Goal.DemoCqrs.Domain.Aggregates.People
 {
-    public class Person : Entity<string>
+    public class Person : Entity
     {
         public Name Name { get; private set; }
         public Document Cpf { get; private set; }
@@ -16,7 +16,7 @@ namespace Goal.DemoCqrsCqrs.Domain.Aggregates.People
         public Person(Name name, Document cpf)
             : this()
         {
-            Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid();
             Name = name;
             Cpf = cpf;
         }

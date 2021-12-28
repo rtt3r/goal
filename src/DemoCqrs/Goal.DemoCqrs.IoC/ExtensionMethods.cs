@@ -1,6 +1,6 @@
 using Goal.Application.Services;
-using Goal.DemoCqrsCqrs.Application.People;
-using Goal.DemoCqrsCqrs.Infra.Data;
+using Goal.DemoCqrs.Infra.Data;
+using Goal.DemoCqrs.Infra.Data.Repositories;
 using Goal.Domain;
 using Goal.Domain.Aggregates;
 using Goal.Infra.Data;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Goal.DemoCqrsCqrs.IoC
+namespace Goal.DemoCqrs.IoC
 {
     public static class ExtensionMethods
     {
@@ -22,12 +22,12 @@ namespace Goal.DemoCqrsCqrs.IoC
             //services.AddScoped<ElasticAuditChangesInterceptor>();
 
             services
-                .AddDbContext<DemoCqrsCqrsContext>((provider, options) =>
+                .AddDbContext<DemoCqrsContext>((provider, options) =>
                 {
                     options
                         .UseSqlite(
                             connectionString,
-                            opts => opts.MigrationsAssembly(typeof(DemoCqrsCqrsContext).Assembly.GetName().Name))
+                            opts => opts.MigrationsAssembly(typeof(DemoCqrsContext).Assembly.GetName().Name))
                         .EnableSensitiveDataLogging();
 
                     //options.AddInterceptors(provider.GetRequiredService<ElasticAuditChangesInterceptor>());

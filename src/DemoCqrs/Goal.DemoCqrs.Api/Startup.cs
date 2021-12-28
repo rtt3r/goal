@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Goal.DemoCqrsCqrs.Api.Extensions;
-using Goal.DemoCqrsCqrs.Api.Swagger;
-using Goal.DemoCqrsCqrs.IoC;
+using Goal.DemoCqrs.Api.Extensions;
+using Goal.DemoCqrs.Api.Swagger;
+using Goal.DemoCqrs.IoC;
 using Goal.Infra.Crosscutting.Localization;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -20,7 +21,7 @@ using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Goal.DemoCqrsCqrs.Api
+namespace Goal.DemoCqrs.Api
 {
     public class Startup
     {
@@ -54,6 +55,7 @@ namespace Goal.DemoCqrsCqrs.Api
 
             services.AddServices(Configuration, Environment);
             services.AddAutoMapperTypeAdapter();
+            services.AddMediatR(typeof(Startup));
 
             services
                 .AddControllers(options =>
@@ -86,7 +88,7 @@ namespace Goal.DemoCqrsCqrs.Api
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoCqrsCqrs API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoCqrs API V1");
                     c.DisplayRequestDuration();
                     c.RoutePrefix = string.Empty;
                 });

@@ -1,22 +1,23 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Goal.DemoCqrsCqrs.Domain.Aggregates.People;
+using Goal.DemoCqrs.Domain.Aggregates.People;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.DemoCqrsCqrs.Infra.Data
+namespace Goal.DemoCqrs.Infra.Data.Repositories
 {
-    public class PersonRepository : Repository<Person, string>, IPersonRepository
+    public class PersonRepository : Repository<Person>, IPersonRepository
     {
         public PersonRepository(DbContext context)
             : base(context)
         {
         }
 
-        public override Person Find(string id)
+        public override Person Find(Guid id)
         {
             return Context
                 .Set<Person>()
@@ -24,7 +25,7 @@ namespace Goal.DemoCqrsCqrs.Infra.Data
                 .FirstOrDefault(p => p.Id == id);
         }
 
-        public override async Task<Person> FindAsync(string id)
+        public override async Task<Person> FindAsync(Guid id)
         {
             return await Context
                 .Set<Person>()

@@ -33,6 +33,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Seedwork\Infra.Data.Seedwork\Infra.Data.Seedwork.csproj" />
-		<ProjectReference Include="..\Goal.DemoCqrsCqrs.Domain\Goal.DemoCqrsCqrs.Domain.csproj" />
+		<ProjectReference Include="..\Goal.DemoCqrs.Domain\Goal.DemoCqrs.Domain.csproj" />
 	</ItemGroup>
 </Project>

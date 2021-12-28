@@ -3,16 +3,16 @@ using System.Threading.Tasks;
 using FluentValidation.Results;
 using Goal.Application.Extensions;
 using Goal.Application.Services;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Requests;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Requests.Validators;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Responses;
-using Goal.DemoCqrsCqrs.Domain.Aggregates.People;
+using Goal.DemoCqrs.Application.DTO.People.Requests;
+using Goal.DemoCqrs.Application.DTO.People.Requests.Validators;
+using Goal.DemoCqrs.Application.DTO.People.Responses;
+using Goal.DemoCqrs.Domain.Aggregates.People;
 using Goal.Domain;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Exceptions;
 
-namespace Goal.DemoCqrsCqrs.Application.People
+namespace Goal.DemoCqrs.Application.People
 {
     public class PersonAppService : AppService, IPersonAppService
     {

@@ -2,7 +2,8 @@ using System;
 
 namespace Goal.Domain.Aggregates
 {
-    public interface IEntity : IEntity<Guid>
+    public interface IEntity
     {
+        Guid Id { get; }
     }
 }

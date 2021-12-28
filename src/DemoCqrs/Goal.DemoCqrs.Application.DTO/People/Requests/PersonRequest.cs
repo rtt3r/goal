@@ -1,4 +1,4 @@
-namespace Goal.DemoCqrsCqrs.Application.DTO.People.Requests
+namespace Goal.DemoCqrs.Application.DTO.People.Requests
 {
     public abstract class PersonRequest
     {

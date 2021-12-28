@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Requests;
-using Goal.DemoCqrsCqrs.Application.DTO.People.Responses;
-using Goal.DemoCqrsCqrs.Application.People;
+using Goal.DemoCqrs.Api.Commands;
+using Goal.DemoCqrs.Api.Dtos;
+using Goal.Domain.Bus;
+using Goal.Domain.Notifications;
 using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Requests;
 using Goal.Infra.Http.Controllers.Results;
@@ -9,7 +10,7 @@ using Goal.Infra.Http.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Goal.DemoCqrsCqrs.Api.Controllers
+namespace Goal.DemoCqrs.Api.Controllers
 {
     /// <summary>
     /// Everything about People
@@ -20,11 +21,11 @@ namespace Goal.DemoCqrsCqrs.Api.Controllers
     [Route("api/[controller]")]
     public class PeopleController : ApiController
     {
-        private readonly IPersonAppService personAppService;
-
-        public PeopleController(IPersonAppService personAppService)
+        public PeopleController(
+            INotificationHandler notificationHandler,
+            IBusHandler busHandler)
+            : base(notificationHandler, busHandler)
         {
-            this.personAppService = personAppService;
         }
 
         [HttpGet]
@@ -50,7 +51,7 @@ namespace Goal.DemoCqrsCqrs.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<PersonResponse>> Post([FromBody] AddPersonRequest request)
+        public async Task<ActionResult<PersonResponse>> Post([FromBody] AddPersonCommand request)
         {
             PersonResponse result = await personAppService.AddPerson(request);
 
