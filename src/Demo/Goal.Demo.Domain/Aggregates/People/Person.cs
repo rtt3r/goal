@@ -1,5 +1,5 @@
 using System;
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {

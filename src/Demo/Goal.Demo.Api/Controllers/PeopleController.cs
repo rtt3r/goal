@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Goal.Demo.Application.DTO.People.Requests;
+using Goal.Demo.Application.DTO.People.Responses;
+using Goal.Demo.Application.People;
 using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Requests;
 using Goal.Infra.Http.Controllers.Results;
 using Goal.Infra.Http.Extensions;
-using Goal.Demo.Application.DTO.People.Requests;
-using Goal.Demo.Application.DTO.People.Responses;
-using Goal.Demo.Application.People;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Goal.Demo.Api.Controllers.V2
+namespace Goal.Demo.Api.Controllers
 {
     /// <summary>
     /// Everything about People
@@ -52,13 +52,17 @@ namespace Goal.Demo.Api.Controllers.V2
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PersonResponse>> Post([FromBody] AddPersonRequest request)
         {
-            return (await personAppService.AddPerson(request))
-                .Match<ActionResult>(
-                    failure: ex => BadRequest(ex.Message),
-                    success: result => CreatedAtRoute(
-                        nameof(GetById),
-                        new { id = result.PersonId },
-                        result));
+            PersonResponse result = await personAppService.AddPerson(request);
+
+            if (result is null)
+            {
+                return BadRequest();
+            }
+
+            return CreatedAtRoute(
+                nameof(GetById),
+                new { id = result.PersonId },
+                result);
         }
 
         [HttpPatch]
@@ -68,15 +72,17 @@ namespace Goal.Demo.Api.Controllers.V2
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<PersonResponse>> Patch(string id, [FromBody] UpdatePersonRequest request)
         {
-            return (await personAppService.UpdatePerson(id, request))
-                .Match<ActionResult>(
-                    failure: ex => ex.IsBusiness()
-                        ? BadRequest(ex.Message)
-                        : NotFound(ex.Message),
-                    success: result => AcceptedAtRoute(
-                        nameof(GetById),
-                        new { id = result.PersonId },
-                        result));
+            PersonResponse result = await personAppService.UpdatePerson(id, request);
+
+            if (result is null)
+            {
+                return BadRequest();
+            }
+
+            return AcceptedAtAction(
+                nameof(GetById),
+                new { id = result.PersonId },
+                result);
         }
 
         [HttpDelete]
@@ -85,10 +91,14 @@ namespace Goal.Demo.Api.Controllers.V2
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(string id)
         {
-            return (await personAppService.DeletePerson(id))
-                .Match<ActionResult>(
-                    failure: ex => NotFound(ex.Message),
-                    success: result => Accepted());
+            bool result = await personAppService.DeletePerson(id);
+
+            if (result)
+            {
+                return NotFound();
+            }
+
+            return Accepted();
         }
     }
 }

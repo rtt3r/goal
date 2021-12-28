@@ -68,7 +68,7 @@ namespace Goal.Infra.Crosscutting.Tests.Validations
         public PersonCnpjValidator()
         {
             RuleFor(p => p.Document)
-                .IsValidCnpj();
+                .Cnpj();
         }
     }
 }

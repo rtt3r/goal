@@ -69,7 +69,7 @@ namespace Goal.Infra.Crosscutting.Tests.Validations
         public PersonCpfValidator()
         {
             RuleFor(p => p.Document)
-                .IsValidCpf();
+                .Cpf();
         }
     }
 }

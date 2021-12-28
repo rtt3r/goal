@@ -1,35 +1,39 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Goal.Application.Services;
-using Goal.Domain;
-using Goal.Infra.Data;
 using Goal.Demo.Application.People;
 using Goal.Demo.Infra.Data;
+using Goal.Domain;
+using Goal.Domain.Aggregates;
+using Goal.Infra.Data;
+using Goal.Infra.Http.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Goal.Demo.IoC
 {
     public static class ExtensionMethods
     {
-        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration, AspNetCore.Hosting.IWebHostEnvironment environment)
+        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
             string connectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddHttpContextAccessor();
-            services.AddScoped<ElasticAuditChangesInterceptor>();
+            //services.AddScoped<ElasticAuditChangesInterceptor>();
 
             services
-                .AddDbContext<SampleContext>((provider, options) =>
+                .AddDbContext<DemoContext>((provider, options) =>
                 {
                     options
                         .UseSqlite(
                             connectionString,
-                            opts => opts.MigrationsAssembly(typeof(SampleContext).Assembly.GetName().Name))
+                            opts => opts.MigrationsAssembly(typeof(DemoContext).Assembly.GetName().Name))
                         .EnableSensitiveDataLogging();
 
-                    options.AddInterceptors(provider.GetRequiredService<ElasticAuditChangesInterceptor>());
+                    //options.AddInterceptors(provider.GetRequiredService<ElasticAuditChangesInterceptor>());
                 });
 
-            services.AddScoped<IEFUnitOfWork>(provider => provider.GetService<SampleContext>());
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.RegisterAllTypesOf<IRepository>(typeof(PersonRepository).Assembly);
             services.RegisterAllTypesOf<IAppService>(typeof(PersonAppService).Assembly);

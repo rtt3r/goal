@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {
@@ -24,9 +24,6 @@ namespace Goal.Demo.Domain.Aggregates.People
             Number = number;
         }
 
-        public static Document CreateCpf(string number)
-        {
-            return new Document(DocumentType.Cpf, number);
-        }
+        public static Document CreateCpf(string number) => new Document(DocumentType.Cpf, number);
     }
 }

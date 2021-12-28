@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Goal.Demo.Domain.Aggregates.People;
 
-namespace Goal.Demo.Infra.Data
+namespace Goal.Demo.Infra.Data.Configurations
 {
     internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
     {

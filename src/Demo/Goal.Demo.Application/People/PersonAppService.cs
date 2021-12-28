@@ -1,32 +1,33 @@
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 using Goal.Application.Extensions;
 using Goal.Application.Services;
+using Goal.Demo.Application.DTO.People.Requests;
+using Goal.Demo.Application.DTO.People.Requests.Validators;
+using Goal.Demo.Application.DTO.People.Responses;
+using Goal.Demo.Domain.Aggregates.People;
+using Goal.Domain;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Exceptions;
-using Goal.Infra.Crosscutting.Trying;
-using Goal.Infra.Crosscutting.Validations;
-using Goal.Demo.Application.DTO.People.Requests;
-using Goal.Demo.Application.DTO.People.Responses;
-using Goal.Demo.Domain.Aggregates.People;
 
 namespace Goal.Demo.Application.People
 {
     public class PersonAppService : AppService, IPersonAppService
     {
+        private readonly IUnitOfWork unitOfWork;
         private readonly IPersonRepository personRepository;
-        private readonly IEntityValidator entityValidator;
         private readonly ITypeAdapter adapter;
 
         public PersonAppService(
+            IUnitOfWork unitOfWork,
             IPersonRepository personRepository,
-            IEntityValidator entityValidator,
             ITypeAdapter adapter)
             : base()
         {
+            this.unitOfWork = unitOfWork;
             this.personRepository = personRepository;
-            this.entityValidator = entityValidator;
             this.adapter = adapter;
         }
 
@@ -44,9 +45,9 @@ namespace Goal.Demo.Application.People
             return adapter.ProjectAs<PersonResponse>(person);
         }
 
-        public async Task<Try<ApplicationException, PersonResponse>> AddPerson(AddPersonRequest request)
+        public async Task<PersonResponse> AddPerson(AddPersonRequest request)
         {
-            ValidationResult result = entityValidator.Validate(request);
+            ValidationResult result = new AddPersonRequestValidator().Validate(request);
 
             if (!result.IsValid)
             {
@@ -65,46 +66,56 @@ namespace Goal.Demo.Application.People
 
             await personRepository.AddAsync(person);
 
-            return adapter.ProjectAs<PersonResponse>(person);
-        }
-
-        public async Task<Try<ApplicationException, PersonResponse>> UpdatePerson(string id, UpdatePersonRequest request)
-        {
-            return await Try.RunAsync<ApplicationException, PersonResponse>(async () =>
+            if (unitOfWork.Commit())
             {
-                ValidationResult result = entityValidator.Validate(request);
-
-                if (!result.IsValid)
-                {
-                    throw new BusinessException(result.Errors.First().ToString());
-                }
-
-                Person person = await personRepository.FindAsync(id)
-                    ?? throw new NotFoundException("Pessoa não encontrada");
-
-                if (await personRepository.AnyAsync(
-                    !PersonSpecifications.MatchId(person.Id)
-                    && PersonSpecifications.MatchCpf(person.Cpf.Number)))
-                {
-                    throw new BusinessException("CPF duplicado");
-                }
-
-                await personRepository.UpdateAsync(person);
-
                 return adapter.ProjectAs<PersonResponse>(person);
-            });
+            }
+
+            return null;
         }
 
-        public async Task<Try<ApplicationException, bool>> DeletePerson(string id)
+        public async Task<PersonResponse> UpdatePerson(string id, UpdatePersonRequest request)
         {
-            return await Try.RunAsync<ApplicationException, bool>(async () =>
-            {
-                Person person = await personRepository.FindAsync(id)
-                    ?? throw new NotFoundException("Pessoa não encontrada");
+            ValidationResult result = new UpdatePersonRequestValidator().Validate(request);
 
-                await personRepository.RemoveAsync(person);
+            if (!result.IsValid)
+            {
+                throw new BusinessException(result.Errors.First().ToString());
+            }
+
+            Person person = await personRepository.FindAsync(id)
+                ?? throw new NotFoundException("Pessoa não encontrada");
+
+            if (await personRepository.AnyAsync(
+                !PersonSpecifications.MatchId(person.Id)
+                && PersonSpecifications.MatchCpf(person.Cpf.Number)))
+            {
+                throw new BusinessException("CPF duplicado");
+            }
+
+            personRepository.Update(person);
+
+            if (unitOfWork.Commit())
+            {
+                return adapter.ProjectAs<PersonResponse>(person);
+            }
+
+            return null;
+        }
+
+        public async Task<bool> DeletePerson(string id)
+        {
+            Person person = await personRepository.FindAsync(id)
+                ?? throw new NotFoundException("Pessoa não encontrada");
+
+            personRepository.Remove(person);
+
+            if (unitOfWork.Commit())
+            {
                 return true;
-            });
+            }
+
+            return true;
         }
     }
 }

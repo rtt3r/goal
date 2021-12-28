@@ -1,3 +1,4 @@
+using System;
 using Goal.Domain.Aggregates;
 
 namespace Goal.Application.Seedwork.Tests.Mocks
@@ -9,12 +10,12 @@ namespace Goal.Application.Seedwork.Tests.Mocks
         {
         }
 
-        public EntityTest(int id)
+        public EntityTest(Guid id)
             : base()
         {
             Id = id;
         }
 
-        public void SetId(int id) => Id = id;
+        public void SetId(Guid id) => Id = id;
     }
 }

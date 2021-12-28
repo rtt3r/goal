@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -29,12 +30,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Extensions
             mock.ConfigureDbSetCalls();
 
             mock.Setup(m => m.Find(It.IsAny<object[]>()))
-                .Returns<object[]>(key => data.FirstOrDefault(d => d.Id == (long)key[0]));
+                .Returns<object[]>(key => data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString())));
 
             mock.Setup(m => m.FindAsync(It.IsAny<object[]>()))
                 .Returns<object[]>(async key =>
                 {
-                    return await Task.FromResult(data.FirstOrDefault(d => d.Id == (long)key[0]));
+                    return await Task.FromResult(data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString())));
                 });
 
             return mock;

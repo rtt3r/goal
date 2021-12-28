@@ -92,7 +92,9 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISpecification<Test> spec = new DirectSpecification<Test>(p => p.Id == 1);
+            var id = Guid.NewGuid();
+
+            ISpecification<Test> spec = new DirectSpecification<Test>(p => p.Id == id);
             IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
 
             testRepository.Remove(spec);
@@ -121,7 +123,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             for (int i = 1; i <= count; i++)
             {
-                tests.Add(new Test(i));
+                tests.Add(new Test(Guid.NewGuid()));
             }
 
             return tests;

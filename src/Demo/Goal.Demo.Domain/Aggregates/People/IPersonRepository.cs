@@ -1,8 +1,8 @@
-using Goal.Domain;
+using Goal.Domain.Aggregates;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {
-    public interface IPersonRepository : ISqlRepository<Person, string>
+    public interface IPersonRepository : IRepository<Person, string>
     {
     }
 }

@@ -1,14 +1,16 @@
-using Microsoft.EntityFrameworkCore;
-using Goal.Infra.Data;
 using Goal.Demo.Domain.Aggregates.People;
+using Goal.Demo.Infra.Data.Configurations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Demo.Infra.Data
 {
-    public class SampleContext : EFUnitOfWork, IEFUnitOfWork, ISql
+    public class DemoContext : DbContext
     {
         public DbSet<Person> People { get; set; }
 
-        public SampleContext(DbContextOptions<SampleContext> options) : base(options) { }
+        public DemoContext(DbContextOptions<DemoContext> options)
+            : base(options)
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

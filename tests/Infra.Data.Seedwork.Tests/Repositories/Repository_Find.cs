@@ -180,7 +180,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
+            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.Parse("1d5003c0-70f4-4ed4-af24-54ba74cd6c86"));
             IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.Find(spec);
 
@@ -200,7 +200,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
+            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.Parse("1d5003c0-70f4-4ed4-af24-54ba74cd6c86"));
 
             IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.FindAsync(spec).GetAwaiter().GetResult();
@@ -737,7 +737,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             for (int i = 1; i <= count; i++)
             {
-                tests.Add(new Test(i));
+                tests.Add(new Test(Guid.NewGuid()));
             }
 
             return tests;

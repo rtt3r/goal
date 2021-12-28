@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Goal.Domain.Aggregates;
 using Goal.Domain.Seedwork.Tests.Mocks;
@@ -11,7 +12,7 @@ namespace Goal.Domain.Seedwork.Tests.Entity
         public void ReturnFalseGivenNotEntity()
         {
             //Given
-            IEntity entity = new EntityTest(3);
+            IEntity entity = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
             object obj = new();
 
             //When
@@ -25,7 +26,7 @@ namespace Goal.Domain.Seedwork.Tests.Entity
         public void ReturnTrueGivenIntransientSameReference()
         {
             //Given
-            IEntity entity1 = new EntityTest(3);
+            IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
             IEntity entity2 = entity1;
 
             //When
@@ -40,7 +41,7 @@ namespace Goal.Domain.Seedwork.Tests.Entity
         {
             //Given
             IEntity entity1 = new EntityTest();
-            IEntity entity2 = new EntityTest(3);
+            IEntity entity2 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
 
             //When
             bool areEquals = entity1.Equals(entity2);
@@ -53,7 +54,7 @@ namespace Goal.Domain.Seedwork.Tests.Entity
         public void ReturnFalseGivenRightTransient()
         {
             //Given
-            IEntity entity1 = new EntityTest(3);
+            IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
             IEntity entity2 = new EntityTest();
 
             //When
@@ -67,8 +68,8 @@ namespace Goal.Domain.Seedwork.Tests.Entity
         public void ReturnTrueGivenBothIntransient()
         {
             //Given
-            IEntity entity1 = new EntityTest(3);
-            IEntity entity2 = new EntityTest(3);
+            IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+            IEntity entity2 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
 
             //When
             bool areEquals = entity1.Equals(entity2);
@@ -81,8 +82,8 @@ namespace Goal.Domain.Seedwork.Tests.Entity
         public void ReturnFalseGivenBothIntransient()
         {
             //Given
-            IEntity entity1 = new EntityTest(3);
-            IEntity entity2 = new EntityTest(4);
+            IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+            IEntity entity2 = new EntityTest(Guid.Parse("09927327-c55b-4c17-8171-ca32131f4357"));
 
             //When
             bool areEquals = entity1.Equals(entity2);

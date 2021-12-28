@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using Goal.Demo.Api.Extensions;
+using Goal.Demo.Api.Swagger;
+using Goal.Demo.IoC;
+using Goal.Infra.Crosscutting.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -11,10 +15,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Goal.Infra.Crosscutting.Localization;
-using Goal.Infra.Crosscutting.Validations;
-using Goal.Infra.Http.Filters;
-using Goal.Demo.Api.Swagger;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -53,23 +53,20 @@ namespace Goal.Demo.Api
             });
 
             services.AddServices(Configuration, Environment);
-            services.AddValidatorFactory<EntityRulesValidatorFactory>();
             services.AddAutoMapperTypeAdapter();
 
             services
-                 .AddControllers(options =>
-                 {
-                     options.Filters.Add(new HttpErrorFilterAttribute());
-                     options.EnableEndpointRouting = false;
-                 })
-                 .AddNewtonsoftJson(options =>
-                 {
-                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                     options.SerializerSettings.Formatting = Formatting.Indented;
-                 });
+                .AddControllers(options =>
+                {
+                    options.EnableEndpointRouting = false;
+                })
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.Formatting = Formatting.Indented;
+                });
 
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-
             services.AddSwaggerGen();
         }
 
@@ -89,7 +86,7 @@ namespace Goal.Demo.Api
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sample API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API V1");
                     c.DisplayRequestDuration();
                     c.RoutePrefix = string.Empty;
                 });

@@ -87,7 +87,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             for (int i = 1; i <= count; i++)
             {
-                tests.Add(new Test(i));
+                tests.Add(new Test(Guid.NewGuid()));
             }
 
             return tests;

@@ -1,5 +1,5 @@
-using Goal.Domain;
 using System.Diagnostics;
+using Goal.Domain.Aggregates;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {
@@ -21,14 +21,8 @@ namespace Goal.Demo.Domain.Aggregates.People
             LastName = lastName;
         }
 
-        public string FullName()
-        {
-            return $"{FirstName} {LastName}".Trim();
-        }
+        public string FullName() => $"{FirstName} {LastName}".Trim();
 
-        public static Name CreateName(string firstName, string lastName)
-        {
-            return new Name(firstName, lastName);
-        }
+        public static Name CreateName(string firstName, string lastName) => new Name(firstName, lastName);
     }
 }

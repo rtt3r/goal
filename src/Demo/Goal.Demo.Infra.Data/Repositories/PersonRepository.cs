@@ -1,23 +1,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Goal.Infra.Crosscutting.Collections;
-using Goal.Infra.Data;
 using Goal.Demo.Domain.Aggregates.People;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Extensions;
+using Goal.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Demo.Infra.Data
 {
-    public class PersonRepository : EFRepository<Person, string>, IPersonRepository
+    public class PersonRepository : Repository<Person, string>, IPersonRepository
     {
-        public PersonRepository(IEFUnitOfWork unitOfWork)
-            : base(unitOfWork)
+        public PersonRepository(DbContext context)
+            : base(context)
         {
         }
 
         public override Person Find(string id)
         {
-            return UnitOfWork
+            return Context
                 .Set<Person>()
                 .Include(p => p.Cpf)
                 .FirstOrDefault(p => p.Id == id);
@@ -25,7 +26,7 @@ namespace Goal.Demo.Infra.Data
 
         public override async Task<Person> FindAsync(string id)
         {
-            return await UnitOfWork
+            return await Context
                 .Set<Person>()
                 .Include(p => p.Cpf)
                 .FirstOrDefaultAsync(p => p.Id == id);
@@ -33,28 +34,32 @@ namespace Goal.Demo.Infra.Data
 
         public override ICollection<Person> Find()
         {
-            return UnitOfWork.Set<Person>()
+            return Context
+                .Set<Person>()
                 .Include(p => p.Cpf)
                 .ToList();
         }
 
         public override async Task<ICollection<Person>> FindAsync()
         {
-            return await UnitOfWork.Set<Person>()
-                 .Include(p => p.Cpf)
-                 .ToListAsync();
+            return await Context
+                .Set<Person>()
+                .Include(p => p.Cpf)
+                .ToListAsync();
         }
 
         public override IPagedCollection<Person> Find(IPagination pagination)
         {
-            return UnitOfWork.Set<Person>()
+            return Context
+                .Set<Person>()
                 .Include(p => p.Cpf)
                 .PaginateList(pagination);
         }
 
         public override async Task<IPagedCollection<Person>> FindAsync(IPagination pagination)
         {
-            return await UnitOfWork.Set<Person>()
+            return await Context
+                .Set<Person>()
                 .AsNoTracking()
                 .Include(p => p.Cpf)
                 .PaginateListAsync(pagination);
