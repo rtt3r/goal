@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ritter.Infra.Data.Seedwork" Version="6.0.0" />
+    <ProjectReference Include="..\..\Seedwork\Infra.Data.Seedwork\Infra.Data.Seedwork.csproj" />
     <ProjectReference Include="..\Goal.Demo.Domain\Goal.Demo.Domain.csproj" />
   </ItemGroup>
 </Project>

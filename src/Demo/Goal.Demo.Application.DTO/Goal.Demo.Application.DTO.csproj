@@ -18,7 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ritter.Infra.Crosscutting" Version="6.0.0" />
+		<ProjectReference Include="..\..\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 		<ProjectReference Include="..\Goal.Demo.Domain\Goal.Demo.Domain.csproj" />
 	</ItemGroup>
 

@@ -18,9 +18,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Ritter.Application.Seedwork" Version="6.0.0" />
-		<PackageReference Include="Ritter.Domain.Seedwork" Version="6.0.0" />
-		<PackageReference Include="Ritter.Infra.Crosscutting" Version="6.0.0" />
+		<ProjectReference Include="..\..\Seedwork\Application.Seedwork\Application.Seedwork.csproj" />
+		<ProjectReference Include="..\..\Seedwork\Domain.Seedwork\Domain.Seedwork.csproj" />
+		<ProjectReference Include="..\..\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 		<ProjectReference Include="..\Goal.Demo.Application.DTO\Goal.Demo.Application.DTO.csproj" />
 		<ProjectReference Include="..\Goal.Demo.Domain\Goal.Demo.Domain.csproj" />
 	</ItemGroup>
