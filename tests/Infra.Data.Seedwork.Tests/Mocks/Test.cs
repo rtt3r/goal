@@ -1,18 +1,17 @@
-using System;
 using Goal.Domain.Aggregates;
 
 namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 {
-    public class Test : Entity
+    public class Test : Entity<int>
     {
         public bool Active { get; set; }
 
-        public Test(Guid id)
+        public Test(int id)
             : this(id, true)
         {
         }
 
-        public Test(Guid id, bool active)
+        public Test(int id, bool active)
             : this()
         {
             Id = id;
@@ -26,6 +25,6 @@ namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 
         public void Deactivate() => Active = false;
 
-        public void SetId(Guid id) => Id = id;
+        public void SetId(int id) => Id = id;
     }
 }

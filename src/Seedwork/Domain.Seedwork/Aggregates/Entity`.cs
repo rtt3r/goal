@@ -13,7 +13,7 @@ namespace Goal.Domain.Aggregates
                 return false;
             }
 
-            if (obj is Entity item)
+            if (obj is IEntity<TKey> item)
             {
                 if (ReferenceEquals(this, obj))
                 {

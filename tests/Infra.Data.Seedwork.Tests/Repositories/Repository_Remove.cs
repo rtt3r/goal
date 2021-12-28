@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Domain.Aggregates;
 using Goal.Infra.Crosscutting.Specifications;
 using Goal.Infra.Data.Seedwork.Tests.Extensions;
 using Goal.Infra.Data.Seedwork.Tests.Mocks;
@@ -21,12 +20,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet();
+                .BuildMockDbSet<Test, int>();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+            var testRepository = new TestRepository(mockDbContext.Object);
             var test = new Test();
             testRepository.Remove(test);
 
@@ -40,7 +39,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Action act = () =>
             {
-                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+                var testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Remove((Test)null);
             };
 
@@ -54,12 +53,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet();
+                .BuildMockDbSet<Test, int>();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+            var testRepository = new TestRepository(mockDbContext.Object);
             List<Test> tests = MockTests();
             testRepository.Remove(tests);
 
@@ -73,7 +72,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Action act = () =>
             {
-                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+                var testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Remove((IEnumerable<Test>)null);
             };
 
@@ -87,15 +86,13 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet();
+                .BuildMockDbSet<Test, int>();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            var id = Guid.NewGuid();
-
-            ISpecification<Test> spec = new DirectSpecification<Test>(p => p.Id == id);
-            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+            ISpecification<Test> spec = new DirectSpecification<Test>(p => p.Id == 3);
+            var testRepository = new TestRepository(mockDbContext.Object);
 
             testRepository.Remove(spec);
 
@@ -110,7 +107,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Action act = () =>
             {
-                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+                var testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Remove((ISpecification<Test>)null);
             };
 
@@ -123,7 +120,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             for (int i = 1; i <= count; i++)
             {
-                tests.Add(new Test(Guid.NewGuid()));
+                tests.Add(new Test(i));
             }
 
             return tests;

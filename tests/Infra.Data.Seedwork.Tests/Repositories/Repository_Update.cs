@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Domain.Aggregates;
 using Goal.Infra.Data.Seedwork.Tests.Extensions;
 using Goal.Infra.Data.Seedwork.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +19,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet();
+                .BuildMockDbSet<Test, int>();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+            var testRepository = new TestRepository(mockDbContext.Object);
             var test = new Test();
             testRepository.Update(test);
 
@@ -39,7 +38,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Action act = () =>
             {
-                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+                var testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Update((Test)null);
             };
 
@@ -53,12 +52,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet();
+                .BuildMockDbSet<Test, int>();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+            var testRepository = new TestRepository(mockDbContext.Object);
             List<Test> tests = MockTests();
             testRepository.Update(tests);
 
@@ -74,7 +73,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             {
                 IEnumerable<Test> tests = null;
 
-                IRepository<Test> testRepository = new TestRepository(mockDbContext.Object);
+                var testRepository = new TestRepository(mockDbContext.Object);
                 testRepository.Update(tests);
             };
 
@@ -87,7 +86,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             for (int i = 1; i <= count; i++)
             {
-                tests.Add(new Test(Guid.NewGuid()));
+                tests.Add(new Test(1));
             }
 
             return tests;
