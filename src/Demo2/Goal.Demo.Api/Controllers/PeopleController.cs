@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
-using Goal.DemoCqrs.Application.DTO.People.Requests;
-using Goal.DemoCqrs.Application.DTO.People.Responses;
-using Goal.DemoCqrs.Application.People;
+using Goal.DemoCqrsCqrs.Application.DTO.People.Requests;
+using Goal.DemoCqrsCqrs.Application.DTO.People.Responses;
+using Goal.DemoCqrsCqrs.Application.People;
 using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Requests;
 using Goal.Infra.Http.Controllers.Results;
@@ -9,7 +9,7 @@ using Goal.Infra.Http.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Goal.DemoCqrs.Api.Controllers
+namespace Goal.DemoCqrsCqrs.Api.Controllers
 {
     /// <summary>
     /// Everything about People

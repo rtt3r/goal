@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Goal.DemoCqrs.Api.Extensions;
-using Goal.DemoCqrs.Api.Swagger;
-using Goal.DemoCqrs.IoC;
+using Goal.DemoCqrsCqrs.Api.Extensions;
+using Goal.DemoCqrsCqrs.Api.Swagger;
+using Goal.DemoCqrsCqrs.IoC;
 using Goal.Infra.Crosscutting.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +20,7 @@ using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Goal.DemoCqrs.Api
+namespace Goal.DemoCqrsCqrs.Api
 {
     public class Startup
     {
@@ -86,7 +86,7 @@ namespace Goal.DemoCqrs.Api
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoCqrs API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoCqrsCqrs API V1");
                     c.DisplayRequestDuration();
                     c.RoutePrefix = string.Empty;
                 });

@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Goal.DemoCqrs.Domain.Aggregates.People;
+using Goal.DemoCqrsCqrs.Domain.Aggregates.People;
 
-namespace Goal.DemoCqrs.Infra.Data.Configurations
+namespace Goal.DemoCqrsCqrs.Infra.Data.Configurations
 {
     internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
     {

@@ -1,14 +1,14 @@
 using Goal.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.DemoCqrs.Infra.Data
+namespace Goal.DemoCqrsCqrs.Infra.Data
 {
-    public class DemoCqrsDesignTimeDbContextFactory : DesignTimeDbContextFactory<DemoCqrsContext>
+    public class DemoCqrsCqrsDesignTimeDbContextFactory : DesignTimeDbContextFactory<DemoCqrsCqrsContext>
     {
-        protected override DemoCqrsContext CreateNewInstance(DbContextOptionsBuilder<DemoCqrsContext> optionsBuilder, string connectionString)
+        protected override DemoCqrsCqrsContext CreateNewInstance(DbContextOptionsBuilder<DemoCqrsCqrsContext> optionsBuilder, string connectionString)
         {
             optionsBuilder.UseSqlite(connectionString);
-            return new DemoCqrsContext(optionsBuilder.Options);
+            return new DemoCqrsCqrsContext(optionsBuilder.Options);
         }
     }
 }

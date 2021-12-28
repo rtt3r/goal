@@ -1,6 +1,6 @@
 using Goal.Domain.Aggregates;
 
-namespace Goal.DemoCqrs.Domain.Aggregates.People
+namespace Goal.DemoCqrsCqrs.Domain.Aggregates.People
 {
     public interface IPersonRepository : IRepository<Person, string>
     {

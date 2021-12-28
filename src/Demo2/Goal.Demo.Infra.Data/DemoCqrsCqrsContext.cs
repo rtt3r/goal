@@ -1,14 +1,14 @@
-using Goal.DemoCqrs.Domain.Aggregates.People;
-using Goal.DemoCqrs.Infra.Data.Configurations;
+using Goal.DemoCqrsCqrs.Domain.Aggregates.People;
+using Goal.DemoCqrsCqrs.Infra.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.DemoCqrs.Infra.Data
+namespace Goal.DemoCqrsCqrs.Infra.Data
 {
-    public class DemoCqrsContext : DbContext
+    public class DemoCqrsCqrsContext : DbContext
     {
         public DbSet<Person> People { get; set; }
 
-        public DemoCqrsContext(DbContextOptions<DemoCqrsContext> options)
+        public DemoCqrsCqrsContext(DbContextOptions<DemoCqrsCqrsContext> options)
             : base(options)
         { }
 

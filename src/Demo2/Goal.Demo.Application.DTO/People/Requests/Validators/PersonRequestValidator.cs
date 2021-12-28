@@ -1,7 +1,7 @@
 using FluentValidation;
 using Goal.Infra.Crosscutting.Validations;
 
-namespace Goal.DemoCqrs.Application.DTO.People.Requests.Validators
+namespace Goal.DemoCqrsCqrs.Application.DTO.People.Requests.Validators
 {
     public abstract class PersonRequestValidator<T> : AbstractValidator<T> where T : PersonRequest
     {
