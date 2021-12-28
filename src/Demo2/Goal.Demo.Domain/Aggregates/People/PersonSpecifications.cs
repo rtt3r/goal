@@ -1,6 +1,6 @@
 using Goal.Infra.Crosscutting.Specifications;
 
-namespace Goal.Demo.Domain.Aggregates.People
+namespace Goal.DemoCqrs.Domain.Aggregates.People
 {
     public static class PersonSpecifications
     {

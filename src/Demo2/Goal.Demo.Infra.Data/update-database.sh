@@ -1,1 +1,1 @@
-dotnet ef database update --startup-project ../Goal.Demo.Api/Goal.Demo.Api.csproj --context DemoContext
+dotnet ef database update --startup-project ../Goal.DemoCqrs.Api/Goal.DemoCqrs.Api.csproj --context DemoCqrsContext

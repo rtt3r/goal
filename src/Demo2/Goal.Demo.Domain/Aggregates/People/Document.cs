@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Goal.Domain.Aggregates;
 
-namespace Goal.Demo.Domain.Aggregates.People
+namespace Goal.DemoCqrs.Domain.Aggregates.People
 {
     [DebuggerDisplay("Type = {Type}; Number = {Number}")]
     public class Document : Entity<string>

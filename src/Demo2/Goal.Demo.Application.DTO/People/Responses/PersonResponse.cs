@@ -1,7 +1,7 @@
 using System;
-using Goal.Demo.Domain.Aggregates.People;
+using Goal.DemoCqrs.Domain.Aggregates.People;
 
-namespace Goal.Demo.Application.DTO.People.Responses
+namespace Goal.DemoCqrs.Application.DTO.People.Responses
 {
     public class PersonResponse
     {

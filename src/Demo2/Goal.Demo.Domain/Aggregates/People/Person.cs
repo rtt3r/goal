@@ -1,7 +1,7 @@
 using System;
 using Goal.Domain.Aggregates;
 
-namespace Goal.Demo.Domain.Aggregates.People
+namespace Goal.DemoCqrs.Domain.Aggregates.People
 {
     public class Person : Entity<string>
     {

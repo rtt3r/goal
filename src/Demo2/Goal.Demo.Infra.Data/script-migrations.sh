@@ -1,1 +1,1 @@
-dotnet ef migrations script --startup-project ../Goal.Demo.Api/Goal.Demo.Api.csproj --context DemoContext
+dotnet ef migrations script --startup-project ../Goal.DemoCqrs.Api/Goal.DemoCqrs.Api.csproj --context DemoCqrsContext

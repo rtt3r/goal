@@ -1,4 +1,4 @@
-namespace Goal.Demo.Domain.Aggregates.People
+namespace Goal.DemoCqrs.Domain.Aggregates.People
 {
     public enum DocumentType
     {
