@@ -1,5 +1,5 @@
 using AutoMapper;
-using Ritter.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Adapters;
 
 namespace Goal.Demo.Application.Adapters
 {

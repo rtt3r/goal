@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Ritter.Infra.Data;
+using Goal.Infra.Data;
 using Goal.Demo.Domain.Aggregates.People;
 
 namespace Goal.Demo.Infra.Data

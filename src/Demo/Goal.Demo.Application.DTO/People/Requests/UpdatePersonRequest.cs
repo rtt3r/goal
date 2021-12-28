@@ -1,4 +1,4 @@
-using Ritter.Infra.Crosscutting.Validations;
+using Goal.Infra.Crosscutting.Validations;
 
 namespace Goal.Demo.Application.DTO.People.Requests
 {

@@ -1,4 +1,4 @@
-using Ritter.Domain;
+using Goal.Domain;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {

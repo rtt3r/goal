@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Ritter.Application.Services;
-using Ritter.Domain;
-using Ritter.Infra.Data;
+using Goal.Application.Services;
+using Goal.Domain;
+using Goal.Infra.Data;
 using Goal.Demo.Application.People;
 using Goal.Demo.Infra.Data;
 

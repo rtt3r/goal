@@ -6,8 +6,8 @@
 		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
-		<Authors>Ritter Soluções em TI</Authors>
-		<Company>Ritter Soluções em TI</Company>
+		<Authors>Goal Soluções em TI</Authors>
+		<Company>Goal Soluções em TI</Company>
 		<PackageId>Goal.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>

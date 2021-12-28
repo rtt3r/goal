@@ -4,7 +4,7 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using Ritter.Infra.Http.Swagger;
+using Goal.Infra.Http.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Goal.Demo.Api.Swagger
@@ -13,7 +13,7 @@ namespace Goal.Demo.Api.Swagger
     {
         public void Configure(SwaggerGenOptions options)
         {
-            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Ritter API", Version = "v1" });
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Goal API", Version = "v1" });
             options.IncludeXmlComments(GetXmlCommentsFile());
             options.DocumentFilter<LowerCaseDocumentFilter>();
             options.DescribeAllParametersInCamelCase();

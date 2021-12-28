@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Ritter.Application.Services;
-using Ritter.Infra.Crosscutting.Collections;
-using Ritter.Infra.Crosscutting.Exceptions;
-using Ritter.Infra.Crosscutting.Trying;
+using Goal.Application.Services;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Exceptions;
+using Goal.Infra.Crosscutting.Trying;
 using Goal.Demo.Application.DTO.People.Requests;
 using Goal.Demo.Application.DTO.People.Responses;
 

@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Ritter.Domain;
+using Goal.Domain;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {

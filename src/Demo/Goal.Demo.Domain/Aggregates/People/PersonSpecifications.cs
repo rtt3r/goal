@@ -1,4 +1,4 @@
-using Ritter.Infra.Crosscutting.Specifications;
+using Goal.Infra.Crosscutting.Specifications;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {

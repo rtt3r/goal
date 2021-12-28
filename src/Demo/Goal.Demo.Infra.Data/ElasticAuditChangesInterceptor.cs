@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Ritter.Infra.Data.Auditing;
+using Goal.Infra.Data.Auditing;
 
 namespace Goal.Demo.Infra.Data
 {

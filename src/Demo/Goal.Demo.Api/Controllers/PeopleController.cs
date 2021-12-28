@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Ritter.Infra.Http.Controllers;
-using Ritter.Infra.Http.Controllers.Requests;
-using Ritter.Infra.Http.Controllers.Results;
-using Ritter.Infra.Http.Extensions;
+using Goal.Infra.Http.Controllers;
+using Goal.Infra.Http.Controllers.Requests;
+using Goal.Infra.Http.Controllers.Results;
+using Goal.Infra.Http.Extensions;
 using Goal.Demo.Application.DTO.People.Requests;
 using Goal.Demo.Application.DTO.People.Responses;
 using Goal.Demo.Application.People;

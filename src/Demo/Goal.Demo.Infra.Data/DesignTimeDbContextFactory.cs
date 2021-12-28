@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Ritter.Infra.Data;
+using Goal.Infra.Data;
 
 namespace Goal.Demo.Infra.Data
 {

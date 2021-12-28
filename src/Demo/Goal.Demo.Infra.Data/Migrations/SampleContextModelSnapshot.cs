@@ -16,7 +16,7 @@ namespace Goal.Demo.Infra.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("Ritter.Infra.Data.Auditing.Audit", b =>
+            modelBuilder.Entity("Goal.Infra.Data.Auditing.Audit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
