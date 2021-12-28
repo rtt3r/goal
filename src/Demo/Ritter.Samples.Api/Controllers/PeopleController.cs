@@ -5,11 +5,11 @@ using Ritter.Infra.Http.Controllers;
 using Ritter.Infra.Http.Controllers.Requests;
 using Ritter.Infra.Http.Controllers.Results;
 using Ritter.Infra.Http.Extensions;
-using Ritter.Samples.Application.DTO.People.Requests;
-using Ritter.Samples.Application.DTO.People.Responses;
-using Ritter.Samples.Application.People;
+using Goal.Demo.Application.DTO.People.Requests;
+using Goal.Demo.Application.DTO.People.Responses;
+using Goal.Demo.Application.People;
 
-namespace Ritter.Samples.Api.Controllers.V2
+namespace Goal.Demo.Api.Controllers.V2
 {
     /// <summary>
     /// Everything about People

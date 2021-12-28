@@ -1,7 +1,7 @@
 using System;
-using Ritter.Samples.Domain.Aggregates.People;
+using Goal.Demo.Domain.Aggregates.People;
 
-namespace Ritter.Samples.Application.DTO.People.Responses
+namespace Goal.Demo.Application.DTO.People.Responses
 {
     public class PersonResponse
     {

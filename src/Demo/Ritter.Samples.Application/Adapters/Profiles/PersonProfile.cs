@@ -1,8 +1,8 @@
 using AutoMapper;
-using Ritter.Samples.Application.DTO.People.Responses;
-using Ritter.Samples.Domain.Aggregates.People;
+using Goal.Demo.Application.DTO.People.Responses;
+using Goal.Demo.Domain.Aggregates.People;
 
-namespace Ritter.Samples.Application.Adapters.Profiles
+namespace Goal.Demo.Application.Adapters.Profiles
 {
     public class PersonProfile : Profile
     {

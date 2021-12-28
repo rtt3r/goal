@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -21,8 +21,8 @@
 		<PackageReference Include="Ritter.Application.Seedwork" Version="6.0.0" />
 		<PackageReference Include="Ritter.Domain.Seedwork" Version="6.0.0" />
 		<PackageReference Include="Ritter.Infra.Crosscutting" Version="6.0.0" />
-		<ProjectReference Include="..\Ritter.Samples.Application.DTO\Ritter.Samples.Application.DTO.csproj" />
-		<ProjectReference Include="..\Ritter.Samples.Domain\Ritter.Samples.Domain.csproj" />
+		<ProjectReference Include="..\Goal.Demo.Application.DTO\Goal.Demo.Application.DTO.csproj" />
+		<ProjectReference Include="..\Goal.Demo.Domain\Goal.Demo.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

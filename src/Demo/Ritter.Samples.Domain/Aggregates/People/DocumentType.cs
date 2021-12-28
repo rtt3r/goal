@@ -1,4 +1,4 @@
-﻿namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     public enum DocumentType
     {

@@ -7,11 +7,11 @@ using Ritter.Infra.Crosscutting.Collections;
 using Ritter.Infra.Crosscutting.Exceptions;
 using Ritter.Infra.Crosscutting.Trying;
 using Ritter.Infra.Crosscutting.Validations;
-using Ritter.Samples.Application.DTO.People.Requests;
-using Ritter.Samples.Application.DTO.People.Responses;
-using Ritter.Samples.Domain.Aggregates.People;
+using Goal.Demo.Application.DTO.People.Requests;
+using Goal.Demo.Application.DTO.People.Responses;
+using Goal.Demo.Domain.Aggregates.People;
 
-namespace Ritter.Samples.Application.People
+namespace Goal.Demo.Application.People
 {
     public class PersonAppService : AppService, IPersonAppService
     {

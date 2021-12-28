@@ -1,6 +1,6 @@
 using Ritter.Infra.Crosscutting.Specifications;
 
-namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     public static class PersonSpecifications
     {

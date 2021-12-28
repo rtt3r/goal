@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Ritter.Domain;
 
-namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     [DebuggerDisplay("Type = {Type}; Number = {Number}")]
     public class Document : Entity<string>

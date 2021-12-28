@@ -2,7 +2,7 @@ using System;
 using Elasticsearch.Net;
 using Nest;
 using Nest.JsonNetSerializer;
-using Ritter.Samples.Application.Adapters;
+using Goal.Demo.Application.Adapters;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

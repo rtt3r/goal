@@ -1,6 +1,6 @@
 using Ritter.Domain.Business;
 
-namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     public sealed class PersonRulesEvaluator : BusinessRulesEvaluator<Person>
     {

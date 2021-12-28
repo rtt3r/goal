@@ -1,4 +1,4 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -55,17 +55,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Http.Seedwork", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{F5F60FC6-C30F-45CB-8F12-BF7565E7FD07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritter.Samples.Api", "src\Demo\Ritter.Samples.Api\Ritter.Samples.Api.csproj", "{D0E1EE71-D49F-4EBD-9648-96DBD5A14124}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo.Api", "src\Demo\Goal.Demo.Api\Goal.Demo.Api.csproj", "{D0E1EE71-D49F-4EBD-9648-96DBD5A14124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritter.Samples.Application", "src\Demo\Ritter.Samples.Application\Ritter.Samples.Application.csproj", "{ECA35C9B-9AB5-4201-ABD9-E104C5A638AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo.Application", "src\Demo\Goal.Demo.Application\Goal.Demo.Application.csproj", "{ECA35C9B-9AB5-4201-ABD9-E104C5A638AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritter.Samples.Application.DTO", "src\Demo\Ritter.Samples.Application.DTO\Ritter.Samples.Application.DTO.csproj", "{4EA4370A-9B30-4C7A-950E-B0B079DFCB51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo.Application.DTO", "src\Demo\Goal.Demo.Application.DTO\Goal.Demo.Application.DTO.csproj", "{4EA4370A-9B30-4C7A-950E-B0B079DFCB51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritter.Samples.Domain", "src\Demo\Ritter.Samples.Domain\Ritter.Samples.Domain.csproj", "{4CBF9073-856B-47BF-8139-CC878AE2909D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo.Domain", "src\Demo\Goal.Demo.Domain\Goal.Demo.Domain.csproj", "{4CBF9073-856B-47BF-8139-CC878AE2909D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritter.Samples.Infra.Data", "src\Demo\Ritter.Samples.Infra.Data\Ritter.Samples.Infra.Data.csproj", "{4CC14148-5FF0-410F-BF00-63F705B12273}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo.Infra.Data", "src\Demo\Goal.Demo.Infra.Data\Goal.Demo.Infra.Data.csproj", "{4CC14148-5FF0-410F-BF00-63F705B12273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ritter.Samples.IoC", "src\Demo\Ritter.Samples.IoC\Ritter.Samples.IoC.csproj", "{3AFDA847-6DBC-4232-B069-CCA8EA6D923C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo.IoC", "src\Demo\Goal.Demo.IoC\Goal.Demo.IoC.csproj", "{3AFDA847-6DBC-4232-B069-CCA8EA6D923C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

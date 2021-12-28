@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 using Ritter.Infra.Http.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Ritter.Samples.Api.Swagger
+namespace Goal.Demo.Api.Swagger
 {
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {

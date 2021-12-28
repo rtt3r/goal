@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Ritter.Infra.Crosscutting.Collections;
 using Ritter.Infra.Data;
-using Ritter.Samples.Domain.Aggregates.People;
+using Goal.Demo.Domain.Aggregates.People;
 
-namespace Ritter.Samples.Infra.Data
+namespace Goal.Demo.Infra.Data
 {
     public class PersonRepository : EFRepository<Person, string>, IPersonRepository
     {

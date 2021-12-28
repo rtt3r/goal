@@ -1,6 +1,6 @@
 using Ritter.Domain;
 
-namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     public interface IPersonRepository : ISqlRepository<Person, string>
     {

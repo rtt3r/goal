@@ -1,7 +1,7 @@
 using Ritter.Domain;
 using System.Diagnostics;
 
-namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     [DebuggerDisplay("Full Name = {FullName()}")]
     public class Name : ValueObject

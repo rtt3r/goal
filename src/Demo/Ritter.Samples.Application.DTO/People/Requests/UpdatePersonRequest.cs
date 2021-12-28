@@ -1,6 +1,6 @@
 using Ritter.Infra.Crosscutting.Validations;
 
-namespace Ritter.Samples.Application.DTO.People.Requests
+namespace Goal.Demo.Application.DTO.People.Requests
 {
     public class UpdatePersonRequest : Validatable<UpdatePersonRequest>
     {

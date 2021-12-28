@@ -1,7 +1,7 @@
 using System;
 using Ritter.Domain;
 
-namespace Ritter.Samples.Domain.Aggregates.People
+namespace Goal.Demo.Domain.Aggregates.People
 {
     public class Person : Entity<string>
     {

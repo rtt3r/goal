@@ -1,1 +1,1 @@
-dotnet ef migrations script --startup-project ../Ritter.Samples.Api/Ritter.Samples.Api.csproj --context SampleContext
+dotnet ef migrations script --startup-project ../Goal.Demo.Api/Goal.Demo.Api.csproj --context SampleContext

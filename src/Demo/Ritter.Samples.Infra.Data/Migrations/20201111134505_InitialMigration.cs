@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ritter.Samples.Infra.Data.Migrations
+namespace Goal.Demo.Infra.Data.Migrations
 {
     public partial class InitialMigration : Migration
     {

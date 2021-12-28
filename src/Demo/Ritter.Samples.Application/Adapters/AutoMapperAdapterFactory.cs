@@ -1,7 +1,7 @@
 using AutoMapper;
 using Ritter.Infra.Crosscutting.Adapters;
 
-namespace Ritter.Samples.Application.Adapters
+namespace Goal.Demo.Application.Adapters
 {
     public class AutoMapperAdapterFactory : ITypeAdapterFactory
     {

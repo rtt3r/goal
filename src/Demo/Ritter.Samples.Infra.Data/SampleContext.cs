@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Ritter.Infra.Data;
-using Ritter.Samples.Domain.Aggregates.People;
+using Goal.Demo.Domain.Aggregates.People;
 
-namespace Ritter.Samples.Infra.Data
+namespace Goal.Demo.Infra.Data
 {
     public class SampleContext : EFUnitOfWork, IEFUnitOfWork, ISql
     {

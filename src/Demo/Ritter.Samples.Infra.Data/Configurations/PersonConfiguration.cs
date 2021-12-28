@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Ritter.Samples.Domain.Aggregates.People;
+using Goal.Demo.Domain.Aggregates.People;
 
-namespace Ritter.Samples.Infra.Data
+namespace Goal.Demo.Infra.Data
 {
     internal sealed class PersonConfiguration : IEntityTypeConfiguration<Person>
     {

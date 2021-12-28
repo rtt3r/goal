@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Ritter.Infra.Data;
 
-namespace Ritter.Samples.Infra.Data
+namespace Goal.Demo.Infra.Data
 {
     public class DesignTimeDbContextFactory : DesignTimeDbContextFactoryBase<SampleContext>
     {

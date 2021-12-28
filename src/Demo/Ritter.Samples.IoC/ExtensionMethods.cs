@@ -3,8 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Ritter.Application.Services;
 using Ritter.Domain;
 using Ritter.Infra.Data;
-using Ritter.Samples.Application.People;
-using Ritter.Samples.Infra.Data;
+using Goal.Demo.Application.People;
+using Goal.Demo.Infra.Data;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

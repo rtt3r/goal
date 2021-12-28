@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
 		<IsPackable>false</IsPackable>
@@ -33,6 +33,6 @@
 
   <ItemGroup>
     <PackageReference Include="Ritter.Infra.Data.Seedwork" Version="6.0.0" />
-    <ProjectReference Include="..\Ritter.Samples.Domain\Ritter.Samples.Domain.csproj" />
+    <ProjectReference Include="..\Goal.Demo.Domain\Goal.Demo.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -14,13 +14,13 @@ using Newtonsoft.Json.Serialization;
 using Ritter.Infra.Crosscutting.Localization;
 using Ritter.Infra.Crosscutting.Validations;
 using Ritter.Infra.Http.Filters;
-using Ritter.Samples.Api.Swagger;
+using Goal.Demo.Api.Swagger;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Ritter.Samples.Api
+namespace Goal.Demo.Api
 {
     public class Startup
     {

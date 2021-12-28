@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace Ritter.Samples.Api
+namespace Goal.Demo.Api
 {
     public class Program
     {
