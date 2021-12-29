@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-namespace Goal.Demo2.Api
+namespace Goal.Demo22.Api
 {
     public class Program
     {

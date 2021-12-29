@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Goal.Demo2.Domain.Aggregates.People;
+using Goal.Demo22.Domain.Aggregates.People;
 
-namespace Goal.Demo2.Infra.Data.Configurations
+namespace Goal.Demo22.Infra.Data.Configurations
 {
     internal sealed class DocumentConfiguration : IEntityTypeConfiguration<Document>
     {

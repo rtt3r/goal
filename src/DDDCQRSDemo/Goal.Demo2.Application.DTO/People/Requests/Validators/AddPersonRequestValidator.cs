@@ -1,4 +1,4 @@
-namespace Goal.Demo2.Application.DTO.People.Requests.Validators
+namespace Goal.Demo22.Application.DTO.People.Requests.Validators
 {
     public sealed class AddPersonRequestValidator : PersonRequestValidator<AddPersonRequest>
     {

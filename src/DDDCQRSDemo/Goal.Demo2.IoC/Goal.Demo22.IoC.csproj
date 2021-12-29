@@ -26,9 +26,9 @@
 		<ProjectReference Include="..\..\Seedwork\Application.Seedwork\Application.Seedwork.csproj" />
 		<ProjectReference Include="..\..\Seedwork\Infra.Data.Seedwork\Infra.Data.Seedwork.csproj" />
 		<ProjectReference Include="..\..\Seedwork\Infra.Http.Seedwork\Infra.Http.Seedwork.csproj" />
-		<ProjectReference Include="..\Goal.Demo2.Application\Goal.Demo2.Application.csproj" />
-		<ProjectReference Include="..\Goal.Demo2.Domain\Goal.Demo2.Domain.csproj" />
-		<ProjectReference Include="..\Goal.Demo2.Infra.Data\Goal.Demo2.Infra.Data.csproj" />
+		<ProjectReference Include="..\Goal.Demo22.Application\Goal.Demo22.Application.csproj" />
+		<ProjectReference Include="..\Goal.Demo22.Domain\Goal.Demo22.Domain.csproj" />
+		<ProjectReference Include="..\Goal.Demo22.Infra.Data\Goal.Demo22.Infra.Data.csproj" />
 	</ItemGroup>
 
 </Project>
