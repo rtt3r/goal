@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Goal.Domain.Seedwork.Events
 {
-    public abstract class Event : Message, INotification
+    public abstract class Event : Message<bool>, INotification
     {
         public DateTimeOffset Timestamp { get; } = DateTimeOffset.Now;
     }

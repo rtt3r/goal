@@ -25,6 +25,8 @@
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -39,9 +41,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 		<ProjectReference Include="..\..\Seedwork\Infra.Http.Seedwork\Infra.Http.Seedwork.csproj" />
-		<ProjectReference Include="..\Goal.Demo2.Application.DTO\Goal.Demo2.Application.DTO.csproj" />
-		<ProjectReference Include="..\Goal.Demo2.Application\Goal.Demo2.Application.csproj" />
-		<ProjectReference Include="..\Goal.Demo2.IoC\Goal.Demo2.IoC.csproj" />
+		<ProjectReference Include="..\Goal.Demo2.Infra.Data\Goal.Demo2.Infra.Data.csproj" />
 	</ItemGroup>
 
 </Project>

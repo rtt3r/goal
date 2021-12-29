@@ -1,4 +1,3 @@
-using System;
 using Goal.Demo.Domain.Aggregates.People;
 
 namespace Goal.Demo.Application.DTO.People.Responses
@@ -13,7 +12,9 @@ namespace Goal.Demo.Application.DTO.People.Responses
         public static explicit operator PersonResponse(Person person)
         {
             if (person == null)
+            {
                 return null;
+            }
 
             return new PersonResponse
             {

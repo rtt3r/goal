@@ -22,7 +22,7 @@ namespace Goal.Application.Seedwork.Handlers
             this.notificationHandler = notificationHandler;
         }
 
-        protected async Task NotifyValidationErrors(Command message)
+        protected async Task NotifyValidationErrors(ICommand message)
         {
             foreach (ValidationFailure error in message.ValidationResult.Errors)
             {
