@@ -1,8 +1,8 @@
 using System;
-using Goal.Domain;
+using Goal.Domain.Seedwork;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Infra.Data
+namespace Goal.Infra.Data.Seedwork
 {
     public abstract class UnitOfWork : IUnitOfWork
     {

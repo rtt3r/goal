@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Goal.Infra.Http.Swagger
+namespace Goal.Infra.Http.Seedwork.Swagger
 {
     internal static class OperationFilterContextExtensions
     {

@@ -4,8 +4,8 @@ using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
-using Goal.Infra.Http.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Goal.Infra.Http.Seedwork.Swagger;
 
 namespace Goal.Demo2.Api.Swagger
 {

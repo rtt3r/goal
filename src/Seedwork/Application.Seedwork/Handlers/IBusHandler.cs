@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Goal.Domain.Commands;
-using Goal.Domain.Events;
+using Goal.Domain.Seedwork.Commands;
+using Goal.Domain.Seedwork.Events;
 
-namespace Goal.Application.Handlers
+namespace Goal.Application.Seedwork.Handlers
 {
     public interface IBusHandler
     {

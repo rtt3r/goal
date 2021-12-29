@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Specifications;
 
-namespace Goal.Domain.Aggregates
+namespace Goal.Domain.Seedwork.Aggregates
 {
     public interface IRepository<TEntity, TKey> : IRepository
         where TEntity : class

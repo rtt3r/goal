@@ -1,4 +1,4 @@
-namespace Goal.Application.Services
+namespace Goal.Application.Seedwork.Services
 {
     public interface IAppService
     {

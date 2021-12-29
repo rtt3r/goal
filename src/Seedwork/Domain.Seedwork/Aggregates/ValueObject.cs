@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Goal.Domain.Aggregates
+namespace Goal.Domain.Seedwork.Aggregates
 {
     public class ValueObject : IEquatable<ValueObject>
     {

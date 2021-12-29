@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Domain.Notifications;
+using Goal.Domain.Seedwork.Notifications;
 
-namespace Goal.Application.Handlers
+namespace Goal.Application.Seedwork.Handlers
 {
     public class NotificationHandler : INotificationHandler
     {

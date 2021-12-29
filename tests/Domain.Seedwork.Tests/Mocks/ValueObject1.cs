@@ -1,4 +1,4 @@
-using Goal.Domain.Aggregates;
+using Goal.Domain.Seedwork.Aggregates;
 
 namespace Goal.Domain.Seedwork.Tests.Mocks
 {

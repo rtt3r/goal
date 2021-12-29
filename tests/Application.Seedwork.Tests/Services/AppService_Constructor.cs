@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Goal.Application.Services;
+using Goal.Application.Seedwork.Services;
 using Xunit;
 
 namespace Goal.Application.Seedwork.Tests.Services

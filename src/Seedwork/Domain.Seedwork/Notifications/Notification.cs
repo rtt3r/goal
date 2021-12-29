@@ -1,7 +1,7 @@
 using System;
-using Goal.Domain.Events;
+using Goal.Domain.Seedwork.Events;
 
-namespace Goal.Domain.Notifications
+namespace Goal.Domain.Seedwork.Notifications
 {
     public class Notification : Event
     {

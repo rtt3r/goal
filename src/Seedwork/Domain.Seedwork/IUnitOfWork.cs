@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Domain
+namespace Goal.Domain.Seedwork
 {
     public interface IUnitOfWork : IDisposable
     {

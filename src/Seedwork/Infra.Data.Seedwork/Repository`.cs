@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Goal.Domain.Aggregates;
+using Goal.Domain.Seedwork.Aggregates;
 using Goal.Infra.Crosscutting;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Crosscutting.Specifications;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Infra.Data
+namespace Goal.Infra.Data.Seedwork
 {
     public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntity, TKey>
         where TEntity : class

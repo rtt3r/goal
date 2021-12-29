@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Goal.Application.Extensions;
+using Goal.Application.Seedwork.Extensions;
 using Goal.Infra.Crosscutting.Adapters;
 using Moq;
 using Xunit;

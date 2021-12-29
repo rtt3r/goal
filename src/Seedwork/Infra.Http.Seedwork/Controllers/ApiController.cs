@@ -1,8 +1,8 @@
 using Goal.Infra.Crosscutting.Collections;
-using Goal.Infra.Http.Controllers.Results;
+using Goal.Infra.Http.Seedwork.Controllers.Results;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Goal.Infra.Http.Controllers
+namespace Goal.Infra.Http.Seedwork.Controllers
 {
     public class ApiController : ControllerBase
     {

@@ -1,4 +1,4 @@
-namespace Goal.Infra.Http.Controllers.Requests
+namespace Goal.Infra.Http.Seedwork.Controllers.Requests
 {
     public sealed class PaginationRequest
     {

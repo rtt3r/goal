@@ -1,13 +1,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.Results;
-using Goal.Application.Extensions;
-using Goal.Application.Services;
+using Goal.Application.Seedwork.Extensions;
+using Goal.Application.Seedwork.Services;
 using Goal.Demo.Application.DTO.People.Requests;
 using Goal.Demo.Application.DTO.People.Requests.Validators;
 using Goal.Demo.Application.DTO.People.Responses;
 using Goal.Demo.Domain.Aggregates.People;
-using Goal.Domain;
+using Goal.Domain.Seedwork;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Exceptions;

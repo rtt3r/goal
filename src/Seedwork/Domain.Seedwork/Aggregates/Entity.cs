@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Domain.Aggregates
+namespace Goal.Domain.Seedwork.Aggregates
 {
     public abstract class Entity : IEntity
     {

@@ -1,8 +1,8 @@
 using System;
-using Goal.Domain.Messages;
+using Goal.Domain.Seedwork.Messages;
 using MediatR;
 
-namespace Goal.Domain.Events
+namespace Goal.Domain.Seedwork.Events
 {
     public abstract class Event : Message, INotification
     {

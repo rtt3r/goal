@@ -1,5 +1,5 @@
 using System;
-using Goal.Domain.Aggregates;
+using Goal.Domain.Seedwork.Aggregates;
 
 namespace Goal.Application.Seedwork.Tests.Mocks
 {

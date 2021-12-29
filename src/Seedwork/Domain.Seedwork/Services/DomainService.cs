@@ -1,4 +1,4 @@
-namespace Goal.Domain.Services
+namespace Goal.Domain.Seedwork.Services
 {
     public abstract class DomainService : IDomainService
     {

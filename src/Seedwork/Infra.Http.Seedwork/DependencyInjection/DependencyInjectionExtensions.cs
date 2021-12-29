@@ -4,7 +4,7 @@ using System.Reflection;
 using Goal.Infra.Crosscutting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Goal.Infra.Http.DependencyInjection
+namespace Goal.Infra.Http.Seedwork.DependencyInjection
 {
     public static class DependencyInjectionExtensions
     {

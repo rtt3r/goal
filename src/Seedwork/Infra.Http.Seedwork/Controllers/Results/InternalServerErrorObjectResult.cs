@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Goal.Infra.Http.Controllers.Results
+namespace Goal.Infra.Http.Seedwork.Controllers.Results
 {
     public class InternalServerErrorObjectResult : ObjectResult
     {

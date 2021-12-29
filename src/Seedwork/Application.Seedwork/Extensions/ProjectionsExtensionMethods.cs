@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
 
-namespace Goal.Application.Extensions
+namespace Goal.Application.Seedwork.Extensions
 {
     public static class ProjectionsExtensionMethods
     {

@@ -1,7 +1,7 @@
 using Goal.Infra.Crosscutting.Collections;
-using Goal.Infra.Http.Controllers.Requests;
+using Goal.Infra.Http.Seedwork.Controllers.Requests;
 
-namespace Goal.Infra.Http.Extensions
+namespace Goal.Infra.Http.Seedwork.Extensions
 {
     public static class PaginationExtensions
     {

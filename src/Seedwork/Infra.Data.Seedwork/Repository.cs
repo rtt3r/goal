@@ -1,7 +1,7 @@
 ﻿using System;
-using Goal.Domain.Aggregates;
+using Goal.Domain.Seedwork.Aggregates;
 
-namespace Goal.Infra.Data
+namespace Goal.Infra.Data.Seedwork
 {
     public abstract class Repository : IRepository
     {

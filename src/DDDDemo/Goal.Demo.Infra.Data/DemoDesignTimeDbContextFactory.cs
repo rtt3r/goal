@@ -1,4 +1,4 @@
-using Goal.Infra.Data;
+using Goal.Infra.Data.Seedwork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Demo.Infra.Data

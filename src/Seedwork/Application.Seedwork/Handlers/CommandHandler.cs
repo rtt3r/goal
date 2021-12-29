@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using FluentValidation.Results;
-using Goal.Domain;
-using Goal.Domain.Commands;
-using Goal.Domain.Notifications;
+using Goal.Domain.Seedwork;
+using Goal.Domain.Seedwork.Commands;
+using Goal.Domain.Seedwork.Notifications;
 
-namespace Goal.Application.Handlers
+namespace Goal.Application.Seedwork.Handlers
 {
     public abstract class CommandHandler
     {

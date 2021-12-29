@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Goal.Domain.Messages
+namespace Goal.Domain.Seedwork.Messages
 {
     public abstract class Message : IRequest<bool>
     {

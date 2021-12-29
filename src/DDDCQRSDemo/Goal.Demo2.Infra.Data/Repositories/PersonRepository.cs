@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Goal.Demo2.Domain.Aggregates.People;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
-using Goal.Infra.Data;
+using Goal.Infra.Data.Seedwork;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Demo2.Infra.Data.Repositories

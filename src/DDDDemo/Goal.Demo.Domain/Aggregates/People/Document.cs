@@ -1,6 +1,6 @@
 using System;
 using System.Diagnostics;
-using Goal.Domain.Aggregates;
+using Goal.Domain.Seedwork.Aggregates;
 
 namespace Goal.Demo.Domain.Aggregates.People
 {

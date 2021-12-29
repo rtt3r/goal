@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Domain.Events
+namespace Goal.Domain.Seedwork.Events
 {
     public class StoredEvent : Event
     {

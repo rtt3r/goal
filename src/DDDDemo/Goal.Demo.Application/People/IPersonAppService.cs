@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Goal.Application.Services;
+using Goal.Application.Seedwork.Services;
 using Goal.Demo.Application.DTO.People.Requests;
 using Goal.Demo.Application.DTO.People.Responses;
 using Goal.Infra.Crosscutting.Collections;

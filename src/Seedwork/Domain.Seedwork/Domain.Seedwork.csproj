@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Domain</RootNamespace>
+		<RootNamespace>Goal.Domain.Seedwork</RootNamespace>
 		<AssemblyName>Goal.Domain.Seedwork</AssemblyName>
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>

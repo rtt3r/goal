@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Goal.Infra.Data
+namespace Goal.Infra.Data.Seedwork
 {
     public interface ISql
     {

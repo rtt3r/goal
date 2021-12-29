@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Goal.Domain.Notifications;
+using Goal.Domain.Seedwork.Notifications;
 using MediatR;
 
-namespace Goal.Application.Handlers
+namespace Goal.Application.Seedwork.Handlers
 {
     public interface INotificationHandler : INotificationHandler<Notification>
     {
