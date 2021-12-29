@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Goal.Domain.Aggregates;
 
-namespace Goal.Demo.Domain.Aggregates.People
+namespace Goal.Demo2.Domain.Aggregates.People
 {
     [DebuggerDisplay("Full Name = {FullName()}")]
     public class Name : ValueObject

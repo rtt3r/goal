@@ -1,7 +1,7 @@
 using AutoMapper;
 using Goal.Infra.Crosscutting.Adapters;
 
-namespace Goal.Demo.Application.Adapters
+namespace Goal.Demo2.Application.Adapters
 {
     public class AutoMapperAdapter : ITypeAdapter
     {
