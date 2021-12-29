@@ -1,12 +1,12 @@
 using System;
 using Elasticsearch.Net;
-using Goal.Demo.Application.Adapters;
+using Goal.Demo2.Application.Adapters;
 using Goal.Infra.Http.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
 using Nest.JsonNetSerializer;
 
-namespace Goal.Demo.Api.Extensions
+namespace Goal.Demo2.Api.Extensions
 {
     public static class ServiceCollectionExtensions
     {

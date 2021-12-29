@@ -21,8 +21,8 @@
 		<ProjectReference Include="..\..\Seedwork\Application.Seedwork\Application.Seedwork.csproj" />
 		<ProjectReference Include="..\..\Seedwork\Domain.Seedwork\Domain.Seedwork.csproj" />
 		<ProjectReference Include="..\..\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\Goal.Demo.Application.DTO\Goal.Demo.Application.DTO.csproj" />
-		<ProjectReference Include="..\Goal.Demo.Domain\Goal.Demo.Domain.csproj" />
+		<ProjectReference Include="..\Goal.Demo2.Application.DTO\Goal.Demo2.Application.DTO.csproj" />
+		<ProjectReference Include="..\Goal.Demo2.Domain\Goal.Demo2.Domain.csproj" />
 	</ItemGroup>
 
 </Project>

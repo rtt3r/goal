@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Goal.Demo.Api.Extensions;
-using Goal.Demo.Api.Swagger;
-using Goal.Demo.IoC;
+using Goal.Demo2.Api.Extensions;
+using Goal.Demo2.Api.Swagger;
+using Goal.Demo2.IoC;
 using Goal.Infra.Crosscutting.Localization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -20,7 +20,7 @@ using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Goal.Demo.Api
+namespace Goal.Demo2.Api
 {
     public class Startup
     {
@@ -86,7 +86,7 @@ namespace Goal.Demo.Api
                 .UseSwagger()
                 .UseSwaggerUI(c =>
                 {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API V1");
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo2 API V1");
                     c.DisplayRequestDuration();
                     c.RoutePrefix = string.Empty;
                 });

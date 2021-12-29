@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Goal.Demo.Domain.Aggregates.People;
+using Goal.Demo2.Domain.Aggregates.People;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Demo.Infra.Data.Repositories
+namespace Goal.Demo2.Infra.Data.Repositories
 {
     public class PersonRepository : Repository<Person, string>, IPersonRepository
     {
