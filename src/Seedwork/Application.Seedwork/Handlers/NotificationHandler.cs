@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Goal.Domain.Notifications;
 
-namespace Goal.Domain.Notifications
+namespace Goal.Application.Handlers
 {
     public class NotificationHandler : INotificationHandler
     {

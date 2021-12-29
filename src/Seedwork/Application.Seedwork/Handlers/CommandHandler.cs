@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
 using FluentValidation.Results;
-using Goal.Domain.Bus;
+using Goal.Domain;
+using Goal.Domain.Commands;
 using Goal.Domain.Notifications;
 
-namespace Goal.Domain.Commands
+namespace Goal.Application.Handlers
 {
     public abstract class CommandHandler
     {

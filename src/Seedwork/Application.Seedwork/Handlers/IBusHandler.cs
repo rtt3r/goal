@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Goal.Domain.Commands;
 using Goal.Domain.Events;
 
-namespace Goal.Domain.Bus
+namespace Goal.Application.Handlers
 {
     public interface IBusHandler
     {
