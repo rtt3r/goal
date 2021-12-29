@@ -34,6 +34,8 @@ namespace Goal.Demo.IoC
                     //options.AddInterceptors(provider.GetRequiredService<ElasticAuditChangesInterceptor>());
                 });
 
+            services.AddScoped<DbContext>(provider => provider.GetService<DemoContext>());
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.RegisterAllTypesOf<IRepository>(typeof(PersonRepository).Assembly);

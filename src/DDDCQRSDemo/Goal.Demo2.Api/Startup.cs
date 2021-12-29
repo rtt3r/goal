@@ -5,6 +5,7 @@ using System.Reflection;
 using Goal.Demo2.Api.Infra.Extensions;
 using Goal.Demo2.Api.Infra.Swagger;
 using Goal.Infra.Crosscutting.Localization;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
@@ -34,7 +35,7 @@ namespace Goal.Demo2.Api
                 .WriteTo.Debug()
                 .WriteTo.Console()
                 .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
-                .WriteTo.Elasticsearch(ConfigureElasticSink())
+                //.WriteTo.Elasticsearch(ConfigureElasticSink())
                 .Enrich.WithProperty("Environment", Environment.EnvironmentName)
                 .ReadFrom.Configuration(Configuration)
                 .CreateLogger();
@@ -46,13 +47,14 @@ namespace Goal.Demo2.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddElasticClient(options =>
-            {
-                options.UseConnectionString(Configuration.GetConnectionString("ElasticSearch"));
-            });
+            //services.AddElasticClient(options =>
+            //{
+            //    options.UseConnectionString(Configuration.GetConnectionString("ElasticSearch"));
+            //});
 
             services.AddServices(Configuration, Environment);
             services.AddAutoMapperTypeAdapter();
+            services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             services
                 .AddControllers(options =>

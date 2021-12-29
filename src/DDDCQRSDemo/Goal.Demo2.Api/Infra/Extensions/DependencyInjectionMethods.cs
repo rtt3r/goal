@@ -6,10 +6,11 @@ using Goal.Demo2.Api.Application.EventHandlers;
 using Goal.Demo2.Api.Application.Events;
 using Goal.Demo2.Api.Infra.Bus;
 using Goal.Demo2.Infra.Data;
+using Goal.Demo2.Infra.Data.EventSourcing;
 using Goal.Demo2.Infra.Data.Repositories;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Aggregates;
-using Goal.Infra.Data.Seedwork;
+using Goal.Domain.Seedwork.Events;
 using Goal.Infra.Http.Seedwork.DependencyInjection;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,18 @@ namespace Goal.Demo2.Api.Infra.Extensions
             //services.AddScoped<ElasticAuditChangesInterceptor>();
 
             services
+                .AddDbContext<EventSourcingContext>((provider, options) =>
+                {
+                    options
+                        .UseSqlite(
+                            connectionString,
+                            opts => opts.MigrationsAssembly(typeof(EventSourcingContext).Assembly.GetName().Name))
+                        .EnableSensitiveDataLogging();
+
+                    //options.AddInterceptors(provider.GetRequiredService<ElasticAuditChangesInterceptor>());
+                });
+
+            services
                 .AddDbContext<Demo2Context>((provider, options) =>
                 {
                     options
@@ -43,6 +56,9 @@ namespace Goal.Demo2.Api.Infra.Extensions
             // Domain Bus (Mediator)
             services.AddScoped<IBusHandler, InMemoryBusHandler>();
 
+            // Domain Event Store
+            services.AddScoped<IEventStore, SqlEventStore>();
+
             // Domain - Events
             services.AddScoped<INotificationHandler, NotificationHandler>();
             services.AddScoped<INotificationHandler<CustomerRegisteredEvent>, CustomerEventHandler>();
@@ -54,7 +70,7 @@ namespace Goal.Demo2.Api.Infra.Extensions
             services.AddScoped<IRequestHandler<UpdateCustomerCommand, bool>, CustomerCommandHandler>();
             services.AddScoped<IRequestHandler<RemoveCustomerCommand, bool>, CustomerCommandHandler>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, Demo2UnitOfWork>();
 
             services.RegisterAllTypesOf<IRepository>(typeof(CustomerRepository).Assembly);
 

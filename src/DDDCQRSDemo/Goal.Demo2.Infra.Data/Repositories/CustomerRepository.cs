@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Goal.Demo2.Domain.Aggregates.Customers;
 using Goal.Infra.Data.Seedwork;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +7,7 @@ namespace Goal.Demo2.Infra.Data.Repositories
 {
     public class CustomerRepository : Repository<Customer>, ICustomerRepository
     {
-        public CustomerRepository(DbContext context)
+        public CustomerRepository(Demo2Context context)
             : base(context)
         {
         }

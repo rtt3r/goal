@@ -38,7 +38,7 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
 
             var customer = new Customer(message.Name, message.Email, message.BirthDate);
 
-            if (customerRepository.GetByEmail(customer.Email) != null)
+            if (await customerRepository.GetByEmail(customer.Email) != null)
             {
                 await busHandler.RaiseEvent(new Notification(message.MessageType, "The customer e-mail has already been taken."));
                 return Guid.Empty;

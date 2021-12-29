@@ -1,4 +1,5 @@
 using Goal.Demo2.Domain.Aggregates.Customers;
+using Goal.Domain.Seedwork.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -23,6 +24,19 @@ namespace Goal.Demo2.Infra.Data.Configurations
                 .IsRequired();
 
             builder.Property(p => p.BirthDate)
+                .IsRequired();
+        }
+    }
+
+    internal sealed class StoredEventConfiguration : IEntityTypeConfiguration<StoredEvent>
+    {
+        public void Configure(EntityTypeBuilder<StoredEvent> builder)
+        {
+            builder.ToTable("StoredEvents");
+            builder.HasKey(p => p.Id);
+
+            builder.Property(c => c.MessageType)
+                .HasMaxLength(100)
                 .IsRequired();
         }
     }
