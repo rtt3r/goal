@@ -5,11 +5,10 @@ namespace Goal.Demo2.Api.Application.Commands.Customers
 {
     public class UpdateCustomerCommand : CustomerCommand<ICommandResult>
     {
-        public UpdateCustomerCommand(Guid id, string name, string email, DateTime birthDate)
+        public UpdateCustomerCommand(Guid id, string name, DateTime birthDate)
         {
             AggregateId = id;
             Name = name;
-            Email = email;
             BirthDate = birthDate;
         }
     }

@@ -23,7 +23,7 @@ namespace Goal.Demo2.Api.Infra.Bus
 
         public Task<ICommandResult<TResult>> SendCommand<TCommand, TResult>(TCommand command)
             where TCommand : ICommand<ICommandResult<TResult>>
-            => SendCommand<TCommand, TResult>(command);
+            => _mediator.Send(command);
 
         public Task RaiseEvent<TEvent>(TEvent @event) where TEvent : Event
         {

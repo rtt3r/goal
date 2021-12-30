@@ -53,17 +53,20 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
 
             if (await customerRepository.GetByEmail(customer.Email) != null)
             {
-                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer e-mail has already been taken."));
+                await notificationHandler.Handle(
+                    new Notification(command.MessageType, "The customer e-mail has already been taken."),
+                    cancellationToken);
+
                 return CommandResult.DomainError<CustomerDto>(default);
             }
 
             await customerRepository.AddAsync(customer);
 
-            if (await Commit())
+            if (await Commit(cancellationToken))
             {
                 await busHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
 
-                return CommandResult.ValidationError(
+                return CommandResult.Success(
                     typeAdapter.ProjectAs<CustomerDto>(customer));
             }
 
@@ -87,7 +90,10 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
 
             if (customer is null)
             {
-                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer was not found."));
+                await notificationHandler.Handle(
+                    new Notification(command.MessageType, "The customer was not found."),
+                    cancellationToken);
+
                 return CommandResult.DomainError();
             }
 
@@ -95,7 +101,10 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
 
             if (existingCustomer != null && !existingCustomer.Equals(customer))
             {
-                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer e-mail has already been taken."));
+                await notificationHandler.Handle(
+                    new Notification(command.MessageType, "The customer e-mail has already been taken."),
+                    cancellationToken);
+
                 return CommandResult.DomainError();
             }
 
@@ -130,13 +139,16 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
 
             if (customer is null)
             {
-                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer was not found."));
+                await notificationHandler.Handle(
+                    new Notification(command.MessageType, "The customer was not found."),
+                    cancellationToken);
+
                 return CommandResult.DomainError();
             }
 
             customerRepository.Remove(customer);
 
-            if (await Commit())
+            if (await Commit(cancellationToken))
             {
                 await busHandler.RaiseEvent(new CustomerRemovedEvent(command.AggregateId));
                 return CommandResult.Success();

@@ -4,6 +4,7 @@ using Goal.Application.Seedwork.Extensions;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
 using Goal.Demo2.Api.Application.Dtos.Customers;
+using Goal.Demo2.Api.Application.Dtos.Customers.Requests;
 using Goal.Demo2.Domain.Aggregates.Customers;
 using Goal.Domain.Seedwork.Commands;
 using Goal.Infra.Crosscutting.Adapters;
@@ -21,17 +22,15 @@ namespace Goal.Demo2.Api.Controllers
     /// Everything about Customers
     /// </summary>
     [ApiController]
-    //[ApiVersion("2")]
-    //[Route("api/v{version:apiVersion}/[controller]")]
     [Route("api/[controller]")]
-    public class CustomerController : ApiController
+    public class CustomersController : ApiController
     {
         private readonly ICustomerRepository customerRepository;
         private readonly IBusHandler busHandler;
         private readonly INotificationHandler notificationHandler;
         private readonly ITypeAdapter typeAdapter;
 
-        public CustomerController(
+        public CustomersController(
             ICustomerRepository customerRepository,
             IBusHandler busHandler,
             INotificationHandler notificationHandler,
@@ -54,7 +53,7 @@ namespace Goal.Demo2.Api.Controllers
         [HttpGet("{id:Guid}", Name = nameof(GetById))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CustomerDto>> GetById(Guid id)
+        public async Task<ActionResult<CustomerDto>> GetById([FromRoute] Guid id)
         {
             Customer customer = await customerRepository.FindAsync(id);
 
@@ -69,9 +68,15 @@ namespace Goal.Demo2.Api.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<CustomerDto>> Post([FromBody] RegisterNewCustomerCommand command)
+        public async Task<ActionResult<CustomerDto>> Post([FromBody] RegisterNewCustomerRequest request)
         {
-            ICommandResult<CustomerDto> result = await busHandler.SendCommand<RegisterNewCustomerCommand, CustomerDto>(command);
+            var command = new RegisterNewCustomerCommand(
+                request.Name,
+                request.Email,
+                request.BirthDate);
+
+            ICommandResult<CustomerDto> result = await busHandler
+                .SendCommand<RegisterNewCustomerCommand, CustomerDto>(command);
 
             if (result.IsValidationError())
             {
@@ -94,8 +99,13 @@ namespace Goal.Demo2.Api.Controllers
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<CustomerDto>> Patch(Guid id, [FromBody] UpdateCustomerCommand command)
+        public async Task<ActionResult<CustomerDto>> Patch([FromRoute] Guid id, [FromBody] UpdateCustomerRequest request)
         {
+            var command = new UpdateCustomerCommand(
+                id,
+                request.Name,
+                request.BirthDate);
+
             ICommandResult result = await busHandler.SendCommand(command);
 
             if (result.IsValidationError())
@@ -118,7 +128,7 @@ namespace Goal.Demo2.Api.Controllers
         [Route("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete([FromRoute] Guid id)
         {
             ICommandResult result = await busHandler.SendCommand(new RemoveCustomerCommand(id));
 

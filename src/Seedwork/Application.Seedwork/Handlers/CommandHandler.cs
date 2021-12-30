@@ -38,7 +38,7 @@ namespace Goal.Application.Seedwork.Handlers
             }
         }
 
-        public async Task<bool> Commit()
+        public async Task<bool> Commit(CancellationToken cancellationToken = new CancellationToken())
         {
             if (notificationHandler.HasNotifications())
             {
@@ -50,7 +50,11 @@ namespace Goal.Application.Seedwork.Handlers
                 return true;
             }
 
+            await notificationHandler.Handle(
+                new Notification("Commit", "We had a problem during saving your data."),
+                cancellationToken);
             await busHandler.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
+
             return false;
         }
 

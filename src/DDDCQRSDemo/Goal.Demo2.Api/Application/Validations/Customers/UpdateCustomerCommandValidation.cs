@@ -11,7 +11,6 @@ namespace Goal.Demo2.Api.Application.Validations.Customers
             ValidateId();
             ValidateName();
             ValidateBirthDate();
-            ValidateEmail();
         }
 
         protected void ValidateId()

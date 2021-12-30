@@ -22,13 +22,6 @@ namespace Goal.Demo2.Api.Application.Validations.Customers
                 .WithMessage("The customer must have 18 years or more");
         }
 
-        protected void ValidateEmail()
-        {
-            RuleFor(c => c.Email)
-                .NotEmpty()
-                .EmailAddress();
-        }
-
         protected static bool HaveMinimumAge(DateTime birthDate)
             => birthDate.Date <= DateTime.Today.AddYears(-18);
     }
