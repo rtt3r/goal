@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  goal.demo2.api:
+    image: ${DOCKER_REGISTRY-}goaldemo2api
+    build:
+      context: .
+      dockerfile: src/DDDCQRSDemo/Goal.Demo2.Api/Dockerfile

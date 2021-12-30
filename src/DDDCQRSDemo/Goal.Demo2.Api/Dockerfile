@@ -8,6 +8,13 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/DDDCQRSDemo/Goal.Demo2.Api/Goal.Demo2.Api.csproj", "src/DDDCQRSDemo/Goal.Demo2.Api/"]
+COPY ["src/DDDCQRSDemo/Goal.Demo2.Infra.Data/Goal.Demo2.Infra.Data.csproj", "src/DDDCQRSDemo/Goal.Demo2.Infra.Data/"]
+COPY ["src/DDDCQRSDemo/Goal.Demo2.Domain/Goal.Demo2.Domain.csproj", "src/DDDCQRSDemo/Goal.Demo2.Domain/"]
+COPY ["src/Seedwork/Domain.Seedwork/Domain.Seedwork.csproj", "src/Seedwork/Domain.Seedwork/"]
+COPY ["src/Seedwork/Infra.Crosscutting/Infra.Crosscutting.csproj", "src/Seedwork/Infra.Crosscutting/"]
+COPY ["src/Seedwork/Infra.Data.Seedwork/Infra.Data.Seedwork.csproj", "src/Seedwork/Infra.Data.Seedwork/"]
+COPY ["src/Seedwork/Infra.Http.Seedwork/Infra.Http.Seedwork.csproj", "src/Seedwork/Infra.Http.Seedwork/"]
+COPY ["src/Seedwork/Application.Seedwork/Application.Seedwork.csproj", "src/Seedwork/Application.Seedwork/"]
 RUN dotnet restore "src/DDDCQRSDemo/Goal.Demo2.Api/Goal.Demo2.Api.csproj"
 COPY . .
 WORKDIR "/src/src/DDDCQRSDemo/Goal.Demo2.Api"
