@@ -7,7 +7,7 @@ namespace Goal.Demo2.Infra.Data
     {
         protected override Demo2Context CreateNewInstance(DbContextOptionsBuilder<Demo2Context> optionsBuilder, string connectionString)
         {
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlServer(connectionString);
             return new Demo2Context(optionsBuilder.Options);
         }
     }

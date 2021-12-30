@@ -7,7 +7,7 @@ namespace Goal.Demo2.Infra.Data.EventSourcing
     {
         protected override EventSourcingContext CreateNewInstance(DbContextOptionsBuilder<EventSourcingContext> optionsBuilder, string connectionString)
         {
-            optionsBuilder.UseSqlite(connectionString);
+            optionsBuilder.UseSqlServer(connectionString);
             return new EventSourcingContext(optionsBuilder.Options);
         }
     }

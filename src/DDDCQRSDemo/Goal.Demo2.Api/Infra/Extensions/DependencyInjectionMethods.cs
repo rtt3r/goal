@@ -34,7 +34,7 @@ namespace Goal.Demo2.Api.Infra.Extensions
                 .AddDbContext<EventSourcingContext>((provider, options) =>
                 {
                     options
-                        .UseSqlite(
+                        .UseSqlServer(
                             connectionString,
                             opts => opts.MigrationsAssembly(typeof(EventSourcingContext).Assembly.GetName().Name))
                         .EnableSensitiveDataLogging();
@@ -46,7 +46,7 @@ namespace Goal.Demo2.Api.Infra.Extensions
                 .AddDbContext<Demo2Context>((provider, options) =>
                 {
                     options
-                        .UseSqlite(
+                        .UseSqlServer(
                             connectionString,
                             opts => opts.MigrationsAssembly(typeof(Demo2Context).Assembly.GetName().Name))
                         .EnableSensitiveDataLogging();

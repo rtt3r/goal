@@ -1,13 +1,19 @@
-version: '3.4'
+version: "3.8"
 
 services:
-  goal.demo2.api:
+  api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_ConnectionStrings__DefaultConnection=Server=192.168.0.101,11433;Initial Catalog=goal-dev;Persist Security Info=False;User ID=sa;Password=pxh4P8w3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
+      - ASPNETCORE_ConnectionStrings__Elasticsearch=http://elasticsearch:9200
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=4431
+    build:
+      args:
+        nuget_pat: 6v7f5gfbzehv47x7fsl5m4y6rfj2fhakf3fccyr6fveur3nf4hia
     ports:
-      - "80"
-      - "443"
+      - "8001:80"
+      - "4431:443"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

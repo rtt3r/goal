@@ -48,6 +48,6 @@ namespace Goal.Infra.Http.Seedwork.Controllers
 
         protected virtual ActionResult InternalServerError(object result) => new InternalServerErrorObjectResult(result);
 
-        protected virtual OkPagedCollectionResult Paged(IPagedCollection collection) => new(collection);
+        protected virtual OkPagedCollectionResult Paged(IPagedCollection collection) => new OkPagedCollectionResult(collection);
     }
 }

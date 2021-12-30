@@ -1,5 +1,3 @@
-using System.Threading;
-using System.Threading.Tasks;
 using FluentValidation.Results;
 using Goal.Application.Seedwork.Extensions;
 using Goal.Application.Seedwork.Handlers;
@@ -113,7 +111,7 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
 
             customerRepository.Update(existingCustomer);
 
-            if (await Commit())
+            if (await Commit(cancellationToken))
             {
                 await busHandler.RaiseEvent(new CustomerUpdatedEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
                 return CommandResult.Success();

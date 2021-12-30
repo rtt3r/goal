@@ -13,11 +13,11 @@ namespace Goal.Demo2.Infra.Data.Migrations.EventSourcingContext
                 name: "StoredEvents",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Data = table.Column<string>(type: "TEXT", nullable: true),
-                    User = table.Column<string>(type: "TEXT", nullable: true),
-                    MessageType = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    AggregateId = table.Column<Guid>(type: "TEXT", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Data = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    User = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MessageType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    AggregateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {

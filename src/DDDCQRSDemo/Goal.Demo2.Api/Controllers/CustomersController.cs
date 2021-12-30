@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using Goal.Application.Seedwork.Extensions;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
@@ -13,7 +11,6 @@ using Goal.Infra.Http.Seedwork.Controllers;
 using Goal.Infra.Http.Seedwork.Controllers.Requests;
 using Goal.Infra.Http.Seedwork.Controllers.Results;
 using Goal.Infra.Http.Seedwork.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Goal.Demo2.Api.Controllers
@@ -47,7 +44,9 @@ namespace Goal.Demo2.Api.Controllers
         public async Task<ActionResult<PagedResponse<CustomerDto>>> Get([FromQuery] PaginationRequest request)
         {
             IPagedCollection<Customer> customers = await customerRepository.FindAsync(request.ToPagination());
-            return Paged(typeAdapter.ProjectAsPagedCollection<CustomerDto>(customers));
+            IPagedCollection<CustomerDto> result = typeAdapter.ProjectAsPagedCollection<CustomerDto>(customers);
+
+            return Paged(result);
         }
 
         [HttpGet("{id:Guid}", Name = nameof(GetById))]
