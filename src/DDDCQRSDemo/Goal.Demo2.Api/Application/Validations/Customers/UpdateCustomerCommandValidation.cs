@@ -1,4 +1,3 @@
-using System;
 using FluentValidation;
 using Goal.Demo2.Api.Application.Commands.Customers;
 

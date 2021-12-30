@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Specifications;
@@ -8,41 +9,41 @@ namespace Goal.Domain.Seedwork.Aggregates
     public interface IRepository<TEntity, TKey> : IRepository
         where TEntity : class
     {
-        TEntity Find(TKey id);
+        TEntity Load(TKey id);
 
-        ICollection<TEntity> Find();
+        ICollection<TEntity> Query();
 
-        ICollection<TEntity> Find(ISpecification<TEntity> specification);
+        ICollection<TEntity> Query(ISpecification<TEntity> specification);
 
-        IPagedCollection<TEntity> Find(IPagination pagination);
+        IPagedCollection<TEntity> Query(IPagination pagination);
 
-        IPagedCollection<TEntity> Find(ISpecification<TEntity> specification, IPagination pagination);
+        IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPagination pagination);
 
-        Task<TEntity> FindAsync(TKey id);
+        Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken());
 
-        Task<ICollection<TEntity>> FindAsync();
+        Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken());
 
-        Task<ICollection<TEntity>> FindAsync(ISpecification<TEntity> specification);
+        Task<ICollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
 
-        Task<IPagedCollection<TEntity>> FindAsync(IPagination pagination);
+        Task<IPagedCollection<TEntity>> QueryAsync(IPagination pagination, CancellationToken cancellationToken = new CancellationToken());
 
-        Task<IPagedCollection<TEntity>> FindAsync(ISpecification<TEntity> specification, IPagination pagination);
+        Task<IPagedCollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPagination pagination, CancellationToken cancellationToken = new CancellationToken());
 
         bool Any();
 
         bool Any(ISpecification<TEntity> specification);
 
-        Task<bool> AnyAsync();
+        Task<bool> AnyAsync(CancellationToken cancellationToken = new CancellationToken());
 
-        Task<bool> AnyAsync(ISpecification<TEntity> specification);
+        Task<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
 
         void Add(TEntity entity);
 
         void Add(IEnumerable<TEntity> entities);
 
-        Task AddAsync(TEntity entity);
+        Task AddAsync(TEntity entity, CancellationToken cancellationToken = new CancellationToken());
 
-        Task AddAsync(IEnumerable<TEntity> entities);
+        Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = new CancellationToken());
 
         void Update(TEntity entity);
 

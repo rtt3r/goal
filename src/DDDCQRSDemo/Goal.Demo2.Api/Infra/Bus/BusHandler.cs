@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Domain.Seedwork.Commands;
 using Goal.Domain.Seedwork.Events;

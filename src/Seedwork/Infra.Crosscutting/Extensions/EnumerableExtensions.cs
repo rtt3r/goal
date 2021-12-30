@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Goal.Infra.Crosscutting.Collections;
 
@@ -35,13 +36,14 @@ namespace Goal.Infra.Crosscutting.Extensions
             return source;
         }
 
-        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, IPagination page) => values.AsQueryable().Paginate(page);
+        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, IPagination page)
+            => values.AsQueryable().Paginate(page);
 
-        public static IQueryable<T> Paginate<T>(this IQueryable<T> dataList, IPagination page)
+        public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPagination page)
         {
             Ensure.Argument.NotNull(page, nameof(page));
 
-            IQueryable<T> queryableList = dataList;
+            IQueryable<T> queryableList = source;
 
             if (!page.OrderByName.IsNullOrEmpty())
             {
@@ -54,11 +56,17 @@ namespace Goal.Infra.Crosscutting.Extensions
             return queryableList;
         }
 
-        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, IPagination page) => await values.AsQueryable().PaginateAsync(page);
+        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, IPagination page, CancellationToken cancellationToken = new CancellationToken())
+            => await values.AsQueryable().PaginateAsync(page, cancellationToken);
 
-        public static async Task<IQueryable<T>> PaginateAsync<T>(this IQueryable<T> dataList, IPagination page) => await Task.FromResult(dataList.Paginate(page));
+        public static async Task<IQueryable<T>> PaginateAsync<T>(this IQueryable<T> dataList, IPagination page, CancellationToken cancellationToken = new CancellationToken())
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return await Task.FromResult(dataList.Paginate(page));
+        }
 
-        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, IPagination page) => values.AsQueryable().PaginateList(page);
+        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, IPagination page)
+            => values.AsQueryable().PaginateList(page);
 
         public static IPagedCollection<T> PaginateList<T>(this IQueryable<T> dataList, IPagination page)
         {
@@ -66,9 +74,14 @@ namespace Goal.Infra.Crosscutting.Extensions
             return new PagedList<T>(dataList.Paginate(page).ToList(), dataList.Count());
         }
 
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, IPagination page) => await values.AsQueryable().PaginateListAsync(page);
+        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, IPagination page, CancellationToken cancellationToken = new CancellationToken())
+            => await values.AsQueryable().PaginateListAsync(page, cancellationToken);
 
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IQueryable<T> dataList, IPagination page) => await Task.FromResult(dataList.PaginateList(page));
+        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IQueryable<T> dataList, IPagination page, CancellationToken cancellationToken = new CancellationToken())
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return await Task.FromResult(dataList.PaginateList(page));
+        }
 
         public static IPagedCollection<TResult> SelectPaged<TSource, TResult>(this IPagedCollection<TSource> source, Func<TSource, TResult> selector)
         {

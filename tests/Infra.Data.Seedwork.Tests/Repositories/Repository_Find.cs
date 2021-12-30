@@ -28,7 +28,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.Find();
+            ICollection<Test> tests = testRepository.Query();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
@@ -45,7 +45,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.Find();
+            ICollection<Test> tests = testRepository.Query();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
@@ -64,7 +64,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.FindAsync().GetAwaiter().GetResult();
+            ICollection<Test> tests = testRepository.QueryAsync().GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
@@ -81,7 +81,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.FindAsync().GetAwaiter().GetResult();
+            ICollection<Test> tests = testRepository.QueryAsync().GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
@@ -102,7 +102,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.Find(spec);
+            ICollection<Test> tests = testRepository.Query(spec);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveSameCount(mockedTests.Where(p => p.Active));
@@ -125,7 +125,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             {
                 ISpecification<Test> spec = null;
                 var testRepository = new TestRepository(mockDbContext.Object);
-                testRepository.Find(spec);
+                testRepository.Query(spec);
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
@@ -146,7 +146,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.FindAsync(spec).GetAwaiter().GetResult();
+            ICollection<Test> tests = testRepository.QueryAsync(spec).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveSameCount(mockedTests.Where(p => p.Active));
@@ -161,7 +161,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             {
                 ISpecification<Test> spec = null;
                 var testRepository = new TestRepository(mockDbContext.Object);
-                testRepository.FindAsync(spec).GetAwaiter().GetResult();
+                testRepository.QueryAsync(spec).GetAwaiter().GetResult();
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
@@ -181,7 +181,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.Find(spec);
+            ICollection<Test> tests = testRepository.Query(spec);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
@@ -202,7 +202,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            ICollection<Test> tests = testRepository.FindAsync(spec).GetAwaiter().GetResult();
+            ICollection<Test> tests = testRepository.QueryAsync(spec).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.BeEmpty();
@@ -222,7 +222,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(pagination);
+            IPagedCollection<Test> tests = testRepository.Query(pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -245,7 +245,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(pagination);
+            IPagedCollection<Test> tests = testRepository.Query(pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -268,7 +268,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -291,7 +291,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -314,7 +314,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(1, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(pagination);
+            IPagedCollection<Test> tests = testRepository.Query(pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -337,7 +337,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(1, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(pagination);
+            IPagedCollection<Test> tests = testRepository.Query(pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -360,7 +360,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(1, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -383,7 +383,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(1, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(10);
@@ -406,7 +406,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(pagination);
+            IPagedCollection<Test> tests = testRepository.Query(pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
@@ -429,7 +429,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
@@ -452,7 +452,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(pagination);
+            IPagedCollection<Test> tests = testRepository.Query(pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
@@ -475,7 +475,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             IPagination pagination = new Pagination(0, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNull().And.HaveCount(9);
@@ -501,7 +501,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
+            IPagedCollection<Test> tests = testRepository.Query(spec, pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -527,7 +527,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(-1, -1);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
+            IPagedCollection<Test> tests = testRepository.Query(spec, pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(98);
@@ -546,7 +546,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
                 ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
                 IPagination pagination = null;
                 var testRepository = new TestRepository(mockDbContext.Object);
-                testRepository.Find(spec, pagination);
+                testRepository.Query(spec, pagination);
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pagination");
@@ -562,7 +562,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
                 ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
                 IPagination pagination = null;
                 var testRepository = new TestRepository(mockDbContext.Object);
-                testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
+                testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pagination");
@@ -578,7 +578,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
                 ISpecification<Test> spec = null;
                 IPagination pagination = new Pagination(0, 10);
                 var testRepository = new TestRepository(mockDbContext.Object);
-                testRepository.Find(spec, pagination);
+                testRepository.Query(spec, pagination);
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
@@ -594,7 +594,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
                 ISpecification<Test> spec = null;
                 IPagination pagination = new Pagination(0, 10);
                 var testRepository = new TestRepository(mockDbContext.Object);
-                testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
+                testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
@@ -617,7 +617,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -643,7 +643,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
+            IPagedCollection<Test> tests = testRepository.Query(spec, pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -669,7 +669,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(0, 10, "Id", false);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -695,7 +695,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(9, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.Find(spec, pagination);
+            IPagedCollection<Test> tests = testRepository.Query(spec, pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(8);
@@ -721,7 +721,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
             IPagination pagination = new Pagination(9, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            IPagedCollection<Test> tests = testRepository.FindAsync(spec, pagination).GetAwaiter().GetResult();
+            IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(8);

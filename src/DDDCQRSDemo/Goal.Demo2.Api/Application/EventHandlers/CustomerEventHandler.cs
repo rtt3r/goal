@@ -1,6 +1,6 @@
-using System.Threading;
-using System.Threading.Tasks;
 using Goal.Demo2.Api.Application.Events;
+using Goal.Demo2.Dto.Customers;
+using Goal.Demo2.Infra.Data.Query.Repositories.Customers;
 using MediatR;
 
 namespace Goal.Demo2.Api.Application.EventHandlers
@@ -10,10 +10,42 @@ namespace Goal.Demo2.Api.Application.EventHandlers
         INotificationHandler<CustomerUpdatedEvent>,
         INotificationHandler<CustomerRemovedEvent>
     {
-        public Task Handle(CustomerUpdatedEvent message, CancellationToken cancellationToken) => Task.CompletedTask;
+        private readonly ICustomerQueryRepository customerRepository;
 
-        public Task Handle(CustomerRegisteredEvent message, CancellationToken cancellationToken) => Task.CompletedTask;
+        public CustomerEventHandler(ICustomerQueryRepository customerRepository)
+        {
+            this.customerRepository = customerRepository;
+        }
 
-        public Task Handle(CustomerRemovedEvent message, CancellationToken cancellationToken) => Task.CompletedTask;
+        public async Task Handle(CustomerUpdatedEvent message, CancellationToken cancellationToken)
+        {
+            await customerRepository.StoreAsync(
+                message.AggregateId.ToString(),
+                new CustomerDto
+                {
+                    CustomerId = message.AggregateId.ToString(),
+                    Name = message.Name,
+                    BirthDate = message.BirthDate,
+                    Email = message.Email,
+                },
+                cancellationToken);
+        }
+
+        public async Task Handle(CustomerRegisteredEvent message, CancellationToken cancellationToken)
+        {
+            await customerRepository.StoreAsync(
+                message.AggregateId.ToString(),
+                new CustomerDto
+                {
+                    CustomerId = message.AggregateId.ToString(),
+                    Name = message.Name,
+                    BirthDate = message.BirthDate,
+                    Email = message.Email,
+                },
+                cancellationToken);
+        }
+
+        public async Task Handle(CustomerRemovedEvent message, CancellationToken cancellationToken)
+            => await customerRepository.RemoveAsync(message.AggregateId.ToString(), cancellationToken);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Goal.Domain.Seedwork.Aggregates;
 
 namespace Goal.Demo2.Domain.Aggregates.Customers

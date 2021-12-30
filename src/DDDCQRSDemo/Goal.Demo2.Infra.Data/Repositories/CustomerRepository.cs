@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Goal.Demo2.Domain.Aggregates.Customers;
 using Goal.Infra.Data.Seedwork;
 using Microsoft.EntityFrameworkCore;

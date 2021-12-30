@@ -33,13 +33,13 @@ namespace Goal.Demo.Application.People
 
         public async Task<IPagedCollection<PersonResponse>> FindPaginatedAsync(Pagination pagination)
         {
-            IPagedCollection<Person> people = await personRepository.FindAsync(pagination);
+            IPagedCollection<Person> people = await personRepository.QueryAsync(pagination);
             return adapter.ProjectAsPagedCollection<PersonResponse>(people);
         }
 
         public async Task<PersonResponse> GetPersonAsync(string id)
         {
-            Person person = await personRepository.FindAsync(id)
+            Person person = await personRepository.LoadAsync(id)
                 ?? throw new NotFoundException("Pessoa não encontrada");
 
             return adapter.ProjectAs<PersonResponse>(person);
@@ -83,7 +83,7 @@ namespace Goal.Demo.Application.People
                 throw new BusinessException(result.Errors.First().ToString());
             }
 
-            Person person = await personRepository.FindAsync(id)
+            Person person = await personRepository.LoadAsync(id)
                 ?? throw new NotFoundException("Pessoa não encontrada");
 
             if (await personRepository.AnyAsync(
@@ -105,7 +105,7 @@ namespace Goal.Demo.Application.People
 
         public async Task<bool> DeletePerson(string id)
         {
-            Person person = await personRepository.FindAsync(id)
+            Person person = await personRepository.LoadAsync(id)
                 ?? throw new NotFoundException("Pessoa não encontrada");
 
             personRepository.Remove(person);

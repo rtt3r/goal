@@ -1,12 +1,10 @@
-using Goal.Application.Seedwork.Extensions;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
-using Goal.Demo2.Api.Application.Dtos.Customers;
 using Goal.Demo2.Api.Application.Dtos.Customers.Requests;
-using Goal.Demo2.Domain.Aggregates.Customers;
+using Goal.Demo2.Dto.Customers;
+using Goal.Demo2.Infra.Data.Query.Repositories.Customers;
 using Goal.Domain.Seedwork.Commands;
 using Goal.Infra.Crosscutting.Adapters;
-using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Http.Seedwork.Controllers;
 using Goal.Infra.Http.Seedwork.Controllers.Requests;
 using Goal.Infra.Http.Seedwork.Controllers.Results;
@@ -22,13 +20,13 @@ namespace Goal.Demo2.Api.Controllers
     [Route("api/[controller]")]
     public class CustomersController : ApiController
     {
-        private readonly ICustomerRepository customerRepository;
+        private readonly ICustomerQueryRepository customerRepository;
         private readonly IBusHandler busHandler;
         private readonly INotificationHandler notificationHandler;
         private readonly ITypeAdapter typeAdapter;
 
         public CustomersController(
-            ICustomerRepository customerRepository,
+            ICustomerQueryRepository customerRepository,
             IBusHandler busHandler,
             INotificationHandler notificationHandler,
             ITypeAdapter typeAdapter)
@@ -42,26 +40,21 @@ namespace Goal.Demo2.Api.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<PagedResponse<CustomerDto>>> Get([FromQuery] PaginationRequest request)
-        {
-            IPagedCollection<Customer> customers = await customerRepository.FindAsync(request.ToPagination());
-            IPagedCollection<CustomerDto> result = typeAdapter.ProjectAsPagedCollection<CustomerDto>(customers);
+            => Paged(await customerRepository.QueryAsync(request.ToPagination()));
 
-            return Paged(result);
-        }
-
-        [HttpGet("{id:Guid}", Name = nameof(GetById))]
+        [HttpGet("{id}", Name = nameof(GetById))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CustomerDto>> GetById([FromRoute] Guid id)
+        public async Task<ActionResult<CustomerDto>> GetById([FromRoute] string id)
         {
-            Customer customer = await customerRepository.FindAsync(id);
+            CustomerDto customer = await customerRepository.LoadAsync(id);
 
             if (customer is null)
             {
                 return NotFound();
             }
 
-            return Ok(typeAdapter.ProjectAs<CustomerDto>(customer));
+            return Ok(customer);
         }
 
         [HttpPost]

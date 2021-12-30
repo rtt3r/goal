@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Goal.Demo.Domain.Aggregates.People;
 using Goal.Infra.Crosscutting.Collections;
@@ -16,7 +17,7 @@ namespace Goal.Demo.Infra.Data.Repositories
         {
         }
 
-        public override Person Find(string id)
+        public override Person Load(string id)
         {
             return Context
                 .Set<Person>()
@@ -24,15 +25,15 @@ namespace Goal.Demo.Infra.Data.Repositories
                 .FirstOrDefault(p => p.Id == id);
         }
 
-        public override async Task<Person> FindAsync(string id)
+        public override async Task<Person> LoadAsync(string id, CancellationToken cancellationToken = new CancellationToken())
         {
             return await Context
                 .Set<Person>()
                 .Include(p => p.Cpf)
-                .FirstOrDefaultAsync(p => p.Id == id);
+                .FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
 
-        public override ICollection<Person> Find()
+        public override ICollection<Person> Query()
         {
             return Context
                 .Set<Person>()
@@ -40,15 +41,15 @@ namespace Goal.Demo.Infra.Data.Repositories
                 .ToList();
         }
 
-        public override async Task<ICollection<Person>> FindAsync()
+        public override async Task<ICollection<Person>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             return await Context
                 .Set<Person>()
                 .Include(p => p.Cpf)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public override IPagedCollection<Person> Find(IPagination pagination)
+        public override IPagedCollection<Person> Query(IPagination pagination)
         {
             return Context
                 .Set<Person>()
@@ -56,13 +57,13 @@ namespace Goal.Demo.Infra.Data.Repositories
                 .PaginateList(pagination);
         }
 
-        public override async Task<IPagedCollection<Person>> FindAsync(IPagination pagination)
+        public override async Task<IPagedCollection<Person>> QueryAsync(IPagination pagination, CancellationToken cancellationToken = new CancellationToken())
         {
             return await Context
                 .Set<Person>()
                 .AsNoTracking()
                 .Include(p => p.Cpf)
-                .PaginateListAsync(pagination);
+                .PaginateListAsync(pagination, cancellationToken);
         }
     }
 }

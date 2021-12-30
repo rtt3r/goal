@@ -2,10 +2,10 @@ using FluentValidation.Results;
 using Goal.Application.Seedwork.Extensions;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
-using Goal.Demo2.Api.Application.Dtos.Customers;
 using Goal.Demo2.Api.Application.Events;
 using Goal.Demo2.Api.Application.Validations.Customers;
 using Goal.Demo2.Domain.Aggregates.Customers;
+using Goal.Demo2.Dto.Customers;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Commands;
 using Goal.Domain.Seedwork.Notifications;
@@ -58,7 +58,7 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
                 return CommandResult.DomainError<CustomerDto>(default);
             }
 
-            await customerRepository.AddAsync(customer);
+            await customerRepository.AddAsync(customer, cancellationToken);
 
             if (await Commit(cancellationToken))
             {
@@ -84,7 +84,7 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
                 return CommandResult.ValidationError();
             }
 
-            Customer customer = await customerRepository.FindAsync(command.AggregateId);
+            Customer customer = await customerRepository.LoadAsync(command.AggregateId, cancellationToken);
 
             if (customer is null)
             {
@@ -133,7 +133,7 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
                 return CommandResult.ValidationError();
             }
 
-            Customer customer = await customerRepository.FindAsync(command.AggregateId);
+            Customer customer = await customerRepository.LoadAsync(command.AggregateId, cancellationToken);
 
             if (customer is null)
             {

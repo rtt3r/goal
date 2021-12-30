@@ -26,7 +26,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             var testRepository = new TestRepository(mockDbContext.Object);
 
-            Test test = testRepository.Find(3);
+            Test test = testRepository.Load(3);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
@@ -47,7 +47,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.Find(6);
+            Test test = testRepository.Load(6);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();
@@ -68,7 +68,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             var id = Guid.NewGuid();
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.FindAsync(3).GetAwaiter().GetResult();
+            Test test = testRepository.LoadAsync(3).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
@@ -88,7 +88,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.FindAsync(6).GetAwaiter().GetResult();
+            Test test = testRepository.LoadAsync(6).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();

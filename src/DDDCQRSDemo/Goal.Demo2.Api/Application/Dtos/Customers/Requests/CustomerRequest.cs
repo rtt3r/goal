@@ -1,5 +1,3 @@
-using System;
-
 namespace Goal.Demo2.Api.Application.Dtos.Customers.Requests
 {
     public abstract class CustomerRequest

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<IsPackable>false</IsPackable>
@@ -15,8 +14,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Seedwork\Domain.Seedwork\Domain.Seedwork.csproj" />
-		<ProjectReference Include="..\..\Seedwork\Infra.Data.Seedwork\Infra.Data.Seedwork.csproj" />
+	  <PackageReference Include="RavenDB.Client" Version="5.3.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Seedwork\Infra.Data.Query.Seedwork\Infra.Data.Query.Seedwork.csproj" />
+	  <ProjectReference Include="..\Goal.Demo2.Dto\Goal.Demo2.Dto.csproj" />
+	</ItemGroup>
 </Project>

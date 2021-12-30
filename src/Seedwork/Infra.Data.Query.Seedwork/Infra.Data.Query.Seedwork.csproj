@@ -1,19 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
-		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
+		<RootNamespace>Goal.Infra.Data.Query.Seedwork</RootNamespace>
+		<AssemblyName>Goal.Infra.Data.Query.Seedwork</AssemblyName>
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
 		<Authors>Goal Soluções em TI</Authors>
 		<Company>Goal Soluções em TI</Company>
-		<PackageId>Goal.Infra.Crosscutting</PackageId>
+		<PackageId>Goal.Infra.Data.Query.Seedwork</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Crosscutting layer for Domain Driven Design</Description>
+		<Description>Data query layer for Domain Driven Design</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
@@ -27,10 +28,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="10.3.6" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="RavenDB.Client" Version="5.3.1" />
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Domain.Seedwork\Domain.Seedwork.csproj" />
+		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,23 +1,22 @@
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.CommandHandlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
-using Goal.Demo2.Api.Application.Dtos.Customers;
 using Goal.Demo2.Api.Application.EventHandlers;
 using Goal.Demo2.Api.Application.Events;
 using Goal.Demo2.Api.Infra.Bus;
+using Goal.Demo2.Dto.Customers;
 using Goal.Demo2.Infra.Data;
 using Goal.Demo2.Infra.Data.EventSourcing;
+using Goal.Demo2.Infra.Data.Query.Repositories.Customers;
 using Goal.Demo2.Infra.Data.Repositories;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Aggregates;
 using Goal.Domain.Seedwork.Commands;
 using Goal.Domain.Seedwork.Events;
+using Goal.Infra.Data.Query.Seedwork;
 using Goal.Infra.Http.Seedwork.DependencyInjection;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Demo2.Api.Infra.Extensions
 {
@@ -74,6 +73,7 @@ namespace Goal.Demo2.Api.Infra.Extensions
             services.AddScoped<IUnitOfWork, Demo2UnitOfWork>();
 
             services.RegisterAllTypesOf<IRepository>(typeof(CustomerRepository).Assembly);
+            services.RegisterAllTypesOf<IQueryRepository>(typeof(CustomerQueryRepository).Assembly);
 
             return services;
         }

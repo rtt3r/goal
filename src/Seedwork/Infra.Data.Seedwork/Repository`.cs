@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Goal.Domain.Seedwork.Aggregates;
 using Goal.Infra.Crosscutting;
@@ -23,17 +24,19 @@ namespace Goal.Infra.Data.Seedwork
             Context = context;
         }
 
-        public virtual TEntity Find(TKey id) => Context.Set<TEntity>().Find(id);
+        public virtual TEntity Load(TKey id)
+            => Context.Set<TEntity>().Find(id);
 
-        public virtual ICollection<TEntity> Find() => Context.Set<TEntity>().ToList();
+        public virtual ICollection<TEntity> Query()
+            => Context.Set<TEntity>().ToList();
 
-        public virtual ICollection<TEntity> Find(ISpecification<TEntity> specification)
+        public virtual ICollection<TEntity> Query(ISpecification<TEntity> specification)
         {
             return FindSpecific(specification)
                 .ToList();
         }
 
-        public virtual IPagedCollection<TEntity> Find(ISpecification<TEntity> specification, IPagination pagination)
+        public virtual IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPagination pagination)
         {
             Ensure.Argument.NotNull(pagination, nameof(pagination));
 
@@ -41,26 +44,37 @@ namespace Goal.Infra.Data.Seedwork
                 .PaginateList(pagination);
         }
 
-        public virtual IPagedCollection<TEntity> Find(IPagination pagination) => Find(new TrueSpecification<TEntity>(), pagination);
+        public virtual IPagedCollection<TEntity> Query(IPagination pagination)
+            => Query(new TrueSpecification<TEntity>(), pagination);
 
-        public virtual async Task<TEntity> FindAsync(TKey id) => await Context.Set<TEntity>().FindAsync(id);
+        public virtual async Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken())
+            => await Context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
 
-        public virtual async Task<ICollection<TEntity>> FindAsync() => await Context.Set<TEntity>().ToListAsync();
+        public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())
+            => await Context.Set<TEntity>().ToListAsync(cancellationToken: cancellationToken);
 
-        public virtual async Task<ICollection<TEntity>> FindAsync(ISpecification<TEntity> specification)
+        public virtual async Task<ICollection<TEntity>> QueryAsync(
+            ISpecification<TEntity> specification,
+            CancellationToken cancellationToken = new CancellationToken())
         {
             return await FindSpecific(specification)
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
         }
 
-        public virtual async Task<IPagedCollection<TEntity>> FindAsync(IPagination pagination) => await FindAsync(new TrueSpecification<TEntity>(), pagination);
+        public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
+            IPagination pagination,
+            CancellationToken cancellationToken = new CancellationToken())
+            => await QueryAsync(new TrueSpecification<TEntity>(), pagination, cancellationToken);
 
-        public virtual async Task<IPagedCollection<TEntity>> FindAsync(ISpecification<TEntity> specification, IPagination pagination)
+        public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
+            ISpecification<TEntity> specification,
+            IPagination pagination,
+            CancellationToken cancellationToken = new CancellationToken())
         {
             Ensure.Argument.NotNull(pagination, nameof(pagination));
 
             return await FindSpecific(specification)
-                .PaginateListAsync(pagination);
+                .PaginateListAsync(pagination, cancellationToken);
         }
 
         public virtual bool Any()
@@ -71,17 +85,19 @@ namespace Goal.Infra.Data.Seedwork
                 .Any();
         }
 
-        public virtual bool Any(ISpecification<TEntity> specification) => FindSpecific(specification).Any();
+        public virtual bool Any(ISpecification<TEntity> specification)
+            => FindSpecific(specification).Any();
 
-        public virtual async Task<bool> AnyAsync()
+        public virtual async Task<bool> AnyAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             return await Context
                 .Set<TEntity>()
                 .AsNoTracking()
-                .AnyAsync();
+                .AnyAsync(cancellationToken);
         }
 
-        public virtual async Task<bool> AnyAsync(ISpecification<TEntity> specification) => await FindSpecific(specification).AnyAsync();
+        public virtual async Task<bool> AnyAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken())
+            => await FindSpecific(specification).AnyAsync(cancellationToken);
 
         public virtual void Add(TEntity entity)
         {
@@ -95,16 +111,16 @@ namespace Goal.Infra.Data.Seedwork
             Context.Set<TEntity>().AddRange(entities);
         }
 
-        public virtual async Task AddAsync(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = new CancellationToken())
         {
             Ensure.Argument.NotNull(entity, nameof(entity));
-            await Context.Set<TEntity>().AddAsync(entity);
+            await Context.Set<TEntity>().AddAsync(entity, cancellationToken);
         }
 
-        public virtual async Task AddAsync(IEnumerable<TEntity> entities)
+        public virtual async Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = new CancellationToken())
         {
             Ensure.Argument.NotNull(entities, nameof(entities));
-            await Context.Set<TEntity>().AddRangeAsync(entities);
+            await Context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
         }
 
         public virtual void Update(TEntity entity)

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Goal.Domain.Seedwork.Aggregates;
+﻿using Goal.Domain.Seedwork.Aggregates;
 
 namespace Goal.Demo2.Domain.Aggregates.Customers
 {

@@ -1,4 +1,3 @@
-using System;
 using Goal.Domain.Seedwork.Commands;
 
 namespace Goal.Demo2.Api.Application.Commands.Customers

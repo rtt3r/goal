@@ -1,4 +1,3 @@
-using System;
 using Goal.Domain.Seedwork.Events;
 
 namespace Goal.Demo2.Api.Application.Events
