@@ -16,7 +16,7 @@ namespace Goal.Demo2.Api.Application.Validations.Customers
 
         protected void ValidateId()
         {
-            RuleFor(c => c.Id)
+            RuleFor(c => c.AggregateId)
                 .NotEmpty()
                 .NotEqual(Guid.Empty);
         }

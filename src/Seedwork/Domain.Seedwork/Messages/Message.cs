@@ -1,10 +1,15 @@
+using System;
+
 namespace Goal.Domain.Seedwork.Messages
 {
-    public abstract class Message : Message<bool>
+    public abstract class Message : IMessage
     {
-        public Message()
-            : base()
+        public string MessageType { get; protected set; }
+        public Guid AggregateId { get; protected set; }
+
+        protected Message()
         {
+            MessageType = GetType().Name;
         }
     }
 }

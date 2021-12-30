@@ -1,14 +1,10 @@
-using System;
-using FluentValidation.Results;
+﻿using System;
 using Goal.Domain.Seedwork.Messages;
 
 namespace Goal.Domain.Seedwork.Commands
 {
     public interface ICommand : IMessage
     {
-        DateTimeOffset Timestamp { get; }
-        ValidationResult ValidationResult { get; set; }
-
-        bool IsValid();
+        public DateTimeOffset Timestamp { get; }
     }
 }

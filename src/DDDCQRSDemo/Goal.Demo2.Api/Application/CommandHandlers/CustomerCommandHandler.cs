@@ -1,47 +1,60 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation.Results;
+using Goal.Application.Seedwork.Extensions;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
+using Goal.Demo2.Api.Application.Dtos.Customers;
 using Goal.Demo2.Api.Application.Events;
+using Goal.Demo2.Api.Application.Validations.Customers;
 using Goal.Demo2.Domain.Aggregates.Customers;
 using Goal.Domain.Seedwork;
+using Goal.Domain.Seedwork.Commands;
 using Goal.Domain.Seedwork.Notifications;
+using Goal.Infra.Crosscutting.Adapters;
 using MediatR;
 
 namespace Goal.Demo2.Api.Application.CommandHandlers
 {
     public class CustomerCommandHandler : CommandHandler,
-        IRequestHandler<RegisterNewCustomerCommand, Guid>,
-        IRequestHandler<UpdateCustomerCommand, bool>,
-        IRequestHandler<RemoveCustomerCommand, bool>
+        IRequestHandler<RegisterNewCustomerCommand, ICommandResult<CustomerDto>>,
+        IRequestHandler<UpdateCustomerCommand, ICommandResult>,
+        IRequestHandler<RemoveCustomerCommand, ICommandResult>
     {
         private readonly ICustomerRepository customerRepository;
+        private readonly ITypeAdapter typeAdapter;
 
         public CustomerCommandHandler(
             ICustomerRepository customerRepository,
             IUnitOfWork unitOfWork,
             IBusHandler busHandler,
-            INotificationHandler notificationHandler)
+            INotificationHandler notificationHandler,
+            ITypeAdapter typeAdapter)
             : base(unitOfWork, busHandler, notificationHandler)
         {
             this.customerRepository = customerRepository;
+            this.typeAdapter = typeAdapter;
         }
 
-        public async Task<Guid> Handle(RegisterNewCustomerCommand message, CancellationToken cancellationToken)
+        public async Task<ICommandResult<CustomerDto>> Handle(RegisterNewCustomerCommand command, CancellationToken cancellationToken)
         {
-            if (!message.IsValid())
+            ValidationResult validationResult = await ValidateCommandAsync(
+                new RegisterNewCustomerCommandValidation(),
+                command,
+                cancellationToken);
+
+            if (!validationResult.IsValid)
             {
-                await NotifyValidationErrors(message);
-                return Guid.Empty;
+                await NotifyValidationErrors(validationResult, cancellationToken);
+                return CommandResult.ValidationError<CustomerDto>(default);
             }
 
-            var customer = new Customer(message.Name, message.Email, message.BirthDate);
+            var customer = new Customer(command.Name, command.Email, command.BirthDate);
 
             if (await customerRepository.GetByEmail(customer.Email) != null)
             {
-                await busHandler.RaiseEvent(new Notification(message.MessageType, "The customer e-mail has already been taken."));
-                return Guid.Empty;
+                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer e-mail has already been taken."));
+                return CommandResult.DomainError<CustomerDto>(default);
             }
 
             await customerRepository.AddAsync(customer);
@@ -49,74 +62,87 @@ namespace Goal.Demo2.Api.Application.CommandHandlers
             if (await Commit())
             {
                 await busHandler.RaiseEvent(new CustomerRegisteredEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-                return customer.Id;
+
+                return CommandResult.ValidationError(
+                    typeAdapter.ProjectAs<CustomerDto>(customer));
             }
 
-            return Guid.Empty;
+            return CommandResult.DomainError<CustomerDto>(default);
         }
 
-        public async Task<bool> Handle(UpdateCustomerCommand message, CancellationToken cancellationToken)
+        public async Task<ICommandResult> Handle(UpdateCustomerCommand command, CancellationToken cancellationToken)
         {
-            if (!message.IsValid())
+            ValidationResult validationResult = await ValidateCommandAsync(
+                new UpdateCustomerCommandValidation(),
+                command,
+                cancellationToken);
+
+            if (!validationResult.IsValid)
             {
-                await NotifyValidationErrors(message);
-                return false;
+                await NotifyValidationErrors(validationResult, cancellationToken);
+                return CommandResult.ValidationError();
             }
 
-            Customer customer = await customerRepository.FindAsync(message.Id);
+            Customer customer = await customerRepository.FindAsync(command.AggregateId);
 
             if (customer is null)
             {
-                await busHandler.RaiseEvent(new Notification(message.MessageType, "The customer was not found."));
-                return false;
+                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer was not found."));
+                return CommandResult.DomainError();
             }
 
             Customer existingCustomer = await customerRepository.GetByEmail(customer.Email);
 
             if (existingCustomer != null && !existingCustomer.Equals(customer))
             {
-                await busHandler.RaiseEvent(new Notification(message.MessageType, "The customer e-mail has already been taken."));
-                return false;
+                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer e-mail has already been taken."));
+                return CommandResult.DomainError();
             }
 
-            customer.UpdateName(message.Name);
-            customer.UpdateBirthDate(message.BirthDate);
+            customer.UpdateName(command.Name);
+            customer.UpdateBirthDate(command.BirthDate);
+
             customerRepository.Update(existingCustomer);
 
             if (await Commit())
             {
                 await busHandler.RaiseEvent(new CustomerUpdatedEvent(customer.Id, customer.Name, customer.Email, customer.BirthDate));
-                return true;
+                return CommandResult.Success();
             }
 
-            return false;
+            return CommandResult.DomainError();
         }
 
-        public async Task<bool> Handle(RemoveCustomerCommand message, CancellationToken cancellationToken)
+        public async Task<ICommandResult> Handle(RemoveCustomerCommand command, CancellationToken cancellationToken)
         {
-            if (!message.IsValid())
+            ValidationResult validationResult = await ValidateCommandAsync(
+                new RemoveCustomerCommandValidation(),
+                command,
+                cancellationToken);
+
+            if (!validationResult.IsValid)
             {
-                await NotifyValidationErrors(message);
-                return false;
+                await NotifyValidationErrors(validationResult, cancellationToken);
+                return CommandResult.ValidationError();
             }
 
-            Customer customer = await customerRepository.FindAsync(message.Id);
+            Customer customer = await customerRepository.FindAsync(command.AggregateId);
 
             if (customer is null)
             {
-                await busHandler.RaiseEvent(new Notification(message.MessageType, "The customer was not found."));
-                return false;
+                await busHandler.RaiseEvent(new Notification(command.MessageType, "The customer was not found."));
+                return CommandResult.DomainError();
             }
 
             customerRepository.Remove(customer);
 
             if (await Commit())
             {
-                await busHandler.RaiseEvent(new CustomerRemovedEvent(message.Id));
-                return true;
+                await busHandler.RaiseEvent(new CustomerRemovedEvent(command.AggregateId));
+                return CommandResult.Success();
             }
 
-            return false;
+            return CommandResult.DomainError();
         }
     }
 }

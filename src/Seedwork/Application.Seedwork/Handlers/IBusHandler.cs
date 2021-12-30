@@ -6,8 +6,8 @@ namespace Goal.Application.Seedwork.Handlers
 {
     public interface IBusHandler
     {
-        Task<bool> SendCommand<TCommand>(TCommand command) where TCommand : Command<bool>;
-        Task<TResult> SendCommand<TCommand, TResult>(TCommand command) where TCommand : Command<TResult>;
-        Task RaiseEvent<TCommand>(TCommand @event) where TCommand : Event;
+        Task RaiseEvent<TEvent>(TEvent @event) where TEvent : Event;
+        Task<ICommandResult<TResult>> SendCommand<TCommand, TResult>(TCommand command) where TCommand : ICommand<ICommandResult<TResult>>;
+        Task<ICommandResult> SendCommand<TCommand>(TCommand command) where TCommand : ICommand<ICommandResult>;
     }
 }

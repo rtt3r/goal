@@ -5,6 +5,7 @@ using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
 using Goal.Demo2.Api.Application.Dtos.Customers;
 using Goal.Demo2.Domain.Aggregates.Customers;
+using Goal.Domain.Seedwork.Commands;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Http.Seedwork.Controllers;
@@ -70,17 +71,22 @@ namespace Goal.Demo2.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<CustomerDto>> Post([FromBody] RegisterNewCustomerCommand command)
         {
-            Guid id = await busHandler.SendCommand<RegisterNewCustomerCommand, Guid>(command);
+            ICommandResult<CustomerDto> result = await busHandler.SendCommand<RegisterNewCustomerCommand, CustomerDto>(command);
 
-            if (id == Guid.Empty)
+            if (result.IsValidationError())
             {
                 return BadRequest();
             }
 
+            if (result.IsDomainError())
+            {
+                return UnprocessableEntity();
+            }
+
             return CreatedAtRoute(
                 nameof(GetById),
-                new { id },
-                null);
+                new { id = result.Data.CustomerId },
+                result.Data);
         }
 
         [HttpPatch]
@@ -90,11 +96,16 @@ namespace Goal.Demo2.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<CustomerDto>> Patch(Guid id, [FromBody] UpdateCustomerCommand command)
         {
-            bool success = await busHandler.SendCommand(command);
+            ICommandResult result = await busHandler.SendCommand(command);
 
-            if (!success)
+            if (result.IsValidationError())
             {
                 return BadRequest();
+            }
+
+            if (result.IsDomainError())
+            {
+                return UnprocessableEntity();
             }
 
             return AcceptedAtAction(
@@ -109,11 +120,16 @@ namespace Goal.Demo2.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> Delete(Guid id)
         {
-            bool success = await busHandler.SendCommand(new RemoveCustomerCommand(id));
+            ICommandResult result = await busHandler.SendCommand(new RemoveCustomerCommand(id));
 
-            if (success)
+            if (result.IsValidationError())
             {
-                return NotFound();
+                return BadRequest();
+            }
+
+            if (result.IsDomainError())
+            {
+                return UnprocessableEntity();
             }
 
             return Accepted();

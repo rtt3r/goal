@@ -1,14 +1,9 @@
-using System;
 using Goal.Domain.Seedwork.Commands;
 
 namespace Goal.Demo2.Api.Application.Commands.Customers
 {
-    public abstract class CustomerCommand<T> : Command<T>
+    public abstract class CustomerCommand<T> : CustomerCommand, ICommand<T>
+        where T : ICommandResult
     {
-        public string Name { get; set; }
-
-        public string Email { get; set; }
-
-        public DateTime BirthDate { get; set; }
     }
 }

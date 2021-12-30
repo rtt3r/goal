@@ -1,7 +1,7 @@
-using System;
 using Goal.Application.Seedwork.Handlers;
 using Goal.Demo2.Api.Application.CommandHandlers;
 using Goal.Demo2.Api.Application.Commands.Customers;
+using Goal.Demo2.Api.Application.Dtos.Customers;
 using Goal.Demo2.Api.Application.EventHandlers;
 using Goal.Demo2.Api.Application.Events;
 using Goal.Demo2.Api.Infra.Bus;
@@ -10,6 +10,7 @@ using Goal.Demo2.Infra.Data.EventSourcing;
 using Goal.Demo2.Infra.Data.Repositories;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Aggregates;
+using Goal.Domain.Seedwork.Commands;
 using Goal.Domain.Seedwork.Events;
 using Goal.Infra.Http.Seedwork.DependencyInjection;
 using MediatR;
@@ -66,9 +67,9 @@ namespace Goal.Demo2.Api.Infra.Extensions
             services.AddScoped<INotificationHandler<CustomerRemovedEvent>, CustomerEventHandler>();
 
             // Domain - Commands
-            services.AddScoped<IRequestHandler<RegisterNewCustomerCommand, Guid>, CustomerCommandHandler>();
-            services.AddScoped<IRequestHandler<UpdateCustomerCommand, bool>, CustomerCommandHandler>();
-            services.AddScoped<IRequestHandler<RemoveCustomerCommand, bool>, CustomerCommandHandler>();
+            services.AddScoped<IRequestHandler<RegisterNewCustomerCommand, ICommandResult<CustomerDto>>, CustomerCommandHandler>();
+            services.AddScoped<IRequestHandler<UpdateCustomerCommand, ICommandResult>, CustomerCommandHandler>();
+            services.AddScoped<IRequestHandler<RemoveCustomerCommand, ICommandResult>, CustomerCommandHandler>();
 
             services.AddScoped<IUnitOfWork, Demo2UnitOfWork>();
 

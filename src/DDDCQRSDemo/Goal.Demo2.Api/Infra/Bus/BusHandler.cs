@@ -17,13 +17,13 @@ namespace Goal.Demo2.Api.Infra.Bus
             _mediator = mediator;
         }
 
-        public Task<bool> SendCommand<TCommand>(TCommand command)
-            where TCommand : Command<bool>
-            => SendCommand<TCommand, bool>(command);
-
-        public Task<TResult> SendCommand<TCommand, TResult>(TCommand command)
-            where TCommand : Command<TResult>
+        public Task<ICommandResult> SendCommand<TCommand>(TCommand command)
+            where TCommand : ICommand<ICommandResult>
             => _mediator.Send(command);
+
+        public Task<ICommandResult<TResult>> SendCommand<TCommand, TResult>(TCommand command)
+            where TCommand : ICommand<ICommandResult<TResult>>
+            => SendCommand<TCommand, TResult>(command);
 
         public Task RaiseEvent<TEvent>(TEvent @event) where TEvent : Event
         {

@@ -1,22 +1,13 @@
 using System;
-using Goal.Demo2.Api.Application.Validations.Customers;
+using Goal.Domain.Seedwork.Commands;
 
 namespace Goal.Demo2.Api.Application.Commands.Customers
 {
-    public class RemoveCustomerCommand : CustomerCommand
+    public class RemoveCustomerCommand : CustomerCommand<ICommandResult>
     {
-        public Guid Id { get; set; }
-
         public RemoveCustomerCommand(Guid id)
         {
-            Id = id;
             AggregateId = id;
-        }
-
-        public override bool IsValid()
-        {
-            ValidationResult = new RemoveCustomerCommandValidation().Validate(this);
-            return ValidationResult.IsValid;
         }
     }
 }

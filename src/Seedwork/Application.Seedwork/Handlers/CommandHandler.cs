@@ -1,4 +1,6 @@
+using System.Threading;
 using System.Threading.Tasks;
+using FluentValidation;
 using FluentValidation.Results;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Commands;
@@ -22,11 +24,17 @@ namespace Goal.Application.Seedwork.Handlers
             this.notificationHandler = notificationHandler;
         }
 
-        protected async Task NotifyValidationErrors(ICommand message)
+        protected async Task NotifyValidationErrors(
+            ValidationResult validationResult,
+            CancellationToken cancellationToken = new CancellationToken())
         {
-            foreach (ValidationFailure error in message.ValidationResult.Errors)
+            Notification notification;
+            foreach (ValidationFailure error in validationResult.Errors)
             {
-                await busHandler.RaiseEvent(new Notification(message.MessageType, error.ErrorMessage));
+                notification = new ValidationNotification(error.PropertyName, error.ErrorMessage);
+
+                await notificationHandler.Handle(notification, cancellationToken);
+                await busHandler.RaiseEvent(notification);
             }
         }
 
@@ -42,8 +50,23 @@ namespace Goal.Application.Seedwork.Handlers
                 return true;
             }
 
-            await busHandler.RaiseEvent(new Notification("Commit", "We had a problem during saving your data."));
+            await busHandler.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
             return false;
         }
+
+        protected async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
+            TCommand command,
+            CancellationToken cancellationToken = new CancellationToken())
+            where TValidator : AbstractValidator<TCommand>, new()
+            where TCommand : ICommand
+            => await new TValidator().ValidateAsync(command, cancellationToken);
+
+        protected async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
+            TValidator validator,
+            TCommand command,
+            CancellationToken cancellationToken = new CancellationToken())
+            where TValidator : AbstractValidator<TCommand>, new()
+            where TCommand : ICommand
+            => await validator.ValidateAsync(command, cancellationToken);
     }
 }

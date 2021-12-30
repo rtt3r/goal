@@ -4,8 +4,8 @@ using Goal.Demo2.Api.Application.Commands.Customers;
 
 namespace Goal.Demo2.Api.Application.Validations.Customers
 {
-    public abstract class CustomerValidation<TCommand, TResult> : AbstractValidator<TCommand>
-        where TCommand : CustomerCommand<TResult>
+    public abstract class CustomerValidation<TCommand> : AbstractValidator<TCommand>
+        where TCommand : CustomerCommand
     {
         protected void ValidateName()
         {
@@ -29,6 +29,7 @@ namespace Goal.Demo2.Api.Application.Validations.Customers
                 .EmailAddress();
         }
 
-        protected static bool HaveMinimumAge(DateTime birthDate) => birthDate.Date <= DateTime.Today.AddYears(-18);
+        protected static bool HaveMinimumAge(DateTime birthDate)
+            => birthDate.Date <= DateTime.Today.AddYears(-18);
     }
 }
