@@ -23,6 +23,6 @@ namespace Goal.Demo.Domain.Aggregates.People
 
         public string FullName() => $"{FirstName} {LastName}".Trim();
 
-        public static Name CreateName(string firstName, string lastName) => new Name(firstName, lastName);
+        public static Name CreateName(string firstName, string lastName) => new(firstName, lastName);
     }
 }

@@ -54,14 +54,14 @@ namespace Goal.Application.Seedwork.Handlers
             return false;
         }
 
-        protected async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
+        protected static async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
             TCommand command,
             CancellationToken cancellationToken = new CancellationToken())
             where TValidator : AbstractValidator<TCommand>, new()
             where TCommand : ICommand
             => await new TValidator().ValidateAsync(command, cancellationToken);
 
-        protected async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
+        protected static async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
             TValidator validator,
             TCommand command,
             CancellationToken cancellationToken = new CancellationToken())

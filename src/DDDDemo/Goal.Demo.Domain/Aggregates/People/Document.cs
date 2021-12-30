@@ -24,6 +24,6 @@ namespace Goal.Demo.Domain.Aggregates.People
             Number = number;
         }
 
-        public static Document CreateCpf(string number) => new Document(DocumentType.Cpf, number);
+        public static Document CreateCpf(string number) => new(DocumentType.Cpf, number);
     }
 }
