@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Reflection;
 using Goal.Demo2.Api.Infra.Extensions;
 using Goal.Demo2.Api.Infra.Swagger;
 using Goal.Infra.Crosscutting.Localization;
@@ -8,32 +7,11 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using Serilog;
-using Serilog.Sinks.Elasticsearch;
-using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-ElasticsearchSinkOptions ConfigureElasticSink()
-{
-    return new ElasticsearchSinkOptions(new Uri(builder.Configuration.GetConnectionString("Elasticsearch")))
-    {
-        AutoRegisterTemplate = true,
-        IndexFormat = $"{Assembly.GetExecutingAssembly().GetName().Name.ToLower().Replace(".", "-")}-{builder.Environment.EnvironmentName?.ToLower().Replace(".", "-")}-{DateTime.UtcNow:yyyy-MM}"
-    };
-}
-
-Log.Logger = new LoggerConfiguration()
-    .Enrich.FromLogContext()
-    .Enrich.WithMachineName()
-    .WriteTo.Debug()
-    .WriteTo.Console()
-    .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}", theme: AnsiConsoleTheme.Code)
-    .WriteTo.Elasticsearch(ConfigureElasticSink())
-    .Enrich.WithProperty("Environment", builder.Environment.EnvironmentName)
-    .ReadFrom.Configuration(builder.Configuration)
-    .CreateLogger();
+builder.ConfgureLogging();
 
 // Add services to the container.
 builder.Services.AddServices(builder.Configuration, builder.Environment);

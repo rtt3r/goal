@@ -4,13 +4,14 @@ services:
   api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_ConnectionStrings__DefaultConnection=Server=192.168.0.101,11433;Initial Catalog=goal-dev;Persist Security Info=False;User ID=sa;Password=pxh4P8w3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
+      - ASPNETCORE_ConnectionStrings__DefaultConnection='Server=192.168.0.101,11433;Initial Catalog=goal-dev;Persist Security Info=False;User ID=sa;Password=pxh4P8w3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;'
       - ASPNETCORE_ConnectionStrings__Elasticsearch=http://elasticsearch:9200
       - ASPNETCORE_URLS=https://+;http://+
       - ASPNETCORE_HTTPS_PORT=4431
-    build:
-      args:
-        nuget_pat: 6v7f5gfbzehv47x7fsl5m4y6rfj2fhakf3fccyr6fveur3nf4hia
+      - ASPNETCORE_RavenSettings__Urls=http://ravendb:8080,
+      - ASPNETCORE_RavenSettings__DatabaseName=Demo2
+      - ASPNETCORE_RavenSettings__CertFilePath=
+      - ASPNETCORE_RavenSettings__CertPassword=
     ports:
       - "8001:80"
       - "4431:443"

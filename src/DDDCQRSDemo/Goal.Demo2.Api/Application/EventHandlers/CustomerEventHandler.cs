@@ -19,15 +19,16 @@ namespace Goal.Demo2.Api.Application.EventHandlers
 
         public async Task Handle(CustomerUpdatedEvent message, CancellationToken cancellationToken)
         {
+            CustomerDto customer = await customerRepository.LoadAsync(message.AggregateId.ToString(), cancellationToken);
+
+            customer.CustomerId = message.AggregateId.ToString();
+            customer.Name = message.Name;
+            customer.BirthDate = message.BirthDate;
+            customer.Email = message.Email;
+
             await customerRepository.StoreAsync(
                 message.AggregateId.ToString(),
-                new CustomerDto
-                {
-                    CustomerId = message.AggregateId.ToString(),
-                    Name = message.Name,
-                    BirthDate = message.BirthDate,
-                    Email = message.Email,
-                },
+                customer,
                 cancellationToken);
         }
 
