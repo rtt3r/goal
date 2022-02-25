@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
 		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<AssemblyVersion>0.0.1.0</AssemblyVersion>
-		<Authors>Goal Soluções em TI</Authors>
-		<Company>Goal Soluções em TI</Company>
+		<Authors>Ritter Soluções em TI</Authors>
+		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
@@ -16,20 +16,20 @@
 		<Description>Crosscutting layer for Domain Driven Design</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
-	<ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
 		<PackageReference Include="FluentValidation" Version="10.3.6" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="RavenDB.Client" Version="5.3.1" />
+		<PackageReference Include="RavenDB.Client" Version="5.3.100" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="FluentValidation" Version="10.3.6" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="RavenDB.Client" Version="5.3.100" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 	</ItemGroup>
 
