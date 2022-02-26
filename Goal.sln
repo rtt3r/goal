@@ -90,7 +90,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goal.Demo2.Api", "src\DDDCQ
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{666C1ED2-40B8-4C1D-A14B-848E0670BB9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goal.Demo2.Infra.Data.Query", "src\DDDCQRSDemo\Goal.Demo2.Infra.Data.Query\Goal.Demo2.Infra.Data.Query.csproj", "{0B759E98-0F32-4B45-865E-24BCCC418583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goal.Demo2.Infra.Data.Query", "src\DDDCQRSDemo\Goal.Demo2.Infra.Data.Query\Goal.Demo2.Infra.Data.Query.csproj", "{0B759E98-0F32-4B45-865E-24BCCC418583}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goal.Demo2.Dto", "src\DDDCQRSDemo\Goal.Demo2.Dto\Goal.Demo2.Dto.csproj", "{D4D96A75-893C-410C-9A87-D17DCD261DA5}"
 EndProject
