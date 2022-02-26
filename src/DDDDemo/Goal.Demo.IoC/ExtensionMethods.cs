@@ -4,7 +4,6 @@ using Goal.Demo.Infra.Data;
 using Goal.Demo.Infra.Data.Repositories;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Aggregates;
-using Goal.Infra.Data.Seedwork;
 using Goal.Infra.Http.Seedwork.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +35,7 @@ namespace Goal.Demo.IoC
 
             services.AddScoped<DbContext>(provider => provider.GetService<DemoContext>());
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, DemoUnitOfWork>();
 
             services.RegisterAllTypesOf<IRepository>(typeof(PersonRepository).Assembly);
             services.RegisterAllTypesOf<IAppService>(typeof(PersonAppService).Assembly);

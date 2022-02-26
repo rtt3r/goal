@@ -1,18 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Text.Json;
 using Goal.Demo.Api.Extensions;
 using Goal.Demo.Api.Swagger;
 using Goal.Demo.IoC;
 using Goal.Infra.Crosscutting.Localization;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
@@ -57,18 +49,8 @@ namespace Goal.Demo.Api
             services.AddSwaggerGen();
 
             services
-                .AddRouting(options =>
-                {
-                    options.LowercaseUrls = true;
-                })
-                .AddControllers(options =>
-                {
-                    options.EnableEndpointRouting = false;
-                })
-                .AddJsonOptions(options =>
-                {
-                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-                });
+                .AddRouting(options => options.LowercaseUrls = true)
+                .AddControllers(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
