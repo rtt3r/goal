@@ -8,11 +8,12 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
-COPY ["src/DDDCQRSDemo/Goal.Demo2.Api/Goal.Demo2.Api.csproj", "src/DDDCQRSDemo/Goal.Demo2.Api/"]
-COPY ["src/DDDCQRSDemo/Goal.Demo2.Infra.Data/Goal.Demo2.Infra.Data.csproj", "src/DDDCQRSDemo/Goal.Demo2.Infra.Data/"]
-COPY ["src/DDDCQRSDemo/Goal.Demo2.Infra.Data.Query/Goal.Demo2.Infra.Data.Query.csproj", "src/DDDCQRSDemo/Goal.Demo2.Infra.Data.Query/"]
-COPY ["src/DDDCQRSDemo/Goal.Demo2.Domain/Goal.Demo2.Domain.csproj", "src/DDDCQRSDemo/Goal.Demo2.Domain/"]
-COPY ["src/DDDCQRSDemo/Goal.Demo2.Dto/Goal.Demo2.Dto.csproj", "src/DDDCQRSDemo/Goal.Demo2.Dto/"]
+COPY ["src/DDDDemo/Goal.Demo.Api/Goal.Demo.Api.csproj", "src/DDDDemo/Goal.Demo.Api/"]
+COPY ["src/DDDDemo/Goal.Demo.Application/Goal.Demo.Application.csproj", "src/DDDDemo/Goal.Demo.Application/"]
+COPY ["src/DDDDemo/Goal.Demo.Application.DTO/Goal.Demo.Application.DTO.csproj", "src/DDDDemo/Goal.Demo.Application.DTO/"]
+COPY ["src/DDDDemo/Goal.Demo.Domain/Goal.Demo.Domain.csproj", "src/DDDDemo/Goal.Demo.Domain/"]
+COPY ["src/DDDDemo/Goal.Demo.Infra.Data/Goal.Demo.Infra.Data.csproj", "src/DDDDemo/Goal.Demo.Infra.Data/"]
+COPY ["src/DDDDemo/Goal.Demo.IoC/Goal.Demo.IoC.csproj", "src/DDDDemo/Goal.Demo.IoC/"]
 COPY ["src/Seedwork/Domain.Seedwork/Domain.Seedwork.csproj", "src/Seedwork/Domain.Seedwork/"]
 COPY ["src/Seedwork/Infra.Crosscutting/Infra.Crosscutting.csproj", "src/Seedwork/Infra.Crosscutting/"]
 COPY ["src/Seedwork/Infra.Data.Seedwork/Infra.Data.Seedwork.csproj", "src/Seedwork/Infra.Data.Seedwork/"]
@@ -20,15 +21,15 @@ COPY ["src/Seedwork/Infra.Data.Query.Seedwork/Infra.Data.Query.Seedwork.csproj",
 COPY ["src/Seedwork/Infra.Http.Seedwork/Infra.Http.Seedwork.csproj", "src/Seedwork/Infra.Http.Seedwork/"]
 COPY ["src/Seedwork/Application.Seedwork/Application.Seedwork.csproj", "src/Seedwork/Application.Seedwork/"]
 
-RUN dotnet restore "src/DDDCQRSDemo/Goal.Demo2.Api/Goal.Demo2.Api.csproj"
+RUN dotnet restore "src/DDDDemo/Goal.Demo.Api/Goal.Demo.Api.csproj"
 COPY . .
-WORKDIR "/src/src/DDDCQRSDemo/Goal.Demo2.Api"
-RUN dotnet build "Goal.Demo2.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/src/DDDDemo/Goal.Demo.Api"
+RUN dotnet build "Goal.Demo.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Goal.Demo2.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "Goal.Demo.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Goal.Demo2.Api.dll"]
+ENTRYPOINT ["dotnet", "Goal.Demo.Api.dll"]

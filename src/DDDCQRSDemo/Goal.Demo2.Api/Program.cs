@@ -1,12 +1,11 @@
 using System.Globalization;
+using System.Text.Json;
 using Goal.Demo2.Api.Infra.Extensions;
 using Goal.Demo2.Api.Infra.Swagger;
 using Goal.Infra.Crosscutting.Localization;
 using MediatR;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -19,14 +18,17 @@ builder.Services.AddAutoMapperTypeAdapter();
 builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services
+    .AddRouting(options =>
+    {
+        options.LowercaseUrls = true;
+    })
     .AddControllers(options =>
     {
         options.EnableEndpointRouting = false;
     })
-    .AddNewtonsoftJson(options =>
+    .AddJsonOptions(options =>
     {
-        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-        options.SerializerSettings.Formatting = Formatting.Indented;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

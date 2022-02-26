@@ -48,9 +48,21 @@ services:
     volumes:
       - mssql:/var/opt/mssql
 
-  api:
-    image: ${REGISTRY:-ritter.co}/goal/api:${PLATFORM:-windows}-${TAG:-latest}
-    container_name: ritter.co-goal-api
+  demo:
+    image: ${REGISTRY:-ritter.co}/goal/demo:${PLATFORM:-windows}-${TAG:-latest}
+    container_name: ritter.co-goal-demo
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: src/DDDDemo/Goal.Demo.Api/Dockerfile
+    depends_on:
+      - mssql
+      - elasticsearch
+      - ravendb
+
+  demo2:
+    image: ${REGISTRY:-ritter.co}/goal/demo2:${PLATFORM:-windows}-${TAG:-latest}
+    container_name: ritter.co-goal-demo2
     restart: on-failure
     build:
       context: .

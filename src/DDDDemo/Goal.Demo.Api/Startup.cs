@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using System.Text.Json;
 using Goal.Demo.Api.Extensions;
 using Goal.Demo.Api.Swagger;
 using Goal.Demo.IoC;
@@ -13,8 +14,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using Serilog.Sinks.SystemConsole.Themes;
@@ -52,22 +51,24 @@ namespace Goal.Demo.Api
                 options.UseConnectionString(Configuration.GetConnectionString("ElasticSearch"));
             });
 
-            services.AddServices(Configuration, Environment);
             services.AddAutoMapperTypeAdapter();
+            services.AddServices(Configuration, Environment);
+            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            services.AddSwaggerGen();
 
             services
+                .AddRouting(options =>
+                {
+                    options.LowercaseUrls = true;
+                })
                 .AddControllers(options =>
                 {
                     options.EnableEndpointRouting = false;
                 })
-                .AddNewtonsoftJson(options =>
+                .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-                    options.SerializerSettings.Formatting = Formatting.Indented;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
                 });
-
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
