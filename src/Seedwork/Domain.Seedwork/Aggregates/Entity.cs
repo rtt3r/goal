@@ -4,7 +4,7 @@ namespace Goal.Domain.Seedwork.Aggregates
 {
     public abstract class Entity : IEntity
     {
-        public Guid Id { get; protected set; } = Guid.NewGuid();
+        public virtual Guid Id { get; protected set; } = Guid.NewGuid();
 
         protected Entity() { }
 

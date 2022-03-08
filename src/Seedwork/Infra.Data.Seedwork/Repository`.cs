@@ -48,7 +48,10 @@ namespace Goal.Infra.Data.Seedwork
             => Query(new TrueSpecification<TEntity>(), pagination);
 
         public virtual async Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken())
-            => await Context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            return await Context.Set<TEntity>().FindAsync(id);
+        }
 
         public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())
             => await Context.Set<TEntity>().ToListAsync(cancellationToken: cancellationToken);

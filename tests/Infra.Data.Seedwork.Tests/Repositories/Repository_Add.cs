@@ -18,13 +18,13 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             var mockedTests = new List<Test>();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            var test = new Test();
+            var test = new Test(1);
             testRepository.Add(test);
 
             mockDbContext.Verify(x => x.Set<Test>().Add(It.IsAny<Test>()), Times.Once);
@@ -35,13 +35,13 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             var mockedTests = new List<Test>();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            var test = new Test();
+            var test = new Test(1);
             testRepository.AddAsync(test).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>().AddAsync(It.IsAny<Test>(), It.IsAny<CancellationToken>()), Times.Once);
@@ -80,7 +80,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             var mockedTests = new List<Test>();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -125,7 +125,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             var mockedTests = new List<Test>();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);

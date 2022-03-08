@@ -22,7 +22,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -39,7 +39,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             Mock<DbSet<Test>> mockDbSet = Enumerable.Empty<Test>()
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -58,7 +58,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -75,7 +75,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             Mock<DbSet<Test>> mockDbSet = Enumerable.Empty<Test>()
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -95,7 +95,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -116,7 +116,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -139,7 +139,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -174,12 +174,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
+            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid());
             var testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.Query(spec);
 
@@ -194,12 +194,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == 6);
+            ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid());
 
             var testRepository = new TestRepository(mockDbContext.Object);
             ICollection<Test> tests = testRepository.QueryAsync(spec).GetAwaiter().GetResult();
@@ -215,7 +215,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -238,12 +238,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IPagination pagination = new Pagination(0, 10, "Id", false);
+            IPagination pagination = new Pagination(0, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Query(pagination);
 
@@ -261,7 +261,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -284,12 +284,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IPagination pagination = new Pagination(0, 10, "Id", false);
+            IPagination pagination = new Pagination(0, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
@@ -307,7 +307,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -330,12 +330,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IPagination pagination = new Pagination(1, 10, "Id", false);
+            IPagination pagination = new Pagination(1, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Query(pagination);
 
@@ -353,7 +353,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -376,12 +376,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IPagination pagination = new Pagination(1, 10, "Id", false);
+            IPagination pagination = new Pagination(1, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
@@ -399,7 +399,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -422,7 +422,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -445,12 +445,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IPagination pagination = new Pagination(0, 10, "Id", false);
+            IPagination pagination = new Pagination(0, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Query(pagination);
 
@@ -468,12 +468,12 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            IPagination pagination = new Pagination(0, 10, "Id", false);
+            IPagination pagination = new Pagination(0, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
@@ -493,7 +493,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -519,7 +519,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -609,7 +609,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -635,14 +635,15 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            IPagination pagination = new Pagination(0, 10, "Id", false);
+            IPagination pagination = new Pagination(0, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
+
             IPagedCollection<Test> tests = testRepository.Query(spec, pagination);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
@@ -661,13 +662,13 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            IPagination pagination = new Pagination(0, 10, "Id", false);
+            IPagination pagination = new Pagination(0, 10, "TId", false);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
 
@@ -687,7 +688,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -713,7 +714,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);

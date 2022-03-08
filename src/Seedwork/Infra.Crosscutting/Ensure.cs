@@ -48,7 +48,7 @@ namespace Goal.Infra.Crosscutting
 
         public static void NotEqual<T>(T left, T right, string message) => That(left != null && right != null && !left.Equals(right), message ?? Messages.BothValuesMustNotBeEqual);
 
-        public static void Items<T>(IEnumerable<T> collection, Func<T, bool> predicate) => Items<T>(collection, predicate, null);
+        public static void Items<T>(IEnumerable<T> collection, Func<T, bool> predicate) => Items(collection, predicate, null);
 
         public static void Items<T>(IEnumerable<T> collection, Func<T, bool> predicate, string message) => That(!(collection is null) && !collection.Any(x => !predicate(x)), message ?? "");
 

@@ -19,18 +19,20 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = tests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
 
-            Test test = testRepository.Load(3);
+            Guid id = tests[2].Id;
+
+            Test test = testRepository.Load(id);
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
-            test.Id.Should().Be(3);
+            test.Id.Should().Be(id);
         }
 
         [Fact]
@@ -40,14 +42,14 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = tests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
 
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.Load(6);
+            Test test = testRepository.Load(Guid.NewGuid());
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();
@@ -60,19 +62,19 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = tests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            var id = Guid.NewGuid();
+            Guid id = tests[2].Id;
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.LoadAsync(3).GetAwaiter().GetResult();
+            Test test = testRepository.LoadAsync(id).Result;
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
-            test.Id.Should().Be(3);
+            test.Id.Should().Be(id);
         }
 
         [Fact]
@@ -82,13 +84,13 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = tests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.LoadAsync(6).GetAwaiter().GetResult();
+            Test test = testRepository.LoadAsync(Guid.NewGuid()).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();

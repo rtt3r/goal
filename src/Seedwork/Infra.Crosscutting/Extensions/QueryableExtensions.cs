@@ -28,7 +28,7 @@ namespace Goal.Infra.Crosscutting.Extensions
 
             foreach (string propName in propertyName.Split('.'))
             {
-                property = Expression.PropertyOrField((Expression)property ?? param, propName);
+                property = Expression.Property((Expression)property ?? param, propName);
                 sort = Expression.Lambda(property, param);
             }
 

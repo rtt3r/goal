@@ -1,30 +1,33 @@
+using System;
 using Goal.Domain.Seedwork.Aggregates;
 
 namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 {
-    public class Test : Entity<int>
+    public class Test : Entity
     {
         public bool Active { get; set; }
+        public int TId { get; private set; }
 
-        public Test(int id)
-            : this(id, true)
+        public Test(Guid id, int tId)
+            : this(id, tId, true)
         {
         }
 
-        public Test(int id, bool active)
-            : this()
+        public Test(Guid id, int tId, bool active)
+            : base()
         {
             Id = id;
             Active = active;
+            TId = tId;
         }
 
-        public Test()
-            : base()
+        public Test(int tId)
+            : this(Guid.NewGuid(), tId)
         {
         }
 
         public void Deactivate() => Active = false;
 
-        public void SetId(int id) => Id = id;
+        public void SetId(Guid id) => Id = id;
     }
 }

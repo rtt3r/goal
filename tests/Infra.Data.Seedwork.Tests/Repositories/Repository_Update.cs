@@ -19,13 +19,13 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            var test = new Test();
+            var test = new Test(1);
             testRepository.Update(test);
 
             mockDbContext.Verify(x => x.Set<Test>().Update(It.IsAny<Test>()), Times.Once);
@@ -52,7 +52,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             Mock<DbSet<Test>> mockDbSet = mockedTests
                 .AsQueryable()
-                .BuildMockDbSet<Test, int>();
+                .BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -86,7 +86,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
 
             for (int i = 1; i <= count; i++)
             {
-                tests.Add(new Test(1));
+                tests.Add(new Test(i));
             }
 
             return tests;

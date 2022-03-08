@@ -18,7 +18,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             List<Test> mockedTests = MockTests();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -35,7 +35,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             List<Test> mockedTests = MockTests();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -52,7 +52,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             List<Test> mockedTests = MockTests(0);
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -69,7 +69,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
         {
             List<Test> mockedTests = MockTests(0);
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -87,7 +87,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             List<Test> mockedTests = MockTests();
             mockedTests.First().Deactivate();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -106,7 +106,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             List<Test> mockedTests = MockTests();
             mockedTests.First().Deactivate();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -125,7 +125,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             List<Test> mockedTests = MockTests(1);
             mockedTests.First().Deactivate();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
@@ -144,7 +144,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Repositories
             List<Test> mockedTests = MockTests(1);
             mockedTests.First().Deactivate();
 
-            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet<Test, int>();
+            Mock<DbSet<Test>> mockDbSet = mockedTests.AsQueryable().BuildMockDbSet();
 
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
