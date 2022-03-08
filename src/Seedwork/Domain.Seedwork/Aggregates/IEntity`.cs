@@ -1,7 +1,7 @@
 namespace Goal.Domain.Seedwork.Aggregates
 {
-    public interface IEntity<out TKey> : IEntity
+    public interface IEntity<out TKey>
     {
-        new TKey Id { get; }
+        TKey Id { get; }
     }
 }

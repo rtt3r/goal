@@ -2,8 +2,7 @@ using System;
 
 namespace Goal.Domain.Seedwork.Aggregates
 {
-    public interface IEntity
+    public interface IEntity : IEntity<Guid>
     {
-        Guid Id { get; }
     }
 }
