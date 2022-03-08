@@ -11,8 +11,8 @@
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Domain.Seedwork</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
-		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Domain seedwork layer for Domain Driven Design</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>

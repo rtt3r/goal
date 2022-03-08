@@ -10,8 +10,8 @@
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
-		<RepositoryUrl>https://github.com/ritter-ti/vantage</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/ritter-ti/vantage</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Crosscutting layer for Domain Driven Design</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
