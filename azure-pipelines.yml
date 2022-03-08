@@ -24,6 +24,12 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
+    version: 5.x
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
     version: 6.x
 
 - task: DotNetCoreCLI@2
