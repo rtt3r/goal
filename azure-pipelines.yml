@@ -35,6 +35,7 @@ steps:
   displayName: Build
   inputs:
     command: 'build'
+    solutionFile: Goal.sln
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
