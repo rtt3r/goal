@@ -9,7 +9,7 @@ namespace Goal.Infra.Data.Seedwork
         private readonly DbContext context;
         private bool disposed;
 
-        public UnitOfWork(DbContext context)
+        protected UnitOfWork(DbContext context)
         {
             this.context = context;
         }
