@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -11,20 +11,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Goal.Infra.Data.Seedwork.Auditing
 {
-    public abstract class EFAuditChangesInterceptor : SaveChangesInterceptor
+    public abstract class AuditChangesInterceptor : SaveChangesInterceptor
     {
         private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly ILogger<EFAuditChangesInterceptor> logger;
+        private readonly ILogger logger;
 
-        protected EFAuditChangesInterceptor(
+        protected AuditChangesInterceptor(
             IHttpContextAccessor httpContextAccessor,
-            ILogger<EFAuditChangesInterceptor> logger)
+            ILogger logger)
         {
             this.httpContextAccessor = httpContextAccessor;
             this.logger = logger;
         }
 
-        public virtual string GetCurrentPrincipal() => httpContextAccessor?.HttpContext?.User?.Identity?.Name;
+        protected virtual string CurrentPrincipal
+            => httpContextAccessor?.HttpContext?.User?.Identity?.Name;
 
         public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
@@ -33,26 +34,22 @@ namespace Goal.Infra.Data.Seedwork.Auditing
         {
             try
             {
-                string user = GetCurrentPrincipal();
                 var auditEntries = new List<AuditEntry>();
 
-                eventData.Context.ChangeTracker.DetectChanges();
+                DbContext context = eventData.Context;
 
-                foreach (EntityEntry entry in eventData.Context.ChangeTracker.Entries())
+                context.ChangeTracker.DetectChanges();
+
+                foreach (EntityEntry entry in context.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted))
                 {
-                    if (entry.Entity is Audit || entry.State == EntityState.Detached || entry.State == EntityState.Unchanged || !entry.Properties.Any())
-                    {
-                        continue;
-                    }
-
-                    auditEntries.Add(new AuditEntry(entry, user));
+                    auditEntries.Add(new AuditEntry(entry, CurrentPrincipal));
                 }
 
                 IEnumerable<Audit> audits = auditEntries.Any()
                     ? auditEntries.Select(x => x.ToAudit())
                     : Enumerable.Empty<Audit>();
 
-                await SaveAuditEntriesAsync(audits);
+                await SaveAuditChangesAsync(audits);
             }
             catch (Exception ex)
             {
@@ -62,6 +59,6 @@ namespace Goal.Infra.Data.Seedwork.Auditing
             return result;
         }
 
-        protected abstract Task SaveAuditEntriesAsync(IEnumerable<Audit> audits);
+        protected abstract Task SaveAuditChangesAsync(IEnumerable<Audit> audits);
     }
 }

@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Goal.Domain.Seedwork;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +17,8 @@ namespace Goal.Infra.Data.Seedwork
         }
 
         public bool Commit() => context.SaveChanges() > 0;
+
+        public async Task<bool> CommitAsync(CancellationToken cancellationToken = default) => (await context.SaveChangesAsync(cancellationToken)) > 0;
 
         protected virtual void Dispose(bool disposing)
         {
