@@ -18,7 +18,7 @@ namespace Goal.Infra.Data.Seedwork
 
         public DbContext Context { get; private set; }
 
-        public Repository(DbContext context)
+        protected Repository(DbContext context)
         {
             Ensure.Argument.NotNull(context, nameof(context));
             Context = context;

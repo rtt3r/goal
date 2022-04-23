@@ -52,9 +52,9 @@ namespace Goal.Infra.Crosscutting.Tests.Specifications
             Specification<TestObject1> spec1 = new TrueSpecification<TestObject1>();
             Specification<TestObject1> spec2 = null;
 
-            Action act = () =>
+            Func<AndSpecification<TestObject1>> act = () =>
             {
-                var orSpec = (spec1 || spec2) as AndSpecification<TestObject1>;
+                return (spec1 || spec2) as AndSpecification<TestObject1>;
             };
 
             act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'rightSideSpecification')");
@@ -66,9 +66,9 @@ namespace Goal.Infra.Crosscutting.Tests.Specifications
             Specification<TestObject1> spec1 = null;
             Specification<TestObject1> spec2 = new DirectSpecification<TestObject1>(e => e.Id == 0);
 
-            Action act = () =>
+            Func<AndSpecification<TestObject1>> act = () =>
             {
-                var orSpec = (spec1 || spec2) as AndSpecification<TestObject1>;
+                return (spec1 || spec2) as AndSpecification<TestObject1>;
             };
 
             act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'leftSideSpecification')");

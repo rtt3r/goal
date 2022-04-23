@@ -1,24 +1,16 @@
-using System;
-
 namespace Goal.Domain.Seedwork.Events
 {
-    public class StoredEvent : Event
+    public class StoredEvent<T> : Event<T>
     {
-        public StoredEvent(Event @event, string data, string user)
+        public string User { get; private set; }
+
+        public StoredEvent(T data, string user)
+            : base(data)
         {
-            AggregateId = @event.AggregateId;
-            MessageType = @event.MessageType;
-            Data = data;
             User = user;
         }
 
         // EF Constructor
-        protected StoredEvent() { }
-
-        public Guid Id { get; private set; } = Guid.NewGuid();
-
-        public string Data { get; private set; }
-
-        public string User { get; private set; }
+        protected StoredEvent() : base() { }
     }
 }

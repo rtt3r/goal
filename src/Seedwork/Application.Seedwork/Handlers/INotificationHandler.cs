@@ -6,7 +6,7 @@ namespace Goal.Application.Seedwork.Handlers
 {
     public interface INotificationHandler : INotificationHandler<Notification>
     {
-        List<Notification> GetNotifications();
+        IEnumerable<Notification> GetNotifications();
         bool HasNotifications();
     }
 }

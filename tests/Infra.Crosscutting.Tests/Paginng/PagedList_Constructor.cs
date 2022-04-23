@@ -31,15 +31,6 @@ namespace Goal.Infra.Crosscutting.Tests.Paginng
         }
 
         [Fact]
-        public void ReturnNewPagedListGivenEmptyPageSize()
-        {
-            var pagging = new PagedList<TestObject1>(null, 20);
-
-            pagging.TotalCount.Should().Be(20);
-            pagging.Count().Should().Be(0);
-        }
-
-        [Fact]
         public void ReturnExplicitEnumeratorGivenAnyValue()
         {
             IEnumerable<TestObject1> items = Enumerable.Repeat(new TestObject1(), 20);

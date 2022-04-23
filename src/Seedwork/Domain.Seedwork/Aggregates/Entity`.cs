@@ -32,7 +32,9 @@ namespace Goal.Domain.Seedwork.Aggregates
             }
         }
 
+#pragma warning disable S3875 // "operator==" should not be overloaded on reference types
         public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
+#pragma warning restore S3875 // "operator==" should not be overloaded on reference types
         {
             if (Equals(left, null))
             {

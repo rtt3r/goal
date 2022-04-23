@@ -44,7 +44,7 @@ namespace Goal.Infra.Data.Seedwork.Tests.Mocks
 
         public TResult Execute<TResult>(Expression expression) => CompileExpressionItem<TResult>(expression);
 
-        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken)
+        public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default)
         {
             Type expectedResultType = typeof(TResult).GetGenericArguments()[0];
             object executionResult = typeof(IQueryProvider)

@@ -1,19 +1,23 @@
-using System;
-using Goal.Domain.Seedwork.Events;
+using MediatR;
 
 namespace Goal.Domain.Seedwork.Notifications
 {
-    public class Notification : Event
+    public class Notification : INotification
     {
-        public Guid NotificationId { get; } = Guid.NewGuid();
-        public int Version { get; private set; } = 1;
-        public string Key { get; private set; }
-        public string Value { get; private set; }
+        public string Type { get; }
+        public string Code { get; private set; }
+        public string Message { get; private set; }
 
-        public Notification(string key, string value)
+        public Notification(string message)
         {
-            Key = key;
-            Value = value;
+            Type = GetType().Name;
+            Message = message;
+        }
+
+        public Notification(string code, string message)
+            : this(message)
+        {
+            Code = code;
         }
     }
 }

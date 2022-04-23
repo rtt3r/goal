@@ -1,11 +1,16 @@
 using System;
-using Goal.Domain.Seedwork.Messages;
-using MediatR;
 
 namespace Goal.Domain.Seedwork.Events
 {
-    public abstract class Event : Message<bool>, INotification
+    public abstract class Event : IEvent
     {
         public DateTimeOffset Timestamp { get; } = DateTimeOffset.Now;
+        public string AggregateId { get; protected set; }
+        public string EventType { get; protected set; }
+
+        protected Event()
+        {
+            EventType = GetType().Name;
+        }
     }
 }

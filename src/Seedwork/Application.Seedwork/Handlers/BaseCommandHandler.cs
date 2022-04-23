@@ -4,17 +4,18 @@ using FluentValidation;
 using FluentValidation.Results;
 using Goal.Domain.Seedwork;
 using Goal.Domain.Seedwork.Commands;
+using Goal.Domain.Seedwork.Events;
 using Goal.Domain.Seedwork.Notifications;
 
 namespace Goal.Application.Seedwork.Handlers
 {
-    public abstract class CommandHandler
+    public abstract class BaseCommandHandler
     {
         protected readonly IUnitOfWork unitOfWork;
         protected readonly IBusHandler busHandler;
         protected readonly INotificationHandler notificationHandler;
 
-        public CommandHandler(
+        protected BaseCommandHandler(
             IUnitOfWork unitOfWork,
             IBusHandler busHandler,
             INotificationHandler notificationHandler)
@@ -24,17 +25,15 @@ namespace Goal.Application.Seedwork.Handlers
             this.notificationHandler = notificationHandler;
         }
 
-        protected async Task NotifyValidationErrors(
+        protected async Task NotifyViolations(
             ValidationResult validationResult,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            Notification notification;
             foreach (ValidationFailure error in validationResult.Errors)
             {
-                notification = new ValidationNotification(error.PropertyName, error.ErrorMessage);
-
-                await notificationHandler.Handle(notification, cancellationToken);
-                await busHandler.RaiseEvent(notification);
+                await notificationHandler.Handle(
+                    new ViolationNotification(error.PropertyName, error.ErrorMessage),
+                    cancellationToken);
             }
         }
 
@@ -51,9 +50,10 @@ namespace Goal.Application.Seedwork.Handlers
             }
 
             await notificationHandler.Handle(
-                new Notification("Commit", "We had a problem during saving your data."),
+                new Notification("COMMIT", "We had a problem during saving your data."),
                 cancellationToken);
-            await busHandler.RaiseEvent(new DomainNotification("Commit", "We had a problem during saving your data."));
+
+            await busHandler.RaiseEvent(new CommitFailureEvent( "We had a problem during saving your data."));
 
             return false;
         }

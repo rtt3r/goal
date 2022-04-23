@@ -85,7 +85,7 @@ namespace Goal.Infra.Crosscutting.Extensions
 
         public static IPagedCollection<TResult> SelectPaged<TSource, TResult>(this IPagedCollection<TSource> source, Func<TSource, TResult> selector)
         {
-            IEnumerable<TResult> items = ((IEnumerable<TSource>)source).Select(selector);
+            IEnumerable<TResult> items = source.Select(selector);
             return new PagedList<TResult>(items, source.TotalCount);
         }
 

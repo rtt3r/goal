@@ -6,7 +6,7 @@ using Goal.Domain.Seedwork.Notifications;
 
 namespace Goal.Application.Seedwork.Handlers
 {
-    public class NotificationHandler : INotificationHandler
+    public sealed class NotificationHandler : INotificationHandler
     {
         private readonly List<Notification> _notifications;
 
@@ -23,8 +23,8 @@ namespace Goal.Application.Seedwork.Handlers
 
         public void Handle(Notification message) => _notifications.Add(message);
 
-        public virtual List<Notification> GetNotifications() => _notifications;
+        public IEnumerable<Notification> GetNotifications() => _notifications;
 
-        public virtual bool HasNotifications() => GetNotifications().Any();
+        public bool HasNotifications() => GetNotifications().Any();
     }
 }

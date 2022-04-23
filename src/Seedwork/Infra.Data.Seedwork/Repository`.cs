@@ -7,7 +7,7 @@ namespace Goal.Infra.Data.Seedwork
     public abstract class Repository<TEntity> : Repository<TEntity, Guid>, IRepository<TEntity>
         where TEntity : class
     {
-        public Repository(DbContext context)
+        protected Repository(DbContext context)
             : base(context)
         {
         }

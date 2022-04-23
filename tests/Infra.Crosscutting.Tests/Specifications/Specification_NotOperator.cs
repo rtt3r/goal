@@ -35,9 +35,9 @@ namespace Goal.Infra.Crosscutting.Tests.Specifications
         {
             Specification<TestObject1> spec2 = null;
 
-            Action act = () =>
+            Func<Specification<TestObject1>> act = () =>
             {
-                Specification<TestObject1> notSpec = !spec2;
+                return !spec2;
             };
 
             act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'originalSpecification')");

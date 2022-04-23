@@ -13,8 +13,8 @@ namespace Goal.Infra.Data.Seedwork.Auditing
 {
     public abstract class AuditChangesInterceptor : SaveChangesInterceptor
     {
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly ILogger logger;
+        protected readonly IHttpContextAccessor httpContextAccessor;
+        protected readonly ILogger logger;
 
         protected AuditChangesInterceptor(
             IHttpContextAccessor httpContextAccessor,
@@ -34,26 +34,27 @@ namespace Goal.Infra.Data.Seedwork.Auditing
         {
             try
             {
-                var auditEntries = new List<AuditEntry>();
-
                 DbContext context = eventData.Context;
-
                 context.ChangeTracker.DetectChanges();
 
-                foreach (EntityEntry entry in context.ChangeTracker.Entries().Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted))
+                var auditEntries = new List<AuditEntry>();
+
+                foreach (EntityEntry entry in context.ChangeTracker
+                    .Entries()
+                    .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted))
                 {
                     auditEntries.Add(new AuditEntry(entry, CurrentPrincipal));
                 }
 
-                IEnumerable<Audit> audits = auditEntries.Any()
-                    ? auditEntries.Select(x => x.ToAudit())
-                    : Enumerable.Empty<Audit>();
+                IEnumerable<Audit> audits = auditEntries
+                    .Select(x => x.ToAudit())
+                    .ToList();
 
                 await SaveAuditChangesAsync(audits);
             }
             catch (Exception ex)
             {
-                logger?.LogWarning($"Fail do index audit logs. Details: {ex}");
+                logger?.LogError(ex, "Fail do index audit logs.", ex.Message);
             }
 
             return result;
