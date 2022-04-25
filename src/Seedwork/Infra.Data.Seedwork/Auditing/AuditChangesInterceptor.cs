@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Goal.Infra.Data.Seedwork.Auditing
 {
@@ -15,6 +17,8 @@ namespace Goal.Infra.Data.Seedwork.Auditing
     {
         protected readonly IHttpContextAccessor httpContextAccessor;
         protected readonly ILogger logger;
+
+        protected Audit _audit;
 
         protected AuditChangesInterceptor(
             IHttpContextAccessor httpContextAccessor,
@@ -31,35 +35,131 @@ namespace Goal.Infra.Data.Seedwork.Auditing
             DbContextEventData eventData,
             InterceptionResult<int> result,
             CancellationToken cancellationToken = new CancellationToken())
+            => await Task.Run(() => SavingChanges(eventData, result), cancellationToken);
+
+        public override InterceptionResult<int> SavingChanges(
+            DbContextEventData eventData,
+            InterceptionResult<int> result)
         {
-            try
-            {
-                DbContext context = eventData.Context;
-                context.ChangeTracker.DetectChanges();
+            _audit = CreateAudit(eventData.Context);
+            return result;
+        }
 
-                var auditEntries = new List<AuditEntry>();
+        public override async ValueTask<int> SavedChangesAsync(
+            SaveChangesCompletedEventData eventData,
+            int result,
+            CancellationToken cancellationToken = new CancellationToken())
+            => await Task.Run(() => SavedChanges(eventData, result), cancellationToken);
 
-                foreach (EntityEntry entry in context.ChangeTracker
-                    .Entries()
-                    .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted))
-                {
-                    auditEntries.Add(new AuditEntry(entry, CurrentPrincipal));
-                }
+        public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
+        {
+            _audit.Succeeded = true;
+            _audit.EndTime = DateTime.UtcNow;
 
-                IEnumerable<Audit> audits = auditEntries
-                    .Select(x => x.ToAudit())
-                    .ToList();
-
-                await SaveAuditChangesAsync(audits);
-            }
-            catch (Exception ex)
-            {
-                logger?.LogError(ex, "Fail do index audit logs.", ex.Message);
-            }
+            SaveAuditChanges(_audit);
 
             return result;
         }
 
-        protected abstract Task SaveAuditChangesAsync(IEnumerable<Audit> audits);
+        public override async Task SaveChangesFailedAsync(
+            DbContextErrorEventData eventData,
+            CancellationToken cancellationToken = new CancellationToken())
+            => await Task.Run(() => SaveChangesFailed(eventData), cancellationToken);
+
+        public override void SaveChangesFailed(DbContextErrorEventData eventData)
+        {
+            _audit.Succeeded = false;
+            _audit.EndTime = DateTime.UtcNow;
+            _audit.ErrorMessage = eventData.Exception.Message;
+
+            SaveAuditChanges(_audit);
+        }
+
+        protected virtual async Task SaveAuditChangesAsync(Audit audit)
+            => await Task.Run(() => SaveAuditChanges(audit));
+
+        protected abstract void SaveAuditChanges(Audit audit);
+
+        private Audit CreateAudit(DbContext context)
+        {
+            context.ChangeTracker.DetectChanges();
+            var audit = new Audit { StartTime = DateTimeOffset.UtcNow };
+
+            foreach (EntityEntry entry in context.ChangeTracker
+                .Entries()
+                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted))
+            {
+                audit.Entries.Add(CreateAuditEntry(entry));
+            }
+
+            return audit;
+        }
+
+        private AuditEntry CreateAuditEntry(EntityEntry entry)
+        {
+            string tableName = entry.Metadata.GetTableName();
+            string schema = entry.Metadata.GetSchema();
+
+            var keyValues = new Dictionary<string, object>();
+            var oldValues = new Dictionary<string, object>();
+            var newValues = new Dictionary<string, object>();
+            var changedColumns = new List<string>();
+            AuditType auditType = AuditType.None;
+
+            var identifier = StoreObjectIdentifier.Table(tableName, schema);
+
+            foreach (PropertyEntry property in entry.Properties)
+            {
+                string propertyName = property.Metadata.Name;
+                string columnName = property.Metadata.GetColumnName(identifier);
+
+                if (property.Metadata.IsPrimaryKey())
+                {
+                    keyValues[propertyName] = property.CurrentValue;
+                    continue;
+                }
+
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        newValues[propertyName] = property.CurrentValue;
+                        auditType = AuditType.Create;
+                        break;
+
+                    case EntityState.Deleted:
+                        oldValues[propertyName] = property.OriginalValue;
+                        auditType = AuditType.Delete;
+                        break;
+
+                    case EntityState.Modified:
+                        if (property.IsModified && !property.OriginalValue.Equals(property.CurrentValue))
+                        {
+                            changedColumns.Add(columnName);
+
+                            oldValues[propertyName] = property.OriginalValue;
+                            newValues[propertyName] = property.CurrentValue;
+                            auditType = AuditType.Update;
+                        }
+                        break;
+                }
+            }
+
+            return new AuditEntry
+            {
+                AuditType = auditType.ToString(),
+                AuditUser = CurrentPrincipal,
+                TableName = tableName,
+                KeyValues = JsonConvert.SerializeObject(keyValues),
+                OldValues = oldValues.Count == 0
+                    ? null
+                    : JsonConvert.SerializeObject(oldValues),
+                NewValues = newValues.Count == 0
+                    ? null
+                    : JsonConvert.SerializeObject(newValues),
+                ChangedColumns = changedColumns.Count == 0
+                    ? null
+                    : JsonConvert.SerializeObject(changedColumns)
+            };
+        }
     }
 }
