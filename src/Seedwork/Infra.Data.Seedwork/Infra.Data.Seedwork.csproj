@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<DebugType>Full</DebugType>
@@ -21,43 +20,83 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="FluentValidation" Version="10.3.6" />
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.14">
+		<PackageReference Include="FluentValidation">
+			<Version>10.4.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions">
+			<Version>2.2.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore">
+			<Version>5.0.16</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+			<Version>5.0.16</Version>
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.14">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational">
+			<Version>5.0.16</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+			<Version>5.0.16</Version>
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-		<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="5.13.16" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables">
+			<Version>6.0.1</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Logging.Console">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug">
+			<Version>6.0.0</Version>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="FluentValidation" Version="10.3.6" />
-		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.2">
+		<PackageReference Include="FluentValidation">
+			<Version>10.4.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions">
+			<Version>2.2.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore">
+			<Version>6.0.4</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+			<Version>6.0.4</Version>
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational">
+			<Version>6.0.4</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
+			<Version>6.0.4</Version>
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
-		<PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="6.13.16" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables">
+			<Version>6.0.1</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Logging.Console">
+			<Version>6.0.0</Version>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug">
+			<Version>6.0.0</Version>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
