@@ -75,10 +75,10 @@ namespace Goal.Infra.Data.Seedwork.Auditing
             SaveAuditChanges(_audit);
         }
 
-        protected virtual async Task SaveAuditChangesAsync(Audit audit)
-            => await Task.Run(() => SaveAuditChanges(audit));
+        protected virtual async Task SaveAuditChangesAsync(Audit audit, CancellationToken cancellationToken = new CancellationToken())
+            => await Task.Run(() => SaveAuditChanges(audit), cancellationToken);
 
-        protected abstract void SaveAuditChanges(Audit audit);
+        protected virtual void SaveAuditChanges(Audit audit) => logger.LogInformation($"Saving audit changes: {audit}");
 
         private Audit CreateAudit(DbContext context)
         {
