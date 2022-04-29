@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<DebugType>Full</DebugType>
+		<RootNamespace>Goal.Seedwork.Application</RootNamespace>
+		<AssemblyName>Goal.Seedwork.Application</AssemblyName>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<AssemblyVersion>0.0.1.0</AssemblyVersion>
+		<Authors>Ritter Soluções em TI</Authors>
+		<Company>Ritter Soluções em TI</Company>
+		<PackageId>Goal.Seedwork.Application</PackageId>
+		<PackageTags>DDD;Domain Driven Design</PackageTags>
+		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<Description>Application seedwork layer for Domain Driven Design</Description>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageLicenseExpression></PackageLicenseExpression>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+		<PackageReference Include="Microsoft.Extensions.Logging">
+			<Version>6.0.0</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="Microsoft.Extensions.Logging">
+			<Version>6.0.0</Version>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Domain\Domain.csproj" />
+		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>
