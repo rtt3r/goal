@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Goal.Infra.Crosscutting.Tests.Mocks
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Mocks
 {
     [Display]
     internal class TestObject1

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Goal.Infra.Crosscutting;
+using Goal.Seedwork.Infra.Crosscutting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Seedwork.Infra.Http.DependencyInjection

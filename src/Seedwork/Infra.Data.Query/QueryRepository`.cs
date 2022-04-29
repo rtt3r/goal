@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 
 namespace Goal.Seedwork.Infra.Data.Query
 {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Extensions;
-using Goal.Infra.Crosscutting.Tests.Mocks;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
 {
     public class Object_ToDictionary
     {

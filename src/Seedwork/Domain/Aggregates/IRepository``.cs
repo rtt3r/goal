@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Infra.Crosscutting.Collections;
-using Goal.Infra.Crosscutting.Specifications;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Crosscutting.Specifications;
 
 namespace Goal.Seedwork.Domain.Aggregates
 {

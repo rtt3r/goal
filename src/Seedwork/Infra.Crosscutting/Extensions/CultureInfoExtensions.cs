@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Goal.Infra.Crosscutting.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 {
     public static class CultureInfoExtensions
     {

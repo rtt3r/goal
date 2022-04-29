@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Goal.Infra.Crosscutting
+namespace Goal.Seedwork.Infra.Crosscutting
 {
     [DebuggerStepThrough]
     public static class Messages

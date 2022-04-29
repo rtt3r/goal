@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 
-namespace Goal.Infra.Crosscutting.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 {
     public static class EnumerableExtensions
     {

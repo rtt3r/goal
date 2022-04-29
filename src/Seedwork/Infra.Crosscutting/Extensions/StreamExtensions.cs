@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Goal.Infra.Crosscutting.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 {
     public static class StreamExtensions
     {

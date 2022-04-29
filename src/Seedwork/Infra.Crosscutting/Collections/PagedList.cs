@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Goal.Infra.Crosscutting.Collections
+namespace Goal.Seedwork.Infra.Crosscutting.Collections
 {
     [DebuggerStepThrough]
     [DebuggerDisplay("PageCount = {PageCount}; TotalCount = {TotalCount}")]

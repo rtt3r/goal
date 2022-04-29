@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Goal.Infra.Crosscutting.Tests.Ensuring
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Ensuring
 {
     public class Ensure_Not
     {

@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace Goal.Infra.Crosscutting.Validations
+namespace Goal.Seedwork.Infra.Crosscutting.Validations
 {
     public static class CustomValidations
     {
@@ -28,7 +28,7 @@ namespace Goal.Infra.Crosscutting.Validations
                 sum += int.Parse(tempCnpj[i].ToString()) * multiplier1[i];
             }
 
-            rest = (sum % 11);
+            rest = sum % 11;
             rest = rest < 2 ? 0 : 11 - rest;
 
             digit = rest.ToString();
@@ -40,7 +40,7 @@ namespace Goal.Infra.Crosscutting.Validations
                 sum += int.Parse(tempCnpj[i].ToString()) * multiplier2[i];
             }
 
-            rest = (sum % 11);
+            rest = sum % 11;
             rest = rest < 2 ? 0 : 11 - rest;
 
             digit = digit + rest.ToString();

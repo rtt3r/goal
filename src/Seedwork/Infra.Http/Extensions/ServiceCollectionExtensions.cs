@@ -1,5 +1,5 @@
-using Goal.Infra.Crosscutting;
-using Goal.Infra.Crosscutting.Adapters;
+using Goal.Seedwork.Infra.Crosscutting;
+using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Seedwork.Infra.Http.Extensions

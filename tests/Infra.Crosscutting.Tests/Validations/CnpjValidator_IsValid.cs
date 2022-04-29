@@ -2,10 +2,10 @@ using System.Linq;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using Goal.Infra.Crosscutting.Validations;
+using Goal.Seedwork.Infra.Crosscutting.Validations;
 using Xunit;
 
-namespace Goal.Infra.Crosscutting.Tests.Validations
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations
 {
     public class CnpjValidator_IsValid
     {

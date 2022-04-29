@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Extensions;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Goal.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
 {
     public class Stream_ToByteArray
     {

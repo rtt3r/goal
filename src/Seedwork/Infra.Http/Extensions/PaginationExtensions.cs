@@ -1,4 +1,4 @@
-using Goal.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Http.Controllers.Requests;
 
 namespace Goal.Seedwork.Infra.Http.Extensions

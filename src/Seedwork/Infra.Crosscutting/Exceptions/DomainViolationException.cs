@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Goal.Infra.Crosscutting.Exceptions
+namespace Goal.Seedwork.Infra.Crosscutting.Exceptions
 {
     [Serializable]
     public class DomainViolationException : ApplicationException

@@ -2,13 +2,13 @@
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
-		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
-		<VersionPrefix>0.0.1</VersionPrefix>
-		<AssemblyVersion>0.0.1.0</AssemblyVersion>
+		<RootNamespace>Goal.Seedwork.Infra.Crosscutting</RootNamespace>
+		<AssemblyName>Goal.Seedwork.Infra.Crosscutting</AssemblyName>
+		<VersionPrefix>0.0.2</VersionPrefix>
+		<AssemblyVersion>0.0.2.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Infra.Crosscutting</PackageId>
+		<PackageId>Goal.Seedwork.Infra.Crosscutting</PackageId>
 		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>

@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Collections;
-using Goal.Infra.Crosscutting.Extensions;
-using Goal.Infra.Crosscutting.Tests.Mocks;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Infra.Crosscutting.Tests.Paginng
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
 {
     public class Pagination_PaginateList
     {

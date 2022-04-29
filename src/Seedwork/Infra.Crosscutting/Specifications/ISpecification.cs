@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Goal.Infra.Crosscutting.Specifications
+namespace Goal.Seedwork.Infra.Crosscutting.Specifications
 {
     public interface ISpecification<TEntity>
         where TEntity : class

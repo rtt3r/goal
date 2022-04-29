@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Goal.Infra.Crosscutting.Extensions;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
 
-namespace Goal.Infra.Crosscutting
+namespace Goal.Seedwork.Infra.Crosscutting
 {
     [DebuggerStepThrough]
     public static class Ensure
@@ -56,7 +56,7 @@ namespace Goal.Infra.Crosscutting
         {
             public static void Is(bool condition) => Is(condition, null);
 
-            public static void Is(bool condition, string message) => Ensure.That<ArgumentException>(condition, message ?? "");
+            public static void Is(bool condition, string message) => That<ArgumentException>(condition, message ?? "");
 
             public static void IsNot(bool condition) => IsNot(condition, null);
 

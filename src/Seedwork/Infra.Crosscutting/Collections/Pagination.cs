@@ -1,4 +1,4 @@
-namespace Goal.Infra.Crosscutting.Collections
+namespace Goal.Seedwork.Infra.Crosscutting.Collections
 {
     public class Pagination : IPagination
     {

@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Infra.Crosscutting;
-using Goal.Infra.Crosscutting.Collections;
-using Goal.Infra.Crosscutting.Extensions;
-using Goal.Infra.Crosscutting.Specifications;
 using Goal.Seedwork.Domain.Aggregates;
+using Goal.Seedwork.Infra.Crosscutting;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Seedwork.Infra.Crosscutting.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Seedwork.Infra.Data

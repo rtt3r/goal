@@ -1,9 +1,9 @@
 using System.Linq;
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Extensions;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Goal.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
 {
     public class Type_GetAllTypesOf
     {
