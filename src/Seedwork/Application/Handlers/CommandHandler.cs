@@ -2,6 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using Goal.Seedwork.Application.Handlers;
+using Goal.Seedwork.Domain.Events;
 using Goal.Seedwork.Domain.Notifications;
 using Microsoft.Extensions.Logging;
 
@@ -9,19 +10,23 @@ namespace Goal.Seedwork.Domain.Commands
 {
     public abstract class CommandHandler
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly INotificationHandler notificationHandler;
-        private readonly ILogger logger;
+        protected readonly INotificationHandler notificationHandler;
+        protected readonly IBusHandler busHandler;
+        protected readonly ILogger logger;
 
         protected CommandHandler(
-            IUnitOfWork unitOfWork,
             INotificationHandler notificationHandler,
+            IBusHandler busHandler,
             ILogger logger)
         {
-            this.unitOfWork = unitOfWork;
             this.notificationHandler = notificationHandler;
+            this.busHandler = busHandler;
             this.logger = logger;
         }
+
+        protected async Task RaiseEvent<TEvent>(TEvent @event)
+            where TEvent : IEvent
+            => await busHandler.RaiseEvent(@event);
 
         protected async Task NotifyContractViolations(
             ValidationResult validationResult,
