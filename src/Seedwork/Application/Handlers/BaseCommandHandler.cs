@@ -4,7 +4,6 @@ using FluentValidation;
 using FluentValidation.Results;
 using Goal.Seedwork.Domain;
 using Goal.Seedwork.Domain.Commands;
-using Goal.Seedwork.Domain.Events;
 using Goal.Seedwork.Domain.Notifications;
 
 namespace Goal.Seedwork.Application.Handlers
@@ -52,8 +51,6 @@ namespace Goal.Seedwork.Application.Handlers
             await notificationHandler.Handle(
                 new Notification("COMMIT", "We had a problem during saving your data."),
                 cancellationToken);
-
-            await busHandler.RaiseEvent(new CommitFailureEvent("We had a problem during saving your data."));
 
             return false;
         }

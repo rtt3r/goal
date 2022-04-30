@@ -4,7 +4,7 @@ namespace Goal.Seedwork.Domain.Events
 {
     public abstract class Event : IEvent
     {
-        public DateTimeOffset Timestamp { get; } = DateTimeOffset.Now;
+        public DateTimeOffset Timestamp { get; protected set; } = DateTimeOffset.UtcNow;
         public string AggregateId { get; protected set; }
         public string EventType { get; protected set; }
 
