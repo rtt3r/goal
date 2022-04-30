@@ -1,8 +1,8 @@
-using Goal.Seedwork.Domain.Messages;
+using MediatR;
 
 namespace Goal.Seedwork.Domain.Commands
 {
-    public interface ICommand<out TResult> : ICommand, IMessage<TResult>
+    public interface ICommand<out TResult> : ICommand, IRequest<TResult>
         where TResult : ICommandResult
     {
     }

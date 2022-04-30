@@ -1,10 +1,8 @@
-﻿using System;
-using Goal.Seedwork.Domain.Messages;
+using MediatR;
 
 namespace Goal.Seedwork.Domain.Commands
 {
-    public interface ICommand : IMessage
+    public interface ICommand : IBaseRequest
     {
-        public DateTimeOffset Timestamp { get; }
     }
 }
