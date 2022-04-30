@@ -3,8 +3,8 @@
     public enum CommandResultStatus
     {
         Success,
-        ValidationError,
-        DomainError,
+        ContractViolation,
+        DomainViolation,
         InternalError,
         ExternalError,
     }

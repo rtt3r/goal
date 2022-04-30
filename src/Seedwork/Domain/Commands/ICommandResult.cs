@@ -5,8 +5,8 @@ namespace Goal.Seedwork.Domain.Commands
         CommandResultStatus Status { get; }
 
         bool IsSuccess();
-        bool IsValidationError();
-        bool IsDomainError();
+        bool IsContractViolation();
+        bool IsDomainViolation();
         bool IsInternalError();
         bool IsExternalError();
     }
