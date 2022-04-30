@@ -3,7 +3,7 @@ using FluentValidation.Validators;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Validations.Validators
 {
-    public class CnpjValidator<T> : PropertyValidator<T, string>, IPropertyValidator
+    internal class CnpjValidator<T> : PropertyValidator<T, string>, IPropertyValidator
     {
         public override bool IsValid(ValidationContext<T> context, string cnpj) => CustomValidations.IsValidCnpj(cnpj);
 

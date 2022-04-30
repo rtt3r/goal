@@ -1,7 +1,6 @@
-using Goal.Seedwork.Domain.Events;
 using MediatR;
 
-namespace Goal.Seedwork.Application.Handlers
+namespace Goal.Seedwork.Domain.Events
 {
     public interface IEventHandler<in TEvent> : INotificationHandler<TEvent> where TEvent : IEvent
     {

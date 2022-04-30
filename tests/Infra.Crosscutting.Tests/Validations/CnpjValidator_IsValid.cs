@@ -2,7 +2,6 @@ using System.Linq;
 using FluentAssertions;
 using FluentValidation;
 using FluentValidation.Results;
-using Goal.Seedwork.Infra.Crosscutting.Validations;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations
