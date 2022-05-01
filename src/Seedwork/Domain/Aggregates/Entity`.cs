@@ -11,7 +11,7 @@ namespace Goal.Seedwork.Domain.Aggregates
                 return false;
             }
 
-            if (obj is IEntity item)
+            if (obj is IEntity<TKey> item)
             {
                 if (ReferenceEquals(this, obj))
                 {
