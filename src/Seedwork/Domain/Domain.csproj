@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>6.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Domain</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Domain</AssemblyName>
@@ -22,7 +22,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="10.0.1" />
-		<PackageReference Include="FluentValidation" Version="10.4.0" />
+		<PackageReference Include="FluentValidation" Version="11.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
