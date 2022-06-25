@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<TargetFramework>6.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Domain</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Domain</AssemblyName>
@@ -20,22 +20,9 @@
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
-		<PackageReference Include="MediatR">
-			<Version>10.0.1</Version>
-		</PackageReference>
-		<PackageReference Include="FluentValidation">
-			<Version>10.4.0</Version>
-		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-		<PackageReference Include="MediatR">
-			<Version>10.0.1</Version>
-		</PackageReference>
-		<PackageReference Include="FluentValidation">
-			<Version>10.4.0</Version>
-		</PackageReference>
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="10.0.1" />
+		<PackageReference Include="FluentValidation" Version="10.4.0" />
 	</ItemGroup>
 
 	<ItemGroup>
