@@ -1,42 +1,32 @@
+using System.Collections.Generic;
+using System.Linq;
+using Goal.Seedwork.Infra.Crosscutting.Notifications;
+
 namespace Goal.Seedwork.Domain.Commands
 {
     public class CommandResult : ICommandResult
     {
-        public CommandResultStatus Status { get; private set; }
-        public bool IsSuccess() => Status == CommandResultStatus.Success;
-        public bool IsContractViolation() => Status == CommandResultStatus.ContractViolation;
-        public bool IsDomainViolation() => Status == CommandResultStatus.DomainViolation;
-        public bool IsInternalError() => Status == CommandResultStatus.InternalError;
-        public bool IsExternalError() => Status == CommandResultStatus.ExternalError;
+        public bool IsSucceeded { get; private set; }
+        public bool HasInformation => HasNotification(NotificationType.Information);
+        public bool HasInputValidation => HasNotification(NotificationType.InputValidation);
+        public bool HasDomainViolation => HasNotification(NotificationType.DomainViolation);
+        public bool HasInternalError => HasNotification(NotificationType.InternalError);
+        public bool HasExternalError => HasNotification(NotificationType.ExternalError);
+        public ICollection<INotification> Notifications { get; } = new List<INotification>();
+
+        private bool HasNotification(NotificationType type)
+            => Notifications.Any(n => n.Type == type);
 
         public static ICommandResult Success()
-            => new CommandResult { Status = CommandResultStatus.Success };
+            => new CommandResult { IsSucceeded = true };
 
         public static ICommandResult<T> Success<T>(T result)
-            => new CommandResult<T> { Status = CommandResultStatus.Success, Data = result };
+            => new CommandResult<T> { IsSucceeded = true, Data = result };
 
-        public static ICommandResult ContractViolation()
-            => new CommandResult { Status = CommandResultStatus.ContractViolation };
+        public static ICommandResult Fail()
+            => new CommandResult { IsSucceeded = false };
 
-        public static ICommandResult<T> ContractViolation<T>(T result)
-            => new CommandResult<T> { Status = CommandResultStatus.ContractViolation, Data = result };
-
-        public static ICommandResult DomainViolation()
-            => new CommandResult { Status = CommandResultStatus.DomainViolation };
-
-        public static ICommandResult<T> DomainViolation<T>(T result)
-            => new CommandResult<T> { Status = CommandResultStatus.DomainViolation, Data = result };
-
-        public static ICommandResult InternalError()
-            => new CommandResult { Status = CommandResultStatus.InternalError };
-
-        public static ICommandResult<T> InternalError<T>(T result)
-            => new CommandResult<T> { Status = CommandResultStatus.InternalError, Data = result };
-
-        public static ICommandResult ExternalError()
-            => new CommandResult { Status = CommandResultStatus.ExternalError };
-
-        public static ICommandResult<T> ExternalError<T>(T result)
-            => new CommandResult<T> { Status = CommandResultStatus.ExternalError, Data = result };
+        public static ICommandResult<T> Fail<T>(T result)
+            => new CommandResult<T> { IsSucceeded = false, Data = result };
     }
 }

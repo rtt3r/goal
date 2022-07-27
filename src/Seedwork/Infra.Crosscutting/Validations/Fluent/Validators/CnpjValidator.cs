@@ -1,11 +1,12 @@
 using FluentValidation;
 using FluentValidation.Validators;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Validations.Validators
+namespace Goal.Seedwork.Infra.Crosscutting.Validations.Fluent.Validators
 {
     internal class CnpjValidator<T> : PropertyValidator<T, string>, IPropertyValidator
     {
-        public override bool IsValid(ValidationContext<T> context, string cnpj) => CustomValidations.IsValidCnpj(cnpj);
+        public override bool IsValid(ValidationContext<T> context, string cnpj)
+            => CustomValidations.IsValidCnpj(cnpj);
 
         public override string Name => "CnpjValidator";
 

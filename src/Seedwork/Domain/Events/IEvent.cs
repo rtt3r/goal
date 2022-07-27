@@ -1,9 +1,8 @@
 using System;
-using MediatR;
 
 namespace Goal.Seedwork.Domain.Events
 {
-    public interface IEvent : INotification
+    public interface IEvent
     {
         string AggregateId { get; }
         string EventType { get; }

@@ -1,3 +1,4 @@
+using Goal.Seedwork.Application.Handlers;
 using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,48 @@ namespace Goal.Seedwork.Infra.Http.Extensions
             services.AddSingleton<ITypeAdapterFactory, TTypeAdapterFactory>();
             services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>().Create());
 
+            return services;
+        }
+
+        public static IServiceCollection AddCommandHandler(this IServiceCollection services, ICommandHandler commandHandler)
+        {
+            Ensure.Argument.NotNull(commandHandler, nameof(commandHandler));
+
+            services.AddSingleton(typeof(ICommandHandler), commandHandler);
+            return services;
+        }
+
+        public static IServiceCollection AddCommandHandler<TCommandHandler>(this IServiceCollection services)
+            where TCommandHandler : class, ICommandHandler
+        {
+            services.AddSingleton<ICommandHandler, TCommandHandler>();
+            return services;
+        }
+
+        public static IServiceCollection AddDefaultCommandHandler(this IServiceCollection services)
+        {
+            services.AddSingleton<ICommandHandler, DefaultCommandHandler>();
+            return services;
+        }
+
+        public static IServiceCollection AddEventHandler(this IServiceCollection services, IEventHandler eventHandler)
+        {
+            Ensure.Argument.NotNull(eventHandler, nameof(eventHandler));
+
+            services.AddSingleton(typeof(IEventHandler), eventHandler);
+            return services;
+        }
+
+        public static IServiceCollection AddEventHandler<TEventHandler>(this IServiceCollection services)
+            where TEventHandler : class, IEventHandler
+        {
+            services.AddSingleton<IEventHandler, TEventHandler>();
+            return services;
+        }
+
+        public static IServiceCollection AddDefaultEventHandler(this IServiceCollection services)
+        {
+            services.AddSingleton<IEventHandler, DefaultEventHandler>();
             return services;
         }
     }
