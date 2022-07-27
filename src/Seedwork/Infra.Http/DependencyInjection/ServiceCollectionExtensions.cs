@@ -31,20 +31,20 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
         {
             Ensure.Argument.NotNull(commandHandler, nameof(commandHandler));
 
-            services.AddSingleton(typeof(ICommandHandler), commandHandler);
+            services.AddScoped(typeof(ICommandHandler), serviceProvider => commandHandler);
             return services;
         }
 
         public static IServiceCollection AddCommandHandler<TCommandHandler>(this IServiceCollection services)
             where TCommandHandler : class, ICommandHandler
         {
-            services.AddSingleton<ICommandHandler, TCommandHandler>();
+            services.AddScoped<ICommandHandler, TCommandHandler>();
             return services;
         }
 
         public static IServiceCollection AddDefaultCommandHandler(this IServiceCollection services)
         {
-            services.AddSingleton<ICommandHandler, DefaultCommandHandler>();
+            services.AddScoped<ICommandHandler, DefaultCommandHandler>();
             return services;
         }
 
@@ -52,20 +52,20 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
         {
             Ensure.Argument.NotNull(eventHandler, nameof(eventHandler));
 
-            services.AddSingleton(typeof(IEventHandler), eventHandler);
+            services.AddScoped(typeof(IEventHandler), serviceProvider => eventHandler);
             return services;
         }
 
         public static IServiceCollection AddEventHandler<TEventHandler>(this IServiceCollection services)
             where TEventHandler : class, IEventHandler
         {
-            services.AddSingleton<IEventHandler, TEventHandler>();
+            services.AddScoped<IEventHandler, TEventHandler>();
             return services;
         }
 
         public static IServiceCollection AddDefaultEventHandler(this IServiceCollection services)
         {
-            services.AddSingleton<IEventHandler, DefaultEventHandler>();
+            services.AddScoped<IEventHandler, DefaultEventHandler>();
             return services;
         }
 
@@ -73,20 +73,20 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
         {
             Ensure.Argument.NotNull(notificationHandler, nameof(notificationHandler));
 
-            services.AddSingleton(typeof(INotificationHandler), notificationHandler);
+            services.AddScoped(typeof(INotificationHandler), serviceProvider => notificationHandler);
             return services;
         }
 
         public static IServiceCollection AddNotificationHandler<TNotificationHandler>(this IServiceCollection services)
             where TNotificationHandler : class, INotificationHandler
         {
-            services.AddSingleton<INotificationHandler, TNotificationHandler>();
+            services.AddScoped<INotificationHandler, TNotificationHandler>();
             return services;
         }
 
         public static IServiceCollection AddDefaultNotificationHandler(this IServiceCollection services)
         {
-            services.AddSingleton<INotificationHandler, DefaultNotificationHandler>();
+            services.AddScoped<INotificationHandler, DefaultNotificationHandler>();
             return services;
         }
     }
