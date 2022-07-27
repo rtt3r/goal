@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Goal.Seedwork.Infra.Crosscutting.Notifications
 {
     public abstract class NotificationHandler<TNotification> : INotificationHandler<TNotification>
-        where TNotification : INotification
+        where TNotification : class, INotification
     {
         private readonly ICollection<TNotification> notifications;
 

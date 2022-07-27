@@ -16,7 +16,7 @@ namespace Goal.Seedwork.Application.Handlers
             this.mediator = mediator;
         }
 
-        public Task RaiseEventAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : IEvent
+        public Task RaiseEventAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent
         {
             eventStore?.Save(@event);
             return mediator.Publish(@event);

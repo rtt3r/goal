@@ -7,9 +7,9 @@ namespace Goal.Seedwork.Application.Handlers
     public interface ICommandHandler
     {
         Task<ICommandResult<TResult>> HandleCommand<TCommand, TResult>(TCommand command, CancellationToken cancellationToken = default)
-            where TCommand : ICommand<ICommandResult<TResult>>;
+            where TCommand : class, ICommand<ICommandResult<TResult>>;
 
         Task<ICommandResult> HandleCommand<TCommand>(TCommand command, CancellationToken cancellationToken = default)
-            where TCommand : ICommand<ICommandResult>;
+            where TCommand : class, ICommand<ICommandResult>;
     }
 }

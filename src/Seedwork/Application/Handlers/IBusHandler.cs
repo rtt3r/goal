@@ -6,6 +6,6 @@ namespace Goal.Seedwork.Application.Handlers
 {
     public interface IBusHandler
     {
-        Task SendAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : IEvent;
+        Task SendAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent;
     }
 }

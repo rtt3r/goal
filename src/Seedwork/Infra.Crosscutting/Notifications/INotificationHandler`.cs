@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Goal.Seedwork.Infra.Crosscutting.Notifications
 {
     public interface INotificationHandler<TNotification>
-        where TNotification : INotification
+        where TNotification : class, INotification
     {
         Task AddNotificationAsync(TNotification notification, CancellationToken cancellationToken = default);
         Task<ICollection<TNotification>> GetNotificationsAsync(CancellationToken cancellationToken = default);

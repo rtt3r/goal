@@ -6,6 +6,6 @@ namespace Goal.Seedwork.Application.Handlers
 {
     public interface IEventHandler
     {
-        Task RaiseEventAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : IEvent;
+        Task RaiseEventAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : class, IEvent;
     }
 }

@@ -15,11 +15,11 @@ namespace Goal.Seedwork.Application.Handlers
         }
 
         public Task<ICommandResult<TResult>> HandleCommand<TCommand, TResult>(TCommand command, CancellationToken cancellationToken = default)
-            where TCommand : ICommand<ICommandResult<TResult>>
+            where TCommand : class, ICommand<ICommandResult<TResult>>
             => mediator.Send(command);
 
         public Task<ICommandResult> HandleCommand<TCommand>(TCommand command, CancellationToken cancellationToken = default)
-            where TCommand : ICommand<ICommandResult>
+            where TCommand : class, ICommand<ICommandResult>
             => mediator.Send(command);
     }
 }
