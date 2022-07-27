@@ -69,11 +69,11 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddNotificationHandler(this IServiceCollection services, INotificationHandler eventHandler)
+        public static IServiceCollection AddNotificationHandler(this IServiceCollection services, INotificationHandler notificationHandler)
         {
-            Ensure.Argument.NotNull(eventHandler, nameof(eventHandler));
+            Ensure.Argument.NotNull(notificationHandler, nameof(notificationHandler));
 
-            services.AddSingleton(typeof(INotificationHandler), eventHandler);
+            services.AddSingleton(typeof(INotificationHandler), notificationHandler);
             return services;
         }
 
@@ -86,7 +86,7 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
 
         public static IServiceCollection AddDefaultNotificationHandler(this IServiceCollection services)
         {
-            services.AddSingleton<INotificationHandler, NotificationHandler>();
+            services.AddSingleton<INotificationHandler, DefaultNotificationHandler>();
             return services;
         }
     }
