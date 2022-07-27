@@ -15,7 +15,7 @@ namespace Goal.Seedwork.Application.Handlers
             this.mediator = mediator;
         }
 
-        public Task RaiseEvent<TEvent>(TEvent @event) where TEvent : IEvent
+        public Task RaiseEventAsync<TEvent>(TEvent @event) where TEvent : IEvent
         {
             eventStore?.Save(@event);
             return mediator.Publish(@event);

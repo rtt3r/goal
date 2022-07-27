@@ -69,6 +69,21 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
             return services;
         }
 
+        public static IServiceCollection AddBusHandler(this IServiceCollection services, IBusHandler busHandler)
+        {
+            Ensure.Argument.NotNull(busHandler, nameof(busHandler));
+
+            services.AddScoped(typeof(IBusHandler), serviceProvider => busHandler);
+            return services;
+        }
+
+        public static IServiceCollection AddBusHandler<TBusHandler>(this IServiceCollection services)
+            where TBusHandler : class, IBusHandler
+        {
+            services.AddScoped<IBusHandler, TBusHandler>();
+            return services;
+        }
+
         public static IServiceCollection AddNotificationHandler(this IServiceCollection services, INotificationHandler notificationHandler)
         {
             Ensure.Argument.NotNull(notificationHandler, nameof(notificationHandler));

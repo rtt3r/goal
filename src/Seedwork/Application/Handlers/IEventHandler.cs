@@ -5,6 +5,6 @@ namespace Goal.Seedwork.Application.Handlers
 {
     public interface IEventHandler
     {
-        Task RaiseEvent<TEvent>(TEvent @event) where TEvent : IEvent;
+        Task RaiseEventAsync<TEvent>(TEvent @event) where TEvent : IEvent;
     }
 }
