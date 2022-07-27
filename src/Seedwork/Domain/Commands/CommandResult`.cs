@@ -5,7 +5,7 @@ namespace Goal.Seedwork.Domain.Commands
 {
     public class CommandResult<T> : CommandResult, ICommandResult<T>
     {
-        public CommandResult(bool isSucceeded, T data, ICollection<INotification> notifications)
+        internal CommandResult(bool isSucceeded, T data, ICollection<INotification> notifications)
             : base(isSucceeded, notifications)
         {
             Data = data;
