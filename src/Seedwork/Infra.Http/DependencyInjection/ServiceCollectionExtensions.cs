@@ -1,9 +1,10 @@
 using Goal.Seedwork.Application.Handlers;
 using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
+using Goal.Seedwork.Infra.Crosscutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Goal.Seedwork.Infra.Http.Extensions
+namespace Goal.Seedwork.Infra.Http.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
@@ -65,6 +66,27 @@ namespace Goal.Seedwork.Infra.Http.Extensions
         public static IServiceCollection AddDefaultEventHandler(this IServiceCollection services)
         {
             services.AddSingleton<IEventHandler, DefaultEventHandler>();
+            return services;
+        }
+
+        public static IServiceCollection AddNotificationHandler(this IServiceCollection services, INotificationHandler eventHandler)
+        {
+            Ensure.Argument.NotNull(eventHandler, nameof(eventHandler));
+
+            services.AddSingleton(typeof(INotificationHandler), eventHandler);
+            return services;
+        }
+
+        public static IServiceCollection AddNotificationHandler<TNotificationHandler>(this IServiceCollection services)
+            where TNotificationHandler : class, INotificationHandler
+        {
+            services.AddSingleton<INotificationHandler, TNotificationHandler>();
+            return services;
+        }
+
+        public static IServiceCollection AddDefaultNotificationHandler(this IServiceCollection services)
+        {
+            services.AddSingleton<INotificationHandler, NotificationHandler>();
             return services;
         }
     }
