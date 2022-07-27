@@ -7,20 +7,20 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
     public interface INotificationHandler<TNotification>
         where TNotification : INotification
     {
-        Task AddNotificationAsync(TNotification notification, CancellationToken cancellationToken);
-        Task<ICollection<TNotification>> GetNotificationsAsync(CancellationToken cancellationToken);
+        Task AddNotificationAsync(TNotification notification, CancellationToken cancellationToken = default);
+        Task<ICollection<TNotification>> GetNotificationsAsync(CancellationToken cancellationToken = default);
+        Task<bool> HasNotificationsAsync(CancellationToken cancellationToken = default);
+        Task<bool> HasInformationAsync(CancellationToken cancellationToken = default);
+        Task<bool> HasInputValidationAsync(CancellationToken cancellationToken = default);
+        Task<bool> HasDomainViolationAsync(CancellationToken cancellationToken = default);
+        Task<bool> HasInternalErrorAsync(CancellationToken cancellationToken = default);
+        Task<bool> HasExternalErrorAsync(CancellationToken cancellationToken = default);
         ICollection<TNotification> GetNotifications();
-        Task<bool> HasNotificationsAsync(CancellationToken cancellationToken);
         bool HasNotifications();
-        Task<bool> HasInformationAsync(CancellationToken cancellationToken);
         bool HasInformation();
-        Task<bool> HasInputValidationAsync(CancellationToken cancellationToken);
         bool HasInputValidation();
-        Task<bool> HasDomainViolationAsync(CancellationToken cancellationToken);
         bool HasDomainViolation();
-        Task<bool> HasInternalErrorAsync(CancellationToken cancellationToken);
         bool HasInternalError();
-        Task<bool> HasExternalErrorAsync(CancellationToken cancellationToken);
         bool HasExternalError();
     }
 }

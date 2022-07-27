@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Goal.Seedwork.Domain.Events;
 using MediatR;
@@ -15,7 +16,7 @@ namespace Goal.Seedwork.Application.Handlers
             this.mediator = mediator;
         }
 
-        public Task RaiseEventAsync<TEvent>(TEvent @event) where TEvent : IEvent
+        public Task RaiseEventAsync<TEvent>(TEvent @event, CancellationToken cancellationToken = default) where TEvent : IEvent
         {
             eventStore?.Save(@event);
             return mediator.Publish(@event);

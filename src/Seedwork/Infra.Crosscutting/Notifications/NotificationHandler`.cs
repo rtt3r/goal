@@ -15,16 +15,18 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
             notifications = new List<TNotification>();
         }
 
-        public virtual async Task AddNotificationAsync(TNotification notification, CancellationToken cancellationToken)
+        public virtual async Task AddNotificationAsync(TNotification notification, CancellationToken cancellationToken = default)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             notifications.Add(notification);
+
             await Task.CompletedTask;
         }
 
         public virtual ICollection<TNotification> GetNotifications()
             => notifications;
 
-        public async Task<ICollection<TNotification>> GetNotificationsAsync(CancellationToken cancellationToken)
+        public async Task<ICollection<TNotification>> GetNotificationsAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(GetNotifications());
@@ -33,7 +35,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         public virtual bool HasDomainViolation()
             => HasNotificationsOf(NotificationType.DomainViolation);
 
-        public async Task<bool> HasDomainViolationAsync(CancellationToken cancellationToken)
+        public async Task<bool> HasDomainViolationAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(HasDomainViolation());
@@ -42,7 +44,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         public virtual bool HasExternalError()
             => HasNotificationsOf(NotificationType.ExternalError);
 
-        public async Task<bool> HasExternalErrorAsync(CancellationToken cancellationToken)
+        public async Task<bool> HasExternalErrorAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(HasExternalError());
@@ -51,7 +53,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         public virtual bool HasInternalError()
             => HasNotificationsOf(NotificationType.InternalError);
 
-        public async Task<bool> HasInternalErrorAsync(CancellationToken cancellationToken)
+        public async Task<bool> HasInternalErrorAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(HasInternalError());
@@ -60,7 +62,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         public virtual bool HasInformation()
             => HasNotificationsOf(NotificationType.Information);
 
-        public async Task<bool> HasInformationAsync(CancellationToken cancellationToken)
+        public async Task<bool> HasInformationAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(HasInformation());
@@ -69,7 +71,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         public virtual bool HasInputValidation()
             => HasNotificationsOf(NotificationType.InputValidation);
 
-        public async Task<bool> HasInputValidationAsync(CancellationToken cancellationToken)
+        public async Task<bool> HasInputValidationAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(HasInputValidation());
@@ -78,7 +80,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         public virtual bool HasNotifications()
             => notifications.Count > 0;
 
-        public async Task<bool> HasNotificationsAsync(CancellationToken cancellationToken)
+        public async Task<bool> HasNotificationsAsync(CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
             return await Task.FromResult(HasNotifications());
