@@ -1,4 +1,3 @@
-using Goal.Seedwork.Application.Handlers;
 using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
@@ -24,63 +23,6 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
             services.AddSingleton<ITypeAdapterFactory, TTypeAdapterFactory>();
             services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>().Create());
 
-            return services;
-        }
-
-        public static IServiceCollection AddCommandHandler(this IServiceCollection services, ICommandHandler commandHandler)
-        {
-            Ensure.Argument.NotNull(commandHandler, nameof(commandHandler));
-
-            services.AddScoped(typeof(ICommandHandler), serviceProvider => commandHandler);
-            return services;
-        }
-
-        public static IServiceCollection AddCommandHandler<TCommandHandler>(this IServiceCollection services)
-            where TCommandHandler : class, ICommandHandler
-        {
-            services.AddScoped<ICommandHandler, TCommandHandler>();
-            return services;
-        }
-
-        public static IServiceCollection AddDefaultCommandHandler(this IServiceCollection services)
-        {
-            services.AddScoped<ICommandHandler, DefaultCommandHandler>();
-            return services;
-        }
-
-        public static IServiceCollection AddEventHandler(this IServiceCollection services, IEventHandler eventHandler)
-        {
-            Ensure.Argument.NotNull(eventHandler, nameof(eventHandler));
-
-            services.AddScoped(typeof(IEventHandler), serviceProvider => eventHandler);
-            return services;
-        }
-
-        public static IServiceCollection AddEventHandler<TEventHandler>(this IServiceCollection services)
-            where TEventHandler : class, IEventHandler
-        {
-            services.AddScoped<IEventHandler, TEventHandler>();
-            return services;
-        }
-
-        public static IServiceCollection AddDefaultEventHandler(this IServiceCollection services)
-        {
-            services.AddScoped<IEventHandler, DefaultEventHandler>();
-            return services;
-        }
-
-        public static IServiceCollection AddBusHandler(this IServiceCollection services, IBusHandler busHandler)
-        {
-            Ensure.Argument.NotNull(busHandler, nameof(busHandler));
-
-            services.AddScoped(typeof(IBusHandler), serviceProvider => busHandler);
-            return services;
-        }
-
-        public static IServiceCollection AddBusHandler<TBusHandler>(this IServiceCollection services)
-            where TBusHandler : class, IBusHandler
-        {
-            services.AddScoped<IBusHandler, TBusHandler>();
             return services;
         }
 
