@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Infra.Http</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Infra.Http</AssemblyName>
-		<VersionPrefix>0.1.11</VersionPrefix>
-		<AssemblyVersion>0.1.11.0</AssemblyVersion>
+		<VersionPrefix>0.1.12</VersionPrefix>
+		<AssemblyVersion>0.1.12.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Http</PackageId>
