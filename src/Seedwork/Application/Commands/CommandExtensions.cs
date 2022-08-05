@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace Goal.Seedwork.Domain.Commands
+namespace Goal.Seedwork.Application.Commands
 {
     public static class CommandExtensions
     {

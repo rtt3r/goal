@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Domain.Events
+namespace Goal.Seedwork.Application.Events
 {
     public abstract class Event : IEvent
     {

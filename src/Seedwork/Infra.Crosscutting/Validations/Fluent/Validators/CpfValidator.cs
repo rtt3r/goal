@@ -6,7 +6,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations.Fluent.Validators
     internal class CpfValidator<T> : PropertyValidator<T, string>, IPropertyValidator
     {
         public override bool IsValid(ValidationContext<T> context, string cnpj)
-            => CustomValidations.IsValidCpf(cnpj);
+            => Validations.Validators.Documents.IsValidCpf(cnpj);
 
         public override string Name => "CpfValidator";
 

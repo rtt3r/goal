@@ -35,11 +35,12 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             string level = !anotherLevel ? "OrderBy" : "ThenBy";
             string direction = descending ? "Descending" : string.Empty;
 
-            MethodCallExpression call = Expression.Call(typeof(Queryable),
-                                                        $"{level}{direction}",
-                                                        new[] { typeof(T), property?.Type },
-                                                        source.Expression,
-                                                        Expression.Quote(sort));
+            MethodCallExpression call = Expression.Call(
+                typeof(Queryable),
+                $"{level}{direction}",
+                new[] { typeof(T), property?.Type },
+                source.Expression,
+                Expression.Quote(sort));
 
             return (IOrderedQueryable<T>)source.Provider.CreateQuery<T>(call);
         }

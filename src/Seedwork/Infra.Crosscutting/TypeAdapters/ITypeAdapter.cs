@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Adapters
+namespace Goal.Seedwork.Infra.Crosscutting.TypeAdapters
 {
     /// <summary>
     /// Base contract for map dto to aggregate or aggregate to dto.
@@ -19,7 +19,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Adapters
         TTarget Adapt<TSource, TTarget>(TSource source)
             where TTarget : class, new()
             where TSource : class;
-
 
         /// <summary>
         /// Adapt a source object to an instnace of type <paramref name="TTarget"/>

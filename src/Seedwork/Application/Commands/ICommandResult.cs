@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Domain.Commands
+namespace Goal.Seedwork.Application.Commands
 {
     public interface ICommandResult
     {

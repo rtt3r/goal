@@ -11,7 +11,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
         {
             var dictionary = new Dictionary<string, object>();
 
-            if (!(source is null))
+            if (source is not null)
             {
                 IEnumerable<PropertyInfo> properties = source.GetType().GetTypeInfo().DeclaredProperties;
 
@@ -29,7 +29,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
         {
             var dictionary = new Dictionary<string, TValue>();
 
-            if (!(source is null))
+            if (source is not null)
             {
                 IEnumerable<PropertyInfo> properties = source
                     .GetType()
@@ -46,7 +46,8 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return dictionary;
         }
 
-        public static TType ConvertTo<TType>(this object value) => (TType)Convert.ChangeType(value, typeof(TType));
+        public static TType ConvertTo<TType>(this object value)
+            => (TType)Convert.ChangeType(value, typeof(TType));
 
         public static TType ConvertTo<TType>(this object value, TType defaultValue)
         {
@@ -68,6 +69,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
         }
 
         public static bool IsDefined<TAttribute>(this object source)
-            where TAttribute : Attribute => source.GetAttribute<TAttribute>() != null;
+            where TAttribute : Attribute
+            => source.GetAttribute<TAttribute>() != null;
     }
 }

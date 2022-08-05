@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Adapters
+namespace Goal.Seedwork.Infra.Crosscutting.TypeAdapters
 {
     /// <summary>
     /// Base contract for adapter factory
