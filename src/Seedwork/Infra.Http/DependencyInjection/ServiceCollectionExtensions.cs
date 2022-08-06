@@ -26,24 +26,24 @@ namespace Goal.Seedwork.Infra.Http.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddNotificationHandler(this IServiceCollection services, INotificationHandler notificationHandler)
+        public static IServiceCollection AddNotificationHandler(this IServiceCollection services, IDefaultNotificationHandler notificationHandler)
         {
             Ensure.Argument.NotNull(notificationHandler, nameof(notificationHandler));
 
-            services.AddScoped(typeof(INotificationHandler), serviceProvider => notificationHandler);
+            services.AddScoped(typeof(IDefaultNotificationHandler), serviceProvider => notificationHandler);
             return services;
         }
 
         public static IServiceCollection AddNotificationHandler<TNotificationHandler>(this IServiceCollection services)
-            where TNotificationHandler : class, INotificationHandler
+            where TNotificationHandler : class, IDefaultNotificationHandler
         {
-            services.AddScoped<INotificationHandler, TNotificationHandler>();
+            services.AddScoped<IDefaultNotificationHandler, TNotificationHandler>();
             return services;
         }
 
         public static IServiceCollection AddDefaultNotificationHandler(this IServiceCollection services)
         {
-            services.AddScoped<INotificationHandler, DefaultNotificationHandler>();
+            services.AddScoped<IDefaultNotificationHandler, DefaultNotificationHandler>();
             return services;
         }
     }
