@@ -17,8 +17,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return attribute;
         }
 
-        public static string GetDescription(this Enum enumValue)
-            => enumValue.GetDescription(enumValue.ToString());
+        public static string GetDescription(this Enum enumValue) => enumValue.GetDescription(enumValue.ToString());
 
         public static string GetDescription(this Enum enumValue, string defaultValue)
         {
@@ -26,8 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return attribute?.Description ?? defaultValue;
         }
 
-        public static string GetDisplayName(this Enum enumValue)
-            => enumValue.GetDisplayName(enumValue.ToString());
+        public static string GetDisplayName(this Enum enumValue) => enumValue.GetDisplayName(enumValue.ToString());
 
         public static string GetDisplayName(this Enum enumValue, string defaultValue)
         {
@@ -35,8 +33,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return attribute?.Name ?? defaultValue;
         }
 
-        public static object GetAmbientValue(this Enum enumValue)
-            => enumValue.GetAmbientValue(default);
+        public static object GetAmbientValue(this Enum enumValue) => enumValue.GetAmbientValue(default);
 
         public static object GetAmbientValue(this Enum enumValue, object defaultValue)
         {

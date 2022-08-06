@@ -66,7 +66,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return Regex.Replace(str, "[^0-9a-zA-Z]+", "");
         }
 
-        public static bool IsNullOrEmpty(this string value)
-            => string.IsNullOrEmpty(value);
+        public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);
     }
 }

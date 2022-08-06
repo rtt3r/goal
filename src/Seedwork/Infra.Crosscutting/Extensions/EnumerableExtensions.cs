@@ -89,10 +89,8 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return new PagedList<TResult>(items, source.TotalCount);
         }
 
-        public static string Join(this IEnumerable<string> values, string separator)
-            => string.Join(separator, values);
+        public static string Join(this IEnumerable<string> values, string separator) => string.Join(separator, values);
 
-        public static string Join<T>(this IEnumerable<T> values, string separator)
-            => string.Join(separator, values);
+        public static string Join<T>(this IEnumerable<T> values, string separator) => string.Join(separator, values);
     }
 }

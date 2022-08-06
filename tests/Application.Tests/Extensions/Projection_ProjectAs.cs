@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Goal.Seedwork.Application.Extensions;
-using Goal.Seedwork.Infra.Crosscutting.TypeAdapters;
+using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Moq;
 using Xunit;
 
