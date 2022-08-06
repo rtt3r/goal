@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Application.Events
+namespace Goal.Seedwork.Domain.Events
 {
     public interface IEventStore
     {
