@@ -87,6 +87,9 @@ namespace Goal.Seedwork.Application.Commands
         public bool HasInputValidation()
             => HasNotificationsOf(NotificationType.InputValidation);
 
+        public bool HasResourceNotFound()
+            => HasNotificationsOf(NotificationType.ResourceNotFound);
+
         private bool HasNotificationsOf(NotificationType type)
             => Notifications.Any(p => p.Type == type);
     }

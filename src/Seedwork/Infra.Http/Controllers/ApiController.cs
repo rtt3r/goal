@@ -54,6 +54,11 @@ namespace Goal.Seedwork.Infra.Http.Controllers
                 return BadRequest(result.Notifications);
             }
 
+            if (result.HasResourceNotFound())
+            {
+                return NotFound(result.Notifications);
+            }
+
             if (result.HasDomainViolation())
             {
                 return UnprocessableEntity(result.Notifications);

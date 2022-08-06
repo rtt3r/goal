@@ -51,5 +51,8 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
 
         public static Notification DomainViolation(string code, string message)
             => new(NotificationType.DomainViolation, code, message);
+
+        public static Notification ResourceNotFound(string code, string message)
+            => new(NotificationType.ResourceNotFound, code, message);
     }
 }

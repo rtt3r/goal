@@ -12,5 +12,6 @@ namespace Goal.Seedwork.Application.Commands
         bool HasInternalError();
         bool HasInformation();
         bool HasInputValidation();
+        bool HasResourceNotFound();
     }
 }

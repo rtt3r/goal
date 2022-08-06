@@ -5,6 +5,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Notifications
         Information,
         InputValidation,
         DomainViolation,
+        ResourceNotFound,
         InternalError,
         ExternalError
     }
