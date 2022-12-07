@@ -6,7 +6,7 @@ namespace Goal.Seedwork.Domain
 {
     public interface IUnitOfWork : IDisposable
     {
-        bool Commit();
-        Task<bool> CommitAsync(CancellationToken cancellationToken = default);
+        bool Save();
+        Task<bool> SaveAsync(CancellationToken cancellationToken = default);
     }
 }

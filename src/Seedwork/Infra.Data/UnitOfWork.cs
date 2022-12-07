@@ -16,9 +16,11 @@ namespace Goal.Seedwork.Infra.Data
             this.context = context;
         }
 
-        public bool Commit() => context.SaveChanges() > 0;
+        public bool Save()
+            => context.SaveChanges() > 0;
 
-        public async Task<bool> CommitAsync(CancellationToken cancellationToken = default) => await context.SaveChangesAsync(cancellationToken) > 0;
+        public async Task<bool> SaveAsync(CancellationToken cancellationToken = default)
+            => await context.SaveChangesAsync(cancellationToken) > 0;
 
         protected virtual void Dispose(bool disposing)
         {
