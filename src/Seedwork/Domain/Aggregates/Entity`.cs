@@ -28,13 +28,11 @@ namespace Goal.Seedwork.Domain.Aggregates
         {
             unchecked
             {
-                return GetType().GetHashCode() * 397 ^ Id.GetHashCode();
+                return (GetType().GetHashCode() * 397) ^ Id.GetHashCode();
             }
         }
 
-#pragma warning disable S3875 // "operator==" should not be overloaded on reference types
         public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
-#pragma warning restore S3875 // "operator==" should not be overloaded on reference types
         {
             if (Equals(left, null))
             {

@@ -63,20 +63,14 @@ namespace Goal.Seedwork.Infra.Data.Tests.Mocks
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            if (_enumerable == null)
-            {
-                _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
-            }
+            _enumerable ??= CompileExpressionItem<IEnumerable<T>>(Expression);
 
             return _enumerable.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            if (_enumerable == null)
-            {
-                _enumerable = CompileExpressionItem<IEnumerable<T>>(Expression);
-            }
+            _enumerable ??= CompileExpressionItem<IEnumerable<T>>(Expression);
 
             return _enumerable.GetEnumerator();
         }

@@ -30,7 +30,7 @@ namespace Goal.Seedwork.Infra.Crosscutting
 
         public static void Not(bool condition, string message = "") => Not<Exception>(condition, message);
 
-        public static void NotNull(object value, string message = "") => That<NullReferenceException>(!(value is null), message);
+        public static void NotNull(object value, string message = "") => That<NullReferenceException>(value is not null, message);
 
         public static void NotNullOrEmpty(string value) => NotNullOrEmpty(value, null);
 
@@ -50,7 +50,7 @@ namespace Goal.Seedwork.Infra.Crosscutting
 
         public static void Items<T>(IEnumerable<T> collection, Func<T, bool> predicate) => Items(collection, predicate, null);
 
-        public static void Items<T>(IEnumerable<T> collection, Func<T, bool> predicate, string message) => That(!(collection is null) && !collection.Any(x => !predicate(x)), message ?? "");
+        public static void Items<T>(IEnumerable<T> collection, Func<T, bool> predicate, string message) => That(collection is not null && !collection.Any(x => !predicate(x)), message ?? "");
 
         public struct Argument
         {

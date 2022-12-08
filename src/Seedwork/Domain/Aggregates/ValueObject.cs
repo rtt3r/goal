@@ -67,11 +67,11 @@ namespace Goal.Seedwork.Domain.Aggregates
 
                     if (value is null)
                     {
-                        hashCode = hashCode ^ index * 13;
+                        hashCode ^= (index * 13);
                     }
                     else
                     {
-                        hashCode = hashCode * (changeMultiplier ? 59 : 114) + value.GetHashCode();
+                        hashCode = (hashCode * (changeMultiplier ? 59 : 114)) + value.GetHashCode();
                         changeMultiplier = !changeMultiplier;
                     }
                 }

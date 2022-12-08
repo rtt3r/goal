@@ -11,7 +11,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
         {
             var dictionary = new Dictionary<string, object>();
 
-            if (!(source is null))
+            if (source is not null)
             {
                 IEnumerable<PropertyInfo> properties = source.GetType().GetTypeInfo().DeclaredProperties;
 
@@ -29,7 +29,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
         {
             var dictionary = new Dictionary<string, TValue>();
 
-            if (!(source is null))
+            if (source is not null)
             {
                 IEnumerable<PropertyInfo> properties = source
                     .GetType()

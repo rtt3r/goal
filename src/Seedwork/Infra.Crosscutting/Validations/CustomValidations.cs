@@ -32,7 +32,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations
             rest = rest < 2 ? 0 : 11 - rest;
 
             digit = rest.ToString();
-            tempCnpj = tempCnpj + digit;
+            tempCnpj += digit;
             sum = 0;
 
             for (int i = 0; i < 13; i++)
@@ -43,7 +43,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations
             rest = sum % 11;
             rest = rest < 2 ? 0 : 11 - rest;
 
-            digit = digit + rest.ToString();
+            digit += rest.ToString();
             return formatedCnpj.EndsWith(digit);
         }
 
@@ -74,7 +74,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations
             rest = rest < 2 ? 0 : 11 - rest;
 
             digit = rest.ToString();
-            tempCpf = tempCpf + digit;
+            tempCpf += digit;
             sum = 0;
 
             for (int i = 0; i < 10; i++)
@@ -85,7 +85,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations
             rest = sum % 11;
 
             rest = rest < 2 ? 0 : 11 - rest;
-            digit = digit + rest.ToString();
+            digit += rest.ToString();
 
             return formatedCpf.EndsWith(digit);
         }

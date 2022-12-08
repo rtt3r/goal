@@ -11,13 +11,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         [Fact]
         public void ReturnValidByteArrayGivenNotNullStream()
         {
-            using (var stream = new MemoryStream())
-            {
-                byte[] byteArray = stream.ToByteArray();
+            using var stream = new MemoryStream();
+            byte[] byteArray = stream.ToByteArray();
 
-                byteArray.Should().NotBeNull();
-                byteArray.Length.Should().Be(0);
-            }
+            byteArray.Should().NotBeNull();
+            byteArray.Length.Should().Be(0);
         }
 
         [Fact]

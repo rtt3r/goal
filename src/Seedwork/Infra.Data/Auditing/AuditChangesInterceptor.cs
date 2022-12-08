@@ -87,7 +87,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
 
             foreach (EntityEntry entry in context.ChangeTracker
                 .Entries()
-                .Where(x => x.State == EntityState.Added || x.State == EntityState.Modified || x.State == EntityState.Deleted))
+                .Where(x => x.State is EntityState.Added or EntityState.Modified or EntityState.Deleted))
             {
                 audit.Entries.Add(CreateAuditEntry(entry));
             }
