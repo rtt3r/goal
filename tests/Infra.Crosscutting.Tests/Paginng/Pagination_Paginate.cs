@@ -15,7 +15,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedGivenEmptyConstructor()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination();
+            var pagination = new SearchQuery();
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -26,7 +26,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 10);
+            var pagination = new SearchQuery(0, 10);
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -37,7 +37,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 10);
+            var pagination = new SearchQuery(0, 10);
 
             var paginateResult = values.PaginateAsync(pagination).GetAwaiter().GetResult().ToList();
 
@@ -48,7 +48,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedGivenPageSizeZero()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 0);
+            var pagination = new SearchQuery(0, 0);
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -59,7 +59,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncGivenPageSizeZero()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 0);
+            var pagination = new SearchQuery(0, 0);
 
             var paginateResult = values.PaginateAsync(pagination)
                 .GetAwaiter()
@@ -78,14 +78,14 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
                 values.Paginate(null);
             };
 
-            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("page");
+            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("query");
         }
 
         [Fact]
         public void ReturnPaginatedOrderingAscendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 10, "Id", true);
+            var pagination = new SearchQuery(0, 10, new SortQuery("Id", SortDirection.Ascending));
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -96,7 +96,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncOrderingAscendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 10, "Id", true);
+            var pagination = new SearchQuery(0, 10, new SortQuery("Id", SortDirection.Ascending));
 
             var paginateResult = values.PaginateAsync(pagination).GetAwaiter().GetResult().ToList();
 
@@ -107,7 +107,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedOrderingDescendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 10, "Id", false);
+            var pagination = new SearchQuery(0, 10, new SortQuery("Id", SortDirection.Descending));
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -118,7 +118,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncOrderingDescendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new Pagination(0, 10, "Id", false);
+            var pagination = new SearchQuery(0, 10, new SortQuery("Id", SortDirection.Descending));
 
             var paginateResult = values.PaginateAsync(pagination).GetAwaiter().GetResult().ToList();
 

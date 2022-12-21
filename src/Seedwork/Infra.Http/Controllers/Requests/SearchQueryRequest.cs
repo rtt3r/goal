@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
+
 namespace Goal.Seedwork.Infra.Http.Controllers.Requests
 {
-    public sealed class PaginationRequest
+    public sealed class SearchQueryRequest
     {
         /// <summary>
         /// The required page index (starts at zero)
@@ -15,11 +18,6 @@ namespace Goal.Seedwork.Infra.Http.Controllers.Requests
         /// <summary>
         /// The field name to sort
         /// </summary>
-        public string OrderByName { get; set; }
-
-        /// <summary>
-        /// The sorting orientation
-        /// </summary>
-        public bool Ascending { get; set; }
+        public IEnumerable<SortQueryRequest> Sort { get; set; }
     }
 }

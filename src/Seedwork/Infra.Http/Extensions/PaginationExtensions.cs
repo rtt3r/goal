@@ -1,3 +1,4 @@
+using System.Linq;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Http.Controllers.Requests;
 
@@ -5,18 +6,19 @@ namespace Goal.Seedwork.Infra.Http.Extensions
 {
     public static class PaginationExtensions
     {
-        public static Pagination ToPagination(this PaginationRequest request)
+        public static SearchQuery ToSearchQuery(this SearchQueryRequest request)
         {
             if (request is null)
             {
-                return new Pagination();
+                return new SearchQuery();
             }
 
-            return new Pagination(
+            return new SearchQuery(
                 request.PageIndex,
                 request.PageSize,
-                request.OrderByName,
-                request.Ascending);
+                (request.Sort ?? Enumerable.Empty<SortQueryRequest>())
+                    .Select(s => new SortQuery(s.FieldName, s.Direction))
+                    .ToArray());
         }
     }
 }

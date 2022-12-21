@@ -36,7 +36,7 @@ namespace Goal.Seedwork.Infra.Data
                 .ToList();
         }
 
-        public virtual IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPagination pagination)
+        public virtual IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, ISearchQuery pagination)
         {
             Ensure.Argument.NotNull(pagination, nameof(pagination));
 
@@ -44,7 +44,7 @@ namespace Goal.Seedwork.Infra.Data
                 .PaginateList(pagination);
         }
 
-        public virtual IPagedCollection<TEntity> Query(IPagination pagination)
+        public virtual IPagedCollection<TEntity> Query(ISearchQuery pagination)
             => Query(new TrueSpecification<TEntity>(), pagination);
 
         public virtual async Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken())
@@ -65,13 +65,13 @@ namespace Goal.Seedwork.Infra.Data
         }
 
         public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
-            IPagination pagination,
+            ISearchQuery pagination,
             CancellationToken cancellationToken = new CancellationToken())
             => await QueryAsync(new TrueSpecification<TEntity>(), pagination, cancellationToken);
 
         public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
             ISpecification<TEntity> specification,
-            IPagination pagination,
+            ISearchQuery pagination,
             CancellationToken cancellationToken = new CancellationToken())
         {
             Ensure.Argument.NotNull(pagination, nameof(pagination));

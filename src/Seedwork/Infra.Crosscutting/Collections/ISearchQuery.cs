@@ -1,13 +1,13 @@
+using System.Collections.Generic;
+
 namespace Goal.Seedwork.Infra.Crosscutting.Collections
 {
-    public interface IPagination
+    public interface ISearchQuery
     {
         int PageIndex { get; }
 
         int PageSize { get; }
 
-        string OrderByName { get; }
-
-        bool Ascending { get; }
+        IEnumerable<SortQuery> Sort { get; }
     }
 }

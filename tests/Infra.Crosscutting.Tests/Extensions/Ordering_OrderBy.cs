@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
@@ -24,7 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByAscendingGivenSimpleProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", true);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", SortDirection.Ascending);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.First().Id);
@@ -35,7 +36,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByDescendingGivenSimpleProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", false);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", SortDirection.Descending);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.Last().Id);
@@ -46,7 +47,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByAscendingGivenComplexProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", true);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", SortDirection.Ascending);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.First().Id);
@@ -57,7 +58,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByDescendingGivenComplexProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", false);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", SortDirection.Descending);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.Last().Id);
