@@ -25,7 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByAscendingGivenSimpleProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", SortDirection.Ascending);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", SortDirection.Asc);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.First().Id);
@@ -36,7 +36,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByDescendingGivenSimpleProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", SortDirection.Descending);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("Id", SortDirection.Desc);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.Last().Id);
@@ -47,7 +47,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByAscendingGivenComplexProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", SortDirection.Ascending);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", SortDirection.Asc);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.First().Id);
@@ -58,7 +58,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         public void ReturnOrderByDescendingGivenComplexProperty()
         {
             IQueryable<TestObject1> query = GetQuery();
-            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", SortDirection.Descending);
+            IOrderedQueryable<TestObject1> result = query.OrderBy("TestObject2.Id", SortDirection.Desc);
 
             result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
             result.First().Id.Should().Be(query.Last().Id);

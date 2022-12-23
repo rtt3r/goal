@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 
 namespace Goal.Seedwork.Infra.Http.Controllers.Requests
 {
@@ -8,16 +7,21 @@ namespace Goal.Seedwork.Infra.Http.Controllers.Requests
         /// <summary>
         /// The required page index (starts at zero)
         /// </summary>
-        public int PageIndex { get; set; }
+        public int PageIndex { get; set; } = 0;
 
         /// <summary>
         /// The number of page items
         /// </summary>
-        public int PageSize { get; set; }
+        public int PageSize { get; set; } = int.MaxValue;
 
         /// <summary>
         /// The field name to sort
         /// </summary>
-        public IEnumerable<SortQueryRequest> Sort { get; set; }
+        public string SortBy { get; private set; }
+
+        /// <summary>
+        /// The sort direction (Asc | Desc)
+        /// </summary>
+        public SortDirection? SortDirection { get; private set; }
     }
 }

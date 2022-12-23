@@ -243,7 +243,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISearchQuery pagination = new SearchQuery(0, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(0, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Query(pagination);
 
@@ -289,7 +289,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISearchQuery pagination = new SearchQuery(0, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(0, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
@@ -335,7 +335,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISearchQuery pagination = new SearchQuery(1, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(1, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Query(pagination);
 
@@ -381,7 +381,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISearchQuery pagination = new SearchQuery(1, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(1, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
@@ -450,7 +450,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISearchQuery pagination = new SearchQuery(0, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(0, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.Query(pagination);
 
@@ -473,7 +473,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-            ISearchQuery pagination = new SearchQuery(0, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(0, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(pagination).GetAwaiter().GetResult();
 
@@ -641,7 +641,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            ISearchQuery pagination = new SearchQuery(0, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(0, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
 
             IPagedCollection<Test> tests = testRepository.Query(spec, pagination);
@@ -668,7 +668,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            ISearchQuery pagination = new SearchQuery(0, 10, new SortQuery("TId", SortDirection.Descending));
+            ISearchQuery pagination = new SearchQuery(0, 10, "TId", SortDirection.Desc);
             var testRepository = new TestRepository(mockDbContext.Object);
             IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pagination).GetAwaiter().GetResult();
 

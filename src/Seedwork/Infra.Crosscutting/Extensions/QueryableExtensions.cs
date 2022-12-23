@@ -11,16 +11,16 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             => OrderingHelper(source, fieldName, direction, false);
 
         public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string fieldName)
-            => OrderingHelper(source, fieldName, SortDirection.Ascending, false);
+            => OrderingHelper(source, fieldName, SortDirection.Asc, false);
 
         public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> source, string fieldName)
-            => OrderingHelper(source, fieldName, SortDirection.Descending, false);
+            => OrderingHelper(source, fieldName, SortDirection.Desc, false);
 
         public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string fieldName)
-            => OrderingHelper(source, fieldName, SortDirection.Ascending, true);
+            => OrderingHelper(source, fieldName, SortDirection.Asc, true);
 
         public static IOrderedQueryable<T> ThenByDescending<T>(this IOrderedQueryable<T> source, string fieldName)
-            => OrderingHelper(source, fieldName, SortDirection.Descending, true);
+            => OrderingHelper(source, fieldName, SortDirection.Desc, true);
 
         private static IOrderedQueryable<T> OrderingHelper<T>(IQueryable<T> source, string fieldName, SortDirection direction, bool anotherLevel)
         {
@@ -35,7 +35,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             }
 
             string level = !anotherLevel ? "OrderBy" : "ThenBy";
-            string sortDirection = direction == SortDirection.Descending ? "Descending" : string.Empty;
+            string sortDirection = direction == SortDirection.Desc ? "Descending" : string.Empty;
 
             MethodCallExpression call = Expression.Call(
                 typeof(Queryable),

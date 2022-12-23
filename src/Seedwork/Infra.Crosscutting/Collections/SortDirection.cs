@@ -2,7 +2,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Collections
 {
     public enum SortDirection
     {
-        Ascending = 0,
-        Descending = 1
+        Asc = 0,
+        Desc = 1
     }
 }

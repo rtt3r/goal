@@ -45,9 +45,9 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 
             IQueryable<T> queryableList = source;
 
-            foreach (var sort in query.Sort)
+            if (!string.IsNullOrWhiteSpace(query.SortBy))
             {
-                queryableList = queryableList.OrderBy(sort.FieldName, sort.Direction);
+                queryableList = queryableList.OrderBy(query.SortBy, query.SortDirection);
             }
 
             queryableList = queryableList.Skip(query.PageIndex * query.PageSize);
