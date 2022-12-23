@@ -6,7 +6,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
     {
         public static readonly NoneType None;
 
-        private static readonly Unit unit;
+        private static readonly Unit unit = default;
 
         public static Func<TA, Func<TB, TResult>> Curry<TA, TB, TResult>(this Func<TA, TB, TResult> func)
             => (TA a) => (TB b) => func(a, b);
@@ -25,7 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
 
         public static Func<T, Unit> ToFunc<T>(Action<T> action)
         {
-            return delegate (T o)
+            return (T o) =>
             {
                 action(o);
                 return Unit();
