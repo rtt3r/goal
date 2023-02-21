@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Infra.Data</AssemblyName>
-		<VersionPrefix>0.3.2</VersionPrefix>
-		<AssemblyVersion>0.3.2.0</AssemblyVersion>
+		<VersionPrefix>0.3.3</VersionPrefix>
+		<AssemblyVersion>0.3.3.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Data</PackageId>
@@ -20,10 +20,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.4.0" />
+		<PackageReference Include="FluentValidation" Version="11.5.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />

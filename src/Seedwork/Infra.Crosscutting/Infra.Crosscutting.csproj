@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Infra.Crosscutting</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Infra.Crosscutting</AssemblyName>
-		<VersionPrefix>0.3.2</VersionPrefix>
-		<AssemblyVersion>0.3.2.0</AssemblyVersion>
+		<VersionPrefix>0.3.3</VersionPrefix>
+		<AssemblyVersion>0.3.3.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Crosscutting</PackageId>
@@ -20,8 +20,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.4.0" />
-		<PackageReference Include="RavenDB.Client" Version="5.4.5" />
+		<PackageReference Include="FluentValidation" Version="11.5.1" />
+		<PackageReference Include="RavenDB.Client" Version="5.4.101" />
 	</ItemGroup>
 
 	<ItemGroup>
