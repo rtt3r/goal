@@ -5,7 +5,7 @@ namespace Goal.Seedwork.Infra.Http.Extensions
 {
     public static class PaginationExtensions
     {
-        public static PageSearch ToSearchQuery(this SearchQueryRequest request)
+        public static PageSearch ToSearchQuery(this PageSearchRequest request)
         {
             if (request is null)
             {

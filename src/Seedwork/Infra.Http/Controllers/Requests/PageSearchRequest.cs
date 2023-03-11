@@ -2,7 +2,7 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 
 namespace Goal.Seedwork.Infra.Http.Controllers.Requests
 {
-    public sealed class SearchQueryRequest
+    public sealed class PageSearchRequest
     {
         /// <summary>
         /// The required page index (starts at zero)
