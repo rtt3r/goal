@@ -78,7 +78,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
                 values.Paginate(null);
             };
 
-            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("query");
+            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
         }
 
         [Fact]

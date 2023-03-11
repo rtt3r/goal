@@ -549,7 +549,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
                 testRepository.Query(spec, pageSearch);
             };
 
-            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pagination");
+            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
         }
 
         [Fact]
@@ -565,7 +565,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
                 testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
             };
 
-            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pagination");
+            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
         }
 
         [Fact]
