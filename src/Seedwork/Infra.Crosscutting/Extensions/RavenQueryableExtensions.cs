@@ -10,24 +10,24 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 {
     public static class RavenQueryableExtensions
     {
-        public static IPagedCollection<T> PaginateList<T>(this IRavenQueryable<T> source, ISearchQuery page)
+        public static IPagedCollection<T> PaginateList<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
         {
-            Ensure.Argument.NotNull(page, nameof(page));
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
 
             IQueryable<T> query = source
                  .Statistics(out QueryStatistics stats)
-                 .Paginate(page);
+                 .Paginate(pageSearch);
 
             return new PagedList<T>(query.ToList(), stats.TotalResults);
         }
 
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IRavenQueryable<T> source, ISearchQuery page, CancellationToken cancellationToken = new CancellationToken())
+        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IRavenQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
         {
-            Ensure.Argument.NotNull(page, nameof(page));
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
 
             IQueryable<T> query = source
                 .Statistics(out QueryStatistics stats)
-                .Paginate(page);
+                .Paginate(pageSearch);
 
             return new PagedList<T>(
                 await query.ToListAsync(cancellationToken),

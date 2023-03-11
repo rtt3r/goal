@@ -36,16 +36,16 @@ namespace Goal.Seedwork.Infra.Data
                 .ToList();
         }
 
-        public virtual IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, ISearchQuery pagination)
+        public virtual IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch)
         {
-            Ensure.Argument.NotNull(pagination, nameof(pagination));
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
 
             return FindSpecific(specification)
-                .PaginateList(pagination);
+                .PaginateList(pageSearch);
         }
 
-        public virtual IPagedCollection<TEntity> Query(ISearchQuery pagination)
-            => Query(new TrueSpecification<TEntity>(), pagination);
+        public virtual IPagedCollection<TEntity> Query(IPageSearch pageSearch)
+            => Query(new TrueSpecification<TEntity>(), pageSearch);
 
         public virtual async Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken())
         {
@@ -65,19 +65,19 @@ namespace Goal.Seedwork.Infra.Data
         }
 
         public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
-            ISearchQuery pagination,
+            IPageSearch pageSearch,
             CancellationToken cancellationToken = new CancellationToken())
-            => await QueryAsync(new TrueSpecification<TEntity>(), pagination, cancellationToken);
+            => await QueryAsync(new TrueSpecification<TEntity>(), pageSearch, cancellationToken);
 
         public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
             ISpecification<TEntity> specification,
-            ISearchQuery pagination,
+            IPageSearch pageSearch,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            Ensure.Argument.NotNull(pagination, nameof(pagination));
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
 
             return await FindSpecific(specification)
-                .PaginateListAsync(pagination, cancellationToken);
+                .PaginateListAsync(pageSearch, cancellationToken);
         }
 
         public virtual bool Any()

@@ -36,51 +36,51 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return source;
         }
 
-        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, ISearchQuery query)
-            => values.AsQueryable().Paginate(query);
+        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, IPageSearch pageSearch)
+            => values.AsQueryable().Paginate(pageSearch);
 
-        public static IQueryable<T> Paginate<T>(this IQueryable<T> source, ISearchQuery query)
+        public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
         {
-            Ensure.Argument.NotNull(query, nameof(query));
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
 
             IQueryable<T> queryableList = source;
 
-            if (!string.IsNullOrWhiteSpace(query.SortBy))
+            if (!string.IsNullOrWhiteSpace(pageSearch.SortBy))
             {
-                queryableList = queryableList.OrderBy(query.SortBy, query.SortDirection);
+                queryableList = queryableList.OrderBy(pageSearch.SortBy, pageSearch.SortDirection);
             }
 
-            queryableList = queryableList.Skip(query.PageIndex * query.PageSize);
-            queryableList = queryableList.Take(query.PageSize);
+            queryableList = queryableList.Skip(pageSearch.PageIndex * pageSearch.PageSize);
+            queryableList = queryableList.Take(pageSearch.PageSize);
 
             return queryableList;
         }
 
-        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, ISearchQuery page, CancellationToken cancellationToken = new CancellationToken())
-            => await values.AsQueryable().PaginateAsync(page, cancellationToken);
+        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+            => await values.AsQueryable().PaginateAsync(pageSearch, cancellationToken);
 
-        public static async Task<IQueryable<T>> PaginateAsync<T>(this IQueryable<T> dataList, ISearchQuery page, CancellationToken cancellationToken = new CancellationToken())
+        public static async Task<IQueryable<T>> PaginateAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await Task.FromResult(dataList.Paginate(page));
+            return await Task.FromResult(dataList.Paginate(pageSearch));
         }
 
-        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, ISearchQuery page)
-            => values.AsQueryable().PaginateList(page);
+        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, IPageSearch pageSearch)
+            => values.AsQueryable().PaginateList(pageSearch);
 
-        public static IPagedCollection<T> PaginateList<T>(this IQueryable<T> dataList, ISearchQuery page)
+        public static IPagedCollection<T> PaginateList<T>(this IQueryable<T> dataList, IPageSearch pageSearch)
         {
-            Ensure.Argument.NotNull(page, nameof(page));
-            return new PagedList<T>(dataList.Paginate(page).ToList(), dataList.Count());
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+            return new PagedList<T>(dataList.Paginate(pageSearch).ToList(), dataList.Count());
         }
 
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, ISearchQuery page, CancellationToken cancellationToken = new CancellationToken())
-            => await values.AsQueryable().PaginateListAsync(page, cancellationToken);
+        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+            => await values.AsQueryable().PaginateListAsync(pageSearch, cancellationToken);
 
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IQueryable<T> dataList, ISearchQuery page, CancellationToken cancellationToken = new CancellationToken())
+        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await Task.FromResult(dataList.PaginateList(page));
+            return await Task.FromResult(dataList.PaginateList(pageSearch));
         }
 
         public static IPagedCollection<TResult> SelectPaged<TSource, TResult>(this IPagedCollection<TSource> source, Func<TSource, TResult> selector)

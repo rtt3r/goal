@@ -15,7 +15,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedGivenEmptyConstructor()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery();
+            var pagination = new PageSearch();
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -26,7 +26,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 10);
+            var pagination = new PageSearch(0, 10);
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -37,7 +37,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 10);
+            var pagination = new PageSearch(0, 10);
 
             var paginateResult = values.PaginateAsync(pagination).GetAwaiter().GetResult().ToList();
 
@@ -48,7 +48,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedGivenPageSizeZero()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 0);
+            var pagination = new PageSearch(0, 0);
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -59,7 +59,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncGivenPageSizeZero()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 0);
+            var pagination = new PageSearch(0, 0);
 
             var paginateResult = values.PaginateAsync(pagination)
                 .GetAwaiter()
@@ -85,7 +85,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedOrderingAscendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 10, "Id", SortDirection.Asc);
+            var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -96,7 +96,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncOrderingAscendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 10, "Id", SortDirection.Asc);
+            var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
 
             var paginateResult = values.PaginateAsync(pagination).GetAwaiter().GetResult().ToList();
 
@@ -107,7 +107,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedOrderingDescendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 10, "Id", SortDirection.Desc);
+            var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
 
             var paginateResult = values.Paginate(pagination).ToList();
 
@@ -118,7 +118,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
         public void ReturnPaginatedAsyncOrderingDescendingGivenIndexAndSize()
         {
             IEnumerable<TestObject1> values = GetQuery();
-            var pagination = new SearchQuery(0, 10, "Id", SortDirection.Desc);
+            var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
 
             var paginateResult = values.PaginateAsync(pagination).GetAwaiter().GetResult().ToList();
 

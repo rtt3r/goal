@@ -1,6 +1,6 @@
 namespace Goal.Seedwork.Infra.Crosscutting.Collections
 {
-    public interface ISearchQuery
+    public interface IPageSearch
     {
         int PageIndex { get; }
         int PageSize { get; }

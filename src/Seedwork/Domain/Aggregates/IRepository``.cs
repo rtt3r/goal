@@ -15,9 +15,9 @@ namespace Goal.Seedwork.Domain.Aggregates
 
         ICollection<TEntity> Query(ISpecification<TEntity> specification);
 
-        IPagedCollection<TEntity> Query(ISearchQuery pagination);
+        IPagedCollection<TEntity> Query(IPageSearch pageSearch);
 
-        IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, ISearchQuery pagination);
+        IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
 
         Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken());
 
@@ -25,9 +25,9 @@ namespace Goal.Seedwork.Domain.Aggregates
 
         Task<ICollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
 
-        Task<IPagedCollection<TEntity>> QueryAsync(ISearchQuery pagination, CancellationToken cancellationToken = new CancellationToken());
+        Task<IPagedCollection<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
-        Task<IPagedCollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, ISearchQuery pagination, CancellationToken cancellationToken = new CancellationToken());
+        Task<IPagedCollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
         bool Any();
 
