@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Goal.Seedwork.Domain;
+using Goal.Seedwork.Infra.Crosscutting;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Seedwork.Infra.Data
@@ -13,6 +14,7 @@ namespace Goal.Seedwork.Infra.Data
 
         protected UnitOfWork(DbContext context)
         {
+            Ensure.Argument.NotNull(context, nameof(context));
             this.context = context;
         }
 
@@ -37,7 +39,6 @@ namespace Goal.Seedwork.Infra.Data
 
         public void Dispose()
         {
-            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
