@@ -8,8 +8,16 @@ namespace Goal.Seedwork.Domain.Tests.Entity
 {
     public class Entity_Equals
     {
+        private class TestEntity : Entity<int>
+        {
+            public TestEntity(int id)
+            {
+                Id = id;
+            }
+        }
+
         [Fact]
-        public void ReturnFalseGivenNotEntity()
+        public void Equals_NotEntity_ReturnsFalse()
         {
             //Given
             IEntity entity = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -23,7 +31,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnTrueGivenIntransientSameReference()
+        public void Equals_IntransientSameReference_ReturnsTrue()
         {
             //Given
             IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -37,7 +45,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnFalseGivenLeftTransient()
+        public void Equals_LeftTransient_ReturnsFalse()
         {
             //Given
             IEntity entity1 = new EntityTest();
@@ -51,7 +59,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnFalseGivenRightTransient()
+        public void Equals_RightTransient_ReturnsFalse()
         {
             //Given
             IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -65,7 +73,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnTrueGivenBothIntransient()
+        public void Equals_BothIntransient_ReturnsTrue()
         {
             //Given
             IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -79,7 +87,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnFalseGivenBothIntransient()
+        public void Equals_BothIntransient_ReturnsFalse()
         {
             //Given
             IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -93,7 +101,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnTrueGivenBothTransientSameReference()
+        public void Equals_BothTransientSameReference_ReturnsTrue()
         {
             //Given
             var entity1 = new EntityTest();
@@ -104,6 +112,73 @@ namespace Goal.Seedwork.Domain.Tests.Entity
 
             //Then
             areEquals.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Equals_SameObject_ReturnsTrue()
+        {
+            // Arrange
+            var entity = new TestEntity(1);
+
+            // Act
+            var result = entity.Equals(entity);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Equals_NullObject_ReturnsFalse()
+        {
+            // Arrange
+            var entity = new TestEntity(1);
+
+            // Act
+            var result = entity.Equals(null);
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void Equals_DifferentType_ReturnsFalse()
+        {
+            // Arrange
+            var entity = new TestEntity(1);
+
+            // Act
+            var result = entity.Equals("not an entity");
+
+            // Assert
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void Equals_SameTypeAndId_ReturnsTrue()
+        {
+            // Arrange
+            var entity1 = new TestEntity(1);
+            var entity2 = new TestEntity(1);
+
+            // Act
+            var result = entity1.Equals(entity2);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Equals_SameTypeDifferentId_ReturnsFalse()
+        {
+            // Arrange
+            var entity1 = new TestEntity(1);
+            var entity2 = new TestEntity(2);
+
+            // Act
+            var result = entity1.Equals(entity2);
+
+            // Assert
+            result.Should().BeFalse();
         }
     }
 }

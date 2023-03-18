@@ -7,8 +7,16 @@ namespace Goal.Seedwork.Domain.Tests.Entity
 {
     public class Entity_GetHashCode
     {
+        private class TestEntity : Domain.Aggregates.Entity<int>
+        {
+            public TestEntity(int id)
+            {
+                Id = id;
+            }
+        }
+
         [Fact]
-        public void ReturnNewHashGivenIntransient()
+        public void GetHashCode_Intransient_ReturnsNewHash()
         {
             //Given
             var entity = new EntityTest();
@@ -20,6 +28,21 @@ namespace Goal.Seedwork.Domain.Tests.Entity
 
             //Then
             newHash.Should().NotBe(currentHash);
+        }
+
+        [Fact]
+        public void GetHashCode_SameTypeAndId_ReturnsSameHash()
+        {
+            // Arrange
+            var entity1 = new TestEntity(1);
+            var entity2 = new TestEntity(1);
+
+            // Act
+            var hash1 = entity1.GetHashCode();
+            var hash2 = entity2.GetHashCode();
+
+            // Assert
+            hash1.Should().Be(hash2);
         }
     }
 }

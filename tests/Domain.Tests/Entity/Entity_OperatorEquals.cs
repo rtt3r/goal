@@ -7,8 +7,16 @@ namespace Goal.Seedwork.Domain.Tests.Entity
 {
     public class Entity_EqualityOperator
     {
+        private class TestEntity : Domain.Aggregates.Entity<int>
+        {
+            public TestEntity(int id)
+            {
+                Id = id;
+            }
+        }
+
         [Fact]
-        public void ReturnFalseGivenNotNullObjects()
+        public void OperatorEquals_NotNullObjects_ReturnsFalse()
         {
             //Given
             var obj1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -22,7 +30,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnTrueGivenNotNullObjects()
+        public void OperatorEquals_NotNullObjects_ReturnsTrue()
         {
             //Given
             var obj1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -36,7 +44,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnFalseGivenNullLeftObjects()
+        public void OperatorEquals_NullLeftObjects_ReturnsFalse()
         {
             //Given
             EntityTest obj1 = null;
@@ -50,7 +58,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnFalseGivenNullRightObjects()
+        public void OperatorEquals_NullRightObjects_ReturnsFalse()
         {
             //Given
             var obj1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
@@ -64,7 +72,7 @@ namespace Goal.Seedwork.Domain.Tests.Entity
         }
 
         [Fact]
-        public void ReturnTrueGivenNullBothObjects()
+        public void OperatorEquals_NullBothObjects_ReturnsTrue()
         {
             //Given
             EntityTest obj1 = null;
@@ -75,6 +83,33 @@ namespace Goal.Seedwork.Domain.Tests.Entity
 
             //Then
             areEquals.Should().BeTrue();
+        }
+
+        [Fact]
+        public void OperatorEquals_SameObjects_ReturnsTrue()
+        {
+            // Arrange
+            var entity = new TestEntity(1);
+
+            // Act
+            var result = entity == entity;
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void OperatorEquals_DifferentObjects_ReturnsFalse()
+        {
+            // Arrange
+            var entity1 = new TestEntity(1);
+            var entity2 = new TestEntity(2);
+
+            // Act
+            var result = entity1 == entity2;
+
+            // Assert
+            result.Should().BeFalse();
         }
     }
 }
