@@ -12,7 +12,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
     public class Enumerable_ForEach
     {
         [Fact]
-        public void NotThrowExceptionGivenNotEmptyEnumerable()
+        public void ForEach_NotEmptyEnumerable_NotThrowException()
         {
             IEnumerable<TestObject1> source = new List<TestObject1>
             {
@@ -31,7 +31,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         }
 
         [Fact]
-        public void NotThrowExceptionGivenEmptyEnumerable()
+        public void ForEach_EmptyEnumerable_NotThrowException()
         {
             IEnumerable<TestObject1> source = new List<TestObject1>();
             source.ForEach(p => { });
@@ -40,7 +40,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         }
 
         [Fact]
-        public void ThrowArgumentNullExceptionGivenNull()
+        public void ForEach_Null_ThrowArgumentNullException()
         {
             Action act = () =>
             {
@@ -52,7 +52,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         }
 
         [Fact]
-        public void NotThrowExceptionGivenNotEmptyObjectEnumerable()
+        public void ForEach_NotEmptyObjectEnumerable_NotThrowException()
         {
             TestObject1[] source = new[]
             {
@@ -72,7 +72,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         }
 
         [Fact]
-        public void NotThrowExceptionGivenEmptyObjectEnumerable()
+        public void ForEach_EmptyObjectEnumerable_NotThrowException()
         {
             TestObject1[] source = Array.Empty<TestObject1>();
             source.ForEach(p => { });
@@ -81,7 +81,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
         }
 
         [Fact]
-        public void ThrowArgumentNullExceptionGivenNullObjectEnumerable()
+        public void ForEach_NullObjectEnumerable_ThrowArgumentNullException()
         {
             Action act = () =>
             {
@@ -90,6 +90,59 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
             };
 
             act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
+        }
+
+        [Fact]
+        public void ForEach_ShouldExecuteActionOnForEachItem()
+        {
+            // arrange
+            int[] input = new[] { 1, 2, 3 };
+            int[] expectedOutput = new[] { 1, 2, 3 }; // each item incremented by one
+
+            // act
+            input.ForEach(item => { });
+
+            // assert
+            input.Should().BeEquivalentTo(expectedOutput);
+        }
+
+        [Fact]
+        public void ForEach_ShouldReturnInputEnumerable()
+        {
+            // arrange
+            IEnumerable input = new[] { 1, 2, 3 };
+
+            // act
+            IEnumerable output = input.ForEach(item => { });
+
+            // assert
+            output.Should().BeSameAs(input);
+        }
+
+        [Fact]
+        public void ForEach_ShouldThrowArgumentNullException_WhenSourceIsNull()
+        {
+            // arrange
+            IEnumerable source = null;
+
+            // act
+            Action action = () => source.ForEach(item => Console.WriteLine(item));
+
+            // assert
+            action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
+        }
+
+        [Fact]
+        public void ForEach_ShouldThrowArgumentNullException_WhenActionIsNull()
+        {
+            // arrange
+            IEnumerable source = new[] { "one", "two", "three" };
+
+            // act
+            Action action = () => source.ForEach(null);
+
+            // assert
+            action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("action");
         }
     }
 }
