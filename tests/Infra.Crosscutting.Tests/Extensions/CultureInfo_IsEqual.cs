@@ -31,5 +31,33 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
 
             isEqual.Should().BeFalse();
         }
+
+        [Fact]
+        public void IsEqual_ReturnsTrue_WhenCulturesHaveSameCompareInfo()
+        {
+            // Arrange
+            var culture1 = new CultureInfo("en-US");
+            var culture2 = new CultureInfo("EN-us");
+
+            // Act
+            bool result = culture1.IsEqual(culture2);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsEqual_ReturnsFalse_WhenCulturesHaveDifferentCompareInfo()
+        {
+            // Arrange
+            var culture1 = new CultureInfo("en-US");
+            var culture2 = new CultureInfo("fr-FR");
+
+            // Act
+            bool result = culture1.IsEqual(culture2);
+
+            // Assert
+            result.Should().BeFalse();
+        }
     }
 }
