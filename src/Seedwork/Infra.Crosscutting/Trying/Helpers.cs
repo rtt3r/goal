@@ -17,9 +17,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
         public static Option<T> Some<T>(T value)
             => Option.Of(value);
 
-        public static PromiseOfTry<T> PromiseOfTry<T>(Func<T> func)
-            => func as PromiseOfTry<T>;
-
         public static Unit Unit()
             => unit;
 
@@ -41,6 +38,4 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             };
         }
     }
-
-    public delegate Try<Exception, TResult> PromiseOfTry<TResult>();
 }
