@@ -34,7 +34,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Notifications
         private class TestNotificationHandler : NotificationHandler<Notification>
         {
             public override IEnumerable<Notification> GetNotifications()
-            => base.GetNotifications();
+                => base.GetNotifications();
         }
     }
 }

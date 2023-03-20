@@ -69,6 +69,28 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Specifications
 
             actual.Should().Be(expected);
         }
-    }
 
+        [Fact]
+        public void ThrowArgumentNullException_WhenMapIsNullOrEmpty()
+        {
+            // Arrange
+            ParameterExpression originalParam1 = Expression.Parameter(typeof(decimal), "originalParam1");
+            ParameterExpression originalParam2 = Expression.Parameter(typeof(decimal), "originalParam2");
+            ParameterExpression newParam1 = Expression.Parameter(typeof(decimal), "newParam1");
+            ParameterExpression newParam2 = Expression.Parameter(typeof(decimal), "newParam2");
+
+            ConstantExpression constantExpr = Expression.Constant(123M);
+            BinaryExpression addExpr = Expression.Add(originalParam1, constantExpr);
+
+            MethodCallExpression concatExpr = Expression.Call(
+                typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) }),
+                addExpr,
+                originalParam2);
+
+            // Act & Assert
+            FluentActions.Invoking(() => ParameterRebinder.ReplaceParameters(null, concatExpr))
+                .Should().Throw<ArgumentNullException>()
+                .Which.Message.Should().Be("Value cannot be null. (Parameter 'left')");
+        }
+    }
 }
