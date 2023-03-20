@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Specifications
 {
-    internal sealed class ParameterRebinder : ExpressionVisitor
+    public sealed class ParameterRebinder : ExpressionVisitor
     {
         private readonly Dictionary<ParameterExpression, ParameterExpression> map;
 

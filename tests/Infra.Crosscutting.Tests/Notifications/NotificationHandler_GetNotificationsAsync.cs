@@ -9,7 +9,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Notifications
     public class NotificationHandler_GetNotificationsAsync
     {
         [Fact]
-        public async Task GetNotificationsAsync_ReturnsAllNotifications()
+        public async Task ReturnsAllNotifications()
         {
             // Arrange
             var handler = new TestNotificationHandler();
