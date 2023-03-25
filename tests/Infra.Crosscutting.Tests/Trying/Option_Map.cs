@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
@@ -52,32 +53,26 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             // assert
             result.IsNone.Should().BeTrue();
         }
-    }
-
-    public class Option_ImplicitOperator
-    {
-        [Fact]
-        public void FromValue_ReturnsSome()
-        {
-            // arrange
-            int value = 10;
-
-            // act
-            Option<int> option = value;
-
-            // assert
-            option.IsSome.Should().BeTrue();
-            option.Value.Should().Be(value);
-        }
 
         [Fact]
-        public void FromNoneType_ReturnsNone()
+        public void ReturnsSome_WhenOptionIsSome()
         {
-            // act
-            Option<int> option = Helpers.None;
+            // Arrange
+            Option<int> option = Helpers.Some(42);
+            Func<int, string, bool> func = (x, y) => (x + y).Length > 5 ? true : false;
 
-            // assert
-            option.IsNone.Should().BeTrue();
+            // Act
+            var result = option.Map(func);
+
+            // Assert
+            result.Should().BeOfType<Option<Func<string, bool>>>();
+            result.Match(
+                some: fn => {
+                    fn("hi").Should().BeFalse();
+                    fn("hello world").Should().BeTrue();
+                },
+                none: () => throw new Exception("should have been Some")
+            );
         }
     }
 }
