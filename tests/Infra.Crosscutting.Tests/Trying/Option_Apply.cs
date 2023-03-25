@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
@@ -15,11 +15,41 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             var optionArg = Option.Of(6);
 
             // Act
-            var result = optionFunc.Apply(optionArg);
+            Option<bool> result = optionFunc.Apply(optionArg);
 
             // Assert
             result.IsSome.Should().BeTrue();
             result.Value.Should().BeTrue();
+        }
+
+        [Fact]
+        public void BothOptionsHaveValues_ReturnsNewOptionWithResult()
+        {
+            // Arrange
+            Option<Func<int, bool, string>> inputFuncOption = Helpers.Some<Func<int, bool, string>>((a, b) => $"{a} {b}");
+            Option<int> inputValueOption = Helpers.Some(42);
+
+            // Act
+            Option<Func<bool, string>> resultOption = inputFuncOption.Apply(inputValueOption);
+            string funcResult = resultOption.Value.Invoke(false);
+            string someResult = Helpers.Some("42 False").Value;
+
+            // Assert
+            funcResult.Should().BeEquivalentTo(someResult);
+        }
+
+        [Fact]
+        public void FirstOptionIsEmpty_ReturnsEmptyOption()
+        {
+            // Arrange
+            Option<Func<int, string, double>> inputFuncOption = Helpers.None;
+            Option<int> inputValueOption = Helpers.Some(42);
+
+            // Act
+            Option<Func<string, double>> resultOption = inputFuncOption.Apply(inputValueOption);
+
+            // Assert
+            resultOption.Value.Should().BeNull();
         }
 
         [Fact]
@@ -30,7 +60,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             var optionArg = Option.Of(6);
 
             // Act
-            var result = optionFunc.Apply(optionArg);
+            Option<bool> result = optionFunc.Apply(optionArg);
 
             // Assert
             result.IsNone.Should().BeTrue();
