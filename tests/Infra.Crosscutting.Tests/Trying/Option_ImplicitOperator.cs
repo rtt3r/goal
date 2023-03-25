@@ -25,7 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void FromNoneType_ReturnsNone()
         {
             // act
-            Option<int> option = Option<int>.None();
+            var option = Option<int>.None();
 
             // assert
             option.IsNone.Should().BeTrue();
@@ -35,7 +35,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void ReturnsNone_WhenOptionIsNone()
         {
             // Arrange
-            Option<int> option = Option<int>.None();
+            var option = Option<int>.None();
             static bool func(int x, string y) => (x + y).Length > 5;
 
             // Act
