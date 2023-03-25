@@ -48,7 +48,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             => Option.Of(value);
 
         public static implicit operator Option<T>(NoneType _)
-            => None();
+            => Option<T>.None();
 
         public static implicit operator UnitType(Option<T> _)
             => Option.Unit();
