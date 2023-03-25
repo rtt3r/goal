@@ -10,7 +10,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithSome_SomeActionIsExecuted()
         {
             // arrange
-            Option<int> option = Helpers.Some(2);
+            Option<int> option = Option.Of(2);
             bool actionPerformed = false;
 
             // act
@@ -26,7 +26,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithSome_ReturnSomeValue()
         {
             // arrange
-            Option<int> option = Helpers.Some(1);
+            Option<int> option = Option.Of(1);
 
             // act
             int result = option.Match(some: v => 2, none: () => 0);

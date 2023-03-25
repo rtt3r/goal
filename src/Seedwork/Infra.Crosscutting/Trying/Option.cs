@@ -20,7 +20,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
                 return Helpers.None;
             }
 
-            return Helpers.Some(mapfunc(@this.Value));
+            return Option.Of(mapfunc(@this.Value));
         }
 
         public static Option<Func<TB, TResult>> Map<TA, TB, TResult>(this Option<TA> @this, Func<TA, TB, TResult> func)

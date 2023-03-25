@@ -14,9 +14,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
         public static Func<TA, Func<TB, Func<TC, TResult>>> Curry<TA, TB, TC, TResult>(this Func<TA, TB, TC, TResult> func)
             => (TA a) => (TB b) => (TC c) => func(a, b, c);
 
-        public static Option<T> Some<T>(T value)
-            => Option.Of(value);
-
         public static Unit Unit()
             => unit;
 

@@ -7,6 +7,16 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
     public class Option_Of
     {
         [Fact]
+        public void Creates_Option_Of_Some()
+        {
+            // Arrange & Act
+            Option<int> option = Option.Of(10);
+
+            // Assert
+            option.IsSome.Should().BeTrue();
+        }
+
+        [Fact]
         public void WithNonNullValue_ReturnsSome()
         {
             int value = 123;

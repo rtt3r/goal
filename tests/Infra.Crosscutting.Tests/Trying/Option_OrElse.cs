@@ -10,8 +10,8 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void GivenAnOption_WhenOrElseWithOptionIsCalled_AndTheOptionHasValue_ShouldReturnOriginalOption()
         {
             //Arrange
-            Option<int> option1 = Helpers.Some(10);
-            Option<int> option2 = Helpers.Some(20);
+            Option<int> option1 = Option.Of(10);
+            Option<int> option2 = Option.Of(20);
 
             //Act
             Option<int> result = option1.OrElse(option2);
@@ -25,7 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         {
             //Arrange
             Option<int> option1 = Helpers.None;
-            Option<int> option2 = Helpers.Some(20);
+            Option<int> option2 = Option.Of(20);
 
             //Act
             Option<int> result = option1.OrElse(option2);
@@ -38,10 +38,10 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void GivenAnOption_WhenOrElseWithFuncIsCalled_AndTheOptionHasValue_ShouldReturnOriginalOption()
         {
             //Arrange
-            Option<string> option1 = Helpers.Some("Hello World");
+            Option<string> option1 = Option.Of("Hello World");
 
             //Act
-            Option<string> result = option1.OrElse(() => Helpers.Some("Fallback"));
+            Option<string> result = option1.OrElse(() => Option.Of("Fallback"));
 
             //Assert
             result.Should().Be(option1);
@@ -54,10 +54,10 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             Option<string> option1 = Helpers.None;
 
             //Act
-            Option<string> result = option1.OrElse(() => Helpers.Some("Fallback"));
+            Option<string> result = option1.OrElse(() => Option.Of("Fallback"));
 
             //Assert
-            Option<string> expectedOption = Helpers.Some("Fallback");
+            Option<string> expectedOption = Option.Of("Fallback");
             result.Should().Be(expectedOption);
         }
     }

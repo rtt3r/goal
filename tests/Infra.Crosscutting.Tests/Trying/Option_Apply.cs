@@ -26,8 +26,8 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void BothOptionsHaveValues_ReturnsNewOptionWithResult()
         {
             // Arrange
-            Option<Func<int, object, string>> inputFunc = Helpers.Some<Func<int, object, string>>((a, b) => $"{a} {b}");
-            Option<int> inputValue = Helpers.Some(42);
+            Option<Func<int, object, string>> inputFunc = Option.Of<Func<int, object, string>>((a, b) => $"{a} {b}");
+            Option<int> inputValue = Option.Of(42);
 
             // Act
             Option<Func<object, string>> result = inputFunc.Apply(inputValue);
@@ -50,7 +50,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         {
             // Arrange
             Option<Func<int, string, double>> inputFuncOption = Helpers.None;
-            Option<int> inputValueOption = Helpers.Some(42);
+            Option<int> inputValueOption = Option.Of(42);
 
             // Act
             Option<Func<string, double>> resultOption = inputFuncOption.Apply(inputValueOption);

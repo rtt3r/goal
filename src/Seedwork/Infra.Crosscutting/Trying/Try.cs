@@ -21,7 +21,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
                     return Helpers.None;
                 }
 
-                return Helpers.Some(Failure);
+                return Option.Of(Failure);
             }
         }
 
@@ -34,7 +34,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
                     return Helpers.None;
                 }
 
-                return Helpers.Some(Success);
+                return Option.Of(Success);
             }
         }
 

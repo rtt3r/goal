@@ -42,7 +42,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
         }
 
         public static implicit operator Option<T>(T value)
-            => Helpers.Some(value);
+            => Option.Of(value);
 
         public static implicit operator Option<T>(NoneType _)
             => None;
