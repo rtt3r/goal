@@ -18,7 +18,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             {
                 if (!IsFailure)
                 {
-                    return Helpers.None;
+                    return Option.None();
                 }
 
                 return Option.Of(Failure);
@@ -31,7 +31,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             {
                 if (!IsSuccess)
                 {
-                    return Helpers.None;
+                    return Option.None();
                 }
 
                 return Option.Of(Success);
@@ -62,7 +62,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             return failure(Failure);
         }
 
-        public Unit Match(Action<TFailure> failure, Action<TSuccess> success)
+        public UnitType Match(Action<TFailure> failure, Action<TSuccess> success)
             => Match(Helpers.ToFunc(failure), Helpers.ToFunc(success));
 
         public TSuccess GetSuccess()

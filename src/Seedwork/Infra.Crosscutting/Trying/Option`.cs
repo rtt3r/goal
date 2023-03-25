@@ -4,13 +4,16 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
 {
     public struct Option<T>
     {
-        public static readonly Option<T> None;
+        private static readonly Option<T> none;
 
         public T Value { get; }
 
         public bool IsSome { get; }
 
         public bool IsNone => !IsSome;
+
+        public static Option<T> None()
+            => none;
 
         internal Option(T value, bool isSome)
         {
@@ -28,7 +31,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             return some(Value);
         }
 
-        public Unit Match(Action<T> some, Action none)
+        public UnitType Match(Action<T> some, Action none)
             => Match(Helpers.ToFunc(some), Helpers.ToFunc(none));
 
         public TR Match<TR>(Func<T, TR> some, Func<T, TR> none)
@@ -45,9 +48,9 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             => Option.Of(value);
 
         public static implicit operator Option<T>(NoneType _)
-            => None;
+            => None();
 
-        public static implicit operator Unit(Option<T> _)
-            => Helpers.Unit();
+        public static implicit operator UnitType(Option<T> _)
+            => Option.Unit();
     }
 }

@@ -25,7 +25,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void FromNoneType_ReturnsNone()
         {
             // act
-            Option<int> option = Option<int>.None;
+            Option<int> option = Option<int>.None();
 
             // assert
             option.IsNone.Should().BeTrue();
@@ -35,14 +35,14 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void ReturnsNone_WhenOptionIsNone()
         {
             // Arrange
-            Option<int> option = Option<int>.None;
+            Option<int> option = Option<int>.None();
             static bool func(int x, string y) => (x + y).Length > 5;
 
             // Act
             Option<Func<string, bool>> result = option.Map((Func<int, string, bool>)func);
 
             // Assert
-            result.Should().Be(Option<Func<string, bool>>.None);
+            result.Should().Be(Option<Func<string, bool>>.None());
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithNoneValue_ShouldReturnEmptyOption()
         {
             // arrange
-            Option<int> option = Option<int>.None;
+            Option<int> option = Option<int>.None();
 
             // act
             Option<string> result = option.Map(i => i.ToString());

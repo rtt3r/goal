@@ -4,13 +4,13 @@ using Xunit;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
 {
-    public class Helpers_Unit
+    public class Option_Unit
     {
         [Fact]
         public void ShouldReturnNonNullUnit()
         {
             // Act
-            Unit result = Helpers.Unit();
+            UnitType result = Option.Unit();
 
             // Assert
             result.Should().NotBeNull();

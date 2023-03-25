@@ -16,7 +16,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
 
             // Act
             var func = Helpers.ToFunc(action);
-            Unit result = func();
+            UnitType result = func();
 
             // Assert
             invoked.Should().BeTrue();
@@ -32,7 +32,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
 
             // Act
             var func = Helpers.ToFunc((Action<int>)action);
-            Unit result = func(42);
+            UnitType result = func(42);
 
             // Assert
             invoked.Should().BeTrue();

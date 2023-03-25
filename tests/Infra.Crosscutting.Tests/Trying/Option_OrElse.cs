@@ -24,7 +24,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void GivenAnOption_WhenOrElseWithOptionIsCalled_AndTheOptionHasNoValue_ShouldReturnBackupOption()
         {
             //Arrange
-            Option<int> option1 = Option<int>.None;
+            Option<int> option1 = Option<int>.None();
             var option2 = Option.Of(20);
 
             //Act
@@ -51,7 +51,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void GivenAnOption_WhenOrElseWithFuncIsCalled_AndTheOptionHasNoValue_ShouldReturnFromTheFallbackFunction()
         {
             //Arrange
-            Option<string> option1 = Option<string>.None;
+            Option<string> option1 = Option<string>.None();
 
             //Act
             Option<string> result = option1.OrElse(() => Option.Of("Fallback"));

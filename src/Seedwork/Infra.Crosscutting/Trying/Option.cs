@@ -4,8 +4,17 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
 {
     public static class Option
     {
+        private static readonly NoneType none = default;
+        private static readonly UnitType unit = default;
+
         public static Option<T> Of<T>(T value)
             => new(value, value != null);
+
+        public static NoneType None()
+            => none;
+
+        public static UnitType Unit()
+            => unit;
 
         public static Option<TResult> Apply<T, TResult>(this Option<Func<T, TResult>> @this, Option<T> arg)
             => @this.Bind((Func<T, TResult> f) => arg.Map(f));
@@ -17,7 +26,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
         {
             if (!@this.IsSome)
             {
-                return Helpers.None;
+                return Option.None();
             }
 
             return Option.Of(mapfunc(@this.Value));
@@ -30,7 +39,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
         {
             if (!@this.IsSome)
             {
-                return Helpers.None;
+                return Option.None();
             }
 
             return bindfunc(@this.Value);

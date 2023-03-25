@@ -49,7 +49,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void FirstOptionIsEmpty_ReturnsEmptyOption()
         {
             // Arrange
-            Option<Func<int, string, double>> inputFunc = Option<Func<int, string, double>>.None;
+            Option<Func<int, string, double>> inputFunc = Option<Func<int, string, double>>.None();
             var inputValue = Option.Of(42);
 
             // Act
@@ -63,7 +63,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void Option_Apply_Should_Return_None_Result_For_None_Function()
         {
             // Arrange
-            Option<Func<int, bool>> optionFunc = Option<Func<int, bool>>.None;
+            Option<Func<int, bool>> optionFunc = Option<Func<int, bool>>.None();
             var optionArg = Option.Of(6);
 
             // Act

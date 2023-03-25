@@ -39,7 +39,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithNone_NoneActionIsExecuted()
         {
             // arrange
-            Option<int> option = Option<int>.None;
+            Option<int> option = Option<int>.None();
             bool actionExecuted = false;
 
             // act
@@ -55,7 +55,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithNone_ReturnNoneValue()
         {
             // arrange
-            Option<int> option = Option<int>.None;
+            Option<int> option = Option<int>.None();
 
             // act
             int result = option.Match(some: v => 1, none: () => 0);
@@ -83,7 +83,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WhenNone_ShouldExecuteNoneFunc()
         {
             // Arrange
-            Option<int> option = Option<int>.None;
+            Option<int> option = Option<int>.None();
 
             // Act
             string result = option.Match(
