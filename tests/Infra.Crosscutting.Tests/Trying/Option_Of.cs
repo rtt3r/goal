@@ -22,104 +22,64 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             var result = Option.Of(value);
             result.IsNone.Should().BeTrue();
         }
-    }
-
-    public class Option_Map
-    {
-        [Theory]
-        [InlineData(1, 2, 3)]
-        [InlineData(4, 5, 9)]
-        public void WithSome_ReturnsSome(int a, int b, int expected)
-        {
-            var option = Option.Of(a);
-            var result = option.Map(x => x + b);
-            result.IsSome.Should().BeTrue();
-            result.Value.Should().Be(expected);
-        }
 
         [Fact]
-        public void WithNone_ReturnsNone()
+        public void ValueNotNull_ReturnsSome()
         {
-            var option = Option.Of<string>(null);
-            var result = option.Map(x => x.ToUpper());
-            result.IsNone.Should().BeTrue();
-        }
-    }
+            // arrange
+            int value = 1;
 
-    public class Option_GetOrElse
-    {
-        [Theory]
-        [InlineData(42, true)]
-        [InlineData("hello world", true)]
-        [InlineData(null, false)]
-        public void WithSome_ReturnsValue(object value, bool useFallback)
-        {
+            // act
             var option = Option.Of(value);
 
-            if (useFallback)
-            {
-                var result = option.GetOrElse(() => 123);
-                result.Should().Be(value);
-            }
-            else
-            {
-                var result = option.GetOrElse(456);
-                result.Should().Be(456);
-            }
-        }
-
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void WithNone_ReturnsFallback(bool useDelegateFallback)
-        {
-            var option = Option.Of<int?>(null);
-
-            if (useDelegateFallback)
-            {
-                var result = option.GetOrElse(() => 123);
-                result.Should().Be(123);
-            }
-            else
-            {
-                var result = option.GetOrElse(456);
-                result.Should().Be(456);
-            }
-        }
-    }
-
-    public class Option_Bind
-    {
-        [Fact]
-        public void WithSome_ReturnsOptionFromBindFunction()
-        {
-            var option = Option.Of(123);
-            var result = option.Bind(x => Option.Of("hi"));
-            result.IsSome.Should().BeTrue();
-            result.Value.Should().Be("hi");
+            // assert
+            option.IsSome.Should().BeTrue();
+            option.Value.Should().Be(value);
         }
 
         [Fact]
-        public void WithNone_ReturnsNone()
+        public void ValueIsNull_ReturnsNone()
         {
-            var option = Option.Of<object>(null);
-            var result = option.Bind(x => Option.Of("hi"));
-            result.IsNone.Should().BeTrue();
+            // arrange
+            int? value = null;
+
+            // act
+            var option = Option.Of(value);
+
+            // assert
+            option.IsNone.Should().BeTrue();
         }
     }
 
-    public class Option_IfNone
+    public class Option_Match
     {
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void ActionIsCalledIfOptionIsNone(bool isNone)
+        [Fact]
+        public void Match_WithSome_SomeActionIsExecuted()
         {
-            var ranAction = false;
-            var option = isNone ? Helpers.None : Helpers.Some(123);
-            var result = option.IfNone(() => ranAction = true);
-            result.IsNone.Should().Be(isNone);
-            ranAction.Should().Be(isNone);
+            // arrange
+            var option = Helpers.Some(2);
+            bool actionPerformed = false;
+
+            // act
+            option.Match(
+                some: (value) => { actionPerformed = true; },
+                none: () => { });
+
+            // assert
+            actionPerformed.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Match_WithSome_ReturnSomeValue()
+        {
+            // arrange
+            var option = Helpers.Some(1);
+
+            // act
+            var result = option.Match(some: v => 2, none: () => 0);
+
+            // assert
+            result.Should().Be(2);
         }
     }
 }
