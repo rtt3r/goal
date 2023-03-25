@@ -6,7 +6,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
     {
         public static readonly Option<T> None;
 
-        internal T Value { get; }
+        public T Value { get; }
 
         public bool IsSome { get; }
 
