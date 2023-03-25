@@ -26,18 +26,20 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void BothOptionsHaveValues_ReturnsNewOptionWithResult()
         {
             // Arrange
-            Option<Func<int, bool, string>> inputFunc = Helpers.Some<Func<int, bool, string>>((a, b) => $"{a} {b}");
+            Option<Func<int, object, string>> inputFunc = Helpers.Some<Func<int, object, string>>((a, b) => $"{a} {b}");
             Option<int> inputValue = Helpers.Some(42);
 
             // Act
-            Option<Func<bool, string>> result = inputFunc.Apply(inputValue);
+            Option<Func<object, string>> result = inputFunc.Apply(inputValue);
 
             // Assert
-            result.Should().BeOfType<Option<Func<bool, string>>>();
             result.Match(
                 some: fn =>
                 {
+                    fn("Test").Should().Be("42 Test");
+                    fn(true).Should().Be("42 True");
                     fn(false).Should().Be("42 False");
+                    fn(64).Should().Be("42 64");
                 },
                 none: () => throw new Exception("should have been Some")
             );

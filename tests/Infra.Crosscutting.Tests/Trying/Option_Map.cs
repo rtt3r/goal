@@ -13,7 +13,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithSome_ReturnsSome(int a, int b, int expected)
         {
             var option = Option.Of(a);
-            var result = option.Map(x => x + b);
+            Option<int> result = option.Map(x => x + b);
             result.IsSome.Should().BeTrue();
             result.Value.Should().Be(expected);
         }
@@ -22,7 +22,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithNone_ReturnsNone()
         {
             var option = Option.Of<string>(null);
-            var result = option.Map(x => x.ToUpper());
+            Option<string> result = option.Map(x => x.ToUpper());
             result.IsNone.Should().BeTrue();
         }
 
@@ -59,15 +59,15 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         {
             // Arrange
             Option<int> option = Helpers.Some(42);
-            Func<int, string, bool> func = (x, y) => (x + y).Length > 5 ? true : false;
+            static bool func(int x, string y) => (x + y).Length > 5;
 
             // Act
-            var result = option.Map(func);
+            Option<Func<string, bool>> result = option.Map((Func<int, string, bool>)func);
 
             // Assert
-            result.Should().BeOfType<Option<Func<string, bool>>>();
             result.Match(
-                some: fn => {
+                some: fn =>
+                {
                     fn("hi").Should().BeFalse();
                     fn("hello world").Should().BeTrue();
                 },
