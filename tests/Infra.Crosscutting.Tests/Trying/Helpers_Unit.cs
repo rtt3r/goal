@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
@@ -11,7 +10,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void ShouldReturnNonNullUnit()
         {
             // Act
-            var result = Helpers.Unit();
+            Unit result = Helpers.Unit();
 
             // Assert
             result.Should().NotBeNull();

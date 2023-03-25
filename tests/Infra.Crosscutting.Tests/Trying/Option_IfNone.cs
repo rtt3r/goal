@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
@@ -11,9 +11,9 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         [InlineData(false)]
         public void ActionIsCalledIfOptionIsNone(bool isNone)
         {
-            var ranAction = false;
-            var option = isNone ? Helpers.None : Option.Of(123);
-            var result = option.IfNone(() => ranAction = true);
+            bool ranAction = false;
+            Option<int> option = isNone ? Helpers.None : Option.Of(123);
+            Option<int> result = option.IfNone(() => ranAction = true);
             result.IsNone.Should().Be(isNone);
             ranAction.Should().Be(isNone);
         }

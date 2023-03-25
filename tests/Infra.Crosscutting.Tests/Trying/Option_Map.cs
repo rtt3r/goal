@@ -31,7 +31,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         {
             // arrange
             int initial = 42;
-            Option<int> option = Option.Of(initial);
+            var option = Option.Of(initial);
 
             // act
             Option<string> result = option.Map(i => i.ToString());
@@ -45,7 +45,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithNoneValue_ShouldReturnEmptyOption()
         {
             // arrange
-            Option<int> option = Helpers.None;
+            Option<int> option = Option<int>.None;
 
             // act
             Option<string> result = option.Map(i => i.ToString());
@@ -58,7 +58,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void ReturnsSome_WhenOptionIsSome()
         {
             // Arrange
-            Option<int> option = Option.Of(42);
+            var option = Option.Of(42);
             static bool func(int x, string y) => (x + y).Length > 5;
 
             // Act

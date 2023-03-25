@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
@@ -10,7 +10,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithSome_ReturnsOptionFromBindFunction()
         {
             var option = Option.Of(123);
-            var result = option.Bind(x => Option.Of("hi"));
+            Option<string> result = option.Bind(x => Option.Of("hi"));
             result.IsSome.Should().BeTrue();
             result.Value.Should().Be("hi");
         }
@@ -19,7 +19,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void WithNone_ReturnsNone()
         {
             var option = Option.Of<object>(null);
-            var result = option.Bind(x => Option.Of("hi"));
+            Option<string> result = option.Bind(x => Option.Of("hi"));
             result.IsNone.Should().BeTrue();
         }
     }

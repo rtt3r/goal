@@ -12,11 +12,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         {
             // Arrange 
             bool invoked = false;
-            Action action = () => invoked = true;
+            void action() => invoked = true;
 
             // Act
             var func = Helpers.ToFunc(action);
-            var result = func();
+            Unit result = func();
 
             // Assert
             invoked.Should().BeTrue();
@@ -28,11 +28,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         {
             // Arrange 
             bool invoked = false;
-            Action<int> action = (_) => invoked = true;
+            void action(int _) => invoked = true;
 
             // Act
-            var func = Helpers.ToFunc(action);
-            var result = func(42);
+            var func = Helpers.ToFunc((Action<int>)action);
+            Unit result = func(42);
 
             // Assert
             invoked.Should().BeTrue();

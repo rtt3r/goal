@@ -26,8 +26,8 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void BothOptionsHaveValues_ReturnsNewOptionWithResult()
         {
             // Arrange
-            Option<Func<int, object, string>> inputFunc = Option.Of<Func<int, object, string>>((a, b) => $"{a} {b}");
-            Option<int> inputValue = Option.Of(42);
+            var inputFunc = Option.Of<Func<int, object, string>>((a, b) => $"{a} {b}");
+            var inputValue = Option.Of(42);
 
             // Act
             Option<Func<object, string>> result = inputFunc.Apply(inputValue);
@@ -49,11 +49,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void FirstOptionIsEmpty_ReturnsEmptyOption()
         {
             // Arrange
-            Option<Func<int, string, double>> inputFuncOption = Helpers.None;
-            Option<int> inputValueOption = Option.Of(42);
+            Option<Func<int, string, double>> inputFunc = Option<Func<int, string, double>>.None;
+            var inputValue = Option.Of(42);
 
             // Act
-            Option<Func<string, double>> resultOption = inputFuncOption.Apply(inputValueOption);
+            Option<Func<string, double>> resultOption = inputFunc.Apply(inputValue);
 
             // Assert
             resultOption.Value.Should().BeNull();
@@ -63,7 +63,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
         public void Option_Apply_Should_Return_None_Result_For_None_Function()
         {
             // Arrange
-            Option<Func<int, bool>> optionFunc = Helpers.None;
+            Option<Func<int, bool>> optionFunc = Option<Func<int, bool>>.None;
             var optionArg = Option.Of(6);
 
             // Act

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
@@ -16,12 +16,12 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
 
             if (useFallback)
             {
-                var result = option.GetOrElse(() => 123);
+                object result = option.GetOrElse(() => 123);
                 result.Should().Be(value);
             }
             else
             {
-                var result = option.GetOrElse(456);
+                object result = option.GetOrElse(456);
                 result.Should().Be(456);
             }
         }
@@ -35,12 +35,12 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
 
             if (useDelegateFallback)
             {
-                var result = option.GetOrElse(() => 123);
+                int? result = option.GetOrElse(() => 123);
                 result.Should().Be(123);
             }
             else
             {
-                var result = option.GetOrElse(456);
+                int? result = option.GetOrElse(456);
                 result.Should().Be(456);
             }
         }
