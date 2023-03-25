@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +10,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace Goal.Seedwork.Infra.Data.Auditing
 {
@@ -149,16 +149,16 @@ namespace Goal.Seedwork.Infra.Data.Auditing
                 AuditType = auditType.ToString(),
                 AuditUser = CurrentPrincipal,
                 TableName = tableName,
-                KeyValues = JsonConvert.SerializeObject(keyValues),
+                KeyValues = JsonSerializer.Serialize(keyValues),
                 OldValues = oldValues.Count == 0
                     ? null
-                    : JsonConvert.SerializeObject(oldValues),
+                    : JsonSerializer.Serialize(oldValues),
                 NewValues = newValues.Count == 0
                     ? null
-                    : JsonConvert.SerializeObject(newValues),
+                    : JsonSerializer.Serialize(newValues),
                 ChangedColumns = changedColumns.Count == 0
                     ? null
-                    : JsonConvert.SerializeObject(changedColumns)
+                    : JsonSerializer.Serialize(changedColumns)
             };
         }
     }
