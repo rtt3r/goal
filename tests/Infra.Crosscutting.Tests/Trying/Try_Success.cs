@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
@@ -14,6 +14,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
 
             bool didCallFailure = false;
             bool didCallSuccess = false;
+
             success.Match(
                 err => didCallFailure = true,
                 i =>

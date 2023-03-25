@@ -16,4 +16,37 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             result.Should().NotBeNull();
         }
     }
+
+    public class Try_Of
+    {
+        [Fact]
+        public void ReturnsSuccessfulTry_WhenGivenSuccess()
+        {
+            // Arrange
+            string message = "Something went wrong.";
+
+            // Act
+            var result = Try<int, string>.Of(message);
+
+            // Assert
+            result.IsSuccess.Should().BeTrue();
+            result.IsFailure.Should().BeFalse();
+            result.GetSuccess().Should().Be(message);
+        }
+
+        [Fact]
+        public void ReturnsFailedTry_WhenGivenFailure()
+        {
+            // Arrange
+            int value = 42;
+
+            // Act
+            var result = Try<int, string>.Of(value);
+
+            // Assert
+            result.IsSuccess.Should().BeFalse();
+            result.IsFailure.Should().BeTrue();
+            result.GetFailure().Should().Be(value);
+        }
+    }
 }
