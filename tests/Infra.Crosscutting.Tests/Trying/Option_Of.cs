@@ -50,36 +50,4 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
             option.IsNone.Should().BeTrue();
         }
     }
-
-    public class Option_Match
-    {
-        [Fact]
-        public void Match_WithSome_SomeActionIsExecuted()
-        {
-            // arrange
-            var option = Helpers.Some(2);
-            bool actionPerformed = false;
-
-            // act
-            option.Match(
-                some: (value) => { actionPerformed = true; },
-                none: () => { });
-
-            // assert
-            actionPerformed.Should().BeTrue();
-        }
-
-        [Fact]
-        public void Match_WithSome_ReturnSomeValue()
-        {
-            // arrange
-            var option = Helpers.Some(1);
-
-            // act
-            var result = option.Match(some: v => 2, none: () => 0);
-
-            // assert
-            result.Should().Be(2);
-        }
-    }
 }
