@@ -17,8 +17,6 @@ namespace Goal.Seedwork.Domain.Tests.Event
             {
                 AggregateId = aggregateId;
             }
-
-            public string Data { get; set; }
         }
 
         [Fact]

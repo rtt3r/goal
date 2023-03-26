@@ -20,7 +20,9 @@ namespace Goal.Seedwork.Domain.Tests.Entity
             var entity = new TestEntity(1);
 
             // Act
+#pragma warning disable CS1718 // Comparison made to same variable
             var result = entity != entity;
+#pragma warning restore CS1718 // Comparison made to same variable
 
             // Assert
             result.Should().BeFalse();

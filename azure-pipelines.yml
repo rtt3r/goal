@@ -59,8 +59,6 @@ steps:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
 
-
-
 - task: DotNetCoreCLI@2
   displayName: Pack
   inputs:

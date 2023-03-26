@@ -223,7 +223,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             if (async)
             {
                 await context.AddAsync(entity);
-                savedCount = await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 entity.Type = "Red Giant";
                 context.Update(entity);
@@ -232,7 +232,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             else
             {
                 context.Add(entity);
-                savedCount = await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 entity.Type = "Red Giant";
                 context.Update(entity);
@@ -335,7 +335,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             if (async)
             {
                 await context.AddAsync(entity);
-                savedCount = await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 context.Remove(entity);
                 savedCount = await context.SaveChangesAsync();
@@ -343,7 +343,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             else
             {
                 context.Add(entity);
-                savedCount = await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 context.Remove(entity);
                 savedCount = context.SaveChanges();

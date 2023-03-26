@@ -76,8 +76,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Specifications
             // Arrange
             ParameterExpression originalParam1 = Expression.Parameter(typeof(decimal), "originalParam1");
             ParameterExpression originalParam2 = Expression.Parameter(typeof(decimal), "originalParam2");
-            ParameterExpression newParam1 = Expression.Parameter(typeof(decimal), "newParam1");
-            ParameterExpression newParam2 = Expression.Parameter(typeof(decimal), "newParam2");
 
             ConstantExpression constantExpr = Expression.Constant(123M);
             BinaryExpression addExpr = Expression.Add(originalParam1, constantExpr);
