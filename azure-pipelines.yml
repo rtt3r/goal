@@ -43,9 +43,8 @@ steps:
   displayName: Test
   inputs:
     command: 'test'
-    projects: '**/*Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Agent.TempDirectory)/TestResults/Coverage'
-    publishTestResults: true
+    projects: 'tests/**/*Tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
 
 - task: SonarCloudAnalyze@1
 
