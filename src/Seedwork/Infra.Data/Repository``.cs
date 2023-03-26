@@ -25,8 +25,8 @@ namespace Goal.Seedwork.Infra.Data
             Context = context;
         }
 
-        public virtual TEntity Load(TKey id)
-            => Context.Set<TEntity>().Find(id);
+        public virtual TEntity Load(params TKey[] keyValues)
+            => Context.Set<TEntity>().Find(keyValues);
 
         public virtual ICollection<TEntity> Query()
             => Context.Set<TEntity>().ToList();
@@ -48,10 +48,10 @@ namespace Goal.Seedwork.Infra.Data
         public virtual IPagedCollection<TEntity> Query(IPageSearch pageSearch)
             => Query(new TrueSpecification<TEntity>(), pageSearch);
 
-        public virtual async Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken())
+        public virtual async Task<TEntity> LoadAsync(TKey[] keyValues, CancellationToken cancellationToken = new CancellationToken())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await Context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+            return await Context.Set<TEntity>().FindAsync(new object[] { keyValues }, cancellationToken);
         }
 
         public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())

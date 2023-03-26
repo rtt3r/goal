@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 
@@ -62,10 +63,13 @@ namespace Goal.Seedwork.Infra.Crosscutting
 
             public static void IsNot(bool condition, string message) => Is(!condition, message ?? "");
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNull(object value) => NotNull(value, null, null);
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNull(object value, string paramName) => NotNull(value, paramName, null);
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNull(object value, string paramName, string message)
             {
                 if (value is null)
@@ -74,10 +78,13 @@ namespace Goal.Seedwork.Infra.Crosscutting
                 }
             }
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNullOrEmpty(string value) => NotNullOrEmpty(value, null, null);
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNullOrEmpty(string value, string paramName) => NotNullOrEmpty(value, paramName, null);
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNullOrEmpty(string value, string paramName, string message)
             {
                 if (value is null)
@@ -91,10 +98,13 @@ namespace Goal.Seedwork.Infra.Crosscutting
                 }
             }
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNullOrWhiteSpace(string value) => NotNullOrWhiteSpace(value, null, null);
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNullOrWhiteSpace(string value, string paramName) => NotNullOrWhiteSpace(value, paramName, null);
 
+            [SuppressMessage("Critical Code Smell", "S3218:Inner class members should not shadow outer class \"static\" or type members", Justification = "<Pending>")]
             public static void NotNullOrWhiteSpace(string value, string paramName, string message)
             {
                 if (value is null)

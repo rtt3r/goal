@@ -4,8 +4,13 @@ using System.Text.RegularExpressions;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 {
-    public static class StringExtensions
+    public static partial class StringExtensions
     {
+#if NET7_0_OR_GREATER
+        [GeneratedRegex("[^0-9a-zA-Z]+")]
+        private static partial Regex AlphaNumericRegex();
+#endif
+
         public static string PadLeft(this string text, int totalWidth, string paddingString)
         {
             var padding = new StringBuilder();
@@ -63,7 +68,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
                 return str;
             }
 
+#if NET7_0_OR_GREATER
+            return AlphaNumericRegex().Replace(str, "");
+#else
             return Regex.Replace(str, "[^0-9a-zA-Z]+", "");
+#endif
         }
 
         public static bool IsNullOrEmpty(this string value) => string.IsNullOrEmpty(value);

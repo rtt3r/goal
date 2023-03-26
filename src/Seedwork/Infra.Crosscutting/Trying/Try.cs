@@ -2,7 +2,7 @@ using System;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Trying
 {
-    public struct Try<TFailure, TSuccess>
+    public readonly struct Try<TFailure, TSuccess>
     {
         internal TFailure Failure { get; }
 

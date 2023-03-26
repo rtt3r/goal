@@ -26,13 +26,13 @@ namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks
         [Fact]
         public void ContextIsNotNull_CreatesAnInstanceOfUnitOfWork()
         {
-            var dbContext = new DbContext(GetDbContextOptions());
+            var dbContext = new DbContext(CreateOptions());
             var unitOfWork = new MockUnitOfWork(dbContext);
 
             unitOfWork.Should().NotBeNull();
         }
 
-        private static DbContextOptions GetDbContextOptions()
+        private static DbContextOptions CreateOptions()
         {
             return new DbContextOptionsBuilder()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())

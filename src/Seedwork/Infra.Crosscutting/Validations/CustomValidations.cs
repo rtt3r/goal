@@ -3,8 +3,13 @@ using System.Text.RegularExpressions;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Validations
 {
-    public static class CustomValidations
+    public static partial class CustomValidations
     {
+#if NET7_0_OR_GREATER
+        [GeneratedRegex("[^0-9]")]
+        private static partial Regex OnlyDigitsRegex();
+#endif
+
         public static bool IsValidCnpj(string cnpj)
         {
             int[] multiplier1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -13,7 +18,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations
             string tempCnpj, digit;
             int sum, rest;
 
+#if NET7_0_OR_GREATER
+            string formatedCnpj = OnlyDigitsRegex().Replace(cnpj, "");
+#else
             string formatedCnpj = Regex.Replace(cnpj, "[^0-9]", "");
+#endif
 
             if (formatedCnpj.Length != 14 || formatedCnpj.Distinct().Count() == 1)
             {
@@ -55,7 +64,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Validations
             string tempCpf, digit;
             int sum, rest;
 
+#if NET7_0_OR_GREATER
+            string formatedCpf = OnlyDigitsRegex().Replace(cpf, "");
+#else
             string formatedCpf = Regex.Replace(cpf, "[^0-9]", "");
+#endif
 
             if (formatedCpf.Length != 11 || formatedCpf.Distinct().Count() == 1)
             {

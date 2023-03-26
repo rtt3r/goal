@@ -70,7 +70,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             Guid id = tests[2].Id;
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.LoadAsync(id).Result;
+            Test test = testRepository.LoadAsync(new[] { id }).Result;
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
@@ -90,7 +90,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.LoadAsync(Guid.NewGuid()).GetAwaiter().GetResult();
+            Test test = testRepository.LoadAsync(new[] { Guid.NewGuid() }).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();

@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Goal.Seedwork.Domain.Aggregates
 {
     public abstract class Entity<TKey> : IEntity<TKey>
@@ -32,6 +34,7 @@ namespace Goal.Seedwork.Domain.Aggregates
             }
         }
 
+        [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "<Pending>")]
         public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
         {
             if (Equals(left, null))

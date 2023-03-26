@@ -2,7 +2,7 @@ using System;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Trying
 {
-    public struct Option<T>
+    public readonly struct Option<T>
     {
         private static readonly Option<T> none = default;
 
