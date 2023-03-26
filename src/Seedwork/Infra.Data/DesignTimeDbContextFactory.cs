@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
@@ -9,59 +9,35 @@ namespace Goal.Seedwork.Infra.Data
     public abstract class DesignTimeDbContextFactory<TContext> : IDesignTimeDbContextFactory<TContext> where TContext : DbContext
     {
         private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
+        private const string DefaultConnectionStringName = "DefaultConnection";
 
-        public TContext CreateDbContext(string[] args) => Create(
-            Directory.GetCurrentDirectory(),
-            Environment.GetEnvironmentVariable(AspNetCoreEnvironment)
-        );
+        protected virtual string ConnectionStringName
+            => DefaultConnectionStringName;
+
+        public TContext CreateDbContext(string[] args)
+            => CreateDbContext(Directory.GetCurrentDirectory(), Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
 
         protected abstract TContext CreateNewInstance(DbContextOptionsBuilder<TContext> optionsBuilder, string connectionString);
 
-        public TContext Create()
+        private TContext CreateDbContext(string basePath, string environmentName)
         {
-            string environmentName = Environment.GetEnvironmentVariable(AspNetCoreEnvironment);
-            string basePath = AppContext.BaseDirectory;
-
-            return Create(basePath, environmentName);
-        }
-
-        private TContext Create(string basePath, string environmentName)
-        {
-            Console.WriteLine($"{nameof(DesignTimeDbContextFactory<TContext>)}.Create(string, string): Base Path: {basePath}");
-            Console.WriteLine($"{nameof(DesignTimeDbContextFactory<TContext>)}.Create(string, string): Environment Name: {environmentName}");
-
-            IConfigurationBuilder builder = new ConfigurationBuilder()
+            IConfigurationRoot config = new ConfigurationBuilder()
                 .SetBasePath(basePath)
                 .AddJsonFile("appsettings.json")
                 .AddJsonFile($"appsettings.{environmentName}.json", true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables()
+                .Build();
 
-            IConfigurationRoot config = builder.Build();
-
-            string connectionString = config.GetConnectionString("DefaultConnection");
+            string connectionString = config.GetConnectionString(ConnectionStringName);
 
             if (string.IsNullOrWhiteSpace(connectionString))
             {
-                throw new InvalidOperationException($"Could not find a connection string named '{"DefaultConnection"}'.");
+                throw new InvalidOperationException($"Could not find a connection string named '{ConnectionStringName}'.");
             }
 
-            return Create(connectionString);
-        }
-
-        private TContext Create(string connectionString)
-        {
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                throw new ArgumentException(
-                    $"{nameof(connectionString)} is null or empty.",
-                    nameof(connectionString));
-            }
-
-            Console.WriteLine("DesignTimeDbContextFactory.Create(string): Connection string: {0}", connectionString);
-
-            var optionsBuilder = new DbContextOptionsBuilder<TContext>();
-
-            return CreateNewInstance(optionsBuilder, connectionString);
+            return CreateNewInstance(
+                new DbContextOptionsBuilder<TContext>(),
+                connectionString);
         }
     }
 }
