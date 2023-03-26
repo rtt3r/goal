@@ -32,7 +32,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
             DbContextEventData eventData,
             InterceptionResult<int> result)
         {
-            _audit = CreateAudit(eventData.Context);
+            _audit = AuditChangesInterceptor.CreateAudit(eventData.Context);
             return result;
         }
 
@@ -68,7 +68,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
 
         protected abstract void SaveAuditChanges(Audit audit);
 
-        private Audit CreateAudit(DbContext context)
+        private static Audit CreateAudit(DbContext context)
         {
             context.ChangeTracker.DetectChanges();
             var audit = new Audit { StartTime = DateTimeOffset.UtcNow };
@@ -77,13 +77,13 @@ namespace Goal.Seedwork.Infra.Data.Auditing
                 .Entries()
                 .Where(x => x.State is EntityState.Added or EntityState.Modified or EntityState.Deleted))
             {
-                audit.Entries.Add(CreateAuditEntry(entry));
+                audit.Entries.Add(AuditChangesInterceptor.CreateAuditEntry(entry));
             }
 
             return audit;
         }
 
-        private AuditEntry CreateAuditEntry(EntityEntry entry)
+        private static AuditEntry CreateAuditEntry(EntityEntry entry)
         {
             string tableName = entry.Metadata.GetTableName();
             string schema = entry.Metadata.GetSchema();

@@ -4,7 +4,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
 {
     public struct Option<T>
     {
-        private static readonly Option<T> none;
+        private static readonly Option<T> none = default;
 
         public T Value { get; }
 

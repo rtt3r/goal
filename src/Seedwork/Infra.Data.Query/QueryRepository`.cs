@@ -10,7 +10,7 @@ namespace Goal.Seedwork.Infra.Data.Query
     {
         public abstract Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken());
         public abstract Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken());
-        public abstract Task<IPagedCollection<TEntity>> QueryAsync(IPageSearch pagination, CancellationToken cancellationToken = new CancellationToken());
+        public abstract Task<IPagedCollection<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
         public abstract Task StoreAsync(TKey id, TEntity entity, CancellationToken cancellationToken = new CancellationToken());
         public abstract Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = new CancellationToken());
         public abstract Task RemoveAsync(TKey id, CancellationToken cancellationToken = new CancellationToken());
