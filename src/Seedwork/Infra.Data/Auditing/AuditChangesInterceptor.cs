@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -15,23 +14,13 @@ namespace Goal.Seedwork.Infra.Data.Auditing
 {
     public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditChangesInterceptor
     {
-        protected readonly IHttpContextAccessor httpContextAccessor;
-        protected readonly ILogger logger;
-
         protected Audit _audit;
 
         public event EventHandler<SaveAuditEventArgs> SaveAudit;
 
-        protected AuditChangesInterceptor(
-            IHttpContextAccessor httpContextAccessor,
-            ILogger logger)
+        protected AuditChangesInterceptor()
         {
-            this.httpContextAccessor = httpContextAccessor;
-            this.logger = logger;
         }
-
-        protected virtual string CurrentPrincipal
-            => httpContextAccessor?.HttpContext?.User?.Identity?.Name;
 
         public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
@@ -58,7 +47,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
             _audit.Succeeded = true;
             _audit.EndTime = DateTime.UtcNow;
 
-            SaveAuditChanges(_audit);
+            SaveAuditChangesInternal(_audit);
 
             return result;
         }
@@ -74,14 +63,10 @@ namespace Goal.Seedwork.Infra.Data.Auditing
             _audit.EndTime = DateTime.UtcNow;
             _audit.ErrorMessage = eventData.Exception.Message;
 
-            SaveAuditChanges(_audit);
+            SaveAuditChangesInternal(_audit);
         }
 
-        protected virtual void SaveAuditChanges(Audit audit)
-        {
-            SaveAudit?.Invoke(this, new SaveAuditEventArgs(audit));
-            logger?.LogInformation($"Saving audit changes: {audit}");
-        }
+        protected abstract void SaveAuditChanges(Audit audit);
 
         private Audit CreateAudit(DbContext context)
         {
@@ -147,13 +132,18 @@ namespace Goal.Seedwork.Infra.Data.Auditing
             return new AuditEntry
             {
                 AuditType = auditType.ToString(),
-                AuditUser = CurrentPrincipal,
                 TableName = tableName,
                 KeyValues = JsonSerializer.Serialize(keyValues),
                 OldValues = oldValues.Count == 0 ? null : JsonSerializer.Serialize(oldValues),
                 NewValues = newValues.Count == 0 ? null : JsonSerializer.Serialize(newValues),
                 ChangedColumns = changedColumns.Count == 0 ? null : JsonSerializer.Serialize(changedColumns)
             };
+        }
+
+        private void SaveAuditChangesInternal(Audit audit)
+        {
+            SaveAudit?.Invoke(this, new SaveAuditEventArgs(audit));
+            SaveAuditChanges(audit);
         }
 
         public class SaveAuditEventArgs : EventArgs
