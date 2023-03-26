@@ -128,7 +128,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             {
                 context.Should().BeSameAs(sender);
                 exceptionFromEvent = args.Exception;
-            };            
+            };
 
             int savedCount = 0;
 
@@ -432,16 +432,11 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
             try
             {
-                if (async)
-                {
-                    await context.AddAsync(new Singularity { Id = 35, Type = "Red Dwarf" });
-                    savedCount = await context.SaveChangesAsync();
-                }
-                else
-                {
-                    context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
-                    savedCount = context.SaveChanges();
-                }
+                context.Update(new Singularity { Id = 35, Type = "Red Dwarf" });
+
+                savedCount = async
+                    ? await context.SaveChangesAsync()
+                    : context.SaveChanges();
             }
             catch (Exception e)
             {
@@ -449,27 +444,27 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             }
 
             // Assert
-            savedCount.Should().Be(1);
+            savedCount.Should().Be(0);
             savingEventCalled.Should().BeTrue();
             saveAuditEventCalled.Should().BeTrue();
             savedCount.Should().Be(resultFromEvent);
             exceptionFromEvent.Should().BeSameAs(thrown);
 
-            context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
+            context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(0);
 
-            auditFromEvent.Succeeded.Should().BeTrue();
-            auditFromEvent.ErrorMessage.Should().BeNullOrWhiteSpace();
+            auditFromEvent.Succeeded.Should().BeFalse();
+            auditFromEvent.ErrorMessage.Should().Be(exceptionFromEvent.Message);
             auditFromEvent.StartTime
                 .Should().BeAfter(startedAt)
                 .And.BeBefore(auditFromEvent.EndTime);
             auditFromEvent.Entries.Should().HaveCount(1);
             auditFromEvent.Entries.ElementAt(0).Should().NotBeNull();
-            auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("Create");
+            auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("None");
             auditFromEvent.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
             auditFromEvent.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-            auditFromEvent.Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
+            auditFromEvent.Entries.ElementAt(0).NewValues.Should().BeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).TableName.Should().Be("Singularity");
         }
 
