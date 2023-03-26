@@ -35,10 +35,10 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             repository.Context.Should().BeNull();
         }
 
-        public UniverseContext CreateContext()
+        public static UniverseContext CreateContext()
             => new(CreateOptions());
 
-        private DbContextOptions CreateOptions()
+        private static DbContextOptions CreateOptions()
         {
             return new DbContextOptionsBuilder()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())

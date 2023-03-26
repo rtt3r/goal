@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -50,7 +51,7 @@ namespace Goal.Seedwork.Infra.Data
         public virtual async Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await Context.Set<TEntity>().FindAsync(id);
+            return await Context.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
         }
 
         public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())

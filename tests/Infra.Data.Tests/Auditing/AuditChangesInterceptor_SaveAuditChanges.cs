@@ -482,7 +482,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             auditFromEvent.Entries.ElementAt(0).TableName.Should().Be("Singularity");
         }
 
-        private DbContextOptions CreateOptions(IInterceptor interceptor)
+        private static DbContextOptions CreateOptions(IInterceptor interceptor)
         {
             return new DbContextOptionsBuilder()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
@@ -490,7 +490,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .Options;
         }
 
-        protected (UniverseContext, TInterceptor) CreateContext<TInterceptor>()
+        protected static (UniverseContext, TInterceptor) CreateContext<TInterceptor>()
             where TInterceptor : class, IAuditChangesInterceptor, new()
         {
             var interceptor = new TInterceptor();
@@ -499,7 +499,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             return (context, interceptor);
         }
 
-        public (UniverseContext, IAuditChangesInterceptor) CreateContext(IAuditChangesInterceptor interceptor)
+        public static (UniverseContext, IAuditChangesInterceptor) CreateContext(IAuditChangesInterceptor interceptor)
         {
             UniverseContext context = new(CreateOptions(interceptor));
             return (context, interceptor);

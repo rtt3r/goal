@@ -17,9 +17,9 @@ namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks
         [Fact]
         public void ContextIsNull_ThrowsArgumentNullException()
         {
-            Action act = () => new MockUnitOfWork(null);
-
-            act.Should().Throw<ArgumentNullException>()
+            // Act and Assert
+            FluentActions.Invoking(() => new MockUnitOfWork(null))
+                .Should().Throw<ArgumentNullException>()
                 .WithMessage("Object value cannot be null (Parameter 'context')");
         }
 
