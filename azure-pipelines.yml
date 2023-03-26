@@ -28,7 +28,7 @@ steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'SonarCloud'
-    organization: 'andersonritter'
+    organization: 'aritters'
     scannerMode: 'MSBuild'
     projectKey: 'ritter-ti_goal'
 
