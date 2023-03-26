@@ -5,8 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Data.Auditing;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
+using Moq;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Data.Tests.Auditing
@@ -14,12 +17,21 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
     public class AuditChangesInterceptor_SaveAuditChanges
     {
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public async Task ShouldAuditAddEntries(bool async)
+        [InlineData(true, true)]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        [InlineData(false, false)]
+        public async Task ShouldAuditAddEntries(bool async, bool withLogger)
         {
             // Arrange
-            (DbContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
+            var logger = new Mock<ILogger>();
+
+            (DbContext context, IAuditChangesInterceptor interceptor) = (null, null);
+
+            (context, interceptor) = withLogger
+                ? CreateContext(new UniverseAuditChangesInterceptor(logger.Object))
+                : CreateContext(new UniverseAuditChangesInterceptor(null));
+
             DateTimeOffset startedAt = DateTimeOffset.UtcNow;
 
             // Act
@@ -95,12 +107,21 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public async Task ShouldAuditUpdateEntries(bool async)
+        [InlineData(true, true)]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        [InlineData(false, false)]
+        public async Task ShouldAuditUpdateEntries(bool async, bool withLogger)
         {
             // Arrange
-            (DbContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
+            var logger = new Mock<ILogger>();
+
+            (DbContext context, IAuditChangesInterceptor interceptor) = (null, null);
+
+            (context, interceptor) = withLogger
+                ? CreateContext(new UniverseAuditChangesInterceptor(logger.Object))
+                : CreateContext(new UniverseAuditChangesInterceptor(null));
+
             DateTimeOffset startedAt = DateTimeOffset.UtcNow;
 
             // Act
@@ -109,7 +130,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             bool savingEventCalled = false;
             bool saveAuditEventCalled = false;
             int resultFromEvent = 0;
-            List<Audit> auditsFromEvent = new List<Audit>();
+            var auditsFromEvent = new List<Audit>();
             Exception exceptionFromEvent = null;
 
             context.SavingChanges += (sender, args) =>
@@ -203,12 +224,21 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public async Task ShouldAuditDeleteEntries(bool async)
+        [InlineData(true, true)]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        [InlineData(false, false)]
+        public async Task ShouldAuditDeleteEntries(bool async, bool withLogger)
         {
             // Arrange
-            (DbContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
+            var logger = new Mock<ILogger>();
+
+            (DbContext context, IAuditChangesInterceptor interceptor) = (null, null);
+
+            (context, interceptor) = withLogger
+                ? CreateContext(new UniverseAuditChangesInterceptor(logger.Object))
+                : CreateContext(new UniverseAuditChangesInterceptor(null));
+
             DateTimeOffset startedAt = DateTimeOffset.UtcNow;
 
             // Act
@@ -217,7 +247,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             bool savingEventCalled = false;
             bool saveAuditEventCalled = false;
             int resultFromEvent = 0;
-            List<Audit> auditsFromEvent = new List<Audit>();
+            var auditsFromEvent = new List<Audit>();
             Exception exceptionFromEvent = null;
 
             context.SavingChanges += (sender, args) =>
@@ -316,17 +346,20 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .Options;
         }
 
-        protected (DbContext, TInterceptor) CreateContext<TInterceptor>()
-            where TInterceptor : class, IInterceptor, new()
+        protected (UniverseContext, TInterceptor) CreateContext<TInterceptor>()
+            where TInterceptor : class, IAuditChangesInterceptor, new()
         {
             var interceptor = new TInterceptor();
-            UniverseContext context = CreateContext(interceptor);
+            (UniverseContext context, IAuditChangesInterceptor _) = CreateContext(interceptor);
 
             return (context, interceptor);
         }
 
-        public UniverseContext CreateContext(IInterceptor interceptor)
-            => new(CreateOptions(interceptor));
+        public (UniverseContext, IAuditChangesInterceptor) CreateContext(IAuditChangesInterceptor interceptor)
+        {
+            UniverseContext context = new(CreateOptions(interceptor));
+            return (context, interceptor);
+        }
 
         public class UniverseContext : DbContext
         {
@@ -369,8 +402,8 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
         public class UniverseAuditChangesInterceptor : AuditChangesInterceptor
         {
-            public UniverseAuditChangesInterceptor()
-                : base(null, null)
+            public UniverseAuditChangesInterceptor(ILogger logger)
+                : base(null, logger)
             { }
         }
     }

@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Goal.Seedwork.Infra.Data.Auditing
 {
-    public abstract class AuditChangesInterceptor : SaveChangesInterceptor
+    public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditChangesInterceptor
     {
         protected readonly IHttpContextAccessor httpContextAccessor;
         protected readonly ILogger logger;
@@ -76,9 +76,6 @@ namespace Goal.Seedwork.Infra.Data.Auditing
 
             SaveAuditChanges(_audit);
         }
-
-        protected virtual async Task SaveAuditChangesAsync(Audit audit, CancellationToken cancellationToken = new CancellationToken())
-            => await Task.Run(() => SaveAuditChanges(audit), cancellationToken).ConfigureAwait(false);
 
         protected virtual void SaveAuditChanges(Audit audit)
         {
