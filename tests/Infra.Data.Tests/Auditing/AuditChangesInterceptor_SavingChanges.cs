@@ -1,104 +1,155 @@
-using System.Threading;
+using System;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Threading.Tasks;
+using FluentAssertions;
 using Goal.Seedwork.Infra.Data.Auditing;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Logging;
-using Moq;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 {
-    public class AuditChangesInterceptor_SavingChanges
+    public class AuditChangesInterceptor_SaveAuditChanges
     {
-        [Fact]
-        public async Task ShouldAddEntriesToAuditAsync()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public async Task ShouldAddEntriesToAudit(bool async)
         {
             // Arrange
-            var httpContextAccessorMock = new Mock<HttpContextAccessor>();
-            var loggerMock = new Mock<ILogger>();
-
-            var interceptorMock = new Mock<TestAuditChangesInterceptor>(
-                httpContextAccessorMock.Object,
-                loggerMock.Object);
-
-            DbContextOptions dbContextOptions = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(databaseName: "Test")
-                .AddInterceptors(interceptorMock.Object)
-                .Options;
+            (DbContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
+            DateTimeOffset startedAt = DateTimeOffset.UtcNow;
 
             // Act
-            using var context = new TestDbContext(dbContextOptions);
-            var entity = new TestEntity { Name = "Test" };
+            using DbContext _ = context;
 
-            await context.TestEntities.AddAsync(entity);
-            await context.SaveChangesAsync();
+            bool savingEventCalled = false;
+            bool saveAuditEventCalled = false;
+            int resultFromEvent = 0;
+            Audit auditFromEvent = null;
+            Exception exceptionFromEvent = null;
+
+            context.SavingChanges += (sender, args) =>
+            {
+                context.Should().BeSameAs(sender);
+                savingEventCalled = true;
+            };
+
+            context.SavedChanges += (sender, args) =>
+            {
+                context.Should().BeSameAs(sender);
+                resultFromEvent = args.EntitiesSavedCount;
+            };
+
+            context.SaveChangesFailed += (sender, args) =>
+            {
+                context.Should().BeSameAs(sender);
+                exceptionFromEvent = args.Exception;
+            };
+
+            interceptor.SaveAudit += (sender, args) =>
+            {
+                args.Audit.Should().NotBeNull();
+                auditFromEvent = args.Audit;
+                saveAuditEventCalled = true;
+            };
+
+            await context.AddAsync(new Singularity { Id = 35, Type = "Red Dwarf" });
+
+            int savedCount = async
+                ? await context.SaveChangesAsync()
+                : context.SaveChanges();
 
             // Assert
-            interceptorMock.Verify(x =>
-                x.SavingChangesAsync(It.IsAny<DbContextEventData>(), It.IsAny<InterceptionResult<int>>(), It.IsAny<CancellationToken>()),
-                Times.Once);
+            savedCount.Should().Be(1);
+            savingEventCalled.Should().BeTrue();
+            saveAuditEventCalled.Should().BeTrue();
+            savedCount.Should().Be(resultFromEvent);
+            exceptionFromEvent.Should().BeNull();
 
-            interceptorMock.Verify(x =>
-                x.SavedChangesAsync(It.IsAny<SaveChangesCompletedEventData>(), It.IsAny<int>(), It.IsAny<CancellationToken>()),
-                Times.Once);
+            context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
+
+            auditFromEvent.Succeeded.Should().BeTrue();
+            auditFromEvent.ErrorMessage.Should().BeNullOrWhiteSpace();
+            auditFromEvent.StartTime
+                .Should().BeAfter(startedAt)
+                .And.BeBefore(auditFromEvent.EndTime);
+            auditFromEvent.Entries.Should().HaveCount(1);
+            auditFromEvent.Entries.ElementAt(0).Should().NotBeNull();
+            auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("Create");
+            auditFromEvent.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
+            auditFromEvent.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
+            auditFromEvent.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
+            auditFromEvent.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
+            auditFromEvent.Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
+            auditFromEvent.Entries.ElementAt(0).TableName.Should().Be("Singularity");
         }
 
-        [Fact]
-        public void ShouldAddEntriesToAudit()
+        private DbContextOptions CreateOptions(IInterceptor interceptor)
         {
-            // Arrange
-            var httpContextAccessorMock = new Mock<HttpContextAccessor>();
-            var loggerMock = new Mock<ILogger>();
-
-            var interceptorMock = new Mock<TestAuditChangesInterceptor>(
-                httpContextAccessorMock.Object,
-                loggerMock.Object);
-
-            DbContextOptions dbContextOptions = new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(databaseName: "Test")
-                .AddInterceptors(interceptorMock.Object)
+            return new DbContextOptionsBuilder()
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+                .AddInterceptors(interceptor)
                 .Options;
-
-            // Act
-            using var context = new TestDbContext(dbContextOptions);
-            var entity = new TestEntity { Name = "Test" };
-
-            context.TestEntities.Add(entity);
-            context.SaveChanges();
-
-            // Assert
-            interceptorMock.Verify(x =>
-                x.SavingChanges(It.IsAny<DbContextEventData>(), It.IsAny<InterceptionResult<int>>()),
-                Times.Once);
-
-            interceptorMock.Verify(x =>
-                x.SavedChanges(It.IsAny<SaveChangesCompletedEventData>(), It.IsAny<int>()),
-                Times.Once);
         }
 
-        public class TestDbContext : DbContext
+        protected (DbContext, TInterceptor) CreateContext<TInterceptor>()
+            where TInterceptor : class, IInterceptor, new()
         {
-            public TestDbContext(DbContextOptions options) : base(options) { }
-            public DbSet<Audit> Audits { get; set; }
-            public DbSet<TestEntity> TestEntities { get; set; }
+            var interceptor = new TInterceptor();
+            UniverseContext context = CreateContext(interceptor);
+
+            return (context, interceptor);
         }
 
-        public class TestEntity
+        public UniverseContext CreateContext(IInterceptor interceptor)
+            => new(CreateOptions(interceptor));
+
+        public class UniverseContext : DbContext
         {
+            public UniverseContext(DbContextOptions options)
+                : base(options)
+            {
+            }
+
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+            {
+                modelBuilder
+                    .Entity<Singularity>()
+                    .HasData(
+                        new Singularity { Id = 77, Type = "Black Hole" },
+                        new Singularity { Id = 88, Type = "Bing Bang" });
+
+                modelBuilder
+                    .Entity<Brane>()
+                    .HasData(
+                        new Brane { Id = 77, Type = "Black Hole?" },
+                        new Brane { Id = 88, Type = "Bing Bang?" });
+            }
+        }
+
+        public class Singularity
+        {
+            [DatabaseGenerated(DatabaseGeneratedOption.None)]
             public int Id { get; set; }
-            public string Name { get; set; }
+
+            public string Type { get; set; }
         }
 
-        public class TestAuditChangesInterceptor : AuditChangesInterceptor
+        public class Brane
         {
-            public TestAuditChangesInterceptor(
-                IHttpContextAccessor httpContextAccessor,
-                ILogger logger)
-                : base(httpContextAccessor, logger)
+            [DatabaseGenerated(DatabaseGeneratedOption.None)]
+            public int Id { get; set; }
+
+            public string Type { get; set; }
+        }
+
+        public class UniverseAuditChangesInterceptor : AuditChangesInterceptor
+        {
+            public UniverseAuditChangesInterceptor()
+                : base(null, null)
             { }
         }
     }
-
 }

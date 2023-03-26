@@ -20,6 +20,8 @@ namespace Goal.Seedwork.Infra.Data.Auditing
 
         protected Audit _audit;
 
+        public event EventHandler<SaveAuditEventArgs> SaveAudit;
+
         protected AuditChangesInterceptor(
             IHttpContextAccessor httpContextAccessor,
             ILogger logger)
@@ -78,7 +80,11 @@ namespace Goal.Seedwork.Infra.Data.Auditing
         protected virtual async Task SaveAuditChangesAsync(Audit audit, CancellationToken cancellationToken = new CancellationToken())
             => await Task.Run(() => SaveAuditChanges(audit), cancellationToken).ConfigureAwait(false);
 
-        protected virtual void SaveAuditChanges(Audit audit) => logger.LogInformation($"Saving audit changes: {audit}");
+        protected virtual void SaveAuditChanges(Audit audit)
+        {
+            SaveAudit?.Invoke(this, new SaveAuditEventArgs(audit));
+            logger?.LogInformation($"Saving audit changes: {audit}");
+        }
 
         private Audit CreateAudit(DbContext context)
         {
@@ -151,6 +157,16 @@ namespace Goal.Seedwork.Infra.Data.Auditing
                 NewValues = newValues.Count == 0 ? null : JsonSerializer.Serialize(newValues),
                 ChangedColumns = changedColumns.Count == 0 ? null : JsonSerializer.Serialize(changedColumns)
             };
+        }
+
+        public class SaveAuditEventArgs : EventArgs
+        {
+            public SaveAuditEventArgs(Audit audit)
+            {
+                Audit = audit;
+            }
+
+            public Audit Audit { get; }
         }
     }
 }
