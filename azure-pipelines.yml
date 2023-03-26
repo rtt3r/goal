@@ -15,7 +15,7 @@ trigger:
 - hotfix/*
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
@@ -31,9 +31,6 @@ steps:
     organization: 'aritters'
     scannerMode: 'MSBuild'
     projectKey: 'ritter-ti_goal'
-    extraProperties: |
-      sonar.cs.opencover.reportsPaths=$(Build.SourcesDirectory)/**/coverage.opencover.xml
-      sonar.cs.vstest.reportsPaths=$(Agent.TempDirectory)/*.trx
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -47,7 +44,7 @@ steps:
   inputs:
     command: 'test'
     projects: 'tests/**/*Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:CollectCoverage=true /p:CoverletOutputFormat=opencover --logger trx'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
     publishTestResults: true
 
 - task: SonarCloudAnalyze@1
