@@ -35,7 +35,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
             DbContextEventData eventData,
             InterceptionResult<int> result,
             CancellationToken cancellationToken = new CancellationToken())
-            => await Task.Run(() => SavingChanges(eventData, result), cancellationToken);
+            => await Task.Run(() => SavingChanges(eventData, result), cancellationToken).ConfigureAwait(false);
 
         public override InterceptionResult<int> SavingChanges(
             DbContextEventData eventData,
@@ -49,7 +49,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
             SaveChangesCompletedEventData eventData,
             int result,
             CancellationToken cancellationToken = new CancellationToken())
-            => await Task.Run(() => SavedChanges(eventData, result), cancellationToken);
+            => await Task.Run(() => SavedChanges(eventData, result), cancellationToken).ConfigureAwait(false);
 
         public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
         {
@@ -64,7 +64,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
         public override async Task SaveChangesFailedAsync(
             DbContextErrorEventData eventData,
             CancellationToken cancellationToken = new CancellationToken())
-            => await Task.Run(() => SaveChangesFailed(eventData), cancellationToken);
+            => await Task.Run(() => SaveChangesFailed(eventData), cancellationToken).ConfigureAwait(false);
 
         public override void SaveChangesFailed(DbContextErrorEventData eventData)
         {
@@ -76,7 +76,7 @@ namespace Goal.Seedwork.Infra.Data.Auditing
         }
 
         protected virtual async Task SaveAuditChangesAsync(Audit audit, CancellationToken cancellationToken = new CancellationToken())
-            => await Task.Run(() => SaveAuditChanges(audit), cancellationToken);
+            => await Task.Run(() => SaveAuditChanges(audit), cancellationToken).ConfigureAwait(false);
 
         protected virtual void SaveAuditChanges(Audit audit) => logger.LogInformation($"Saving audit changes: {audit}");
 
@@ -131,15 +131,12 @@ namespace Goal.Seedwork.Infra.Data.Auditing
                         auditType = AuditType.Delete;
                         break;
 
-                    case EntityState.Modified:
-                        if (property.IsModified && !property.OriginalValue.Equals(property.CurrentValue))
-                        {
-                            changedColumns.Add(columnName);
+                    case EntityState.Modified when property.IsModified && !property.OriginalValue.Equals(property.CurrentValue):
+                        changedColumns.Add(columnName);
 
-                            oldValues[propertyName] = property.OriginalValue;
-                            newValues[propertyName] = property.CurrentValue;
-                            auditType = AuditType.Update;
-                        }
+                        oldValues[propertyName] = property.OriginalValue;
+                        newValues[propertyName] = property.CurrentValue;
+                        auditType = AuditType.Update;
                         break;
                 }
             }
@@ -150,15 +147,9 @@ namespace Goal.Seedwork.Infra.Data.Auditing
                 AuditUser = CurrentPrincipal,
                 TableName = tableName,
                 KeyValues = JsonSerializer.Serialize(keyValues),
-                OldValues = oldValues.Count == 0
-                    ? null
-                    : JsonSerializer.Serialize(oldValues),
-                NewValues = newValues.Count == 0
-                    ? null
-                    : JsonSerializer.Serialize(newValues),
-                ChangedColumns = changedColumns.Count == 0
-                    ? null
-                    : JsonSerializer.Serialize(changedColumns)
+                OldValues = oldValues.Count == 0 ? null : JsonSerializer.Serialize(oldValues),
+                NewValues = newValues.Count == 0 ? null : JsonSerializer.Serialize(newValues),
+                ChangedColumns = changedColumns.Count == 0 ? null : JsonSerializer.Serialize(changedColumns)
             };
         }
     }
