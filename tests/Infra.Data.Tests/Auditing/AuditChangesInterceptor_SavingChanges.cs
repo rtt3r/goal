@@ -78,6 +78,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
             context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
 
+            auditFromEvent.Id.Should().NotBeNullOrWhiteSpace();
             auditFromEvent.Succeeded.Should().BeTrue();
             auditFromEvent.ErrorMessage.Should().BeNullOrWhiteSpace();
             auditFromEvent.StartTime
@@ -85,6 +86,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(auditFromEvent.EndTime);
             auditFromEvent.Entries.Should().HaveCount(1);
             auditFromEvent.Entries.ElementAt(0).Should().NotBeNull();
+            auditFromEvent.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("Create");
             auditFromEvent.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
@@ -153,6 +155,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
             context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
 
+            interceptor.Audit.Id.Should().NotBeNullOrWhiteSpace();
             interceptor.Audit.Succeeded.Should().BeTrue();
             interceptor.Audit.ErrorMessage.Should().BeNullOrWhiteSpace();
             interceptor.Audit.StartTime
@@ -160,6 +163,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(interceptor.Audit.EndTime);
             interceptor.Audit.Entries.Should().HaveCount(1);
             interceptor.Audit.Entries.ElementAt(0).Should().NotBeNull();
+            interceptor.Audit.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             interceptor.Audit.Entries.ElementAt(0).AuditType.Should().Be("Create");
             interceptor.Audit.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             interceptor.Audit.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
@@ -246,6 +250,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
             auditsFromEvent.Should().HaveCount(2);
 
+            auditsFromEvent[0].Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[0].Succeeded.Should().BeTrue();
             auditsFromEvent[0].ErrorMessage.Should().BeNullOrWhiteSpace();
             auditsFromEvent[0].StartTime
@@ -253,6 +258,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(auditsFromEvent[0].EndTime);
             auditsFromEvent[0].Entries.Should().HaveCount(1);
             auditsFromEvent[0].Entries.ElementAt(0).Should().NotBeNull();
+            auditsFromEvent[0].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[0].Entries.ElementAt(0).AuditType.Should().Be("Create");
             auditsFromEvent[0].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditsFromEvent[0].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
@@ -261,6 +267,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             auditsFromEvent[0].Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
             auditsFromEvent[0].Entries.ElementAt(0).TableName.Should().Be("Singularity");
 
+            auditsFromEvent[1].Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[1].Succeeded.Should().BeTrue();
             auditsFromEvent[1].ErrorMessage.Should().BeNullOrWhiteSpace();
             auditsFromEvent[1].StartTime
@@ -268,6 +275,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(auditsFromEvent[1].EndTime);
             auditsFromEvent[1].Entries.Should().HaveCount(1);
             auditsFromEvent[1].Entries.ElementAt(0).Should().NotBeNull();
+            auditsFromEvent[1].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[1].Entries.ElementAt(0).AuditType.Should().Be("Update");
             auditsFromEvent[1].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditsFromEvent[1].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
@@ -352,6 +360,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
             auditsFromEvent.Should().HaveCount(2);
 
+            auditsFromEvent[0].Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[0].Succeeded.Should().BeTrue();
             auditsFromEvent[0].ErrorMessage.Should().BeNullOrWhiteSpace();
             auditsFromEvent[0].StartTime
@@ -359,6 +368,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(auditsFromEvent[0].EndTime);
             auditsFromEvent[0].Entries.Should().HaveCount(1);
             auditsFromEvent[0].Entries.ElementAt(0).Should().NotBeNull();
+            auditsFromEvent[0].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[0].Entries.ElementAt(0).AuditType.Should().Be("Create");
             auditsFromEvent[0].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditsFromEvent[0].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
@@ -367,6 +377,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
             auditsFromEvent[0].Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
             auditsFromEvent[0].Entries.ElementAt(0).TableName.Should().Be("Singularity");
 
+            auditsFromEvent[0].Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[1].Succeeded.Should().BeTrue();
             auditsFromEvent[1].ErrorMessage.Should().BeNullOrWhiteSpace();
             auditsFromEvent[1].StartTime
@@ -374,6 +385,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(auditsFromEvent[1].EndTime);
             auditsFromEvent[1].Entries.Should().HaveCount(1);
             auditsFromEvent[1].Entries.ElementAt(0).Should().NotBeNull();
+            auditsFromEvent[0].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             auditsFromEvent[1].Entries.ElementAt(0).AuditType.Should().Be("Delete");
             auditsFromEvent[1].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditsFromEvent[1].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
@@ -452,6 +464,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
 
             context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(0);
 
+            auditFromEvent.Id.Should().NotBeNullOrWhiteSpace();
             auditFromEvent.Succeeded.Should().BeFalse();
             auditFromEvent.ErrorMessage.Should().Be(exceptionFromEvent.Message);
             auditFromEvent.StartTime
@@ -459,6 +472,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Auditing
                 .And.BeBefore(auditFromEvent.EndTime);
             auditFromEvent.Entries.Should().HaveCount(1);
             auditFromEvent.Entries.ElementAt(0).Should().NotBeNull();
+            auditFromEvent.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("None");
             auditFromEvent.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
             auditFromEvent.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");

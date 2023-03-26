@@ -1,8 +1,8 @@
-﻿namespace Goal.Seedwork.Infra.Data.Auditing
+namespace Goal.Seedwork.Infra.Data.Auditing
 {
-    public class AuditEntry
+    public class AuditEntry<TKey>
     {
-        public int Id { get; set; }
+        public TKey Id { get; set; }
         public string AuditType { get; set; }
         public string AuditUser { get; set; }
         public string TableName { get; set; }
