@@ -9,6 +9,7 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Goal.Seedwork.Infra.Data
 {
@@ -25,8 +26,8 @@ namespace Goal.Seedwork.Infra.Data
             Context = context;
         }
 
-        public virtual TEntity Load(params TKey[] keyValues)
-            => Context.Set<TEntity>().Find(keyValues);
+        public virtual TEntity Load(TKey key)
+            => Context.Set<TEntity>().Find(key);
 
         public virtual ICollection<TEntity> Query()
             => Context.Set<TEntity>().ToList();
@@ -48,10 +49,10 @@ namespace Goal.Seedwork.Infra.Data
         public virtual IPagedCollection<TEntity> Query(IPageSearch pageSearch)
             => Query(new TrueSpecification<TEntity>(), pageSearch);
 
-        public virtual async Task<TEntity> LoadAsync(TKey[] keyValues, CancellationToken cancellationToken = new CancellationToken())
+        public virtual async Task<TEntity> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
         {
             cancellationToken.ThrowIfCancellationRequested();
-            return await Context.Set<TEntity>().FindAsync(new object[] { keyValues }, cancellationToken);
+            return await Context.Set<TEntity>().FindAsync(new object[] { key }, cancellationToken);
         }
 
         public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())

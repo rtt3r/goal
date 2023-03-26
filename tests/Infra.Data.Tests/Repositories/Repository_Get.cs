@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
+using System.Threading;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Data.Tests.Extensions;
 using Goal.Seedwork.Infra.Data.Tests.Mocks;
@@ -64,13 +66,15 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
                 .AsQueryable()
                 .BuildMockDbSet();
 
+            mockDbSet.Setup(s => s.FindAsync(It.IsAny<object[]>(), It.IsAny<CancellationToken>())).ReturnsAsync(tests[2]);
+
             var mockDbContext = new Mock<DbContext>();
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             Guid id = tests[2].Id;
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.LoadAsync(new[] { id }).Result;
+            Test test = testRepository.LoadAsync(id).Result;
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().NotBeNull();
@@ -90,7 +94,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Repositories
             mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
             var testRepository = new TestRepository(mockDbContext.Object);
-            Test test = testRepository.LoadAsync(new[] { Guid.NewGuid() }).GetAwaiter().GetResult();
+            Test test = testRepository.LoadAsync(Guid.NewGuid()).GetAwaiter().GetResult();
 
             mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
             test.Should().BeNull();
