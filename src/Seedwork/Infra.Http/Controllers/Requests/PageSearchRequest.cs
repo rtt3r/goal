@@ -17,11 +17,11 @@ namespace Goal.Seedwork.Infra.Http.Controllers.Requests
         /// <summary>
         /// The field name to sort
         /// </summary>
-        public string SortBy { get; private set; }
+        public string SortBy { get; set; }
 
         /// <summary>
         /// The sort direction (Asc | Desc)
         /// </summary>
-        public SortDirection? SortDirection { get; private set; }
+        public SortDirection? SortDirection { get; set; }
     }
 }
