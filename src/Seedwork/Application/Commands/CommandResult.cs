@@ -43,7 +43,7 @@ namespace Goal.Seedwork.Application.Commands
             };
         }
 
-        public static ICommandResult Failure(IEnumerable<Notification> notifications)
+        public static ICommandResult Failure(params Notification[] notifications)
         {
             if (!notifications.Any(n => n.Type != NotificationType.Information))
             {
@@ -56,6 +56,9 @@ namespace Goal.Seedwork.Application.Commands
                 Notifications = notifications
             };
         }
+
+        public static ICommandResult Failure(IEnumerable<Notification> notifications)
+            => Failure(notifications.ToArray());
 
         public static ICommandResult<TData> Failure<TData>(TData data, IEnumerable<Notification> notifications)
         {

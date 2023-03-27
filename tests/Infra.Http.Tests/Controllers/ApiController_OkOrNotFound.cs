@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Goal.Seedwork.Infra.Http.Controllers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
@@ -19,7 +20,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Should().BeOfType<OkObjectResult>();
-            result.As<OkObjectResult>().StatusCode.Should().Be(200);
+            result.As<OkObjectResult>().StatusCode.Should().Be(StatusCodes.Status200OK);
             result.As<OkObjectResult>().Value.Should().BeSameAs(value);
         }
 
@@ -35,7 +36,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Should().BeOfType<NotFoundResult>();
-            result.As<NotFoundResult>().StatusCode.Should().Be(404);
+            result.As<NotFoundResult>().StatusCode.Should().Be(StatusCodes.Status404NotFound);
         }
 
         [Fact]
@@ -51,7 +52,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Should().BeOfType<OkObjectResult>();
-            result.As<OkObjectResult>().StatusCode.Should().Be(200);
+            result.As<OkObjectResult>().StatusCode.Should().Be(StatusCodes.Status200OK);
             result.As<OkObjectResult>().Value.Should().BeSameAs(value);
         }
 
@@ -68,7 +69,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Should().BeOfType<NotFoundObjectResult>();
-            result.As<NotFoundObjectResult>().StatusCode.Should().Be(404);
+            result.As<NotFoundObjectResult>().StatusCode.Should().Be(StatusCodes.Status404NotFound);
             result.As<NotFoundObjectResult>().Value.Should().Be(message);
         }
 
@@ -84,7 +85,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Result.Should().BeOfType<OkObjectResult>();
-            result.Result.As<OkObjectResult>().StatusCode.Should().Be(200);
+            result.Result.As<OkObjectResult>().StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Result.As<OkObjectResult>().Value.Should().BeSameAs(value);
         }
 
@@ -100,7 +101,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Result.Should().BeOfType<NotFoundResult>();
-            result.Result.As<NotFoundResult>().StatusCode.Should().Be(404);
+            result.Result.As<NotFoundResult>().StatusCode.Should().Be(StatusCodes.Status404NotFound);
         }
 
         [Fact]
@@ -116,7 +117,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Result.Should().BeOfType<OkObjectResult>();
-            result.Result.As<OkObjectResult>().StatusCode.Should().Be(200);
+            result.Result.As<OkObjectResult>().StatusCode.Should().Be(StatusCodes.Status200OK);
             result.Result.As<OkObjectResult>().Value.Should().BeSameAs(value);
         }
 
@@ -133,7 +134,7 @@ namespace Goal.Seedwork.Infra.Http.Tests.Controllers
 
             // Assert
             result.Result.Should().BeOfType<NotFoundObjectResult>();
-            result.Result.As<NotFoundObjectResult>().StatusCode.Should().Be(404);
+            result.Result.As<NotFoundObjectResult>().StatusCode.Should().Be(StatusCodes.Status404NotFound);
             result.Result.As<NotFoundObjectResult>().Value.Should().Be("The value was not found.");
         }
 

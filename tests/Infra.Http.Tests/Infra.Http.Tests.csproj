@@ -29,7 +29,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\src\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 		<ProjectReference Include="..\..\src\Seedwork\Infra.Http\Infra.Http.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Application\Application.csproj" />
 	</ItemGroup>
 
 </Project>
