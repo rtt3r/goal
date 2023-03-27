@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Goal.Seedwork.Infra.Http.Controllers.Requests;
-using Xunit;
-using Goal.Seedwork.Infra.Http.Extensions;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Seedwork.Infra.Http.Controllers.Requests;
+using Goal.Seedwork.Infra.Http.Extensions;
+using Xunit;
 
 namespace Goal.Seedwork.Infra.Http.Tests.Extensions
 {
