@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Http.Swagger;
 using Microsoft.AspNetCore.Authorization;
@@ -8,11 +6,10 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Xunit;
-using System.Linq;
 
 namespace Goal.Seedwork.Infra.Http.Tests.Swagger
 {
-    public class AppendAuthorizeToSummaryOperationFilter_Constructor
+    public class AppendAuthorizeToSummaryOperationFilter_Apply
     {
         [Fact]
         public void ApplyAuthorizationInformationToOperation()
@@ -59,20 +56,14 @@ namespace Goal.Seedwork.Infra.Http.Tests.Swagger
         {
             [HttpGet]
             [Authorize(Policy = "policy1, policy2", Roles = "role1, role2")]
-            public IActionResult Get()
-            {
-                return Ok();
-            }
+            public IActionResult Get() => Ok();
         }
 
         public class AnonymousController : ControllerBase
         {
             [HttpGet]
             [AllowAnonymous]
-            public IActionResult Get()
-            {
-                return Ok();
-            }
+            public IActionResult Get() => Ok();
         }
     }
 }
