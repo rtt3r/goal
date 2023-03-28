@@ -29,9 +29,11 @@ namespace Goal.Seedwork.Infra.Http.Swagger
                         .Select(a => a.Roles)
             };
 
-            filter = new AppendAuthorizeToSummaryOperationFilter<AuthorizeAttribute>(new[] { policySelector, rolesSelector }.AsEnumerable());
+            filter = new AppendAuthorizeToSummaryOperationFilter<AuthorizeAttribute>(
+                new[] { policySelector, rolesSelector }.AsEnumerable());
         }
 
-        public void Apply(OpenApiOperation operation, OperationFilterContext context) => filter.Apply(operation, context);
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+            => filter.Apply(operation, context);
     }
 }

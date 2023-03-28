@@ -44,7 +44,7 @@ namespace Goal.Seedwork.Infra.Http.Swagger
                 {
                     new OpenApiSecurityRequirement
                     {
-                        [ securityScheme ] = new [] { "erp.api" }
+                        [ securityScheme ] = new [] { "scheme" }
                     }
                 };
 
