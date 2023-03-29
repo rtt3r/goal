@@ -10,4 +10,12 @@ namespace Goal.Seedwork.Infra.Http.Controllers.Results
         {
         }
     }
+
+    public class OkPagedCollectionResult<T> : OkObjectResult
+    {
+        public OkPagedCollectionResult(IPagedCollection<T> value)
+            : base(new PagedResponse<T>(value))
+        {
+        }
+    }
 }

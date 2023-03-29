@@ -87,5 +87,8 @@ namespace Goal.Seedwork.Infra.Http.Controllers
 
         protected virtual OkPagedCollectionResult Paged(IPagedCollection collection)
             => new(collection);
+
+        protected virtual OkPagedCollectionResult<T> Paged<T>(IPagedCollection<T> collection)
+            => new(collection);
     }
 }
