@@ -10,7 +10,6 @@
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Data.Query</PackageId>
-		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>

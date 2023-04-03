@@ -22,28 +22,12 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
         public static Option<Func<TB, TResult>> Apply<TA, TB, TResult>(this Option<Func<TA, TB, TResult>> @this, Option<TA> arg)
             => @this.Map(Helpers.Curry).Apply(arg);
 
-        public static Option<TR> Map<T, TR>(this Option<T> @this, Func<T, TR> mapfunc)
-        {
-            if (!@this.IsSome)
-            {
-                return Option.None();
-            }
-
-            return Option.Of(mapfunc(@this.Value));
-        }
+        public static Option<TR> Map<T, TR>(this Option<T> @this, Func<T, TR> mapfunc) => !@this.IsSome ? (Option<TR>)Option.None() : Option.Of(mapfunc(@this.Value));
 
         public static Option<Func<TB, TResult>> Map<TA, TB, TResult>(this Option<TA> @this, Func<TA, TB, TResult> func)
             => @this.Map(func.Curry());
 
-        public static Option<TR> Bind<T, TR>(this Option<T> @this, Func<T, Option<TR>> bindfunc)
-        {
-            if (!@this.IsSome)
-            {
-                return Option.None();
-            }
-
-            return bindfunc(@this.Value);
-        }
+        public static Option<TR> Bind<T, TR>(this Option<T> @this, Func<T, Option<TR>> bindfunc) => !@this.IsSome ? (Option<TR>)Option.None() : bindfunc(@this.Value);
 
         public static T GetOrElse<T>(this Option<T> @this, Func<T> fallback)
             => @this.Match((T value) => value, fallback);

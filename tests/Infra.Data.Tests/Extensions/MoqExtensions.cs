@@ -12,7 +12,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Extensions
 {
     public static class MoqExtensions
     {
-        public static Mock<IQueryable<TEntity>> BuildMock<TEntity>(this IQueryable<TEntity> data) where TEntity : class, IEntity
+        public static Mock<IQueryable<TEntity>> BuildMock<TEntity>(this IQueryable<TEntity> data) where TEntity : class
         {
             var mock = new Mock<IQueryable<TEntity>>();
             var enumerable = new TestAsyncEnumerable<TEntity>(data);

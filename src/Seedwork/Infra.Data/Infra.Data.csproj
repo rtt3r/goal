@@ -9,7 +9,6 @@
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Data</PackageId>
-		<PackageTags>DDD;Domain Driven Design</PackageTags>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -32,6 +31,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Domain\Domain.csproj" />
 		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+		<ProjectReference Include="..\Infra.Data.Extensions.EFCore\Infra.Data.Extensions.EFCore.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

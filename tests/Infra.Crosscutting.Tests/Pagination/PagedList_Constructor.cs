@@ -6,7 +6,7 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Paginng
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Pagination
 {
     public class PagedList_Constructor
     {

@@ -12,31 +12,9 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
 
         public bool IsSuccess => !IsFailure;
 
-        public Option<TFailure> OptionalFailure
-        {
-            get
-            {
-                if (!IsFailure)
-                {
-                    return Option.None();
-                }
+        public Option<TFailure> OptionalFailure => !IsFailure ? (Option<TFailure>)Option.None() : Option.Of(Failure);
 
-                return Option.Of(Failure);
-            }
-        }
-
-        public Option<TSuccess> OptionalSuccess
-        {
-            get
-            {
-                if (!IsSuccess)
-                {
-                    return Option.None();
-                }
-
-                return Option.Of(Success);
-            }
-        }
+        public Option<TSuccess> OptionalSuccess => !IsSuccess ? (Option<TSuccess>)Option.None() : Option.Of(Success);
 
         internal Try(TFailure failure)
         {
@@ -52,15 +30,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying
             Success = success;
         }
 
-        public TResult Match<TResult>(Func<TFailure, TResult> failure, Func<TSuccess, TResult> success)
-        {
-            if (!IsFailure)
-            {
-                return success(Success);
-            }
-
-            return failure(Failure);
-        }
+        public TResult Match<TResult>(Func<TFailure, TResult> failure, Func<TSuccess, TResult> success) => !IsFailure ? success(Success) : failure(Failure);
 
         public UnitType Match(Action<TFailure> failure, Action<TSuccess> success)
             => Match(Helpers.ToFunc(failure), Helpers.ToFunc(success));

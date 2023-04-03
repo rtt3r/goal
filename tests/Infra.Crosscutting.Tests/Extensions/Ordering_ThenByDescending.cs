@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
+using Goal.Seedwork.Infra.Crosscutting.Extensions;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
 {
@@ -15,9 +15,9 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
             IQueryable<TestObject1> query = GetQuery();
             IOrderedQueryable<TestObject1> result = query.OrderByDescending("Id").ThenByDescending("TestObject2Id");
 
-            result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
-            result.First().Id.Should().Be(query.Last().Id);
-            result.Last().Id.Should().Be(query.First().Id);
+            _ = result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+            _ = result.First().Id.Should().Be(query.Last().Id);
+            _ = result.Last().Id.Should().Be(query.First().Id);
         }
 
         [Fact]
@@ -26,9 +26,9 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
             IQueryable<TestObject1> query = GetQuery();
             IOrderedQueryable<TestObject1> result = query.OrderByDescending("Id").ThenByDescending("TestObject2.Id");
 
-            result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
-            result.First().Id.Should().Be(query.Last().Id);
-            result.Last().Id.Should().Be(query.First().Id);
+            _ = result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+            _ = result.First().Id.Should().Be(query.Last().Id);
+            _ = result.Last().Id.Should().Be(query.First().Id);
         }
 
         private static IQueryable<TestObject1> GetQuery() => GetQuery(100);

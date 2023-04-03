@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
@@ -21,6 +20,32 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 
         public static IOrderedQueryable<T> ThenByDescending<T>(this IOrderedQueryable<T> source, string fieldName)
             => OrderingHelper(source, fieldName, SortDirection.Desc, true);
+
+        public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
+        {
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+
+            IQueryable<T> queryableList = source;
+
+            if (!string.IsNullOrWhiteSpace(pageSearch.SortBy))
+            {
+                queryableList = queryableList.OrderBy(pageSearch.SortBy, pageSearch.SortDirection);
+            }
+
+            queryableList = queryableList.Skip(pageSearch.PageIndex * pageSearch.PageSize);
+            queryableList = queryableList.Take(pageSearch.PageSize);
+
+            return queryableList;
+        }
+
+        public static IPagedCollection<T> ToPagedList<T>(this IQueryable<T> dataList, IPageSearch pageSearch)
+        {
+            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+
+            return new PagedList<T>(
+                dataList.Paginate(pageSearch).ToList(),
+                dataList.Count());
+        }
 
         private static IOrderedQueryable<T> OrderingHelper<T>(IQueryable<T> source, string fieldName, SortDirection direction, bool anotherLevel)
         {

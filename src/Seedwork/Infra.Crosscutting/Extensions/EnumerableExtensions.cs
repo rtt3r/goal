@@ -36,53 +36,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
             return source;
         }
 
-        public static IEnumerable<T> Paginate<T>(this IEnumerable<T> values, IPageSearch pageSearch)
-            => values.AsQueryable().Paginate(pageSearch);
-
-        public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
-        {
-            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
-
-            IQueryable<T> queryableList = source;
-
-            if (!string.IsNullOrWhiteSpace(pageSearch.SortBy))
-            {
-                queryableList = queryableList.OrderBy(pageSearch.SortBy, pageSearch.SortDirection);
-            }
-
-            queryableList = queryableList.Skip(pageSearch.PageIndex * pageSearch.PageSize);
-            queryableList = queryableList.Take(pageSearch.PageSize);
-
-            return queryableList;
-        }
-
-        public static async Task<IEnumerable<T>> PaginateAsync<T>(this IEnumerable<T> values, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
-            => await values.AsQueryable().PaginateAsync(pageSearch, cancellationToken);
-
-        public static async Task<IQueryable<T>> PaginateAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            return await Task.FromResult(dataList.Paginate(pageSearch));
-        }
-
-        public static IPagedCollection<T> PaginateList<T>(this IEnumerable<T> values, IPageSearch pageSearch)
-            => values.AsQueryable().PaginateList(pageSearch);
-
-        public static IPagedCollection<T> PaginateList<T>(this IQueryable<T> dataList, IPageSearch pageSearch)
-        {
-            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
-            return new PagedList<T>(dataList.Paginate(pageSearch).ToList(), dataList.Count());
-        }
-
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IEnumerable<T> values, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
-            => await values.AsQueryable().PaginateListAsync(pageSearch, cancellationToken);
-
-        public static async Task<IPagedCollection<T>> PaginateListAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            return await Task.FromResult(dataList.PaginateList(pageSearch));
-        }
-
         public static IPagedCollection<TResult> SelectPaged<TSource, TResult>(this IPagedCollection<TSource> source, Func<TSource, TResult> selector)
         {
             IEnumerable<TResult> items = source.Select(selector);

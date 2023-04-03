@@ -17,10 +17,10 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
 
             for (int i = 0; i < totalWidth; i++)
             {
-                padding.Append(paddingString);
+                _ = padding.Append(paddingString);
             }
 
-            padding.Append(text);
+            _ = padding.Append(text);
 
             return padding.ToString();
         }
@@ -29,11 +29,11 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
         {
             var padding = new StringBuilder();
 
-            padding.Append(text);
+            _ = padding.Append(text);
 
             for (int i = 0; i < totalWidth; i++)
             {
-                padding.Append(paddingString);
+                _ = padding.Append(paddingString);
             }
 
             return padding.ToString();
@@ -54,7 +54,7 @@ namespace Goal.Seedwork.Infra.Crosscutting.Extensions
                 UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
                 if (unicodeCategory != UnicodeCategory.NonSpacingMark)
                 {
-                    stringBuilder.Append(c);
+                    _ = stringBuilder.Append(c);
                 }
             }
 
