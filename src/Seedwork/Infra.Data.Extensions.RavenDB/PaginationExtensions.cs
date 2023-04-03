@@ -35,21 +35,21 @@ public static class PaginationExtensions
         return queryableList;
     }
 
-    public static IPagedCollection<T> ToPagedList<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch)
+    public static IPagedCollection<T> ToPagedList<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
-            dataList.Paginate(pageSearch).ToList(),
-            dataList.Count());
+            source.Paginate(pageSearch).ToList(),
+            source.Count());
     }
 
-    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
-            await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),
-            await dataList.CountAsync());
+            await source.Paginate(pageSearch).ToListAsync(cancellationToken),
+            await source.CountAsync(cancellationToken));
     }
 }

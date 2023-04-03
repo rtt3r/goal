@@ -10,12 +10,12 @@ namespace Goal.Seedwork.Infra.Data.Extensions.EFCore;
 
 public static class PaginationExtensions
 {
-    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
-            await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),
-            await dataList.CountAsync());
+            await source.Paginate(pageSearch).ToListAsync(cancellationToken),
+            await source.CountAsync(cancellationToken));
     }
 }
