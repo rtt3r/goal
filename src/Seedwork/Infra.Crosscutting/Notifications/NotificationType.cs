@@ -1,12 +1,11 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Notifications
+namespace Goal.Seedwork.Infra.Crosscutting.Notifications;
+
+public enum NotificationType
 {
-    public enum NotificationType
-    {
-        Information,
-        InputValidation,
-        DomainViolation,
-        ResourceNotFound,
-        InternalError,
-        ExternalError
-    }
+    Information,
+    InputValidation,
+    DomainViolation,
+    ResourceNotFound,
+    InternalError,
+    ExternalError
 }

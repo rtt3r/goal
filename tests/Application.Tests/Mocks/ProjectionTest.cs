@@ -1,8 +1,7 @@
-namespace Goal.Seedwork.Application.Tests.Mocks
+namespace Goal.Seedwork.Application.Tests.Mocks;
+
+internal class ProjectionTest
 {
-    internal class ProjectionTest
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+    public int Id { get; set; }
+    public string Name { get; set; }
 }

@@ -2,30 +2,29 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying;
+
+public class Try_Success
 {
-    public class Try_Success
+    [Fact]
+    public void MatchOnSuccess()
     {
-        [Fact]
-        public void MatchOnSuccess()
-        {
-            int value = 10;
-            Try<string, int> success = value;
+        int value = 10;
+        Try<string, int> success = value;
 
-            bool didCallFailure = false;
-            bool didCallSuccess = false;
+        bool didCallFailure = false;
+        bool didCallSuccess = false;
 
-            success.Match(
-                err => didCallFailure = true,
-                i =>
-                {
-                    didCallSuccess = true;
-                    i.Should().Be(value);
-                }
-            );
+        success.Match(
+            err => didCallFailure = true,
+            i =>
+            {
+                didCallSuccess = true;
+                i.Should().Be(value);
+            }
+        );
 
-            didCallFailure.Should().BeFalse();
-            didCallSuccess.Should().BeTrue();
-        }
+        didCallFailure.Should().BeFalse();
+        didCallSuccess.Should().BeTrue();
     }
 }

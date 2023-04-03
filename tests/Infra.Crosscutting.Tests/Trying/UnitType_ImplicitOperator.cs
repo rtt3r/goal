@@ -1,21 +1,20 @@
 ﻿using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying;
+
+public class UnitType_ImplicitOperator
 {
-    public class UnitType_ImplicitOperator
+    [Fact]
+    public void Option_To_UnitType_Convertion_Should_Return_Unit()
     {
-        [Fact]
-        public void Option_To_UnitType_Convertion_Should_Return_Unit()
-        {
-            // Arrange
-            var option = Option.Of(42);
+        // Arrange
+        var option = Option.Of(42);
 
-            // Act
-            UnitType unitType = option;
+        // Act
+        UnitType unitType = option;
 
-            // Assert
-            Assert.Equal(option, unitType);
-        }
+        // Assert
+        Assert.Equal(option, unitType);
     }
 }

@@ -5,42 +5,41 @@ using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Application.Tests.Extensions
+namespace Goal.Seedwork.Application.Tests.Extensions;
+
+public class Projection_ProjectAsCollection
 {
-    public class Projection_ProjectAsCollection
+    [Fact]
+    public void AdaptCollectionGivenSourceAndTarget()
     {
-        [Fact]
-        public void AdaptCollectionGivenSourceAndTarget()
-        {
-            var mockAdapter = new Mock<ITypeAdapter>();
-            mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns(new List<TestMapClass> { new TestMapClass() });
+        var mockAdapter = new Mock<ITypeAdapter>();
+        mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns(new List<TestMapClass> { new TestMapClass() });
 
-            ICollection<TestMapClass> adapted = mockAdapter.Object.ProjectAsCollection<TestClass, TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
+        ICollection<TestMapClass> adapted = mockAdapter.Object.ProjectAsCollection<TestClass, TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
 
-            mockAdapter.Verify(x => x.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>()), Times.Once);
-            adapted.Should().NotBeNullOrEmpty();
-        }
+        mockAdapter.Verify(x => x.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>()), Times.Once);
+        adapted.Should().NotBeNullOrEmpty();
+    }
 
-        [Fact]
-        public void AdaptCollectionGivenTarget()
-        {
-            var mockAdapter = new Mock<ITypeAdapter>();
-            mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns(new List<TestMapClass> { new TestMapClass() });
+    [Fact]
+    public void AdaptCollectionGivenTarget()
+    {
+        var mockAdapter = new Mock<ITypeAdapter>();
+        mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns(new List<TestMapClass> { new TestMapClass() });
 
-            ICollection<TestMapClass> adapted = mockAdapter.Object.ProjectAsCollection<TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
+        ICollection<TestMapClass> adapted = mockAdapter.Object.ProjectAsCollection<TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
 
-            mockAdapter.Verify(x => x.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>()), Times.Once);
-            adapted.Should().NotBeNullOrEmpty();
-        }
+        mockAdapter.Verify(x => x.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>()), Times.Once);
+        adapted.Should().NotBeNullOrEmpty();
+    }
 
-        internal class TestClass
-        {
-            public string Test { get; set; }
-        }
+    internal class TestClass
+    {
+        public string Test { get; set; }
+    }
 
-        internal class TestMapClass
-        {
-            public string Test { get; set; }
-        }
+    internal class TestMapClass
+    {
+        public string Test { get; set; }
     }
 }

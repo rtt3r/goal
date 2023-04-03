@@ -14,43 +14,42 @@ using Microsoft.EntityFrameworkCore;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Linq;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB
+namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB;
+
+public static class PaginationExtensions
 {
-    public static class PaginationExtensions
+    public static IRavenQueryable<T> Paginate<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
     {
-        public static IRavenQueryable<T> Paginate<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
+        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+
+        IRavenQueryable<T> queryableList = source;
+
+        if (!string.IsNullOrWhiteSpace(pageSearch.SortBy))
         {
-            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
-
-            IRavenQueryable<T> queryableList = source;
-
-            if (!string.IsNullOrWhiteSpace(pageSearch.SortBy))
-            {
-                queryableList = queryableList.OrderBy(pageSearch.SortBy, pageSearch.SortDirection);
-            }
-
-            queryableList = queryableList.Skip(pageSearch.PageIndex * pageSearch.PageSize);
-            queryableList = queryableList.Take(pageSearch.PageSize);
-
-            return queryableList;
+            queryableList = queryableList.OrderBy(pageSearch.SortBy, pageSearch.SortDirection);
         }
 
-        public static IPagedCollection<T> ToPagedList<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch)
-        {
-            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+        queryableList = queryableList.Skip(pageSearch.PageIndex * pageSearch.PageSize);
+        queryableList = queryableList.Take(pageSearch.PageSize);
 
-            return new PagedList<T>(
-                dataList.Paginate(pageSearch).ToList(),
-                dataList.Count());
-        }
+        return queryableList;
+    }
 
-        public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
-        {
-            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+    public static IPagedCollection<T> ToPagedList<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch)
+    {
+        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
 
-            return new PagedList<T>(
-                await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),
-                await dataList.CountAsync());
-        }
+        return new PagedList<T>(
+            dataList.Paginate(pageSearch).ToList(),
+            dataList.Count());
+    }
+
+    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+    {
+        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+
+        return new PagedList<T>(
+            await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),
+            await dataList.CountAsync());
     }
 }

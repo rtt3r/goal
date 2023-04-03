@@ -4,110 +4,109 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions;
+
+public class Enum_GetAmbientValue
 {
-    public class Enum_GetAmbientValue
+    [Fact]
+    public void GivenEnumWithAmbientValueThenReturnObjectString()
     {
-        [Fact]
-        public void GivenEnumWithAmbientValueThenReturnObjectString()
+        Enum1 value1 = Enum1.Value1;
+        object value = value1.GetAmbientValue();
+
+        value.Should().NotBeNull().And.Be("Name");
+    }
+
+    [Fact]
+    public void GivenEnumWithAmbientValueThenReturnString()
+    {
+        Enum1 value1 = Enum1.Value1;
+        string value = value1.GetAmbientValue<string>();
+
+        value.Should().NotBeNull().And.Be("Name");
+    }
+
+    [Fact]
+    public void GivenEnumWithStringAmbientValueThenThrowsInvalidCastException()
+    {
+        Action act = () =>
         {
             Enum1 value1 = Enum1.Value1;
-            object value = value1.GetAmbientValue();
+            value1.GetAmbientValue<bool>();
+        };
 
-            value.Should().NotBeNull().And.Be("Name");
-        }
+        act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Boolean' type");
+    }
 
-        [Fact]
-        public void GivenEnumWithAmbientValueThenReturnString()
+    [Fact]
+    public void GivenEnumWithIntAmbientValueThenThrowsInvalidCastException()
+    {
+        Action act = () =>
         {
-            Enum1 value1 = Enum1.Value1;
-            string value = value1.GetAmbientValue<string>();
+            Enum1 value1 = Enum1.Value2;
+            value1.GetAmbientValue<bool>();
+        };
 
-            value.Should().NotBeNull().And.Be("Name");
-        }
+        act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Boolean' type");
+    }
 
-        [Fact]
-        public void GivenEnumWithStringAmbientValueThenThrowsInvalidCastException()
+    [Fact]
+    public void GivenEnumWithBooleanAmbientValueThenThrowsInvalidCastException()
+    {
+        Action act = () =>
         {
-            Action act = () =>
-            {
-                Enum1 value1 = Enum1.Value1;
-                value1.GetAmbientValue<bool>();
-            };
+            Enum1 value1 = Enum1.Value3;
+            value1.GetAmbientValue<int>();
+        };
 
-            act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Boolean' type");
-        }
+        act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Int32' type");
+    }
 
-        [Fact]
-        public void GivenEnumWithIntAmbientValueThenThrowsInvalidCastException()
-        {
-            Action act = () =>
-            {
-                Enum1 value1 = Enum1.Value2;
-                value1.GetAmbientValue<bool>();
-            };
+    [Fact]
+    public void GivenEnumWithAmbientValueThenReturnInt()
+    {
+        Enum1 value2 = Enum1.Value2;
+        int value = value2.GetAmbientValue<int>();
 
-            act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Boolean' type");
-        }
+        value.Should().Be(3);
+    }
 
-        [Fact]
-        public void GivenEnumWithBooleanAmbientValueThenThrowsInvalidCastException()
-        {
-            Action act = () =>
-            {
-                Enum1 value1 = Enum1.Value3;
-                value1.GetAmbientValue<int>();
-            };
+    [Fact]
+    public void GivenEnumWithoutAmbientValueThenReturnObjectInt()
+    {
+        Enum1 value2 = Enum1.Value2;
+        object value = value2.GetAmbientValue();
 
-            act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Int32' type");
-        }
+        value.Should().Be(3);
+    }
 
-        [Fact]
-        public void GivenEnumWithAmbientValueThenReturnInt()
-        {
-            Enum1 value2 = Enum1.Value2;
-            int value = value2.GetAmbientValue<int>();
+    [Fact]
+    public void GivenEnumWithAmbientValueThenReturnBoolean()
+    {
+        Enum1 value2 = Enum1.Value3;
+        bool value = value2.GetAmbientValue<bool>();
 
-            value.Should().Be(3);
-        }
+        value.Should().Be(true);
+    }
 
-        [Fact]
-        public void GivenEnumWithoutAmbientValueThenReturnObjectInt()
-        {
-            Enum1 value2 = Enum1.Value2;
-            object value = value2.GetAmbientValue();
+    [Fact]
+    public void GivenEnumWithoutAmbientValueThenReturnNull()
+    {
+        Enum1 value2 = Enum1.Value4;
+        object value = value2.GetAmbientValue();
 
-            value.Should().Be(3);
-        }
+        value.Should().BeNull();
+    }
 
-        [Fact]
-        public void GivenEnumWithAmbientValueThenReturnBoolean()
-        {
-            Enum1 value2 = Enum1.Value3;
-            bool value = value2.GetAmbientValue<bool>();
-
-            value.Should().Be(true);
-        }
-
-        [Fact]
-        public void GivenEnumWithoutAmbientValueThenReturnNull()
-        {
-            Enum1 value2 = Enum1.Value4;
-            object value = value2.GetAmbientValue();
-
-            value.Should().BeNull();
-        }
-
-        private enum Enum1
-        {
-            [AmbientValue("Name")]
-            Value1,
-            [AmbientValue(3)]
-            Value2,
-            [AmbientValue(true)]
-            Value3,
-            Value4,
-            Value5
-        }
+    private enum Enum1
+    {
+        [AmbientValue("Name")]
+        Value1,
+        [AmbientValue(3)]
+        Value2,
+        [AmbientValue(true)]
+        Value3,
+        Value4,
+        Value5
     }
 }

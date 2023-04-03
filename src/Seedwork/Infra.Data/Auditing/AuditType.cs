@@ -1,10 +1,9 @@
-﻿namespace Goal.Seedwork.Infra.Data.Auditing
+﻿namespace Goal.Seedwork.Infra.Data.Auditing;
+
+public enum AuditType
 {
-    public enum AuditType
-    {
-        None = 0,
-        Create = 1,
-        Update = 2,
-        Delete = 3
-    }
+    None = 0,
+    Create = 1,
+    Update = 2,
+    Delete = 3
 }

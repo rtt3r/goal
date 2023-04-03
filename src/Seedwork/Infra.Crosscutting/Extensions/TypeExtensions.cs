@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Extensions;
+
+public static class TypeExtensions
 {
-    public static class TypeExtensions
+    public static IEnumerable<Type> GetAllTypesOf<T>(this Assembly assembly)
     {
-        public static IEnumerable<Type> GetAllTypesOf<T>(this Assembly assembly)
-        {
-            return assembly
-                .GetTypes()
-                .Where(
-                    type => type.IsClass
-                    && !type.IsAbstract
-                    && typeof(T).IsAssignableFrom(type)
-                );
-        }
+        return assembly
+            .GetTypes()
+            .Where(
+                type => type.IsClass
+                && !type.IsAbstract
+                && typeof(T).IsAssignableFrom(type)
+            );
     }
 }

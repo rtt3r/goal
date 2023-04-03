@@ -6,69 +6,68 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Goal.Seedwork.Infra.Http.Swagger
+namespace Goal.Seedwork.Infra.Http.Swagger;
+
+public sealed class AppendAuthorizeToSummaryOperationFilter<T> : IOperationFilter where T : Attribute
 {
-    public sealed class AppendAuthorizeToSummaryOperationFilter<T> : IOperationFilter where T : Attribute
+    private readonly IEnumerable<PolicySelectorWithLabel<T>> policySelectors;
+
+    /// <summary>
+    /// Constructor for AppendAuthorizeToSummaryOperationFilter
+    /// </summary>
+    /// <param name="policySelectors">Used to select the authorization policy from the attribute e.g. (a => a.Policy)</param>
+    public AppendAuthorizeToSummaryOperationFilter(IEnumerable<PolicySelectorWithLabel<T>> policySelectors)
     {
-        private readonly IEnumerable<PolicySelectorWithLabel<T>> policySelectors;
+        this.policySelectors = policySelectors;
+    }
 
-        /// <summary>
-        /// Constructor for AppendAuthorizeToSummaryOperationFilter
-        /// </summary>
-        /// <param name="policySelectors">Used to select the authorization policy from the attribute e.g. (a => a.Policy)</param>
-        public AppendAuthorizeToSummaryOperationFilter(IEnumerable<PolicySelectorWithLabel<T>> policySelectors)
+    public void Apply(OpenApiOperation operation, OperationFilterContext context)
+    {
+        if (context.GetControllerAndActionAttributes<AllowAnonymousAttribute>().Any())
         {
-            this.policySelectors = policySelectors;
+            return;
         }
 
-        public void Apply(OpenApiOperation operation, OperationFilterContext context)
+        IEnumerable<T> authorizeAttributes = context.GetControllerAndActionAttributes<T>();
+
+        if (authorizeAttributes.Any())
         {
-            if (context.GetControllerAndActionAttributes<AllowAnonymousAttribute>().Any())
+            operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
+
+            var securityScheme = new OpenApiSecurityScheme
             {
-                return;
-            }
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+            };
 
-            IEnumerable<T> authorizeAttributes = context.GetControllerAndActionAttributes<T>();
-
-            if (authorizeAttributes.Any())
+            operation.Security = new List<OpenApiSecurityRequirement>
             {
-                operation.Responses.Add("401", new OpenApiResponse { Description = "Unauthorized" });
-                operation.Responses.Add("403", new OpenApiResponse { Description = "Forbidden" });
-
-                var securityScheme = new OpenApiSecurityScheme
+                new OpenApiSecurityRequirement
                 {
-                    Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-                };
-
-                operation.Security = new List<OpenApiSecurityRequirement>
-                {
-                    new OpenApiSecurityRequirement
-                    {
-                        [ securityScheme ] = new [] { "scheme" }
-                    }
-                };
-
-                var authorizationDescription = new StringBuilder(" (Auth");
-
-                foreach (PolicySelectorWithLabel<T> policySelector in policySelectors)
-                {
-                    AppendPolicies(authorizeAttributes, authorizationDescription, policySelector);
+                    [ securityScheme ] = new [] { "scheme" }
                 }
+            };
 
-                operation.Summary += authorizationDescription.ToString().TrimEnd(';') + ")";
-            }
-        }
+            var authorizationDescription = new StringBuilder(" (Auth");
 
-        private static void AppendPolicies(IEnumerable<T> authorizeAttributes, StringBuilder authorizationDescription, PolicySelectorWithLabel<T> policySelector)
-        {
-            IOrderedEnumerable<string> policies = policySelector
-                .Selector(authorizeAttributes)
-                .OrderBy(policy => policy);
-
-            if (policies.Any())
+            foreach (PolicySelectorWithLabel<T> policySelector in policySelectors)
             {
-                authorizationDescription.Append($" {policySelector.Label}: {string.Join(", ", policies)};");
+                AppendPolicies(authorizeAttributes, authorizationDescription, policySelector);
             }
+
+            operation.Summary += authorizationDescription.ToString().TrimEnd(';') + ")";
+        }
+    }
+
+    private static void AppendPolicies(IEnumerable<T> authorizeAttributes, StringBuilder authorizationDescription, PolicySelectorWithLabel<T> policySelector)
+    {
+        IOrderedEnumerable<string> policies = policySelector
+            .Selector(authorizeAttributes)
+            .OrderBy(policy => policy);
+
+        if (policies.Any())
+        {
+            authorizationDescription.Append($" {policySelector.Label}: {string.Join(", ", policies)};");
         }
     }
 }

@@ -2,30 +2,29 @@
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying;
+
+public class Try_OptionalFailure
 {
-    public class Try_OptionalFailure
+    [Fact]
+    public void IsNullForSuccessTry()
     {
-        [Fact]
-        public void IsNullForSuccessTry()
-        {
-            int value = 456;
-            Try<string, int> success = value;
+        int value = 456;
+        Try<string, int> success = value;
 
-            Option<string> optionalFailure = success.OptionalFailure;
+        Option<string> optionalFailure = success.OptionalFailure;
 
-            optionalFailure.Should().Be(Option.Of<string>(null));
-        }
+        optionalFailure.Should().Be(Option.Of<string>(null));
+    }
 
-        [Fact]
-        public void IsSomeForFailureTry()
-        {
-            string errorMessage = "Failed!";
-            Try<string, int> failure = errorMessage;
+    [Fact]
+    public void IsSomeForFailureTry()
+    {
+        string errorMessage = "Failed!";
+        Try<string, int> failure = errorMessage;
 
-            Option<string> optionalFailure = failure.OptionalFailure;
+        Option<string> optionalFailure = failure.OptionalFailure;
 
-            optionalFailure.Should().Be(Option.Of(errorMessage));
-        }
+        optionalFailure.Should().Be(Option.Of(errorMessage));
     }
 }

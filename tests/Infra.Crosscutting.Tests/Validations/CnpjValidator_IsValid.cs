@@ -5,54 +5,53 @@ using FluentValidation.Results;
 using Goal.Seedwork.Infra.Crosscutting.Validations.Fluent;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations;
+
+public class CnpjValidator_IsValid
 {
-    public class CnpjValidator_IsValid
+    [Theory]
+    [InlineData("54967301000118")]
+    public void ReturnTrueGivenValidCnpj(string cnpj)
     {
-        [Theory]
-        [InlineData("54967301000118")]
-        public void ReturnTrueGivenValidCnpj(string cnpj)
-        {
-            var person = new Person { Document = cnpj };
-            var validator = new PersonCnpjValidator();
+        var person = new Person { Document = cnpj };
+        var validator = new PersonCnpjValidator();
 
-            ValidationResult result = validator.Validate(person);
+        ValidationResult result = validator.Validate(person);
 
-            result.Should().NotBeNull();
-            result.IsValid.Should().BeTrue();
-        }
-
-        [Theory]
-        [InlineData("11.111.111/1111-11")]
-        [InlineData("11111111111111")]
-        [InlineData("572.039.650-07")]
-        [InlineData("57203965007")]
-        [InlineData("111.111.111-11")]
-        [InlineData("11111111111")]
-        [InlineData("572.039.650-01")]
-        [InlineData("57203965001")]
-        public void ReturnFalseGivenInvalidCpfOrCnpj(string cnpj)
-        {
-            var person = new Person { Document = cnpj };
-            var validator = new PersonCnpjValidator();
-
-            ValidationResult result = validator.Validate(person);
-
-            result.Should().NotBeNull();
-            result.IsValid.Should().BeFalse();
-            result.Errors
-                .Should().NotBeEmpty()
-                .And.HaveCount(1)
-                .And.Match(e => e.All(x => x.ErrorMessage == "O Cnpj informado não é válido"));
-        }
+        result.Should().NotBeNull();
+        result.IsValid.Should().BeTrue();
     }
 
-    public class PersonCnpjValidator : AbstractValidator<Person>
+    [Theory]
+    [InlineData("11.111.111/1111-11")]
+    [InlineData("11111111111111")]
+    [InlineData("572.039.650-07")]
+    [InlineData("57203965007")]
+    [InlineData("111.111.111-11")]
+    [InlineData("11111111111")]
+    [InlineData("572.039.650-01")]
+    [InlineData("57203965001")]
+    public void ReturnFalseGivenInvalidCpfOrCnpj(string cnpj)
     {
-        public PersonCnpjValidator()
-        {
-            RuleFor(p => p.Document)
-                .Cnpj();
-        }
+        var person = new Person { Document = cnpj };
+        var validator = new PersonCnpjValidator();
+
+        ValidationResult result = validator.Validate(person);
+
+        result.Should().NotBeNull();
+        result.IsValid.Should().BeFalse();
+        result.Errors
+            .Should().NotBeEmpty()
+            .And.HaveCount(1)
+            .And.Match(e => e.All(x => x.ErrorMessage == "O Cnpj informado não é válido"));
+    }
+}
+
+public class PersonCnpjValidator : AbstractValidator<Person>
+{
+    public PersonCnpjValidator()
+    {
+        RuleFor(p => p.Document)
+            .Cnpj();
     }
 }

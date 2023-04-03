@@ -6,17 +6,16 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.EFCore
-{
-    public static class PaginationExtensions
-    {
-        public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
-        {
-            Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+namespace Goal.Seedwork.Infra.Data.Extensions.EFCore;
 
-            return new PagedList<T>(
-                await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),
-                await dataList.CountAsync());
-        }
+public static class PaginationExtensions
+{
+    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+    {
+        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+
+        return new PagedList<T>(
+            await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),
+            await dataList.CountAsync());
     }
 }

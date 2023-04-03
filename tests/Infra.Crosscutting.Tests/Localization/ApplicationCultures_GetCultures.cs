@@ -3,20 +3,19 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Localization;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Localization
-{
-    public class ApplicationCultures_GetCultures
-    {
-        [Fact]
-        public void GetCulturesSuccessfully()
-        {
-            CultureInfo ptbr = ApplicationCultures.Portugues;
-            ptbr.Should().NotBeNull();
-            ptbr.Name.Should().Be("pt-BR");
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Localization;
 
-            CultureInfo enus = ApplicationCultures.English;
-            enus.Should().NotBeNull();
-            enus.Name.Should().Be("en-US");
-        }
+public class ApplicationCultures_GetCultures
+{
+    [Fact]
+    public void GetCulturesSuccessfully()
+    {
+        CultureInfo ptbr = ApplicationCultures.Portugues;
+        ptbr.Should().NotBeNull();
+        ptbr.Name.Should().Be("pt-BR");
+
+        CultureInfo enus = ApplicationCultures.English;
+        enus.Should().NotBeNull();
+        enus.Name.Should().Be("en-US");
     }
 }

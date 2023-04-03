@@ -2,51 +2,50 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
-{
-    public class Option_Unit
-    {
-        [Fact]
-        public void ShouldReturnNonNullUnit()
-        {
-            // Act
-            UnitType result = Option.Unit();
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying;
 
-            // Assert
-            result.Should().NotBeNull();
-        }
+public class Option_Unit
+{
+    [Fact]
+    public void ShouldReturnNonNullUnit()
+    {
+        // Act
+        UnitType result = Option.Unit();
+
+        // Assert
+        result.Should().NotBeNull();
+    }
+}
+
+public class Try_Of
+{
+    [Fact]
+    public void ReturnsSuccessfulTry_WhenGivenSuccess()
+    {
+        // Arrange
+        string message = "Something went wrong.";
+
+        // Act
+        var result = Try<int, string>.Of(message);
+
+        // Assert
+        result.IsSuccess.Should().BeTrue();
+        result.IsFailure.Should().BeFalse();
+        result.GetSuccess().Should().Be(message);
     }
 
-    public class Try_Of
+    [Fact]
+    public void ReturnsFailedTry_WhenGivenFailure()
     {
-        [Fact]
-        public void ReturnsSuccessfulTry_WhenGivenSuccess()
-        {
-            // Arrange
-            string message = "Something went wrong.";
+        // Arrange
+        int value = 42;
 
-            // Act
-            var result = Try<int, string>.Of(message);
+        // Act
+        var result = Try<int, string>.Of(value);
 
-            // Assert
-            result.IsSuccess.Should().BeTrue();
-            result.IsFailure.Should().BeFalse();
-            result.GetSuccess().Should().Be(message);
-        }
-
-        [Fact]
-        public void ReturnsFailedTry_WhenGivenFailure()
-        {
-            // Arrange
-            int value = 42;
-
-            // Act
-            var result = Try<int, string>.Of(value);
-
-            // Assert
-            result.IsSuccess.Should().BeFalse();
-            result.IsFailure.Should().BeTrue();
-            result.GetFailure().Should().Be(value);
-        }
+        // Assert
+        result.IsSuccess.Should().BeFalse();
+        result.IsFailure.Should().BeTrue();
+        result.GetFailure().Should().Be(value);
     }
 }

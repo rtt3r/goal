@@ -7,7 +7,6 @@ using Goal.Seedwork.Infra.Data.Extensions.EFCore;
 using Goal.Seedwork.Infra.Data.Tests.Mock;
 using Moq;
 using Xunit;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Goal.Seedwork.Infra.Data.Tests;
 
@@ -17,7 +16,7 @@ public class PaginationExtensions_ToPagedList
     public void PaginateSuccessfullyGivenEnumerable()
     {
         IQueryable<TestObject1> query = GetQuery(55);
-        var mock = query.BuildMock();
+        Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10);
         var paginateResult = mock.Object.ToPagedListAsync(pagination).GetAwaiter().GetResult() as PagedList<TestObject1>;
@@ -30,7 +29,7 @@ public class PaginationExtensions_ToPagedList
     public void PaginateSuccessfullyGivenQueryable()
     {
         IQueryable<TestObject1> query = GetQuery(55);
-        var mock = query.BuildMock();
+        Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10);
         var paginateResult = mock.Object.ToPagedListAsync(pagination).GetAwaiter().GetResult() as PagedList<TestObject1>;
@@ -43,7 +42,7 @@ public class PaginationExtensions_ToPagedList
     public void ReturnListOrderedAscendingAsyncGivenIndexAndSize()
     {
         IQueryable<TestObject1> query = GetQuery();
-        var mock = query.BuildMock();
+        Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
         var paginateResult = mock.Object.ToPagedListAsync(pagination).GetAwaiter().GetResult() as PagedList<TestObject1>;
@@ -56,7 +55,7 @@ public class PaginationExtensions_ToPagedList
     public void ReturnListOrderedDescendingAsyncGivenIndexAndSize()
     {
         IQueryable<TestObject1> query = GetQuery();
-        var mock = query.BuildMock();
+        Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
         var paginateResult = mock.Object.ToPagedListAsync(pagination).GetAwaiter().GetResult() as PagedList<TestObject1>;
@@ -69,7 +68,7 @@ public class PaginationExtensions_ToPagedList
     public void ReturnListGivenZeroSizeAsync()
     {
         IQueryable<TestObject1> query = GetQuery();
-        var mock = query.BuildMock();
+        Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 0);
         var paginateResult = mock.Object.ToPagedListAsync(pagination).GetAwaiter().GetResult() as PagedList<TestObject1>;

@@ -1,50 +1,23 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Goal.Seedwork.Domain.Aggregates
+namespace Goal.Seedwork.Domain.Aggregates;
+
+public abstract class Entity<TKey> : IEntity<TKey>
 {
-    public abstract class Entity<TKey> : IEntity<TKey>
+    public virtual TKey Id { get; protected set; } = default;
+
+    public override bool Equals(object obj) => obj is not null && obj is IEntity<TKey> item && (ReferenceEquals(this, obj) || item.Id.Equals(Id));
+
+    public override int GetHashCode()
     {
-        public virtual TKey Id { get; protected set; } = default;
-
-        public override bool Equals(object obj)
+        unchecked
         {
-            if (obj is null)
-            {
-                return false;
-            }
-
-            if (obj is IEntity<TKey> item)
-            {
-                if (ReferenceEquals(this, obj))
-                {
-                    return true;
-                }
-
-                return item.Id.Equals(Id);
-            }
-
-            return false;
+            return (GetType().GetHashCode() * 397) ^ Id.GetHashCode();
         }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return (GetType().GetHashCode() * 397) ^ Id.GetHashCode();
-            }
-        }
-
-        [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "<Pending>")]
-        public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
-        {
-            if (Equals(left, null))
-            {
-                return Equals(right, null);
-            }
-
-            return left.Equals(right);
-        }
-
-        public static bool operator !=(Entity<TKey> left, Entity<TKey> right) => !(left == right);
     }
+
+    [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "<Pending>")]
+    public static bool operator ==(Entity<TKey> left, Entity<TKey> right) => Equals(left, null) ? Equals(right, null) : left.Equals(right);
+
+    public static bool operator !=(Entity<TKey> left, Entity<TKey> right) => !(left == right);
 }

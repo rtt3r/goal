@@ -1,7 +1,6 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations;
+
+public class Person
 {
-    public class Person
-    {
-        public string Document { get; set; }
-    }
+    public string Document { get; set; }
 }

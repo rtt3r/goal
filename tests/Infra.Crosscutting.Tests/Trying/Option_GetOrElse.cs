@@ -2,47 +2,46 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Trying;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying;
+
+public class Option_GetOrElse
 {
-    public class Option_GetOrElse
+    [Theory]
+    [InlineData(42, true)]
+    [InlineData("hello world", true)]
+    [InlineData(null, false)]
+    public void WithSome_ReturnsValue(object value, bool useFallback)
     {
-        [Theory]
-        [InlineData(42, true)]
-        [InlineData("hello world", true)]
-        [InlineData(null, false)]
-        public void WithSome_ReturnsValue(object value, bool useFallback)
-        {
-            var option = Option.Of(value);
+        var option = Option.Of(value);
 
-            if (useFallback)
-            {
-                object result = option.GetOrElse(() => 123);
-                result.Should().Be(value);
-            }
-            else
-            {
-                object result = option.GetOrElse(456);
-                result.Should().Be(456);
-            }
+        if (useFallback)
+        {
+            object result = option.GetOrElse(() => 123);
+            result.Should().Be(value);
         }
-
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void WithNone_ReturnsFallback(bool useDelegateFallback)
+        else
         {
-            var option = Option.Of<int?>(null);
+            object result = option.GetOrElse(456);
+            result.Should().Be(456);
+        }
+    }
 
-            if (useDelegateFallback)
-            {
-                int? result = option.GetOrElse(() => 123);
-                result.Should().Be(123);
-            }
-            else
-            {
-                int? result = option.GetOrElse(456);
-                result.Should().Be(456);
-            }
+    [Theory]
+    [InlineData(true)]
+    [InlineData(false)]
+    public void WithNone_ReturnsFallback(bool useDelegateFallback)
+    {
+        var option = Option.Of<int?>(null);
+
+        if (useDelegateFallback)
+        {
+            int? result = option.GetOrElse(() => 123);
+            result.Should().Be(123);
+        }
+        else
+        {
+            int? result = option.GetOrElse(456);
+            result.Should().Be(456);
         }
     }
 }

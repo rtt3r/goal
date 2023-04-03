@@ -5,45 +5,44 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks
+namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks;
+
+public class UnitOfWork_SaveAsync
 {
-    public class UnitOfWork_SaveAsync
+    public class MockUnitOfWork : UnitOfWork
     {
-        public class MockUnitOfWork : UnitOfWork
+        public MockUnitOfWork(DbContext context) : base(context)
         {
-            public MockUnitOfWork(DbContext context) : base(context)
-            {
-            }
         }
+    }
 
-        [Fact]
-        public async Task Called_ReturnsExpectedResult()
-        {
-            // Arrange
-            var contextMock = new Mock<DbContext>();
-            var unitOfWork = new MockUnitOfWork(contextMock.Object);
-            contextMock.Setup(c => c.SaveChangesAsync(default)).ReturnsAsync(1);
+    [Fact]
+    public async Task Called_ReturnsExpectedResult()
+    {
+        // Arrange
+        var contextMock = new Mock<DbContext>();
+        var unitOfWork = new MockUnitOfWork(contextMock.Object);
+        contextMock.Setup(c => c.SaveChangesAsync(default)).ReturnsAsync(1);
 
-            // Act
-            bool result = await unitOfWork.SaveAsync();
+        // Act
+        bool result = await unitOfWork.SaveAsync();
 
-            // Assert
-            result.Should().BeTrue();
-        }
+        // Assert
+        result.Should().BeTrue();
+    }
 
-        [Fact]
-        public async Task CalledWithCancelledToken_ReturnsZero()
-        {
-            // Arrange
-            var contextMock = new Mock<DbContext>();
-            var unitOfWork = new MockUnitOfWork(contextMock.Object);
-            var cancellationToken = new CancellationToken(true);
+    [Fact]
+    public async Task CalledWithCancelledToken_ReturnsZero()
+    {
+        // Arrange
+        var contextMock = new Mock<DbContext>();
+        var unitOfWork = new MockUnitOfWork(contextMock.Object);
+        var cancellationToken = new CancellationToken(true);
 
-            // Act
-            bool result = await unitOfWork.SaveAsync(cancellationToken);
+        // Act
+        bool result = await unitOfWork.SaveAsync(cancellationToken);
 
-            // Assert
-            result.Should().BeFalse();
-        }
+        // Assert
+        result.Should().BeFalse();
     }
 }

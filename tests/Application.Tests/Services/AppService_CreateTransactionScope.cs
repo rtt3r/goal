@@ -4,37 +4,36 @@ using FluentAssertions;
 using Goal.Seedwork.Application.Services;
 using Xunit;
 
-namespace Goal.Seedwork.Application.Tests.Services
-{
-    public class AppService_CreateTransactionScope
-    {
-        [Fact]
-        public void CreateTransactionScopeSuccessfully()
-        {
-            Func<bool> func = () =>
-            {
-                var appService = new TestAppService();
-                return appService.Test();
-            };
+namespace Goal.Seedwork.Application.Tests.Services;
 
-            func.Should().NotThrow();
-            func.Invoke().Should().BeTrue();
+public class AppService_CreateTransactionScope
+{
+    [Fact]
+    public void CreateTransactionScopeSuccessfully()
+    {
+        Func<bool> func = () =>
+        {
+            var appService = new TestAppService();
+            return appService.Test();
+        };
+
+        func.Should().NotThrow();
+        func.Invoke().Should().BeTrue();
+    }
+
+    public class TestAppService : AppService
+    {
+        public TestAppService() : base()
+        {
         }
 
-        public class TestAppService : AppService
+        public virtual bool Test()
         {
-            public TestAppService() : base()
-            {
-            }
+            using TransactionScope transaction = CreateTransactionScope();
 
-            public virtual bool Test()
-            {
-                using TransactionScope transaction = CreateTransactionScope();
+            transaction.Complete();
 
-                transaction.Complete();
-
-                return true;
-            }
+            return true;
         }
     }
 }

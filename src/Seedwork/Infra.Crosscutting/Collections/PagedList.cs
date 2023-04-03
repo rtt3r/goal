@@ -3,27 +3,26 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Collections
+namespace Goal.Seedwork.Infra.Crosscutting.Collections;
+
+[DebuggerStepThrough]
+[DebuggerDisplay("PageCount = {PageCount}; TotalCount = {TotalCount}")]
+public class PagedList<T> : IPagedCollection<T>
 {
-    [DebuggerStepThrough]
-    [DebuggerDisplay("PageCount = {PageCount}; TotalCount = {TotalCount}")]
-    public class PagedList<T> : IPagedCollection<T>
+    private readonly IEnumerable<T> items;
+
+    public PagedList(IEnumerable<T> items, int totalCount)
     {
-        private readonly IEnumerable<T> items;
-
-        public PagedList(IEnumerable<T> items, int totalCount)
-        {
-            this.items = items ?? new List<T>();
-            PageCount = items?.Count() ?? 0;
-            TotalCount = totalCount;
-        }
-
-        public int TotalCount { get; private set; } = 0;
-
-        public int PageCount { get; private set; } = 0;
-
-        public IEnumerator<T> GetEnumerator() => items.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() => items.GetEnumerator();
+        this.items = items ?? new List<T>();
+        PageCount = items?.Count() ?? 0;
+        TotalCount = totalCount;
     }
+
+    public int TotalCount { get; private set; } = 0;
+
+    public int PageCount { get; private set; } = 0;
+
+    public IEnumerator<T> GetEnumerator() => items.GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => items.GetEnumerator();
 }
