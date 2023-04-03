@@ -20,7 +20,7 @@ public static class PaginationExtensions
 {
     public static IRavenQueryable<T> Paginate<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
     {
-        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         IRavenQueryable<T> queryableList = source;
 
@@ -37,7 +37,7 @@ public static class PaginationExtensions
 
     public static IPagedCollection<T> ToPagedList<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch)
     {
-        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
             dataList.Paginate(pageSearch).ToList(),
@@ -46,7 +46,7 @@ public static class PaginationExtensions
 
     public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> dataList, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
     {
-        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
             await dataList.Paginate(pageSearch).ToListAsync(cancellationToken),

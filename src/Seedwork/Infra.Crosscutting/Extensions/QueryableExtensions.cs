@@ -23,7 +23,7 @@ public static class QueryableExtensions
 
     public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
-        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         IQueryable<T> queryableList = source;
 
@@ -40,7 +40,7 @@ public static class QueryableExtensions
 
     public static IPagedCollection<T> ToPagedList<T>(this IQueryable<T> dataList, IPageSearch pageSearch)
     {
-        Ensure.Argument.NotNull(pageSearch, nameof(pageSearch));
+        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
             dataList.Paginate(pageSearch).ToList(),

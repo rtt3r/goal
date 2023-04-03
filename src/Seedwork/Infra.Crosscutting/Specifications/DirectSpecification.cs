@@ -10,7 +10,7 @@ public class DirectSpecification<TEntity> : Specification<TEntity>
 
     public DirectSpecification(Expression<Func<TEntity, bool>> matchingCriteria)
     {
-        Ensure.Argument.NotNull(matchingCriteria, nameof(matchingCriteria));
+        Ensure.Argument.IsNotNull(matchingCriteria, nameof(matchingCriteria));
         this.matchingCriteria = matchingCriteria;
     }
 

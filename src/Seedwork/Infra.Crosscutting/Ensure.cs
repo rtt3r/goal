@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 
@@ -62,11 +63,11 @@ public static class Ensure
 
         public static void IsNot(bool condition, string message) => Is(!condition, message ?? "");
 
-        public static void NotNull(object value) => NotNull(value, null, null);
+        public static void IsNotNull(object value) => IsNotNull(value, null, null);
 
-        public static void NotNull(object value, string paramName) => NotNull(value, paramName, null);
+        public static void IsNotNull(object value, string paramName) => IsNotNull(value, paramName, null);
 
-        public static void NotNull(object value, string paramName, string message)
+        public static void IsNotNull(object value, string paramName, string message)
         {
             if (value is null)
             {
@@ -74,11 +75,11 @@ public static class Ensure
             }
         }
 
-        public static void NotNullOrEmpty(string value) => NotNullOrEmpty(value, null, null);
+        public static void IsNotNullOrEmpty(string value) => IsNotNullOrEmpty(value, null, null);
 
-        public static void NotNullOrEmpty(string value, string paramName) => NotNullOrEmpty(value, paramName, null);
+        public static void IsNotNullOrEmpty(string value, string paramName) => IsNotNullOrEmpty(value, paramName, null);
 
-        public static void NotNullOrEmpty(string value, string paramName, string message)
+        public static void IsNotNullOrEmpty(string value, string paramName, string message)
         {
             if (value is null)
             {
@@ -91,11 +92,11 @@ public static class Ensure
             }
         }
 
-        public static void NotNullOrWhiteSpace(string value) => NotNullOrWhiteSpace(value, null, null);
+        public static void IsNotNullOrWhiteSpace(string value) => IsNotNullOrWhiteSpace(value, null, null);
 
-        public static void NotNullOrWhiteSpace(string value, string paramName) => NotNullOrWhiteSpace(value, paramName, null);
+        public static void IsNotNullOrWhiteSpace(string value, string paramName) => IsNotNullOrWhiteSpace(value, paramName, null);
 
-        public static void NotNullOrWhiteSpace(string value, string paramName, string message)
+        public static void IsNotNullOrWhiteSpace(string value, string paramName, string message)
         {
             if (value is null)
             {

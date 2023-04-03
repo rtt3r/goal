@@ -7,7 +7,7 @@ public static partial class ExtensionManager
 {
     public static string GetPropertyName<TSource, TProp>(this Expression<Func<TSource, TProp>> predicate)
     {
-        Ensure.Argument.NotNull(predicate, nameof(predicate));
+        Ensure.Argument.IsNotNull(predicate, nameof(predicate));
 
         return predicate.Body is MemberExpression memberExpression
             ? memberExpression.Member.Name

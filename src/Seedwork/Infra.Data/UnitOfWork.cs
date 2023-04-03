@@ -14,7 +14,7 @@ public abstract class UnitOfWork : IUnitOfWork
 
     protected UnitOfWork(DbContext context)
     {
-        Ensure.Argument.NotNull(context, nameof(context));
+        Ensure.Argument.IsNotNull(context, nameof(context));
         this.context = context;
     }
 

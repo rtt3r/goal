@@ -5,8 +5,8 @@ public abstract class CompositeSpecification<TEntity> : Specification<TEntity>
 {
     protected CompositeSpecification(ISpecification<TEntity> leftSideSpecification, ISpecification<TEntity> rightSideSpecification)
     {
-        Ensure.Argument.NotNull(leftSideSpecification, nameof(leftSideSpecification));
-        Ensure.Argument.NotNull(rightSideSpecification, nameof(rightSideSpecification));
+        Ensure.Argument.IsNotNull(leftSideSpecification, nameof(leftSideSpecification));
+        Ensure.Argument.IsNotNull(rightSideSpecification, nameof(rightSideSpecification));
 
         LeftSideSpecification = leftSideSpecification;
         RightSideSpecification = rightSideSpecification;
