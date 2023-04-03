@@ -7,13 +7,45 @@ namespace Goal.Seedwork.Infra.Http.Controllers;
 
 public class ApiController : ControllerBase
 {
-    protected virtual IActionResult OkOrNotFound(object value, string message) => value is null ? NotFound(message) : Ok(value);
+    protected virtual IActionResult OkOrNotFound(object value, string message)
+    {
+        if (value is null)
+        {
+            return NotFound(message);
+        }
 
-    protected virtual IActionResult OkOrNotFound(object value) => value is null ? NotFound() : Ok(value);
+        return Ok(value);
+    }
 
-    protected virtual ActionResult<T> OkOrNotFound<T>(T value, string message) => value is null ? (ActionResult<T>)NotFound(message) : (ActionResult<T>)Ok(value);
+    protected virtual IActionResult OkOrNotFound(object value)
+    {
+        if (value is null)
+        {
+            return NotFound();
+        }
 
-    protected virtual ActionResult<T> OkOrNotFound<T>(T value) => value is null ? (ActionResult<T>)NotFound() : (ActionResult<T>)Ok(value);
+        return Ok(value);
+    }
+
+    protected virtual ActionResult<T> OkOrNotFound<T>(T value, string message)
+    {
+        if (value is null)
+        {
+            return NotFound(message);
+        }
+
+        return Ok(value);
+    }
+
+    protected virtual ActionResult<T> OkOrNotFound<T>(T value)
+    {
+        if (value is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(value);
+    }
 
     protected virtual ActionResult CommandFailure(ICommandResult result)
     {
@@ -22,11 +54,22 @@ public class ApiController : ControllerBase
             return BadRequest(result.Notifications);
         }
 
-        return result.HasResourceNotFound()
-            ? NotFound(result.Notifications)
-            : result.HasDomainViolation()
-            ? UnprocessableEntity(result.Notifications)
-            : result.HasExternalError() ? ServiceUnavailable(result.Notifications) : InternalServerError(result.Notifications);
+        if (result.HasResourceNotFound())
+        {
+            return NotFound(result.Notifications);
+        }
+
+        if (result.HasDomainViolation())
+        {
+            return UnprocessableEntity(result.Notifications);
+        }
+
+        if (result.HasExternalError())
+        {
+            return ServiceUnavailable(result.Notifications);
+        }
+
+        return InternalServerError(result.Notifications);
     }
 
     protected virtual ActionResult InternalServerError(object result)

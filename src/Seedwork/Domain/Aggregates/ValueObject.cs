@@ -8,7 +8,20 @@ public class ValueObject : IEquatable<ValueObject>
 {
     protected ValueObject() { }
 
-    public override bool Equals(object obj) => obj is not null && obj is ValueObject valueObject && Equals(valueObject);
+    public override bool Equals(object obj)
+    {
+        if (obj is null)
+        {
+            return false;
+        }
+
+        if (obj is ValueObject valueObject)
+        {
+            return Equals(valueObject);
+        }
+
+        return false;
+    }
 
     public virtual bool Equals(ValueObject obj)
     {
@@ -24,14 +37,18 @@ public class ValueObject : IEquatable<ValueObject>
 
         PropertyInfo[] properties = GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
 
-        return !properties.Any()
-|| properties.All(p =>
+        if (properties.Any())
+        {
+            return properties.All(p =>
             {
                 object left = p.GetValue(this, null);
                 object right = p.GetValue(obj, null);
 
                 return Equals(left, right);
             });
+        }
+
+        return true;
     }
 
     public override int GetHashCode()
@@ -50,7 +67,7 @@ public class ValueObject : IEquatable<ValueObject>
 
                 if (value is null)
                 {
-                    hashCode ^= index * 13;
+                    hashCode ^= (index * 13);
                 }
                 else
                 {
@@ -63,7 +80,15 @@ public class ValueObject : IEquatable<ValueObject>
         return Math.Abs(hashCode);
     }
 
-    public static bool operator ==(ValueObject left, ValueObject right) => left is null ? right is null : left.Equals(right);
+    public static bool operator ==(ValueObject left, ValueObject right)
+    {
+        if (left is null)
+        {
+            return right is null;
+        }
+
+        return left.Equals(right);
+    }
 
     public static bool operator !=(ValueObject left, ValueObject right) => !(left == right);
 }

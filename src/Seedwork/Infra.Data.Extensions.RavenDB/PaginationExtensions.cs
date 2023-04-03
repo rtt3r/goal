@@ -3,14 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-
-/* Unmerged change from project 'Infra.Data.Extensions.RavenDB (net7.0)'
-Before:
-using Microsoft.EntityFrameworkCore;
-After:
-using Goal.Seedwork.Infra.Data.Extensions.RavenDB;
-using Microsoft.EntityFrameworkCore;
-*/
 using Raven.Client.Documents;
 using Raven.Client.Documents.Linq;
 
