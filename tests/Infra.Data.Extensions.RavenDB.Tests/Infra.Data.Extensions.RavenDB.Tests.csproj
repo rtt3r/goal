@@ -4,7 +4,7 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
-		<RootNamespace>Goal.Seedwork.Infra.Data.Tests</RootNamespace>
+		<RootNamespace> Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
