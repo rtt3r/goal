@@ -20,10 +20,11 @@ public static class Queryable
 
         string level = !anotherLevel ? "OrderBy" : "ThenBy";
         string sortDirection = direction == SortDirection.Desc ? "Descending" : string.Empty;
+        string methodName = $"{level}{sortDirection}";
 
         MethodCallExpression call = Expression.Call(
             typeof(System.Linq.Queryable),
-            $"{level}{sortDirection}",
+            methodName,
             new[] { typeof(T), property?.Type },
             source.Expression,
             Expression.Quote(sort));

@@ -15,6 +15,9 @@ public static class QueryableExtensions
     public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> source, string fieldName)
         => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, false);
 
+    public static IOrderedQueryable<T> ThenBy<T>(this IQueryable<T> source, string fieldName, SortDirection direction)
+        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, direction, true);
+
     public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string fieldName)
         => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, true);
 
