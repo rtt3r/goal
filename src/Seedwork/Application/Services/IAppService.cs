@@ -1,6 +1,5 @@
-namespace Goal.Seedwork.Application.Services
+namespace Goal.Seedwork.Application.Services;
+
+public interface IAppService
 {
-    public interface IAppService
-    {
-    }
 }

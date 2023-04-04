@@ -1,14 +1,13 @@
 using System.IO;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Extensions;
+
+public static class StreamExtensions
 {
-    public static class StreamExtensions
+    public static byte[] ToByteArray(this Stream stream)
     {
-        public static byte[] ToByteArray(this Stream stream)
-        {
-            byte[] buffer = new byte[(int)stream.Length];
-            stream.Read(buffer, 0, buffer.Length);
-            return buffer;
-        }
+        byte[] buffer = new byte[(int)stream.Length];
+        _ = stream.Read(buffer, 0, buffer.Length);
+        return buffer;
     }
 }

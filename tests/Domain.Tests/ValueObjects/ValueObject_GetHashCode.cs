@@ -2,55 +2,54 @@ using FluentAssertions;
 using Goal.Seedwork.Domain.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Domain.Tests.ValueObjects
+namespace Goal.Seedwork.Domain.Tests.ValueObjects;
+
+public class ValueObject_GetHashCode
 {
-    public class ValueObject_GetHashCode
+    [Fact]
+    public void GetHashGivenObjectWithNotNullProperties()
     {
-        [Fact]
-        public void GetHashGivenObjectWithNotNullProperties()
+        //Given
+        var obj1 = new ValueObject1()
         {
-            //Given
-            var obj1 = new ValueObject1()
-            {
-                Id = 1,
-                Value = "test"
-            };
+            Id = 1,
+            Value = "test"
+        };
 
-            //When
-            int hash = obj1.GetHashCode();
+        //When
+        int hash = obj1.GetHashCode();
 
-            //Then
-            hash.Should().NotBe(0);
-        }
+        //Then
+        hash.Should().NotBe(0);
+    }
 
-        [Fact]
-        public void GetHashGivenObjectWithNullProperties()
+    [Fact]
+    public void GetHashGivenObjectWithNullProperties()
+    {
+        //Given
+        var obj1 = new ValueObject1()
         {
-            //Given
-            var obj1 = new ValueObject1()
-            {
-                Id = 1,
-                Value = null
-            };
+            Id = 1,
+            Value = null
+        };
 
-            //When
-            int hash = obj1.GetHashCode();
+        //When
+        int hash = obj1.GetHashCode();
 
-            //Then
-            hash.Should().NotBe(0);
-        }
+        //Then
+        hash.Should().NotBe(0);
+    }
 
-        [Fact]
-        public void GetHashGivenObjectWithoutProperties()
-        {
-            //Given
-            var obj1 = new ValueObject2();
+    [Fact]
+    public void GetHashGivenObjectWithoutProperties()
+    {
+        //Given
+        var obj1 = new ValueObject2();
 
-            //When
-            int hash = obj1.GetHashCode();
+        //When
+        int hash = obj1.GetHashCode();
 
-            //Then
-            hash.Should().NotBe(0);
-        }
+        //Then
+        hash.Should().NotBe(0);
     }
 }

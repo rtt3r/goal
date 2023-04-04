@@ -5,42 +5,41 @@ using Goal.Seedwork.Domain;
 using Goal.Seedwork.Infra.Crosscutting;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Seedwork.Infra.Data
+namespace Goal.Seedwork.Infra.Data;
+
+public abstract class UnitOfWork : IUnitOfWork
 {
-    public abstract class UnitOfWork : IUnitOfWork
+    private readonly DbContext context;
+    private bool disposed;
+
+    protected UnitOfWork(DbContext context)
     {
-        private readonly DbContext context;
-        private bool disposed;
+        Ensure.Argument.IsNotNull(context, nameof(context));
+        this.context = context;
+    }
 
-        protected UnitOfWork(DbContext context)
+    public bool Save()
+        => context.SaveChanges() > 0;
+
+    public async Task<bool> SaveAsync(CancellationToken cancellationToken = default)
+        => await context.SaveChangesAsync(cancellationToken) > 0;
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposed)
         {
-            Ensure.Argument.NotNull(context, nameof(context));
-            this.context = context;
-        }
-
-        public bool Save()
-            => context.SaveChanges() > 0;
-
-        public async Task<bool> SaveAsync(CancellationToken cancellationToken = default)
-            => await context.SaveChangesAsync(cancellationToken) > 0;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposed)
+            if (disposing)
             {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-
-                disposed = true;
+                context.Dispose();
             }
-        }
 
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
+            disposed = true;
         }
+    }
+
+    public void Dispose()
+    {
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
     }
 }

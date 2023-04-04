@@ -3,35 +3,34 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions;
+
+public class Attribute_GetAttributeFromEnumType
 {
-    public class Attribute_GetAttributeFromEnumType
+    [Fact]
+    public void GivenEnumWithAttributeWhenReturnCorrectAttribute()
     {
-        [Fact]
-        public void GivenEnumWithAttributeWhenReturnCorrectAttribute()
-        {
-            AttrEnumTest enumValue = AttrEnumTest.Value;
-            DisplayAttribute attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
+        AttrEnumTest enumValue = AttrEnumTest.Value;
+        DisplayAttribute attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
 
-            attribute.Should().NotBeNull().And.BeOfType<DisplayAttribute>();
-            attribute.Name.Should().Be("Value");
-        }
+        attribute.Should().NotBeNull().And.BeOfType<DisplayAttribute>();
+        attribute.Name.Should().Be("Value");
+    }
 
-        [Fact]
-        public void GivenEnumWithoutAttributeThenReturnNull()
-        {
-            AttrEnumTest enumValue = AttrEnumTest.Text;
-            DisplayAttribute attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
+    [Fact]
+    public void GivenEnumWithoutAttributeThenReturnNull()
+    {
+        AttrEnumTest enumValue = AttrEnumTest.Text;
+        DisplayAttribute attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
 
-            attribute.Should().BeNull();
-        }
+        attribute.Should().BeNull();
+    }
 
-        private enum AttrEnumTest
-        {
-            [Display(Name = "Value")]
-            Value = 0,
+    private enum AttrEnumTest
+    {
+        [Display(Name = "Value")]
+        Value = 0,
 
-            Text = 1
-        }
+        Text = 1
     }
 }

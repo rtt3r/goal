@@ -3,40 +3,39 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks
+namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks;
+
+public class UnitOfWork_Constructor
 {
-    public class UnitOfWork_Constructor
+    public class MockUnitOfWork : UnitOfWork
     {
-        public class MockUnitOfWork : UnitOfWork
+        public MockUnitOfWork(DbContext context) : base(context)
         {
-            public MockUnitOfWork(DbContext context) : base(context)
-            {
-            }
         }
+    }
 
-        [Fact]
-        public void ContextIsNull_ThrowsArgumentNullException()
-        {
-            // Act and Assert
-            FluentActions.Invoking(() => new MockUnitOfWork(null))
-                .Should().Throw<ArgumentNullException>()
-                .WithMessage("Object value cannot be null (Parameter 'context')");
-        }
+    [Fact]
+    public void ContextIsNull_ThrowsArgumentNullException()
+    {
+        // Act and Assert
+        FluentActions.Invoking(() => new MockUnitOfWork(null))
+            .Should().Throw<ArgumentNullException>()
+            .WithMessage("Object value cannot be null (Parameter 'context')");
+    }
 
-        [Fact]
-        public void ContextIsNotNull_CreatesAnInstanceOfUnitOfWork()
-        {
-            var dbContext = new DbContext(CreateOptions());
-            var unitOfWork = new MockUnitOfWork(dbContext);
+    [Fact]
+    public void ContextIsNotNull_CreatesAnInstanceOfUnitOfWork()
+    {
+        var dbContext = new DbContext(CreateOptions());
+        var unitOfWork = new MockUnitOfWork(dbContext);
 
-            unitOfWork.Should().NotBeNull();
-        }
+        unitOfWork.Should().NotBeNull();
+    }
 
-        private static DbContextOptions CreateOptions()
-        {
-            return new DbContextOptionsBuilder()
-                .UseInMemoryDatabase(Guid.NewGuid().ToString())
-                .Options;
-        }
+    private static DbContextOptions CreateOptions()
+    {
+        return new DbContextOptionsBuilder()
+            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .Options;
     }
 }

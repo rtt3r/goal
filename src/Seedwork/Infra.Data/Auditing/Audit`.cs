@@ -1,12 +1,11 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Data.Auditing
+namespace Goal.Seedwork.Infra.Data.Auditing;
+
+public class Audit : Audit<string>
 {
-    public class Audit : Audit<string>
+    public Audit()
     {
-        public Audit()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
+        Id = Guid.NewGuid().ToString();
     }
 }

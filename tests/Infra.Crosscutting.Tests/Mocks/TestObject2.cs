@@ -1,7 +1,6 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Mocks
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
+
+internal class TestObject2
 {
-    internal class TestObject2
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

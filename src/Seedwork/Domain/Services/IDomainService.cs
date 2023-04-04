@@ -1,6 +1,5 @@
-namespace Goal.Seedwork.Domain.Services
+namespace Goal.Seedwork.Domain.Services;
+
+public interface IDomainService
 {
-    public interface IDomainService
-    {
-    }
 }

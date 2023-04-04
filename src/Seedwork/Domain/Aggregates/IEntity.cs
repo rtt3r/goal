@@ -1,8 +1,7 @@
 using System;
 
-namespace Goal.Seedwork.Domain.Aggregates
+namespace Goal.Seedwork.Domain.Aggregates;
+
+public interface IEntity : IEntity<Guid>
 {
-    public interface IEntity : IEntity<Guid>
-    {
-    }
 }

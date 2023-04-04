@@ -3,61 +3,59 @@ using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions;
+
+public class CultureInfo_IsEqual
 {
+    [Fact]
 
-    public class CultureInfo_IsEqual
+    public void ReturnTrueGivenEqualCultures()
     {
-        [Fact]
+        var culture1 = new CultureInfo("pt-BR");
+        var culture2 = new CultureInfo("pt-BR");
 
-        public void ReturnTrueGivenEqualCultures()
-        {
-            var culture1 = new CultureInfo("pt-BR");
-            var culture2 = new CultureInfo("pt-BR");
+        bool isEqual = culture1.IsEqual(culture2);
 
-            bool isEqual = culture1.IsEqual(culture2);
+        isEqual.Should().BeTrue();
+    }
 
-            isEqual.Should().BeTrue();
-        }
+    [Fact]
 
-        [Fact]
+    public void ReturnFalseGivenNotEqualCultures()
+    {
+        var culture1 = new CultureInfo("pt-BR");
+        var culture2 = new CultureInfo("en-US");
 
-        public void ReturnFalseGivenNotEqualCultures()
-        {
-            var culture1 = new CultureInfo("pt-BR");
-            var culture2 = new CultureInfo("en-US");
+        bool isEqual = culture1.IsEqual(culture2);
 
-            bool isEqual = culture1.IsEqual(culture2);
+        isEqual.Should().BeFalse();
+    }
 
-            isEqual.Should().BeFalse();
-        }
+    [Fact]
+    public void IsEqual_ReturnsTrue_WhenCulturesHaveSameCompareInfo()
+    {
+        // Arrange
+        var culture1 = new CultureInfo("en-US");
+        var culture2 = new CultureInfo("EN-us");
 
-        [Fact]
-        public void IsEqual_ReturnsTrue_WhenCulturesHaveSameCompareInfo()
-        {
-            // Arrange
-            var culture1 = new CultureInfo("en-US");
-            var culture2 = new CultureInfo("EN-us");
+        // Act
+        bool result = culture1.IsEqual(culture2);
 
-            // Act
-            bool result = culture1.IsEqual(culture2);
+        // Assert
+        result.Should().BeTrue();
+    }
 
-            // Assert
-            result.Should().BeTrue();
-        }
+    [Fact]
+    public void IsEqual_ReturnsFalse_WhenCulturesHaveDifferentCompareInfo()
+    {
+        // Arrange
+        var culture1 = new CultureInfo("en-US");
+        var culture2 = new CultureInfo("fr-FR");
 
-        [Fact]
-        public void IsEqual_ReturnsFalse_WhenCulturesHaveDifferentCompareInfo()
-        {
-            // Arrange
-            var culture1 = new CultureInfo("en-US");
-            var culture2 = new CultureInfo("fr-FR");
+        // Act
+        bool result = culture1.IsEqual(culture2);
 
-            // Act
-            bool result = culture1.IsEqual(culture2);
-
-            // Assert
-            result.Should().BeFalse();
-        }
+        // Assert
+        result.Should().BeFalse();
     }
 }

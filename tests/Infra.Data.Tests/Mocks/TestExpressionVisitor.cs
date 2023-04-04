@@ -1,8 +1,7 @@
 using System.Linq.Expressions;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Mocks
+namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
+
+public class TestExpressionVisitor : ExpressionVisitor
 {
-    public class TestExpressionVisitor : ExpressionVisitor
-    {
-    }
 }

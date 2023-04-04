@@ -1,7 +1,6 @@
-namespace Goal.Seedwork.Domain.Events
+namespace Goal.Seedwork.Domain.Events;
+
+public interface IEventStore
 {
-    public interface IEventStore
-    {
-        void Save<T>(T @event) where T : IEvent;
-    }
+    void Save<T>(T @event) where T : IEvent;
 }

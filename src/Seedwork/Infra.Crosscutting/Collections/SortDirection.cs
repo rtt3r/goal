@@ -1,8 +1,7 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Collections
+namespace Goal.Seedwork.Infra.Crosscutting.Collections;
+
+public enum SortDirection
 {
-    public enum SortDirection
-    {
-        Asc = 0,
-        Desc = 1
-    }
+    Asc = 0,
+    Desc = 1
 }

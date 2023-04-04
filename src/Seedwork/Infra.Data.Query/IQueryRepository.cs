@@ -1,8 +1,7 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Data.Query
+namespace Goal.Seedwork.Infra.Data.Query;
+
+public interface IQueryRepository : IDisposable
 {
-    public interface IQueryRepository : IDisposable
-    {
-    }
 }

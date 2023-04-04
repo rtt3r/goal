@@ -5,45 +5,44 @@ using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions
+namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions;
+
+public class Expression_GetPropertyName
 {
-    public class Expression_GetPropertyName
+    [Fact]
+    public void ReturnPropertyNameGivenMemberExpression()
     {
-        [Fact]
-        public void ReturnPropertyNameGivenMemberExpression()
-        {
-            Expression<Func<TestObject1, string>> expression = p => p.Value;
-            string propertyName = expression.GetPropertyName();
+        Expression<Func<TestObject1, string>> expression = p => p.Value;
+        string propertyName = expression.GetPropertyName();
 
-            propertyName.Should().NotBeNull().And.Be("Value");
-        }
+        propertyName.Should().NotBeNull().And.Be("Value");
+    }
 
-        [Fact]
-        public void ReturnPropertyNameGivenUnaryExpression()
-        {
-            Expression<Func<TestObject1, object>> expression = x => x.Id;
-            string propertyName = expression.GetPropertyName();
+    [Fact]
+    public void ReturnPropertyNameGivenUnaryExpression()
+    {
+        Expression<Func<TestObject1, object>> expression = x => x.Id;
+        string propertyName = expression.GetPropertyName();
 
-            propertyName.Should().NotBeNull().And.Be("Id");
-        }
+        propertyName.Should().NotBeNull().And.Be("Id");
+    }
 
-        [Fact]
-        public void ThrowsArgumentNullExceptionGivenNullExpression()
-        {
-            Expression<Func<TestObject1, string>> expression = null;
-            Action act = () => expression.GetPropertyName();
+    [Fact]
+    public void ThrowsArgumentNullExceptionGivenNullExpression()
+    {
+        Expression<Func<TestObject1, string>> expression = null;
+        Action act = () => expression.GetPropertyName();
 
-            act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("predicate");
-        }
+        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("predicate");
+    }
 
-        [Fact]
-        public void ThrowsArgumentExceptionGivenInvalidExpression()
-        {
-            Expression<Func<TestObject1, bool>> expression = p => p.Id == 0;
-            Action act = () => expression.GetPropertyName();
+    [Fact]
+    public void ThrowsArgumentExceptionGivenInvalidExpression()
+    {
+        Expression<Func<TestObject1, bool>> expression = p => p.Id == 0;
+        Action act = () => expression.GetPropertyName();
 
-            act.Should().Throw<ArgumentException>()
-                .And.Message.Should().Be("Expression not supported. (Parameter 'predicate')");
-        }
+        act.Should().Throw<ArgumentException>()
+            .And.Message.Should().Be("Expression not supported. (Parameter 'predicate')");
     }
 }

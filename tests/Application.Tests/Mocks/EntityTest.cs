@@ -1,21 +1,20 @@
 using System;
 using Goal.Seedwork.Domain.Aggregates;
 
-namespace Goal.Seedwork.Application.Tests.Mocks
+namespace Goal.Seedwork.Application.Tests.Mocks;
+
+internal class EntityTest : Entity
 {
-    internal class EntityTest : Entity
+    public EntityTest()
+        : base()
     {
-        public EntityTest()
-            : base()
-        {
-        }
-
-        public EntityTest(Guid id)
-            : base()
-        {
-            Id = id;
-        }
-
-        public void SetId(Guid id) => Id = id;
     }
+
+    public EntityTest(Guid id)
+        : base()
+    {
+        Id = id;
+    }
+
+    public void SetId(Guid id) => Id = id;
 }

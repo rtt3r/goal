@@ -1,10 +1,9 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Collections
+namespace Goal.Seedwork.Infra.Crosscutting.Collections;
+
+public interface IPageSearch
 {
-    public interface IPageSearch
-    {
-        int PageIndex { get; }
-        int PageSize { get; }
-        public string SortBy { get; }
-        public SortDirection SortDirection { get; }
-    }
+    int PageIndex { get; }
+    int PageSize { get; }
+    public string SortBy { get; }
+    public SortDirection SortDirection { get; }
 }

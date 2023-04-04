@@ -1,7 +1,6 @@
-namespace Goal.Seedwork.Application.Commands
+namespace Goal.Seedwork.Application.Commands;
+
+public interface ICommandResult<T> : ICommandResult
 {
-    public interface ICommandResult<T> : ICommandResult
-    {
-        T Data { get; set; }
-    }
+    T Data { get; set; }
 }

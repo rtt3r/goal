@@ -1,14 +1,13 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Adapters
+namespace Goal.Seedwork.Infra.Crosscutting.Adapters;
+
+/// <summary>
+/// Base contract for adapter factory
+/// </summary>
+public interface ITypeAdapterFactory
 {
     /// <summary>
-    /// Base contract for adapter factory
+    /// Create a type adater
     /// </summary>
-    public interface ITypeAdapterFactory
-    {
-        /// <summary>
-        /// Create a type adater
-        /// </summary>
-        /// <returns>The created ITypeAdapter</returns>
-        ITypeAdapter Create();
-    }
+    /// <returns>The created ITypeAdapter</returns>
+    ITypeAdapter Create();
 }
