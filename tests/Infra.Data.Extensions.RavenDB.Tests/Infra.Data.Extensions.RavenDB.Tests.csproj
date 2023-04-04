@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
-		<RootNamespace> Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests</RootNamespace>
+		<RootNamespace>Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
@@ -18,6 +18,7 @@
 		<PackageReference Include="Microsoft.CodeCoverage" Version="17.5.0">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
+		<PackageReference Include="RavenDB.TestDriver" Version="5.4.103" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
