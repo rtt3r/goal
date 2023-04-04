@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -5,6 +6,7 @@ using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Linq;
+using Raven.Client.Documents.Session;
 
 namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB;
 
@@ -31,17 +33,27 @@ public static class PaginationExtensions
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
+        var data = source
+            .Statistics(out QueryStatistics stats)
+            .Paginate(pageSearch)
+            .ToList();
+
         return new PagedList<T>(
-            source.Paginate(pageSearch).ToList(),
-            source.Count());
+            data,
+            stats.TotalResults);
     }
 
     public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
+        List<T> data = await source
+            .Statistics(out QueryStatistics stats)
+            .Paginate(pageSearch)
+            .ToListAsync(cancellationToken);
+
         return new PagedList<T>(
-            await source.Paginate(pageSearch).ToListAsync(cancellationToken),
-            await source.CountAsync(cancellationToken));
+            data,
+            stats.TotalResults);
     }
 }
