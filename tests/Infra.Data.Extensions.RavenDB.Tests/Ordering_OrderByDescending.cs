@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Raven.Client.Documents;
-using Raven.Client.Documents.Indexes;
 using Raven.Client.Documents.Session;
 using Raven.TestDriver;
 using Xunit;
@@ -13,16 +10,6 @@ namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests;
 
 public class Ordering_OrderByDescending : RavenTestDriver
 {
-    public Ordering_OrderByDescending()
-    {
-        // ConfigureServer() must be set before calling GetDocumentStore()
-        // and can only be set once per test run.
-        ConfigureServer(new TestServerOptions
-        {
-            DataDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "RavenDBTestDir")
-        });
-    }
-    // This allows us to modify the conventions of the store we get from 'GetDocumentStore'
     protected override void PreInitialize(IDocumentStore documentStore)
         => documentStore.Conventions.MaxNumberOfRequestsPerSession = 50;
 
@@ -30,7 +17,6 @@ public class Ordering_OrderByDescending : RavenTestDriver
     public void ReturnOrderByDescendingGivenSimpleProperty()
     {
         using IDocumentStore store = GetDocumentStore();
-        store.ExecuteIndex(new TestDocumentByName());
 
         using (IDocumentSession session = store.OpenSession())
         {
@@ -39,8 +25,6 @@ public class Ordering_OrderByDescending : RavenTestDriver
             session.SaveChanges();
         }
 
-        WaitForIndexing(store);
-
         // Sometimes we want to debug the test itself. This method redirects us to the studio
         // so that we can see if the code worked as expected (in this case, created two documents).
         // WaitForUserToContinueTheTest(store);
@@ -48,7 +32,7 @@ public class Ordering_OrderByDescending : RavenTestDriver
         using (IDocumentSession session = store.OpenSession())
         {
             var result = session
-                .Query<TestDocument, TestDocumentByName>()
+                .Query<TestDocument>()
                 .OrderByDescending("Name")
                 .ToList();
 
@@ -62,8 +46,6 @@ public class Ordering_OrderByDescending : RavenTestDriver
     public void ReturnOrderByDescendingGivenComplexProperty()
     {
         using IDocumentStore store = GetDocumentStore();
-        store.ExecuteIndex(new TestDocumentByName());
-        store.ExecuteIndex(new TestDocumentByTestName());
 
         using (IDocumentSession session = store.OpenSession())
         {
@@ -71,8 +53,6 @@ public class Ordering_OrderByDescending : RavenTestDriver
             session.Store(new TestDocument { Name = "Hello world!", Test = new TestDocument { Name = "Hi!" } });
             session.SaveChanges();
         }
-
-        WaitForIndexing(store);
 
         // Sometimes we want to debug the test itself. This method redirects us to the studio
         // so that we can see if the code worked as expected (in this case, created two documents).
@@ -89,24 +69,6 @@ public class Ordering_OrderByDescending : RavenTestDriver
             result.First().Name.Should().Be("Hello world!");
             result.Last().Name.Should().Be("Goodbye...");
         }
-    }
-}
-
-public class TestDocumentByName : AbstractIndexCreationTask<TestDocument>
-{
-    public TestDocumentByName()
-    {
-        Map = docs => from doc in docs select new { doc.Name };
-        Indexes.Add(x => x.Name, FieldIndexing.Search);
-    }
-}
-
-public class TestDocumentByTestName : AbstractIndexCreationTask<TestDocument>
-{
-    public TestDocumentByTestName()
-    {
-        Map = docs => from doc in docs select new { doc.Test.Name };
-        Indexes.Add(x => x.Test.Name, FieldIndexing.Search);
     }
 }
 
