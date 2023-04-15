@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests.Mocks;
 using Raven.Client.Documents;
@@ -49,6 +50,72 @@ public class Ordering_ThenBy : RavenTestDriver
     }
 
     [Fact]
+    public void ReturnThenByGivenSimplePropertyAndDirectionAsc()
+    {
+        // Arrange
+        using IDocumentStore store = GetDocumentStore();
+
+        IQueryable<TestObject1> query = GetQuery(100);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            query.ForEach(obj => session.Store(obj));
+            session.SaveChanges();
+        }
+
+        // Sometimes we want to debug the test itself. This method redirects us to the studio
+        // so that we can see if the code worked as expected (in this case, created two documents).
+        // WaitForUserToContinueTheTest(store);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            // Act
+            var result = session
+                .Query<TestObject1>()
+                .OrderBy("Id").ThenBy("TestObject2Id", SortDirection.Asc)
+                .ToList();
+
+            // Assert
+            result.Should().NotBeNull().And.BeOfType<List<TestObject1>>().And.NotBeEmpty().And.HaveCount(query.Count());
+            result.First().Id.Should().Be(query.First().Id);
+            result.Last().Id.Should().Be(query.Last().Id);
+        }
+    }
+
+    [Fact]
+    public void ReturnThenByGivenSimplePropertyAndDirectionDesc()
+    {
+        // Arrange
+        using IDocumentStore store = GetDocumentStore();
+
+        IQueryable<TestObject1> query = GetQuery(100);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            query.ForEach(obj => session.Store(obj));
+            session.SaveChanges();
+        }
+
+        // Sometimes we want to debug the test itself. This method redirects us to the studio
+        // so that we can see if the code worked as expected (in this case, created two documents).
+        // WaitForUserToContinueTheTest(store);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            // Act
+            var result = session
+                .Query<TestObject1>()
+                .OrderBy("Id").ThenBy("TestObject2Id", SortDirection.Desc)
+                .ToList();
+
+            // Assert
+            result.Should().NotBeNull().And.BeOfType<List<TestObject1>>().And.NotBeEmpty().And.HaveCount(query.Count());
+            result.First().Id.Should().Be(query.First().Id);
+            result.Last().Id.Should().Be(query.Last().Id);
+        }
+    }
+
+    [Fact]
     public void ReturnThenByGivenComplexProperty()
     {
         // Arrange
@@ -72,6 +139,72 @@ public class Ordering_ThenBy : RavenTestDriver
             var result = session
                 .Query<TestObject1>()
                 .OrderBy("Id").ThenBy("TestObject2.Id")
+                .ToList();
+
+            // Assert
+            result.Should().NotBeNull().And.BeOfType<List<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+            result.First().Id.Should().Be(query.First().Id);
+            result.Last().Id.Should().Be(query.Last().Id);
+        }
+    }
+
+    [Fact]
+    public void ReturnThenByGivenComplexPropertyAndDirectionAsc()
+    {
+        // Arrange
+        using IDocumentStore store = GetDocumentStore();
+
+        IQueryable<TestObject1> query = GetQuery(100);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            query.ForEach(obj => session.Store(obj));
+            session.SaveChanges();
+        }
+
+        // Sometimes we want to debug the test itself. This method redirects us to the studio
+        // so that we can see if the code worked as expected (in this case, created two documents).
+        // WaitForUserToContinueTheTest(store);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            // Act
+            var result = session
+                .Query<TestObject1>()
+                .OrderBy("Id").ThenBy("TestObject2.Id", SortDirection.Asc)
+                .ToList();
+
+            // Assert
+            result.Should().NotBeNull().And.BeOfType<List<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+            result.First().Id.Should().Be(query.First().Id);
+            result.Last().Id.Should().Be(query.Last().Id);
+        }
+    }
+
+    [Fact]
+    public void ReturnThenByGivenComplexPropertyAndDirectionDesc()
+    {
+        // Arrange
+        using IDocumentStore store = GetDocumentStore();
+
+        IQueryable<TestObject1> query = GetQuery(100);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            query.ForEach(obj => session.Store(obj));
+            session.SaveChanges();
+        }
+
+        // Sometimes we want to debug the test itself. This method redirects us to the studio
+        // so that we can see if the code worked as expected (in this case, created two documents).
+        // WaitForUserToContinueTheTest(store);
+
+        using (IDocumentSession session = store.OpenSession())
+        {
+            // Act
+            var result = session
+                .Query<TestObject1>()
+                .OrderBy("Id").ThenBy("TestObject2.Id", SortDirection.Desc)
                 .ToList();
 
             // Assert

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
@@ -21,10 +22,54 @@ public class Ordering_ThenBy
     }
 
     [Fact]
+    public void ReturnThenByGivenSimplePropertyAndDirectionAsc()
+    {
+        IQueryable<TestObject1> query = GetQuery();
+        IOrderedQueryable<TestObject1> result = query.OrderBy("Id").ThenBy("TestObject2Id", SortDirection.Asc);
+
+        result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+        result.First().Id.Should().Be(query.First().Id);
+        result.Last().Id.Should().Be(query.Last().Id);
+    }
+
+    [Fact]
+    public void ReturnThenByGivenSimplePropertyAndDirectionDesc()
+    {
+        IQueryable<TestObject1> query = GetQuery();
+        IOrderedQueryable<TestObject1> result = query.OrderBy("Id").ThenBy("TestObject2Id", SortDirection.Desc);
+
+        result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+        result.First().Id.Should().Be(query.First().Id);
+        result.Last().Id.Should().Be(query.Last().Id);
+    }
+
+    [Fact]
     public void ReturnThenByGivenComplexProperty()
     {
         IQueryable<TestObject1> query = GetQuery();
         IOrderedQueryable<TestObject1> result = query.OrderBy("Id").ThenBy("TestObject2.Id");
+
+        result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+        result.First().Id.Should().Be(query.First().Id);
+        result.Last().Id.Should().Be(query.Last().Id);
+    }
+
+    [Fact]
+    public void ReturnThenByGivenComplexPropertyAndDirectionAsc()
+    {
+        IQueryable<TestObject1> query = GetQuery();
+        IOrderedQueryable<TestObject1> result = query.OrderBy("Id").ThenBy("TestObject2.Id", SortDirection.Asc);
+
+        result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
+        result.First().Id.Should().Be(query.First().Id);
+        result.Last().Id.Should().Be(query.Last().Id);
+    }
+
+    [Fact]
+    public void ReturnThenByGivenComplexPropertyAndDirectionDesc()
+    {
+        IQueryable<TestObject1> query = GetQuery();
+        IOrderedQueryable<TestObject1> result = query.OrderBy("Id").ThenBy("TestObject2.Id", SortDirection.Desc);
 
         result.Should().NotBeNull().And.BeAssignableTo<IOrderedQueryable<TestObject1>>().And.NotBeEmpty().And.HaveSameCount(query);
         result.First().Id.Should().Be(query.First().Id);
