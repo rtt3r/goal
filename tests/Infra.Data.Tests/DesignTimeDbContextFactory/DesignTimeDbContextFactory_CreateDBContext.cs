@@ -42,7 +42,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
 
         // Act & Assert
         FluentActions.Invoking(() => factory.CreateDbContext(Array.Empty<string>()))
-            .Should().Throw<InvalidOperationException>().WithMessage($"Could not find a connection string named 'NotFoundDatabaseName'.");
+            .Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter 'databaseName')");
     }
 
     private class InMemoryDbContextFactory : DesignTimeDbContextFactory<TestDbContext>
