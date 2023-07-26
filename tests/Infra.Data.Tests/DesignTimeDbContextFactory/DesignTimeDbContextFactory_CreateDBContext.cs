@@ -1,6 +1,7 @@
 using System;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Data.Tests.DesignTimeDbContextFactory;
@@ -48,22 +49,18 @@ public class DesignTimeDbContextFactory_CreateDBContext
     {
         protected override string ConnectionStringName => "InMemoryDatabaseName";
 
-        protected override TestDbContext CreateNewInstance(
-            DbContextOptionsBuilder<TestDbContext> optionsBuilder,
-            string connectionString)
+        protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: connectionString);
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName));
             return new TestDbContext(optionsBuilder.Options);
         }
     }
 
     private class DefaultDbContextFactory : DesignTimeDbContextFactory<TestDbContext>
     {
-        protected override TestDbContext CreateNewInstance(
-            DbContextOptionsBuilder<TestDbContext> optionsBuilder,
-            string connectionString)
+        protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: connectionString);
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName));
             return new TestDbContext(optionsBuilder.Options);
         }
     }
@@ -72,11 +69,9 @@ public class DesignTimeDbContextFactory_CreateDBContext
     {
         protected override string ConnectionStringName => "NotFoundDatabaseName";
 
-        protected override TestDbContext CreateNewInstance(
-            DbContextOptionsBuilder<TestDbContext> optionsBuilder,
-            string connectionString)
+        protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: connectionString);
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName));
             return new TestDbContext(optionsBuilder.Options);
         }
     }
