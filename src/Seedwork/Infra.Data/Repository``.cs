@@ -177,6 +177,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             if (disposing)
             {
                 Context.Dispose();
+                Context = null!;
             }
 
             disposed = true;

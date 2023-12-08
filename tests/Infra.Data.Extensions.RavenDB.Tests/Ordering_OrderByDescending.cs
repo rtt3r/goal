@@ -74,6 +74,6 @@ public class Ordering_OrderByDescending : RavenTestDriver
 
 public class TestDocument
 {
-    public string Name { get; set; }
-    public TestDocument Test { get; set; }
+    public string? Name { get; set; }
+    public TestDocument? Test { get; set; }
 }
