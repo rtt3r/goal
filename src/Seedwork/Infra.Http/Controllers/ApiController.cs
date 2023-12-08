@@ -1,50 +1,38 @@
+using Microsoft.AspNetCore.Mvc;
 using Goal.Seedwork.Application.Commands;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Http.Controllers.Results;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Goal.Seedwork.Infra.Http.Controllers;
 
 public class ApiController : ControllerBase
 {
-    protected virtual IActionResult OkOrNotFound(object value, string message)
+    protected virtual IActionResult OkOrNotFound(object? value, string message)
     {
-        if (value is null)
-        {
-            return NotFound(message);
-        }
-
-        return Ok(value);
+        return value is null
+            ? NotFound(message)
+            : Ok(value);
     }
 
-    protected virtual IActionResult OkOrNotFound(object value)
+    protected virtual IActionResult OkOrNotFound(object? value)
     {
-        if (value is null)
-        {
-            return NotFound();
-        }
-
-        return Ok(value);
+        return value is null
+            ? NotFound()
+            : Ok(value);
     }
 
-    protected virtual ActionResult<T> OkOrNotFound<T>(T value, string message)
+    protected virtual ActionResult<T> OkOrNotFound<T>(T? value, string message)
     {
-        if (value is null)
-        {
-            return NotFound(message);
-        }
-
-        return Ok(value);
+        return value is null
+            ? NotFound(message)
+            : Ok(value);
     }
 
-    protected virtual ActionResult<T> OkOrNotFound<T>(T value)
+    protected virtual ActionResult<T> OkOrNotFound<T>(T? value)
     {
-        if (value is null)
-        {
-            return NotFound();
-        }
-
-        return Ok(value);
+        return value is null
+            ? NotFound()
+            : Ok(value);
     }
 
     protected virtual ActionResult CommandFailure(ICommandResult result)
@@ -64,12 +52,9 @@ public class ApiController : ControllerBase
             return UnprocessableEntity(result.Notifications);
         }
 
-        if (result.HasExternalError())
-        {
-            return ServiceUnavailable(result.Notifications);
-        }
-
-        return InternalServerError(result.Notifications);
+        return result.HasExternalError() 
+            ? ServiceUnavailable(result.Notifications) 
+            : InternalServerError(result.Notifications);
     }
 
     protected virtual ActionResult InternalServerError(object result)

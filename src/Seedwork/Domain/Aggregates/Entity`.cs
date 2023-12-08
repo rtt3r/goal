@@ -16,12 +16,7 @@ public abstract class Entity<TKey> : IEntity<TKey>
 
         if (obj is IEntity<TKey> item)
         {
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            return item.Id.Equals(Id);
+            return ReferenceEquals(this, obj) || item.Id.Equals(Id);
         }
 
         return false;
@@ -38,12 +33,9 @@ public abstract class Entity<TKey> : IEntity<TKey>
     [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "<Pending>")]
     public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
     {
-        if (Equals(left, null))
-        {
-            return Equals(right, null);
-        }
-
-        return left.Equals(right);
+        return Equals(left, null)
+            ? Equals(right, null)
+            : left.Equals(right);
     }
 
     public static bool operator !=(Entity<TKey> left, Entity<TKey> right)

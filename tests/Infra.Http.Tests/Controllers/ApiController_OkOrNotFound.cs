@@ -1,7 +1,7 @@
-using FluentAssertions;
-using Goal.Seedwork.Infra.Http.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FluentAssertions;
+using Goal.Seedwork.Infra.Http.Controllers;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Http.Tests.Controllers;
@@ -29,7 +29,7 @@ public class ApiController_OkOrNotFound
     {
         // Arrange
         var controller = new TestController();
-        object value = null;
+        object? value = null;
 
         // Act
         IActionResult result = controller.OkOrNotFoundWrapper(value);
@@ -61,7 +61,7 @@ public class ApiController_OkOrNotFound
     {
         // Arrange
         var controller = new TestController();
-        object value = null;
+        object? value = null;
         string message = "The value was not found.";
 
         // Act
@@ -94,7 +94,7 @@ public class ApiController_OkOrNotFound
     {
         // Arrange
         var controller = new TestController();
-        Test value = null;
+        Test? value = null;
 
         // Act
         ActionResult<Test> result = controller.OkOrNotFoundWrapper<Test>(value);
@@ -126,7 +126,7 @@ public class ApiController_OkOrNotFound
     {
         // Arrange
         var controller = new TestController();
-        Test value = null;
+        Test? value = null;
         string message = "The value was not found.";
 
         // Act
@@ -140,22 +140,22 @@ public class ApiController_OkOrNotFound
 
     public class TestController : ApiController
     {
-        public IActionResult OkOrNotFoundWrapper(object value, string message)
+        public IActionResult OkOrNotFoundWrapper(object? value, string message)
             => OkOrNotFound(value, message);
 
-        public IActionResult OkOrNotFoundWrapper(object value)
+        public IActionResult OkOrNotFoundWrapper(object? value)
             => OkOrNotFound(value);
 
-        public ActionResult<T> OkOrNotFoundWrapper<T>(T value, string message)
+        public ActionResult<T> OkOrNotFoundWrapper<T>(T? value, string message)
             => OkOrNotFound<T>(value, message);
 
-        public ActionResult<T> OkOrNotFoundWrapper<T>(T value)
+        public ActionResult<T> OkOrNotFoundWrapper<T>(T? value)
             => OkOrNotFound<T>(value);
     }
 
     public class Test
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Age { get; set; }
     }
 }
