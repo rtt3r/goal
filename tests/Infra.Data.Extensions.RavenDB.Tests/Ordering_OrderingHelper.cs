@@ -123,9 +123,9 @@ public class Ordering_OrderingHelper : RavenTestDriver
                 .ToList();
 
             // Assert
-            result[0].OtherFoo.MyProperty.Should().Be(1);
-            result[1].OtherFoo.MyProperty.Should().Be(2);
-            result[2].OtherFoo.MyProperty.Should().Be(3);
+            result[0].OtherFoo?.MyProperty.Should().Be(1);
+            result[1].OtherFoo?.MyProperty.Should().Be(2);
+            result[2].OtherFoo?.MyProperty.Should().Be(3);
         }
     }
 
@@ -156,16 +156,16 @@ public class Ordering_OrderingHelper : RavenTestDriver
                 .ToList();
 
             // Assert
-            result[0].OtherFoo.MyProperty.Should().Be(3);
-            result[1].OtherFoo.MyProperty.Should().Be(2);
-            result[2].OtherFoo.MyProperty.Should().Be(1);
+            result[0].OtherFoo?.MyProperty.Should().Be(3);
+            result[1].OtherFoo?.MyProperty.Should().Be(2);
+            result[2].OtherFoo?.MyProperty.Should().Be(1);
         }
     }
 
     public class Foo
     {
         public int MyProperty { get; set; }
-        public OtherFoo OtherFoo { get; set; }
+        public OtherFoo? OtherFoo { get; set; }
     }
 
     public class OtherFoo

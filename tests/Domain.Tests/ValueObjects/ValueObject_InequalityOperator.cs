@@ -38,7 +38,7 @@ public class Entity_InequalityOperator
     public void ReturnTrueGivenNullLeftObjects()
     {
         //Given
-        ValueObject1 obj1 = null;
+        ValueObject1 obj1 = null!;
         var obj2 = new ValueObject1 { Id = 2, Value = "value1" };
 
         //When
@@ -53,7 +53,7 @@ public class Entity_InequalityOperator
     {
         //Given
         var obj1 = new ValueObject1 { Id = 1, Value = "value" };
-        ValueObject1 obj2 = null;
+        ValueObject1 obj2 = null!;
 
         //When
         bool areEquals = obj1 != obj2;
@@ -66,8 +66,8 @@ public class Entity_InequalityOperator
     public void ReturnFalseGivenNullBothObjects()
     {
         //Given
-        ValueObject1 obj1 = null;
-        ValueObject1 obj2 = null;
+        ValueObject1 obj1 = null!;
+        ValueObject1 obj2 = null!;
 
         //When
         bool areEquals = obj1 != obj2;
