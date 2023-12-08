@@ -18,7 +18,7 @@ public class Option_Bind
     [Fact]
     public void WithNone_ReturnsNone()
     {
-        var option = Option.Of<object>(null);
+        var option = Option.Of<object>(null!);
         Option<string> result = option.Bind(x => Option.Of("hi"));
         result.IsNone.Should().BeTrue();
     }

@@ -63,9 +63,9 @@ public class String_RemoveDiacritics
     [Theory]
     [InlineData("")]
     [InlineData(null)]
-    public void RemoveAllAccentsGivenNullOrEmptyString(string test)
+    public void RemoveAllAccentsGivenNullOrEmptyString(string? test)
     {
-        test.RemoveDiacritics()
+        test?.RemoveDiacritics()
             .Should()
             .BeNullOrWhiteSpace();
     }

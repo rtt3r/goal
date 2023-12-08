@@ -12,7 +12,8 @@ public abstract class Specification<TEntity> : ISpecification<TEntity>
     public static Specification<TEntity> operator |(Specification<TEntity> leftSideSpecification, Specification<TEntity> rightSideSpecification)
         => new OrSpecification<TEntity>(leftSideSpecification, rightSideSpecification);
 
-    public static Specification<TEntity> operator !(Specification<TEntity> specification) => new NotSpecification<TEntity>(specification);
+    public static Specification<TEntity> operator !(Specification<TEntity> specification)
+        => new NotSpecification<TEntity>(specification);
 
     public static bool operator false(Specification<TEntity> specification) => false;
 

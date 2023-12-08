@@ -41,11 +41,11 @@ public class Enumerable_ForEach
     {
         Action act = () =>
         {
-            IEnumerable<TestObject1> source = null;
+            IEnumerable<TestObject1> source = null!;
             source.ForEach(p => { });
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("source");
     }
 
     [Fact]
@@ -82,11 +82,11 @@ public class Enumerable_ForEach
     {
         Action act = () =>
         {
-            ArrayList source = null;
+            ArrayList source = null!;
             source.ForEach(p => { });
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("source");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("source");
     }
 
     [Fact]
@@ -120,7 +120,7 @@ public class Enumerable_ForEach
     public void ForEach_ShouldThrowArgumentNullException_WhenSourceIsNull()
     {
         // arrange
-        IEnumerable source = null;
+        IEnumerable source = null!;
 
         // act
         Action action = () => source.ForEach(item => Console.WriteLine(item));
@@ -136,7 +136,7 @@ public class Enumerable_ForEach
         IEnumerable source = new[] { "one", "two", "three" };
 
         // act
-        Action action = () => source.ForEach(null);
+        Action action = () => source.ForEach(null!);
 
         // assert
         action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("action");

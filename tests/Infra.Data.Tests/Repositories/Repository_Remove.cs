@@ -43,7 +43,7 @@ public class Repository_Remove
             testRepository.Remove((Test)null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("entity");
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class Repository_Remove
             testRepository.Remove((IEnumerable<Test>)null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("entities");
     }
 
     [Fact]
@@ -113,7 +113,7 @@ public class Repository_Remove
             testRepository.Remove((ISpecification<Test>)null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("specification");
     }
 
     private static List<Test> MockTests(int count)

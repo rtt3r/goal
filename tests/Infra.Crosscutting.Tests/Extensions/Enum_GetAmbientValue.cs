@@ -35,7 +35,7 @@ public class Enum_GetAmbientValue
             value1.GetAmbientValue<bool>();
         };
 
-        act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Boolean' type");
+        act.Should().Throw<InvalidCastException>().WithMessage("The value must be an 'Boolean' type");
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class Enum_GetAmbientValue
             value1.GetAmbientValue<bool>();
         };
 
-        act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Boolean' type");
+        act.Should().Throw<InvalidCastException>().WithMessage("The value must be an 'Boolean' type");
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class Enum_GetAmbientValue
             value1.GetAmbientValue<int>();
         };
 
-        act.Should().Throw<InvalidCastException>().And.Message.Should().Be("The value must be an 'Int32' type");
+        act.Should().Throw<InvalidCastException>().WithMessage("The value must be an 'Int32' type");
     }
 
     [Fact]

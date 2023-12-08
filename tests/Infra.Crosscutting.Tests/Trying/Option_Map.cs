@@ -21,7 +21,7 @@ public class Option_Map
     [Fact]
     public void WithNone_ReturnsNone()
     {
-        var option = Option.Of<string>(null);
+        var option = Option.Of<string>(null!);
         Option<string> result = option.Map(x => x.ToUpper());
         result.IsNone.Should().BeTrue();
     }

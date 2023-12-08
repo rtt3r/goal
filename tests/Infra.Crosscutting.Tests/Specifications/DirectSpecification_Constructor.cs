@@ -11,7 +11,7 @@ public class DirectSpecification_Constructor
     [Fact]
     public void GivenValidCriteriaThenReturnNewInstance()
     {
-        Specification<TestObject1> spec1 = null;
+        Specification<TestObject1> spec1 = null!;
 
         Action act = () => spec1 = new DirectSpecification<TestObject1>(e => e.Id == 0);
 
@@ -23,10 +23,10 @@ public class DirectSpecification_Constructor
     [Fact]
     public void GivenNullCriteriaThenThrowException()
     {
-        Specification<TestObject1> spec1 = null;
+        Specification<TestObject1> spec1 = null!;
 
-        Action act = () => spec1 = new DirectSpecification<TestObject1>(null);
+        Action act = () => spec1 = new DirectSpecification<TestObject1>(null!);
 
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'matchingCriteria')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'matchingCriteria')");
     }
 }

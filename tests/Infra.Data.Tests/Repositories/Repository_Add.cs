@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Data.Tests.Extensions;
 using Goal.Seedwork.Infra.Data.Tests.Mocks;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
@@ -31,7 +32,7 @@ public class Repository_Add
     }
 
     [Fact]
-    public void CallSaveChangesSuccessfullyGivenOneEntityAsync()
+    public async Task CallSaveChangesSuccessfullyGivenOneEntityAsync()
     {
         var mockedTests = new List<Test>();
 
@@ -42,7 +43,7 @@ public class Repository_Add
 
         var testRepository = new TestRepository(mockDbContext.Object);
         var test = new Test(1);
-        testRepository.AddAsync(test).GetAwaiter().GetResult();
+        await testRepository.AddAsync(test);
 
         mockDbContext.Verify(x => x.Set<Test>().AddAsync(It.IsAny<Test>(), It.IsAny<CancellationToken>()), Times.Once);
     }
@@ -58,21 +59,20 @@ public class Repository_Add
             testRepository.Add((Test)null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("entity");
     }
 
     [Fact]
-    public void ThrowsArgumentNullExceptionGivenNullEntityAsync()
+    public async Task ThrowsArgumentNullExceptionGivenNullEntityAsync()
     {
         var mockDbContext = new Mock<DbContext>();
 
-        Action act = () =>
+        await FluentActions.Invoking(() =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.AddAsync((Test)null!).GetAwaiter().GetResult();
-        };
-
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
+            return testRepository.AddAsync((Test)null!);
+        })
+        .Should().ThrowAsync<ArgumentNullException>().WithParameterName("entity");
     }
 
     [Fact]
@@ -103,25 +103,24 @@ public class Repository_Add
             testRepository.Add((IEnumerable<Test>)null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("entities");
     }
 
     [Fact]
-    public void ThrowsArgumentNullExceptionGivenNullEntityEnumerableAsync()
+    public async Task ThrowsArgumentNullExceptionGivenNullEntityEnumerableAsync()
     {
         var mockDbContext = new Mock<DbContext>();
 
-        Action act = () =>
+        await FluentActions.Invoking(() =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.AddAsync((IEnumerable<Test>)null!).GetAwaiter().GetResult();
-        };
-
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");
+            return testRepository.AddAsync((IEnumerable<Test>)null!);
+        })
+        .Should().ThrowAsync<ArgumentNullException>().WithParameterName("entities");
     }
 
     [Fact]
-    public void CallSaveChangesSuccessfullyGivenManyEntitiesAsync()
+    public async Task CallSaveChangesSuccessfullyGivenManyEntitiesAsync()
     {
         var mockedTests = new List<Test>();
 
@@ -132,7 +131,7 @@ public class Repository_Add
 
         var testRepository = new TestRepository(mockDbContext.Object);
         List<Test> tests = MockTests();
-        testRepository.AddAsync(tests).GetAwaiter().GetResult();
+        await testRepository.AddAsync(tests);
 
         mockDbContext.Verify(x => x.Set<Test>().AddRangeAsync(It.IsAny<IEnumerable<Test>>(), It.IsAny<CancellationToken>()), Times.Once);
     }

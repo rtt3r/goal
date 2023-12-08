@@ -28,7 +28,7 @@ public class Option_Of
     [Fact]
     public void WithNullValue_ReturnsNone()
     {
-        object value = null;
+        object value = null!;
         var result = Option.Of(value);
         result.IsNone.Should().BeTrue();
     }

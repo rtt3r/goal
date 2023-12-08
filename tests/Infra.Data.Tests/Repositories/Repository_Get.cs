@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Data.Tests.Extensions;
 using Goal.Seedwork.Infra.Data.Tests.Mocks;
@@ -57,7 +58,7 @@ public class Repository_Get
     }
 
     [Fact]
-    public void ReturnsAnEntityGivenIdAsync()
+    public async Task ReturnsAnEntityGivenIdAsync()
     {
         List<Test> tests = MockTests();
 
@@ -73,7 +74,7 @@ public class Repository_Get
         Guid id = tests[2].Id;
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = testRepository.LoadAsync(id).Result;
+        Test? test = await testRepository.LoadAsync(id);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().NotBeNull();
@@ -81,7 +82,7 @@ public class Repository_Get
     }
 
     [Fact]
-    public void ReturnsNullGivenIdAsync()
+    public async Task ReturnsNullGivenIdAsync()
     {
         List<Test> tests = MockTests();
 
@@ -93,7 +94,7 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = testRepository.LoadAsync(Guid.NewGuid()).GetAwaiter().GetResult();
+        Test? test = await testRepository.LoadAsync(Guid.NewGuid());
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().BeNull();

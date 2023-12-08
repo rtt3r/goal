@@ -1,8 +1,15 @@
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq.Expressions;
+
+using System.Reflection;
+
 using FluentAssertions;
+
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
+
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Tests.Specifications;
@@ -27,8 +34,11 @@ public class ParameterRebinder_ReplaceParameters
         ConstantExpression constantExpr = Expression.Constant(123M);
         BinaryExpression addExpr = Expression.Add(originalParam1, constantExpr);
 
+        MethodInfo method = typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) })
+            ?? throw new InvalidOperationException("Method not found");
+
         MethodCallExpression concatExpr = Expression.Call(
-            typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) }),
+            method,
             addExpr,
             originalParam2);
 
@@ -80,13 +90,16 @@ public class ParameterRebinder_ReplaceParameters
         ConstantExpression constantExpr = Expression.Constant(123M);
         BinaryExpression addExpr = Expression.Add(originalParam1, constantExpr);
 
+        MethodInfo method = typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) })
+            ?? throw new InvalidOperationException("Method not found");
+
         MethodCallExpression concatExpr = Expression.Call(
-            typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) }),
+            method,
             addExpr,
             originalParam2);
 
         // Act & Assert
-        FluentActions.Invoking(() => ParameterRebinder.ReplaceParameters(null, concatExpr))
+        FluentActions.Invoking(() => ParameterRebinder.ReplaceParameters(null!, concatExpr))
             .Should().Throw<ArgumentNullException>()
             .Which.Message.Should().Be("Value cannot be null. (Parameter 'left')");
     }

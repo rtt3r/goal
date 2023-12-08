@@ -14,7 +14,7 @@ public class Try_OptionalFailure
 
         Option<string> optionalFailure = success.OptionalFailure;
 
-        optionalFailure.Should().Be(Option.Of<string>(null));
+        optionalFailure.Should().Be(Option.Of<string>(null!));
     }
 
     [Fact]

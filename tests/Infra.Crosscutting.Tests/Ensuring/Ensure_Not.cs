@@ -17,7 +17,7 @@ public class Ensure_Not
     public void ThrowExceptionGivenTrueAndNotEmptyMessage()
     {
         Action act = () => Ensure.Not(true, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]

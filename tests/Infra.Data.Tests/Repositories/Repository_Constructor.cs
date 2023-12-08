@@ -22,6 +22,6 @@ public class Repository_Constructor
     public void ThrowsArgumentNullExceptionGivenSimpleRepository()
     {
         Action act = () => _ = new TestRepository(null!);
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("context");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("context");
     }
 }

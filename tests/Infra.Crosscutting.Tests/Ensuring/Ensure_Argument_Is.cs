@@ -31,6 +31,6 @@ public class Ensure_Argument_Is
     public void ThrowsArgumentExceptionGivenFalseConditionAndAMessage()
     {
         Action act = () => Ensure.Argument.Is(false, "Test");
-        act.Should().Throw<ArgumentException>().And.Message.Should().Be("Test");
+        act.Should().Throw<ArgumentException>().WithMessage("Test");
     }
 }

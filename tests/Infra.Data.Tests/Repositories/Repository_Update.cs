@@ -42,7 +42,7 @@ public class Repository_Update
             testRepository.Update((Test)null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("entity");
     }
 
     [Fact]
@@ -77,7 +77,7 @@ public class Repository_Update
             testRepository.Update(tests);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("entities");
     }
 
     private static List<Test> MockTests(int count)

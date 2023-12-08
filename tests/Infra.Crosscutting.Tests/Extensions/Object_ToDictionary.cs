@@ -22,7 +22,7 @@ public class Object_ToDictionary
     [Fact]
     public void ReturnEmptyGivenNullObject()
     {
-        TestObject1 object1 = null;
+        TestObject1 object1 = null!;
         IDictionary<string, object> dictionary = object1.ToDictionary();
 
         dictionary.Should().NotBeNull().And.BeEmpty().And.NotContainKey("Id").And.NotContainKey("Value");
@@ -42,7 +42,7 @@ public class Object_ToDictionary
     [Fact]
     public void ReturnEmptyGenericDictionaryGivenNullObject()
     {
-        TestObject1 object1 = null;
+        TestObject1 object1 = null!;
         IDictionary<string, string> dictionary = object1.ToDictionary<string>();
 
         dictionary.Should().NotBeNull().And.BeEmpty().And.NotContainKey("Id").And.NotContainKey("Value");

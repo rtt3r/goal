@@ -129,7 +129,7 @@ public class Repository_Find
             testRepository.Query(spec);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]
@@ -550,7 +550,7 @@ public class Repository_Find
             testRepository.Query(spec, pageSearch);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("pageSearch");
     }
 
     [Fact]
@@ -583,7 +583,7 @@ public class Repository_Find
             testRepository.Query(spec, pageSearch);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]

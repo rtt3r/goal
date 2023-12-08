@@ -17,7 +17,7 @@ public class Ensure_That
     public void ThrowExceptionGivenFalseAndNotEmptyMessage()
     {
         Action act = () => Ensure.That(false, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class Ensure_That
     public void ThrowExceptionGivenFalsePredicateAndNotEmptyMessage()
     {
         Action act = () => Ensure.That(() => false, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class Ensure_That
     public void ThrowApplicationExceptionGivenFalsePredicateAndNotEmptyMessage()
     {
         Action act = () => Ensure.That<ApplicationException>(() => false, "Test");
-        act.Should().Throw<ApplicationException>().And.Message.Should().Be("Test");
+        act.Should().Throw<ApplicationException>().WithMessage("Test");
     }
 
     [Fact]
