@@ -6,6 +6,7 @@
 		<IsPackable>false</IsPackable>
 		<RootNamespace>Goal.Seedwork.Domain.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
