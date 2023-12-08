@@ -13,9 +13,9 @@ namespace Goal.Seedwork.Infra.Data.Auditing;
 
 public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditChangesInterceptor
 {
-    protected Audit _audit;
+    protected Audit? _audit;
 
-    public event EventHandler<SaveAuditEventArgs> SaveAudit;
+    public event EventHandler<SaveAuditEventArgs>? SaveAudit;
 
     protected AuditChangesInterceptor()
     {
@@ -31,7 +31,7 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
         DbContextEventData eventData,
         InterceptionResult<int> result)
     {
-        _audit = AuditChangesInterceptor.CreateAudit(eventData.Context);
+        _audit = CreateAudit(eventData.Context);
         return result;
     }
 
@@ -43,6 +43,9 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
 
     public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
     {
+        if (_audit is null)
+            return result;
+
         _audit.Succeeded = true;
         _audit.EndTime = DateTime.UtcNow;
 
@@ -58,6 +61,9 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
 
     public override void SaveChangesFailed(DbContextErrorEventData eventData)
     {
+        if (_audit is null)
+            return;
+
         _audit.Succeeded = false;
         _audit.EndTime = DateTime.UtcNow;
         _audit.ErrorMessage = eventData.Exception.Message;
@@ -67,16 +73,19 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
 
     protected abstract void SaveAuditChanges(Audit audit);
 
-    private static Audit CreateAudit(DbContext context)
+    private static Audit? CreateAudit(DbContext? context)
     {
-        context.ChangeTracker.DetectChanges();
+        if (context is null)
+            throw new ArgumentNullException(nameof(context));
+
+        context?.ChangeTracker.DetectChanges();
         var audit = new Audit { StartTime = DateTimeOffset.UtcNow };
 
-        foreach (EntityEntry entry in context.ChangeTracker
+        foreach (EntityEntry entry in context!.ChangeTracker
             .Entries()
             .Where(x => x.State is EntityState.Added or EntityState.Modified or EntityState.Deleted))
         {
-            audit.Entries.Add(AuditChangesInterceptor.CreateAuditEntry(entry));
+            audit.Entries.Add(CreateAuditEntry(entry));
         }
 
         return audit;
@@ -84,21 +93,27 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
 
     private static AuditEntry CreateAuditEntry(EntityEntry entry)
     {
-        string tableName = entry.Metadata.GetTableName();
-        string schema = entry.Metadata.GetSchema();
+        string tableName = entry.Metadata.GetTableName()
+            ?? throw new InvalidOperationException("Cannot obtain the table name");
 
-        var keyValues = new Dictionary<string, object>();
-        var oldValues = new Dictionary<string, object>();
-        var newValues = new Dictionary<string, object>();
+        string? schema = entry.Metadata.GetSchema();
+
+        var keyValues = new Dictionary<string, object?>();
+        var oldValues = new Dictionary<string, object?>();
+        var newValues = new Dictionary<string, object?>();
         var changedColumns = new List<string>();
         AuditType auditType = AuditType.None;
 
         var identifier = StoreObjectIdentifier.Table(tableName, schema);
 
+        string propertyName;
+        string? columnName;
+
         foreach (PropertyEntry property in entry.Properties)
         {
-            string propertyName = property.Metadata.Name;
-            string columnName = property.Metadata.GetColumnName(identifier);
+            propertyName = property.Metadata.Name;
+            columnName = property.Metadata.GetColumnName(identifier)
+                ?? throw new InvalidOperationException("Cannot obtain the column name");
 
             if (property.Metadata.IsPrimaryKey())
             {
@@ -118,7 +133,10 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
                     auditType = AuditType.Delete;
                     break;
 
-                case EntityState.Modified when property.IsModified && !property.OriginalValue.Equals(property.CurrentValue):
+                case EntityState.Modified when property.IsModified
+                    && property.OriginalValue is not null
+                    && !property.OriginalValue.Equals(property.CurrentValue):
+
                     changedColumns.Add(columnName);
 
                     oldValues[propertyName] = property.OriginalValue;
