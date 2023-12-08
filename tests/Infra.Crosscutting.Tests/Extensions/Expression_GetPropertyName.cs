@@ -12,7 +12,7 @@ public class Expression_GetPropertyName
     [Fact]
     public void ReturnPropertyNameGivenMemberExpression()
     {
-        Expression<Func<TestObject1, string>> expression = p => p.Value;
+        Expression<Func<TestObject1, string?>> expression = p => p.Value;
         string propertyName = expression.GetPropertyName();
 
         propertyName.Should().NotBeNull().And.Be("Value");

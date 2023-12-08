@@ -21,7 +21,7 @@ public class Enum_GetAmbientValue
     public void GivenEnumWithAmbientValueThenReturnString()
     {
         Enum1 value1 = Enum1.Value1;
-        string value = value1.GetAmbientValue<string>();
+        string? value = value1.GetAmbientValue<string>();
 
         value.Should().NotBeNull().And.Be("Name");
     }

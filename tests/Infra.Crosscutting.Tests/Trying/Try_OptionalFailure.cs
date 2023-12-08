@@ -12,7 +12,7 @@ public class Try_OptionalFailure
         int value = 456;
         Try<string, int> success = value;
 
-        Option<string> optionalFailure = success.OptionalFailure;
+        Option<string?> optionalFailure = success.OptionalFailure;
 
         optionalFailure.Should().Be(Option.Of<string>(null!));
     }
@@ -23,7 +23,7 @@ public class Try_OptionalFailure
         string errorMessage = "Failed!";
         Try<string, int> failure = errorMessage;
 
-        Option<string> optionalFailure = failure.OptionalFailure;
+        Option<string?> optionalFailure = failure.OptionalFailure;
 
         optionalFailure.Should().Be(Option.Of(errorMessage));
     }
