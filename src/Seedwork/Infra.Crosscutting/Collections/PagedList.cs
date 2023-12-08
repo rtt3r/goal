@@ -11,14 +11,14 @@ public class PagedList<T> : IPagedCollection<T>
 {
     private readonly IEnumerable<T> items;
 
-    public PagedList(IEnumerable<T> items, int totalCount)
+    public PagedList(IEnumerable<T> items, long totalCount)
     {
         this.items = items ?? new List<T>();
         PageCount = items?.Count() ?? 0;
         TotalCount = totalCount;
     }
 
-    public int TotalCount { get; private set; } = 0;
+    public long TotalCount { get; private set; } = 0;
 
     public int PageCount { get; private set; } = 0;
 

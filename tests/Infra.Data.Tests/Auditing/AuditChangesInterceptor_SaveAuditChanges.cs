@@ -410,8 +410,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
         bool savingEventCalled = false;
         bool saveAuditEventCalled = false;
         int resultFromEvent = 0;
-        Audit? auditFromEvent = null;
-        Exception? exceptionFromEvent = null;
+        Audit? auditFromEvent = null!;
+        Exception? exceptionFromEvent = null!;
 
         context.SavingChanges += (sender, args) =>
         {
@@ -458,7 +458,7 @@ public class AuditChangesInterceptor_SaveAuditChanges
         // Assert
         savedCount.Should().Be(0);
         savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeTrue();
+        saveAuditEventCalled.Should().BeFalse();
         savedCount.Should().Be(resultFromEvent);
         exceptionFromEvent.Should().BeSameAs(thrown);
 

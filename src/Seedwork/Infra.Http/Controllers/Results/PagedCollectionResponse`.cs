@@ -11,5 +11,5 @@ public abstract class PagedCollectionResponse<T> where T : class, IPagedCollecti
     }
 
     public T Items { get; set; }
-    public int TotalCount { get; set; }
+    public long TotalCount { get; set; }
 }
