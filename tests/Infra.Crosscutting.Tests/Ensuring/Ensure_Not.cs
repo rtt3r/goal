@@ -10,7 +10,7 @@ public class Ensure_Not
     public void ThrowExceptionGivenTrue()
     {
         Action act = () => Ensure.Not(true);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]

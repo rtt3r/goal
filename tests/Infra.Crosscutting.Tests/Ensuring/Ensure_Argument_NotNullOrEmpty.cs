@@ -38,7 +38,7 @@ public class Ensure_Argument_NotNullOrEmpty
     [Fact]
     public void ThrowArgumentNullExceptionGivenNullString()
     {
-        Action act = () => Ensure.Argument.IsNotNullOrEmpty(null!);
+        Action act = () => Ensure.Argument.IsNotNullOrEmpty(null);
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().BeNull();
         act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrEmpty);
     }

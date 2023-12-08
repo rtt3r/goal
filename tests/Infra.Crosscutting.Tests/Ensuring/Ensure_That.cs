@@ -10,7 +10,7 @@ public class Ensure_That
     public void ThrowExceptionGivenFalse()
     {
         Action act = () => Ensure.That(false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class Ensure_That
     public void ThrowExceptionGivenFalsePredicate()
     {
         Action act = () => Ensure.That(() => false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public class Ensure_That
     public void ThrowApplicationExceptionGivenFalsePredicate()
     {
         Action act = () => Ensure.That<ApplicationException>(() => false);
-        act.Should().Throw<ApplicationException>().And.Message.Should().Be("");
+        act.Should().Throw<ApplicationException>().And.Message.Should().Be("Exception of type 'System.ApplicationException' was thrown.");
     }
 
     [Fact]

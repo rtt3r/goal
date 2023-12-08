@@ -38,7 +38,7 @@ public class Ensure_Argument_NotNullOrWhiteSpace
     [Fact]
     public void ThrowArgumentNullExceptionGivenNullString()
     {
-        Action act = () => Ensure.Argument.IsNotNullOrWhiteSpace(null!);
+        Action act = () => Ensure.Argument.IsNotNullOrWhiteSpace(null);
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().BeNull();
         act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
     }

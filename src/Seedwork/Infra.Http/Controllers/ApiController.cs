@@ -37,22 +37,22 @@ public class ApiController : ControllerBase
 
     protected virtual ActionResult CommandFailure(ICommandResult result)
     {
-        if (result.HasInputValidation())
+        if (result.HasInputValidation)
         {
             return BadRequest(result.Notifications);
         }
 
-        if (result.HasResourceNotFound())
+        if (result.HasResourceNotFound)
         {
             return NotFound(result.Notifications);
         }
 
-        if (result.HasDomainViolation())
+        if (result.HasDomainViolation)
         {
             return UnprocessableEntity(result.Notifications);
         }
 
-        return result.HasExternalError() 
+        return result.HasExternalError 
             ? ServiceUnavailable(result.Notifications) 
             : InternalServerError(result.Notifications);
     }

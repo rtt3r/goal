@@ -35,7 +35,7 @@ public class Ensure_Argument_NotNull
     [Fact]
     public void ThrowArgumentNullExceptionGivenNullObject()
     {
-        Action act = () => Ensure.Argument.IsNotNull(null!);
+        Action act = () => Ensure.Argument.IsNotNull(null);
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().BeNull();
         act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null");
     }

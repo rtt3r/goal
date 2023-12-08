@@ -11,7 +11,7 @@ public class Ensure_Items
     {
         int[] collection = null!;
         Action act = () => Ensure.Items(collection, p => p == 0);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().WithMessage("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]
@@ -19,7 +19,7 @@ public class Ensure_Items
     {
         int[] collection = new[] { 0 };
         Action act = () => Ensure.Items(collection, p => p > 0);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().WithMessage("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]

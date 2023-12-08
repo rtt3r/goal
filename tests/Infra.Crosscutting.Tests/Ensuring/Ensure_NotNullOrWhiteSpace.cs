@@ -9,14 +9,14 @@ public class Ensure_NotNullOrWhiteSpace
     [Fact]
     public void ThrowExceptionGivenNull()
     {
-        Action act = () => Ensure.NotNullOrWhiteSpace(null!);
+        Action act = () => Ensure.NotNullOrWhiteSpace(null);
         act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
     }
 
     [Fact]
     public void ThrowExceptionGivenNullAndNotWhiteSpaceMessage()
     {
-        Action act = () => Ensure.NotNullOrWhiteSpace(null!, "Test");
+        Action act = () => Ensure.NotNullOrWhiteSpace(null, "Test");
         act.Should().Throw<Exception>().WithMessage("Test");
     }
 

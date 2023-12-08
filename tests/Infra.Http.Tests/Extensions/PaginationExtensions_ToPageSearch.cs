@@ -18,7 +18,7 @@ public class PaginationExtensions_ToPageSearch
         var result = request?.ToPageSearch();
 
         // Assert
-        result.Should().NotBeNull();
+        result?.Should().NotBeNull();
         result?.PageIndex.Should().Be(0);
         result?.PageSize.Should().Be(int.MaxValue);
         result?.SortBy.Should().BeNull();

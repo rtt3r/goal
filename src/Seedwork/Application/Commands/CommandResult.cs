@@ -5,47 +5,27 @@ using Goal.Seedwork.Infra.Crosscutting.Notifications;
 
 namespace Goal.Seedwork.Application.Commands;
 
-public class CommandResult : ICommandResult
+public record CommandResult(bool IsSucceeded, IEnumerable<Notification> Notifications) : ICommandResult
 {
-    protected CommandResult()
-    {
-    }
-
-    public bool IsSucceeded { get; private set; }
-    public IEnumerable<Notification> Notifications { get; private set; } = new List<Notification>();
-
     public static ICommandResult Success(params Notification[] notifications)
     {
-        return notifications.Any(p => p.Type != NotificationType.Information)
-            ? throw new InvalidOperationException("For 'Success' result only notifications of type 'Information' are accepted.")
-            : (ICommandResult)new CommandResult
-            {
-                IsSucceeded = true,
-                Notifications = notifications
-            };
+        return notifications.All(p => p.Type != NotificationType.Information)
+            ? new CommandResult(true, notifications)
+            : throw new InvalidOperationException("For 'Success' result only notifications of type 'Information' are accepted.");
     }
 
     public static ICommandResult<TData> Success<TData>(TData data, params Notification[] notifications)
     {
-        return notifications.Any(p => p.Type != NotificationType.Information)
-            ? throw new InvalidOperationException("For 'Success' result only notifications of type 'Information' are accepted.")
-            : (ICommandResult<TData>)new CommandResult<TData>
-            {
-                IsSucceeded = true,
-                Data = data,
-                Notifications = notifications
-            };
+        return notifications.All(p => p.Type != NotificationType.Information)
+            ? new CommandResult<TData>(true, data, notifications)
+            : throw new InvalidOperationException("For 'Success' result only notifications of type 'Information' are accepted.");
     }
 
     public static ICommandResult Failure(params Notification[] notifications)
     {
-        return !notifications.Any(n => n.Type != NotificationType.Information)
-            ? throw new InvalidOperationException("For 'Failure' result it's necessary to report failure notifications.")
-            : (ICommandResult)new CommandResult
-            {
-                IsSucceeded = false,
-                Notifications = notifications
-            };
+        return notifications.Any(n => n.Type != NotificationType.Information)
+            ? new CommandResult(false, notifications)
+            : throw new InvalidOperationException("For 'Failure' result it's necessary to report failure notifications.");
     }
 
     public static ICommandResult Failure(IEnumerable<Notification> notifications)
@@ -53,32 +33,27 @@ public class CommandResult : ICommandResult
 
     public static ICommandResult<TData> Failure<TData>(TData data, IEnumerable<Notification> notifications)
     {
-        return !notifications.Any(n => n.Type != NotificationType.Information)
-            ? throw new InvalidOperationException("For 'Failure' result it's necessary to report failure notifications.")
-            : (ICommandResult<TData>)new CommandResult<TData>
-            {
-                IsSucceeded = false,
-                Data = data,
-                Notifications = notifications
-            };
+        return notifications.Any(n => n.Type != NotificationType.Information)
+            ? new CommandResult<TData>(false, data, notifications)
+            : throw new InvalidOperationException("For 'Failure' result it's necessary to report failure notifications.");
     }
 
-    public bool HasDomainViolation()
+    public bool HasDomainViolation
         => HasNotificationsOf(NotificationType.DomainViolation);
 
-    public bool HasExternalError()
+    public bool HasExternalError
         => HasNotificationsOf(NotificationType.ExternalError);
 
-    public bool HasInternalError()
+    public bool HasInternalError
         => HasNotificationsOf(NotificationType.InternalError);
 
-    public bool HasInformation()
+    public bool HasInformation
         => HasNotificationsOf(NotificationType.Information);
 
-    public bool HasInputValidation()
+    public bool HasInputValidation
         => HasNotificationsOf(NotificationType.InputValidation);
 
-    public bool HasResourceNotFound()
+    public bool HasResourceNotFound
         => HasNotificationsOf(NotificationType.ResourceNotFound);
 
     private bool HasNotificationsOf(NotificationType type)

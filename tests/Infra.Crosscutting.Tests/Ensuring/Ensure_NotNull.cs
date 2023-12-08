@@ -9,14 +9,14 @@ public class Ensure_NotNull
     [Fact]
     public void ThrowExceptionGivenNull()
     {
-        Action act = () => Ensure.NotNull(null!);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        Action act = () => Ensure.NotNull(null);
+        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.NullReferenceException' was thrown.");
     }
 
     [Fact]
     public void ThrowExceptionGivenNullAndNotEmptyMessage()
     {
-        Action act = () => Ensure.NotNull(null!, "Test");
+        Action act = () => Ensure.NotNull(null, "Test");
         act.Should().Throw<Exception>().WithMessage("Test");
     }
 

@@ -9,8 +9,8 @@ public static class Queryable
         where TQueryable : IQueryable<T>
     {
         ParameterExpression param = Expression.Parameter(typeof(T), string.Empty);
-        MemberExpression property = null;
-        LambdaExpression sort = null;
+        MemberExpression property = null!;
+        LambdaExpression sort = null!;
 
         foreach (string propName in fieldName.Split('.'))
         {
@@ -25,7 +25,7 @@ public static class Queryable
         MethodCallExpression call = Expression.Call(
             typeof(System.Linq.Queryable),
             methodName,
-            new[] { typeof(T), property?.Type },
+            [typeof(T), property.Type],
             source.Expression,
             Expression.Quote(sort));
 

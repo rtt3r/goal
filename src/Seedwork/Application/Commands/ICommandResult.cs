@@ -7,10 +7,10 @@ public interface ICommandResult
 {
     bool IsSucceeded { get; }
     IEnumerable<Notification> Notifications { get; }
-    bool HasDomainViolation();
-    bool HasExternalError();
-    bool HasInternalError();
-    bool HasInformation();
-    bool HasInputValidation();
-    bool HasResourceNotFound();
+    bool HasDomainViolation { get; }
+    bool HasExternalError { get; }
+    bool HasInternalError { get; }
+    bool HasInformation { get; }
+    bool HasInputValidation { get; }
+    bool HasResourceNotFound { get; }
 }

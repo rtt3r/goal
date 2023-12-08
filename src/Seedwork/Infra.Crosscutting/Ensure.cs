@@ -6,7 +6,7 @@ using Goal.Seedwork.Infra.Crosscutting.Extensions;
 
 namespace Goal.Seedwork.Infra.Crosscutting;
 
-[DebuggerStepThrough]
+// [DebuggerStepThrough]
 public static class Ensure
 {
     public static void That(bool condition, string? message = null)
@@ -40,19 +40,19 @@ public static class Ensure
     public static void Not(bool condition, string? message = null)
         => Not<Exception>(condition, message);
 
-    public static void NotNull(object value, string? message = null)
+    public static void NotNull(object? value, string? message = null)
         => That<NullReferenceException>(value is not null, message);
 
-    public static void NotNullOrEmpty(string value)
+    public static void NotNullOrEmpty(string? value)
         => NotNullOrEmpty(value, null);
 
-    public static void NotNullOrEmpty(string value, string? message = null)
-        => That(!value.IsNullOrEmpty(), message ?? Messages.StringCannotBeNullOrEmpty);
+    public static void NotNullOrEmpty(string? value, string? message = null)
+        => That(!string.IsNullOrEmpty(value), message ?? Messages.StringCannotBeNullOrEmpty);
 
-    public static void NotNullOrWhiteSpace(string value)
+    public static void NotNullOrWhiteSpace(string? value)
         => NotNullOrWhiteSpace(value, null);
 
-    public static void NotNullOrWhiteSpace(string value, string? message = null)
+    public static void NotNullOrWhiteSpace(string? value, string? message = null)
         => That(!string.IsNullOrWhiteSpace(value), message ?? Messages.StringCannotBeNullOrWhitespace);
 
     public static void Equal<T>(T left, T right)

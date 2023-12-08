@@ -4,17 +4,21 @@ namespace Goal.Seedwork.Infra.Crosscutting.Trying;
 
 public readonly struct Try<TFailure, TSuccess>
 {
-    internal TFailure Failure { get; }
+    internal TFailure? Failure { get; }
 
-    internal TSuccess Success { get; }
+    internal TSuccess? Success { get; }
 
     public bool IsFailure { get; }
 
     public bool IsSuccess => !IsFailure;
 
-    public Option<TFailure> OptionalFailure => !IsFailure ? (Option<TFailure>)Option.None() : Option.Of(Failure);
+    public Option<TFailure?> OptionalFailure => !IsFailure 
+        ? (Option<TFailure?>)Option.None()
+        : Option.Of(Failure);
 
-    public Option<TSuccess> OptionalSuccess => !IsSuccess ? (Option<TSuccess>)Option.None() : Option.Of(Success);
+    public Option<TSuccess?> OptionalSuccess => !IsSuccess
+        ? (Option<TSuccess?>)Option.None() 
+        : Option.Of(Success);
 
     internal Try(TFailure failure)
     {
@@ -30,15 +34,16 @@ public readonly struct Try<TFailure, TSuccess>
         Success = success;
     }
 
-    public TResult Match<TResult>(Func<TFailure, TResult> failure, Func<TSuccess, TResult> success) => !IsFailure ? success(Success) : failure(Failure);
+    public TResult Match<TResult>(Func<TFailure?, TResult> failure, Func<TSuccess?, TResult> success) 
+        => !IsFailure ? success(Success) : failure(Failure);
 
-    public UnitType Match(Action<TFailure> failure, Action<TSuccess> success)
+    public UnitType Match(Action<TFailure?> failure, Action<TSuccess?> success)
         => Match(Helpers.ToFunc(failure), Helpers.ToFunc(success));
 
-    public TSuccess GetSuccess()
+    public TSuccess? GetSuccess()
         => Success;
 
-    public TFailure GetFailure()
+    public TFailure? GetFailure()
         => Failure;
 
     public static implicit operator Try<TFailure, TSuccess>(TFailure failure)

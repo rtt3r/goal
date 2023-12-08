@@ -4,7 +4,7 @@ public class PageSearch : IPageSearch
 {
     public int PageIndex { get; private set; } = 0;
     public int PageSize { get; private set; } = int.MaxValue;
-    public string SortBy { get; private set; }
+    public string? SortBy { get; private set; }
     public SortDirection SortDirection { get; private set; } = SortDirection.Asc;
 
     public PageSearch()
