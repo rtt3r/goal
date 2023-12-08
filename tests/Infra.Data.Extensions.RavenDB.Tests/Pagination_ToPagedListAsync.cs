@@ -43,7 +43,7 @@ public class Pagination_ToPagedListAsync : RavenTestDriver
             // Act
             var pagination = new PageSearch(0, 10);
 
-            IPagedCollection<TestObject1> result = await session
+            IPagedList<TestObject1> result = await session
                 .Query<TestObject1>()
                 .ToPagedListAsync(pagination);
 
@@ -81,7 +81,7 @@ public class Pagination_ToPagedListAsync : RavenTestDriver
             // Act
             var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
 
-            IPagedCollection<TestObject1> result = await session
+            IPagedList<TestObject1> result = await session
                 .Query<TestObject1>()
                 .ToPagedListAsync(pagination);
 
@@ -119,7 +119,7 @@ public class Pagination_ToPagedListAsync : RavenTestDriver
             // Act
             var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
 
-            IPagedCollection<TestObject1> result = await session
+            IPagedList<TestObject1> result = await session
                 .Query<TestObject1>()
                 .ToPagedListAsync(pagination);
 
@@ -157,7 +157,7 @@ public class Pagination_ToPagedListAsync : RavenTestDriver
             // Act
             var pagination = new PageSearch(0, 0);
 
-            IPagedCollection<TestObject1> result = await session
+            IPagedList<TestObject1> result = await session
                 .Query<TestObject1>()
                 .ToPagedListAsync(pagination);
 

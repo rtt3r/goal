@@ -8,18 +8,9 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Goal.Seedwork.Infra.Http.Swagger;
 
-public sealed class AppendAuthorizeToSummaryOperationFilter<T> : IOperationFilter where T : Attribute
+public sealed class AppendAuthorizeToSummaryOperationFilter<T>(IEnumerable<PolicySelectorWithLabel<T>> policySelectors) : IOperationFilter where T : Attribute
 {
-    private readonly IEnumerable<PolicySelectorWithLabel<T>> policySelectors;
-
-    /// <summary>
-    /// Constructor for AppendAuthorizeToSummaryOperationFilter
-    /// </summary>
-    /// <param name="policySelectors">Used to select the authorization policy from the attribute e.g. (a => a.Policy)</param>
-    public AppendAuthorizeToSummaryOperationFilter(IEnumerable<PolicySelectorWithLabel<T>> policySelectors)
-    {
-        this.policySelectors = policySelectors;
-    }
+    private readonly IEnumerable<PolicySelectorWithLabel<T>> policySelectors = policySelectors;
 
     public void Apply(OpenApiOperation operation, OperationFilterContext context)
     {
@@ -61,7 +52,7 @@ public sealed class AppendAuthorizeToSummaryOperationFilter<T> : IOperationFilte
 
     private static void AppendPolicies(IEnumerable<T> authorizeAttributes, StringBuilder authorizationDescription, PolicySelectorWithLabel<T> policySelector)
     {
-        IOrderedEnumerable<string> policies = policySelector
+        IOrderedEnumerable<string?> policies = policySelector
             .Selector(authorizeAttributes)
             .OrderBy(policy => policy);
 

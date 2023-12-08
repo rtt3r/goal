@@ -77,7 +77,6 @@ public class DesignTimeDbContextFactory_CreateDBContext
     }
 }
 
-public class TestDbContext : DbContext
+public class TestDbContext(DbContextOptions<TestDbContext> options) : DbContext(options)
 {
-    public TestDbContext(DbContextOptions<TestDbContext> options) : base(options) { }
 }

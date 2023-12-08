@@ -7,11 +7,8 @@ namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks;
 
 public class UnitOfWork_Constructor
 {
-    public class MockUnitOfWork : UnitOfWork
+    public class MockUnitOfWork(DbContext context) : UnitOfWork(context)
     {
-        public MockUnitOfWork(DbContext context) : base(context)
-        {
-        }
     }
 
     [Fact]

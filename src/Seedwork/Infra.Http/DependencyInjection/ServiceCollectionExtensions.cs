@@ -15,7 +15,7 @@ public static class ServiceCollectionExtensions
         Ensure.Argument.IsNotNull(typeAdapterFactory, nameof(typeAdapterFactory));
 
         services.AddSingleton(typeof(ITypeAdapterFactory), typeAdapterFactory);
-        services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>().Create());
+        services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>()!.Create());
 
         return services;
     }
@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
         where TTypeAdapterFactory : class, ITypeAdapterFactory
     {
         services.AddSingleton<ITypeAdapterFactory, TTypeAdapterFactory>();
-        services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>().Create());
+        services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>()!.Create());
 
         return services;
     }

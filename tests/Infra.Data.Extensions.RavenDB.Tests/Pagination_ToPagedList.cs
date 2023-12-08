@@ -8,7 +8,6 @@ using Raven.Client.Documents.Session;
 using Raven.Client.Documents;
 using Xunit;
 using Raven.TestDriver;
-using Newtonsoft.Json.Linq;
 
 namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests;
 

@@ -16,9 +16,9 @@ public interface IRepository<TEntity, TKey> : IRepository
 
     ICollection<TEntity> Query(ISpecification<TEntity> specification);
 
-    IPagedCollection<TEntity> Query(IPageSearch pageSearch);
+    IPagedList<TEntity> Query(IPageSearch pageSearch);
 
-    IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
+    IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
 
     Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
 
@@ -26,9 +26,9 @@ public interface IRepository<TEntity, TKey> : IRepository
 
     Task<ICollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<IPagedCollection<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<IPagedCollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
     bool Any();
 

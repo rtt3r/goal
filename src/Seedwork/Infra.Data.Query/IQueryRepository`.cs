@@ -10,7 +10,7 @@ public interface IQueryRepository<TEntity, TKey> : IQueryRepository
 {
     Task<TEntity> LoadAsync(TKey id, CancellationToken cancellationToken = new CancellationToken());
     Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken());
-    Task<IPagedCollection<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
     Task StoreAsync(TKey id, TEntity entity, CancellationToken cancellationToken = new CancellationToken());
     Task RemoveAsync(TEntity entity, CancellationToken cancellationToken = new CancellationToken());
     Task RemoveAsync(TKey id, CancellationToken cancellationToken = new CancellationToken());

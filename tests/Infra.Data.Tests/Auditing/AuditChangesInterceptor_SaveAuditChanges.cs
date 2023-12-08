@@ -505,13 +505,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
         return (context, interceptor);
     }
 
-    public class UniverseContext : DbContext
+    public class UniverseContext(DbContextOptions options) : DbContext(options)
     {
-        public UniverseContext(DbContextOptions options)
-            : base(options)
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder

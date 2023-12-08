@@ -2,14 +2,8 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 
 namespace Goal.Seedwork.Infra.Http.Controllers.Results;
 
-public abstract class PagedCollectionResponse<T> where T : class, IPagedCollection
+public abstract class PagedCollectionResponse<T>(T source) where T : class, IPagedList
 {
-    protected PagedCollectionResponse(T source)
-    {
-        TotalCount = source.TotalCount;
-        Items = source;
-    }
-
-    public T Items { get; set; }
-    public long TotalCount { get; set; }
+    public T Items { get; set; } = source;
+    public long TotalCount { get; set; } = source.TotalCount;
 }

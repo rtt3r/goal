@@ -38,7 +38,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             .ToList();
     }
 
-    public virtual IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch)
+    public virtual IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch)
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
@@ -46,7 +46,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             .ToPagedList(pageSearch);
     }
 
-    public virtual IPagedCollection<TEntity> Query(IPageSearch pageSearch)
+    public virtual IPagedList<TEntity> Query(IPageSearch pageSearch)
         => Query(new TrueSpecification<TEntity>(), pageSearch);
 
     public virtual async Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
@@ -66,12 +66,12 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             .ToListAsync(cancellationToken);
     }
 
-    public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
+    public virtual async Task<IPagedList<TEntity>> QueryAsync(
         IPageSearch pageSearch,
         CancellationToken cancellationToken = new CancellationToken())
         => await QueryAsync(new TrueSpecification<TEntity>(), pageSearch, cancellationToken);
 
-    public virtual async Task<IPagedCollection<TEntity>> QueryAsync(
+    public virtual async Task<IPagedList<TEntity>> QueryAsync(
         ISpecification<TEntity> specification,
         IPageSearch pageSearch,
         CancellationToken cancellationToken = new CancellationToken())

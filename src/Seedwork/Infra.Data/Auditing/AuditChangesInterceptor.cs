@@ -145,13 +145,9 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
         SaveAuditChanges(audit);
     }
 
-    public class SaveAuditEventArgs : EventArgs
+    public class SaveAuditEventArgs(Audit audit) : EventArgs
     {
-        public SaveAuditEventArgs(Audit audit)
-        {
-            Audit = audit;
-        }
 
-        public Audit Audit { get; }
+        public Audit Audit { get; } = audit;
     }
 }

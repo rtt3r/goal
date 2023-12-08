@@ -69,9 +69,9 @@ public class ApiController : ControllerBase
     protected virtual ActionResult ServiceUnavailable()
         => new ServiceUnavailableResult();
 
-    protected virtual OkPagedCollectionResult Paged(IPagedCollection collection)
+    protected virtual OkPagedCollectionResult Paged(IPagedList collection)
         => new(collection);
 
-    protected virtual OkPagedCollectionResult<T> Paged<T>(IPagedCollection<T> collection)
+    protected virtual OkPagedCollectionResult<T> Paged<T>(IPagedList<T> collection)
         => new(collection);
 }

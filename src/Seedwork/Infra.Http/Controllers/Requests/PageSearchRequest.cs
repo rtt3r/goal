@@ -17,7 +17,7 @@ public sealed class PageSearchRequest
     /// <summary>
     /// The field name to sort
     /// </summary>
-    public string SortBy { get; set; }
+    public string? SortBy { get; set; }
 
     /// <summary>
     /// The sort direction (Asc | Desc)

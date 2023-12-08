@@ -3,13 +3,9 @@ using System.Linq.Expressions;
 
 namespace Goal.Seedwork.Infra.Crosscutting.Specifications;
 
-public sealed class OrSpecification<TEntity> : CompositeSpecification<TEntity>
+public sealed class OrSpecification<TEntity>(ISpecification<TEntity> leftSideSpecification, ISpecification<TEntity> rightSideSpecification) : CompositeSpecification<TEntity>(leftSideSpecification, rightSideSpecification)
      where TEntity : class
 {
-    public OrSpecification(ISpecification<TEntity> leftSideSpecification, ISpecification<TEntity> rightSideSpecification)
-        : base(leftSideSpecification, rightSideSpecification)
-    {
-    }
 
     public override Expression<Func<TEntity, bool>> SatisfiedBy()
     {
