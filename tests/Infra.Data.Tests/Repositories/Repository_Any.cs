@@ -164,7 +164,7 @@ public class Repository_Any
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Any(spec);
         };
@@ -179,7 +179,7 @@ public class Repository_Any
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.AnyAsync(spec).GetAwaiter().GetResult();
         };

@@ -39,7 +39,7 @@ public class Repository_Update
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.Update((Test)null);
+            testRepository.Update((Test)null!);
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
@@ -71,7 +71,7 @@ public class Repository_Update
 
         Action act = () =>
         {
-            IEnumerable<Test> tests = null;
+            IEnumerable<Test> tests = null!;
 
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Update(tests);

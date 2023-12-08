@@ -3,10 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 namespace Goal.Seedwork.Domain.Aggregates;
 
 public abstract class Entity<TKey> : IEntity<TKey>
+    where TKey : struct
 {
     public virtual TKey Id { get; protected set; } = default;
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj is null)
         {
@@ -45,5 +46,6 @@ public abstract class Entity<TKey> : IEntity<TKey>
         return left.Equals(right);
     }
 
-    public static bool operator !=(Entity<TKey> left, Entity<TKey> right) => !(left == right);
+    public static bool operator !=(Entity<TKey> left, Entity<TKey> right)
+        => !(left == right);
 }

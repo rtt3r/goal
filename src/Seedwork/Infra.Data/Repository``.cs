@@ -14,10 +14,11 @@ namespace Goal.Seedwork.Infra.Data;
 
 public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntity, TKey>
     where TEntity : class
+    where TKey : struct
 {
     private bool disposed;
 
-    public DbContext Context { get; private set; }
+    protected DbContext Context { get; private set; }
 
     protected Repository(DbContext context)
     {
@@ -25,7 +26,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
         Context = context;
     }
 
-    public virtual TEntity Load(TKey key)
+    public virtual TEntity? Load(TKey key)
         => Context.Set<TEntity>().Find(key);
 
     public virtual ICollection<TEntity> Query()
@@ -48,7 +49,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
     public virtual IPagedCollection<TEntity> Query(IPageSearch pageSearch)
         => Query(new TrueSpecification<TEntity>(), pageSearch);
 
-    public virtual async Task<TEntity> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
+    public virtual async Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
     {
         cancellationToken.ThrowIfCancellationRequested();
         return await Context.Set<TEntity>().FindAsync(new object[] { key }, cancellationToken);
@@ -176,7 +177,6 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             if (disposing)
             {
                 Context.Dispose();
-                Context = null;
             }
 
             disposed = true;

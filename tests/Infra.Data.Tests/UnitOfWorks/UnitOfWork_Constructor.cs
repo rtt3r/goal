@@ -18,7 +18,7 @@ public class UnitOfWork_Constructor
     public void ContextIsNull_ThrowsArgumentNullException()
     {
         // Act and Assert
-        FluentActions.Invoking(() => new MockUnitOfWork(null))
+        FluentActions.Invoking(() => new MockUnitOfWork(null!))
             .Should().Throw<ArgumentNullException>()
             .WithMessage("Object value cannot be null (Parameter 'context')");
     }

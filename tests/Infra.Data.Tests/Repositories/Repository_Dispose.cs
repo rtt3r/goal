@@ -32,7 +32,7 @@ public class Repository_Dispose
         repository.Dispose();
 
         // Assert
-        repository.Context.Should().BeNull();
+        repository.PublicContext.Should().BeNull();
     }
 
     public static UniverseContext CreateContext()
@@ -67,7 +67,7 @@ public class Repository_Dispose
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 
     private class TestRepository : Repository
@@ -84,5 +84,7 @@ public class Repository_Dispose
             : base(context)
         {
         }
+
+        public DbContext PublicContext => Context;
     }
 }

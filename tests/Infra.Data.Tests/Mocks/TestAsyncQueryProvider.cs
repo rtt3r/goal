@@ -19,7 +19,7 @@ internal class TestAsyncQueryProvider<TEntity> : IAsyncQueryProvider
 
     public IQueryable<TElement> CreateQuery<TElement>(Expression expression) => new TestAsyncEnumerable<TElement>(expression);
 
-    public object Execute(Expression expression) => queryProvider.Execute(expression);
+    public object? Execute(Expression expression) => queryProvider.Execute(expression);
 
     public TResult Execute<TResult>(Expression expression) => queryProvider.Execute<TResult>(expression);
 

@@ -55,7 +55,7 @@ public class Repository_Add
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.Add((Test)null);
+            testRepository.Add((Test)null!);
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
@@ -69,7 +69,7 @@ public class Repository_Add
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.AddAsync((Test)null).GetAwaiter().GetResult();
+            testRepository.AddAsync((Test)null!).GetAwaiter().GetResult();
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
@@ -100,7 +100,7 @@ public class Repository_Add
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.Add((IEnumerable<Test>)null);
+            testRepository.Add((IEnumerable<Test>)null!);
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");
@@ -114,7 +114,7 @@ public class Repository_Add
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.AddAsync((IEnumerable<Test>)null).GetAwaiter().GetResult();
+            testRepository.AddAsync((IEnumerable<Test>)null!).GetAwaiter().GetResult();
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");

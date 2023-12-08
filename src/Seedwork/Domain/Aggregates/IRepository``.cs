@@ -8,8 +8,9 @@ namespace Goal.Seedwork.Domain.Aggregates;
 
 public interface IRepository<TEntity, TKey> : IRepository
     where TEntity : class
+    where TKey : struct
 {
-    TEntity Load(TKey key);
+    TEntity? Load(TKey key);
 
     ICollection<TEntity> Query();
 
@@ -19,7 +20,7 @@ public interface IRepository<TEntity, TKey> : IRepository
 
     IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
 
-    Task<TEntity> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
+    Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
 
     Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken());
 

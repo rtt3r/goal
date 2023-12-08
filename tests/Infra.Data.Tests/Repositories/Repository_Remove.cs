@@ -40,7 +40,7 @@ public class Repository_Remove
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.Remove((Test)null);
+            testRepository.Remove((Test)null!);
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entity");
@@ -73,7 +73,7 @@ public class Repository_Remove
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.Remove((IEnumerable<Test>)null);
+            testRepository.Remove((IEnumerable<Test>)null!);
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("entities");
@@ -110,7 +110,7 @@ public class Repository_Remove
         Action act = () =>
         {
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.Remove((ISpecification<Test>)null);
+            testRepository.Remove((ISpecification<Test>)null!);
         };
 
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");

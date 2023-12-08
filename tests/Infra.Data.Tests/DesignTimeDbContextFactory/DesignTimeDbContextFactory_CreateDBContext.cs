@@ -51,7 +51,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
 
         protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName));
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName)!);
             return new TestDbContext(optionsBuilder.Options);
         }
     }
@@ -60,7 +60,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
     {
         protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName));
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName)!);
             return new TestDbContext(optionsBuilder.Options);
         }
     }
@@ -71,7 +71,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
 
         protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName));
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName)!);
             return new TestDbContext(optionsBuilder.Options);
         }
     }

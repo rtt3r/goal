@@ -8,7 +8,7 @@ public class ValueObject : IEquatable<ValueObject>
 {
     protected ValueObject() { }
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj is null)
         {
@@ -23,7 +23,7 @@ public class ValueObject : IEquatable<ValueObject>
         return false;
     }
 
-    public virtual bool Equals(ValueObject obj)
+    public virtual bool Equals(ValueObject? obj)
     {
         if (obj is null)
         {
@@ -41,8 +41,8 @@ public class ValueObject : IEquatable<ValueObject>
         {
             return properties.All(p =>
             {
-                object left = p.GetValue(this, null);
-                object right = p.GetValue(obj, null);
+                object? left = p.GetValue(this, null);
+                object? right = p.GetValue(obj, null);
 
                 return Equals(left, right);
             });
@@ -63,11 +63,11 @@ public class ValueObject : IEquatable<ValueObject>
         {
             foreach (PropertyInfo item in properties)
             {
-                object value = item.GetValue(this, null);
+                object? value = item.GetValue(this, null);
 
                 if (value is null)
                 {
-                    hashCode ^= (index * 13);
+                    hashCode ^= index * 13;
                 }
                 else
                 {

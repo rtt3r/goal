@@ -8,4 +8,6 @@ internal class TestRepository : Repository<Test>
         : base(context)
     {
     }
+
+    public DbContext PublicContext => Context;
 }

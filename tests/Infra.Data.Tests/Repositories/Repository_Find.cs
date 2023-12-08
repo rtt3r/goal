@@ -123,7 +123,7 @@ public class Repository_Find
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Query(spec);
         };
@@ -159,7 +159,7 @@ public class Repository_Find
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.QueryAsync(spec).GetAwaiter().GetResult();
         };
@@ -544,7 +544,7 @@ public class Repository_Find
         Action act = () =>
         {
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            IPageSearch pageSearch = null;
+            IPageSearch pageSearch = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Query(spec, pageSearch);
         };
@@ -560,7 +560,7 @@ public class Repository_Find
         Action act = () =>
         {
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            IPageSearch pageSearch = null;
+            IPageSearch pageSearch = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
         };
@@ -575,7 +575,7 @@ public class Repository_Find
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             IPageSearch pageSearch = new PageSearch(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Query(spec, pageSearch);
@@ -591,7 +591,7 @@ public class Repository_Find
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             IPageSearch pageSearch = new PageSearch(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
