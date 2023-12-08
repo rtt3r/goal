@@ -81,7 +81,7 @@ public class ApiController_Paged
 
     public class Test
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Age { get; set; }
     }
 }

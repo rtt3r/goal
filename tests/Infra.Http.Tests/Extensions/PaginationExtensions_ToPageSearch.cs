@@ -12,17 +12,17 @@ public class PaginationExtensions_ToPageSearch
     public void ReturnsNewPageSearch_WhenRequestIsNull()
     {
         // Arrange
-        PageSearchRequest request = null;
+        PageSearchRequest? request = null;
 
         // Act
-        var result = request.ToPageSearch();
+        var result = request?.ToPageSearch();
 
         // Assert
         result.Should().NotBeNull();
-        result.PageIndex.Should().Be(0);
-        result.PageSize.Should().Be(int.MaxValue);
-        result.SortBy.Should().BeNull();
-        result.SortDirection.Should().Be(SortDirection.Asc);
+        result?.PageIndex.Should().Be(0);
+        result?.PageSize.Should().Be(int.MaxValue);
+        result?.SortBy.Should().BeNull();
+        result?.SortDirection.Should().Be(SortDirection.Asc);
     }
 
     [Fact]
