@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
 		<RootNamespace>Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests</RootNamespace>
@@ -10,16 +10,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentAssertions" Version="6.11.0" />
+		<PackageReference Include="FluentAssertions" Version="6.12.0" />
 		<PackageReference Include="coverlet.collector" Version="6.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
-		<PackageReference Include="Microsoft.CodeCoverage" Version="17.6.3">
+		<PackageReference Include="Microsoft.CodeCoverage" Version="17.8.0">
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="RavenDB.TestDriver" Version="5.4.107" />
+		<PackageReference Include="RavenDB.TestDriver" Version="6.0.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.5.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
@@ -29,7 +29,7 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
 		<PackageReference Include="Moq" Version="4.18.4" />
 		<PackageReference Include="OpenCover" Version="4.7.1221" />
-		<PackageReference Include="xunit" Version="2.5.0" />
+		<PackageReference Include="xunit" Version="2.6.2" />
 	</ItemGroup>
 
 	<ItemGroup>

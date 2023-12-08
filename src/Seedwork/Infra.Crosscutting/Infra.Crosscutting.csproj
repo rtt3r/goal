@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Infra.Crosscutting</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Infra.Crosscutting</AssemblyName>
@@ -20,7 +20,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.6.0" />
+		<PackageReference Include="FluentValidation" Version="11.8.1" />
 	</ItemGroup>
 
 	<ItemGroup>
