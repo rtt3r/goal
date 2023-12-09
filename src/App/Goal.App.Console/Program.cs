@@ -1,3 +1,3 @@
-﻿using Goal.Seedwork.Infra.Crosscutting;
+﻿using Goal.Seedwork.Infra.Crosscutting.Notifications;
 
-Ensure.Argument.Is(false);
+Notification.Information("", "Info");

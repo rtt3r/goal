@@ -51,11 +51,11 @@ public class Enumerable_ForEach
     [Fact]
     public void ForEach_NotEmptyObjectEnumerable_NotThrowException()
     {
-        TestObject1[] source = new[]
-        {
+        TestObject1[] source =
+        [
             new TestObject1 { Id = 1 },
             new TestObject1 { Id = 2 }
-        };
+        ];
 
         source.ForEach(p =>
         {
@@ -93,8 +93,8 @@ public class Enumerable_ForEach
     public void ForEach_ShouldExecuteActionOnForEachItem()
     {
         // arrange
-        int[] input = new[] { 1, 2, 3 };
-        int[] expectedOutput = new[] { 1, 2, 3 }; // each item incremented by one
+        int[] input = [1, 2, 3];
+        int[] expectedOutput = [1, 2, 3]; // each item incremented by one
 
         // act
         input.ForEach(item => { });

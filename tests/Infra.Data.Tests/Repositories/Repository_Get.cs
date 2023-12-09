@@ -102,13 +102,13 @@ public class Repository_Get
 
     private static List<Test> MockTests()
     {
-        return new List<Test>
-        {
+        return
+        [
             new Test(1),
             new Test(2),
             new Test(3),
             new Test(4),
             new Test(5)
-        };
+        ];
     }
 }

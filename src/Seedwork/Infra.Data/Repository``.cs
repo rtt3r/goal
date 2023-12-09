@@ -52,7 +52,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
     public virtual async Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
     {
         cancellationToken.ThrowIfCancellationRequested();
-        return await Context.Set<TEntity>().FindAsync(new object[] { key }, cancellationToken);
+        return await Context.Set<TEntity>().FindAsync([key], cancellationToken);
     }
 
     public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())

@@ -51,13 +51,13 @@ public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>,
         Type expectedResultType = typeof(TResult).GetGenericArguments()[0];
 
         object? executionResult = typeof(IQueryProvider)
-            .GetMethod(nameof(IQueryProvider.Execute), 1, new[] { typeof(Expression) })
+            .GetMethod(nameof(IQueryProvider.Execute), 1, [typeof(Expression)])
             ?.MakeGenericMethod(expectedResultType)
             ?.Invoke(this, new[] { expression });
 
         return (TResult?)typeof(Task).GetMethod(nameof(Task.FromResult))
             ?.MakeGenericMethod(expectedResultType)
-            ?.Invoke(null, new[] { executionResult })
+            ?.Invoke(null, [executionResult])
             ?? throw new InvalidOperationException("Query expression cannot be null");
     }
 

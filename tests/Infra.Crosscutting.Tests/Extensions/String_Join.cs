@@ -10,7 +10,7 @@ public class String_Join
     [Fact]
     public void ReturnJoinedStringGivenValidStringArray()
     {
-        string[] stringArray = new string[] { "test", "test1" };
+        string[] stringArray = ["test", "test1"];
         string joinedArray = stringArray.Join(", ");
 
         joinedArray.Should().NotBeNull().And.Be("test, test1");
@@ -19,7 +19,7 @@ public class String_Join
     [Fact]
     public void ReturnJoinedStringGivenValidObjectArray()
     {
-        object[] stringArray = new object[] { "test", 1, true };
+        object[] stringArray = ["test", 1, true];
         string joinedArray = stringArray.Join(", ");
 
         joinedArray.Should().NotBeNull().And.Be("test, 1, True");

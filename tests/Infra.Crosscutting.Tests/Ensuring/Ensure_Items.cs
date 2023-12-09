@@ -17,7 +17,7 @@ public class Ensure_Items
     [Fact]
     public void ThrowExceptionNotMatchPredicate()
     {
-        int[] collection = new[] { 0 };
+        int[] collection = [0];
         Action act = () => Ensure.Items(collection, p => p > 0);
         act.Should().Throw<Exception>().WithMessage("Exception of type 'System.Exception' was thrown.");
     }
@@ -33,7 +33,7 @@ public class Ensure_Items
     [Fact]
     public void ThrowExceptionNotMatchPredicateGivenMessage()
     {
-        int[] collection = new[] { 0 };
+        int[] collection = [0];
         Action act = () => Ensure.Items(collection, p => p > 0, "Test");
         act.Should().Throw<Exception>().WithMessage("Test");
     }
@@ -41,7 +41,7 @@ public class Ensure_Items
     [Fact]
     public void EnsureMatchPredicate()
     {
-        int[] collection = new[] { 0 };
+        int[] collection = [0];
         Action act = () => Ensure.Items(collection, p => p == 0);
         act.Should().NotThrow<Exception>();
     }

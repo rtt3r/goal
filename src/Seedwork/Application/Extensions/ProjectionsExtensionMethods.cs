@@ -18,7 +18,7 @@ public static class ProjectionsExtensionMethods
         return new PagedList<TTarget>(projection, source.TotalCount);
     }
 
-    public static IPagedList<TTarget> ProjectAsPagedCollection<TSource, TTarget>(this ITypeAdapter adapter, IPagedList<TSource> source)
+    public static IPagedList<TTarget> AdaptPagedList<TSource, TTarget>(this ITypeAdapter adapter, IPagedList<TSource> source)
     {
         List<TTarget> projection = adapter.Adapt<IPagedList<TSource>, List<TTarget>>(source);
         return new PagedList<TTarget>(projection, source.TotalCount);

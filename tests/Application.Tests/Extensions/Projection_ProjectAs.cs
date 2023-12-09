@@ -11,11 +11,11 @@ public class Projection_ProjectAs
     public void AdaptClassGivenSourceAndTarget()
     {
         var mockAdapter = new Mock<ITypeAdapter>();
-        mockAdapter.Setup(p => p.Adapt<TestMapClass>(It.IsAny<TestClass>())).Returns(new TestMapClass(""));
+        mockAdapter.Setup(p => p.Adapt<TestClass, TestMapClass>(It.IsAny<TestClass>())).Returns(new TestMapClass(""));
 
         TestMapClass adapted = mockAdapter.Object.Adapt<TestClass, TestMapClass>(It.IsAny<TestClass>());
 
-        mockAdapter.Verify(x => x.Adapt<TestMapClass>(It.IsAny<TestClass>()), Times.Once);
+        mockAdapter.Verify(x => x.Adapt<TestClass, TestMapClass>(It.IsAny<TestClass>()), Times.Once);
         adapted.Should().NotBeNull();
     }
 

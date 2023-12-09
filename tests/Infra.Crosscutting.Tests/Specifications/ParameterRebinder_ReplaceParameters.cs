@@ -34,7 +34,7 @@ public class ParameterRebinder_ReplaceParameters
         ConstantExpression constantExpr = Expression.Constant(123M);
         BinaryExpression addExpr = Expression.Add(originalParam1, constantExpr);
 
-        MethodInfo method = typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) })
+        MethodInfo method = typeof(decimal).GetMethod("Add", [typeof(decimal), typeof(decimal)])
             ?? throw new InvalidOperationException("Method not found");
 
         MethodCallExpression concatExpr = Expression.Call(
@@ -90,7 +90,7 @@ public class ParameterRebinder_ReplaceParameters
         ConstantExpression constantExpr = Expression.Constant(123M);
         BinaryExpression addExpr = Expression.Add(originalParam1, constantExpr);
 
-        MethodInfo method = typeof(decimal).GetMethod("Add", new[] { typeof(decimal), typeof(decimal) })
+        MethodInfo method = typeof(decimal).GetMethod("Add", [typeof(decimal), typeof(decimal)])
             ?? throw new InvalidOperationException("Method not found");
 
         MethodCallExpression concatExpr = Expression.Call(
@@ -101,6 +101,6 @@ public class ParameterRebinder_ReplaceParameters
         // Act & Assert
         FluentActions.Invoking(() => ParameterRebinder.ReplaceParameters(null!, concatExpr))
             .Should().Throw<ArgumentNullException>()
-            .Which.Message.Should().Be("Value cannot be null. (Parameter 'left')");
+            .Which.Message.Should().Be("Value cannot be null. (Parameter 'node')");
     }
 }

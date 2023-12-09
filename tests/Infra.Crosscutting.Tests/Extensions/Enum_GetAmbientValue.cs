@@ -12,7 +12,7 @@ public class Enum_GetAmbientValue
     public void GivenEnumWithAmbientValueThenReturnObjectString()
     {
         Enum1 value1 = Enum1.Value1;
-        object value = value1.GetAmbientValue();
+        object? value = value1.GetAmbientValue();
 
         value.Should().NotBeNull().And.Be("Name");
     }
@@ -75,7 +75,7 @@ public class Enum_GetAmbientValue
     public void GivenEnumWithoutAmbientValueThenReturnObjectInt()
     {
         Enum1 value2 = Enum1.Value2;
-        object value = value2.GetAmbientValue();
+        object? value = value2.GetAmbientValue();
 
         value.Should().Be(3);
     }
@@ -93,7 +93,7 @@ public class Enum_GetAmbientValue
     public void GivenEnumWithoutAmbientValueThenReturnNull()
     {
         Enum1 value2 = Enum1.Value4;
-        object value = value2.GetAmbientValue();
+        object? value = value2.GetAmbientValue();
 
         value.Should().BeNull();
     }

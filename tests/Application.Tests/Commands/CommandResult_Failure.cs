@@ -12,7 +12,7 @@ public class CommandResult_Failure
     public void WithValidParams_ShouldReturnFailureCommandResult()
     {
         // Arrange
-        Notification[] notifications = new[] { Notification.DomainViolation("01", "Notification message") };
+        Notification[] notifications = [Notification.DomainViolation("01", "Notification message")];
 
         // Act
         ICommandResult result = CommandResult.Failure(notifications);
@@ -27,7 +27,7 @@ public class CommandResult_Failure
     public void WithInvalidNotificationType_ShouldThrowInvalidOperationException()
     {
         // Arrange
-        Notification[] notifications = new[] { Notification.Information("01", "Notification message") };
+        Notification[] notifications = [Notification.Information("01", "Notification message")];
 
         // Act
         Func<ICommandResult> act = () => CommandResult.Failure(notifications);
@@ -42,7 +42,7 @@ public class CommandResult_Failure
     {
         // Arrange
         int data = 42;
-        Notification[] notifications = new[] { Notification.DomainViolation("01", "Notification message") };
+        Notification[] notifications = [Notification.DomainViolation("01", "Notification message")];
 
         // Act
         ICommandResult<int> result = CommandResult.Failure(data, notifications);
@@ -59,7 +59,7 @@ public class CommandResult_Failure
     {
         // Arrange
         int data = 42;
-        Notification[] notifications = new[] { Notification.Information("01", "Notification message") };
+        Notification[] notifications = [Notification.Information("01", "Notification message")];
 
         // Act
         Func<ICommandResult<int>> act = () => CommandResult.Failure(data, notifications);

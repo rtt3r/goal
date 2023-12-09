@@ -9,14 +9,14 @@ public record CommandResult(bool IsSucceeded, IEnumerable<Notification> Notifica
 {
     public static ICommandResult Success(params Notification[] notifications)
     {
-        return notifications.All(p => p.Type != NotificationType.Information)
+        return notifications.All(p => p.Type == NotificationType.Information)
             ? new CommandResult(true, notifications)
             : throw new InvalidOperationException("For 'Success' result only notifications of type 'Information' are accepted.");
     }
 
     public static ICommandResult<TData> Success<TData>(TData data, params Notification[] notifications)
     {
-        return notifications.All(p => p.Type != NotificationType.Information)
+        return notifications.All(p => p.Type == NotificationType.Information)
             ? new CommandResult<TData>(true, data, notifications)
             : throw new InvalidOperationException("For 'Success' result only notifications of type 'Information' are accepted.");
     }

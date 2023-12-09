@@ -14,7 +14,7 @@ public class LowerCaseDocumentFilter_Apply
     {
         // Arrange
         var filter = new LowerCaseDocumentFilter();
-        var swaggerDoc = new OpenApiDocument { Paths = new OpenApiPaths() };
+        var swaggerDoc = new OpenApiDocument { Paths = [] };
         var context = new DocumentFilterContext(
             new[] { new ApiDescription() },
             new SchemaGenerator(new SchemaGeneratorOptions(), null),
@@ -34,7 +34,7 @@ public class LowerCaseDocumentFilter_Apply
     {
         // Arrange
         var filter = new LowerCaseDocumentFilter();
-        var swaggerDoc = new OpenApiDocument { Paths = new OpenApiPaths() };
+        var swaggerDoc = new OpenApiDocument { Paths = [] };
         var context = new DocumentFilterContext(
             new[] { new ApiDescription() },
             new SchemaGenerator(new SchemaGeneratorOptions(), null),
@@ -54,7 +54,7 @@ public class LowerCaseDocumentFilter_Apply
     {
         // Arrange
         var filter = new LowerCaseDocumentFilter();
-        var swaggerDoc = new OpenApiDocument { Paths = new OpenApiPaths() };
+        var swaggerDoc = new OpenApiDocument { Paths = [] };
         var context = new DocumentFilterContext(
             new[] { new ApiDescription() },
             new SchemaGenerator(new SchemaGeneratorOptions(), null),

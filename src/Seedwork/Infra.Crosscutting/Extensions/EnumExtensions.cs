@@ -35,10 +35,10 @@ public static class EnumExtensions
         return attribute?.Name ?? defaultValue;
     }
 
-    public static object GetAmbientValue(this Enum enumValue)
-        => enumValue.GetAmbientValue(string.Empty);
+    public static object? GetAmbientValue(this Enum enumValue)
+        => enumValue.GetAmbientValue(null);
 
-    public static object GetAmbientValue(this Enum enumValue, object defaultValue)
+    public static object? GetAmbientValue(this Enum enumValue, object? defaultValue)
     {
         AmbientValueAttribute? attribute = enumValue.GetAttributeFromEnumType<AmbientValueAttribute>();
         return attribute?.Value ?? defaultValue;
@@ -46,7 +46,7 @@ public static class EnumExtensions
 
     public static TType? GetAmbientValue<TType>(this Enum enumValue)
     {
-        object value = enumValue.GetAmbientValue();
+        object? value = enumValue.GetAmbientValue();
         Ensure.That<InvalidCastException>(value is TType, $"The value must be an '{typeof(TType).Name}' type");
 
         return value.ConvertTo<TType>();
