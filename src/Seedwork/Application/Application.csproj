@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Application</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Application</AssemblyName>
-		<VersionPrefix>0.3.15</VersionPrefix>
-		<AssemblyVersion>0.3.15.0</AssemblyVersion>
+		<VersionPrefix>0.4.0</VersionPrefix>
+		<AssemblyVersion>0.4.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Application</PackageId>
@@ -21,7 +21,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
-	<ItemGroup>
+	<ItemGroup>`
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 	</ItemGroup>
 
