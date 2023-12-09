@@ -50,10 +50,10 @@ public class Pagination_Paginate
         Action act = () =>
         {
             IQueryable<TestObject1> values = GetQuery();
-            values.Paginate(null);
+            values.Paginate(null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("pageSearch");
     }
 
     [Fact]

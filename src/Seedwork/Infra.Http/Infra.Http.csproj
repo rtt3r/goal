@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Infra.Http</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Infra.Http</AssemblyName>
-		<VersionPrefix>0.3.15</VersionPrefix>
-		<AssemblyVersion>0.3.15.0</AssemblyVersion>
+		<VersionPrefix>0.4.0</VersionPrefix>
+		<AssemblyVersion>0.4.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Http</PackageId>
@@ -17,6 +17,7 @@
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
 		<OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
 	</PropertyGroup>
 

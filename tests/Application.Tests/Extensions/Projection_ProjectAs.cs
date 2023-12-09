@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Goal.Seedwork.Application.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Moq;
 using Xunit;
@@ -12,11 +11,11 @@ public class Projection_ProjectAs
     public void AdaptClassGivenSourceAndTarget()
     {
         var mockAdapter = new Mock<ITypeAdapter>();
-        mockAdapter.Setup(p => p.Adapt<TestMapClass>(It.IsAny<TestClass>())).Returns(new TestMapClass());
+        mockAdapter.Setup(p => p.Adapt<TestClass, TestMapClass>(It.IsAny<TestClass>())).Returns(new TestMapClass(""));
 
-        TestMapClass adapted = mockAdapter.Object.ProjectAs<TestClass, TestMapClass>(It.IsAny<TestClass>());
+        TestMapClass adapted = mockAdapter.Object.Adapt<TestClass, TestMapClass>(It.IsAny<TestClass>());
 
-        mockAdapter.Verify(x => x.Adapt<TestMapClass>(It.IsAny<TestClass>()), Times.Once);
+        mockAdapter.Verify(x => x.Adapt<TestClass, TestMapClass>(It.IsAny<TestClass>()), Times.Once);
         adapted.Should().NotBeNull();
     }
 
@@ -24,21 +23,15 @@ public class Projection_ProjectAs
     public void AdaptClassGivenTarget()
     {
         var mockAdapter = new Mock<ITypeAdapter>();
-        mockAdapter.Setup(p => p.Adapt<TestMapClass>(It.IsAny<TestClass>())).Returns(new TestMapClass());
+        mockAdapter.Setup(p => p.Adapt<TestMapClass>(It.IsAny<TestClass>())).Returns(new TestMapClass(""));
 
-        TestMapClass adapted = mockAdapter.Object.ProjectAs<TestMapClass>(It.IsAny<TestClass>());
+        TestMapClass adapted = mockAdapter.Object.Adapt<TestMapClass>(It.IsAny<TestClass>());
 
         mockAdapter.Verify(x => x.Adapt<TestMapClass>(It.IsAny<TestClass>()), Times.Once);
         adapted.Should().NotBeNull();
     }
 
-    internal class TestClass
-    {
-        public string Test { get; set; }
-    }
+    internal record TestClass(string? Test);
 
-    internal class TestMapClass
-    {
-        public string Test { get; set; }
-    }
+    internal record TestMapClass(string? Test);
 }

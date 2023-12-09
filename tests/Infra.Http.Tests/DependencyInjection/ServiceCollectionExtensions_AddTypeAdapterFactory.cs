@@ -1,7 +1,7 @@
+using Microsoft.Extensions.DependencyInjection;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Goal.Seedwork.Infra.Http.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Http.Tests.DependencyInjection;
@@ -42,6 +42,6 @@ public class ServiceCollectionExtensions_AddTypeAdapterFactory
 
     private class CustomTypeAdapterFactory : ITypeAdapterFactory
     {
-        public ITypeAdapter Create() => null;
+        public ITypeAdapter Create() => null!;
     }
 }

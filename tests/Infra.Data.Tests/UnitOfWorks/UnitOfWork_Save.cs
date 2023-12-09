@@ -11,11 +11,8 @@ public class UnitOfWork_Save
     {
     }
 
-    public class MockUnitOfWork : UnitOfWork
+    public class MockUnitOfWork(UnitOfWork_Save.MockDbContext context) : UnitOfWork(context)
     {
-        public MockUnitOfWork(MockDbContext context) : base(context)
-        {
-        }
     }
 
     [Fact]

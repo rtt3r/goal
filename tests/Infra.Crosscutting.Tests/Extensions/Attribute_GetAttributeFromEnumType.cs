@@ -11,17 +11,17 @@ public class Attribute_GetAttributeFromEnumType
     public void GivenEnumWithAttributeWhenReturnCorrectAttribute()
     {
         AttrEnumTest enumValue = AttrEnumTest.Value;
-        DisplayAttribute attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
+        DisplayAttribute? attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
 
         attribute.Should().NotBeNull().And.BeOfType<DisplayAttribute>();
-        attribute.Name.Should().Be("Value");
+        attribute?.Name.Should().Be("Value");
     }
 
     [Fact]
     public void GivenEnumWithoutAttributeThenReturnNull()
     {
         AttrEnumTest enumValue = AttrEnumTest.Text;
-        DisplayAttribute attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
+        DisplayAttribute? attribute = enumValue.GetAttributeFromEnumType<DisplayAttribute>();
 
         attribute.Should().BeNull();
     }

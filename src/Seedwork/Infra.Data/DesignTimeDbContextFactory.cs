@@ -14,21 +14,27 @@ public abstract class DesignTimeDbContextFactory<TContext> : IDesignTimeDbContex
     protected virtual string ConnectionStringName
         => DefaultConnectionStringName;
 
-    public IConfiguration Configuration { get; private set; }
+    public IConfiguration Configuration { get; private set; } = null!;
 
     public TContext CreateDbContext(string[] args)
         => CreateDbContext(Directory.GetCurrentDirectory(), Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
 
     protected abstract TContext CreateNewInstance(DbContextOptionsBuilder<TContext> optionsBuilder);
 
-    private TContext CreateDbContext(string basePath, string environmentName)
+    private TContext CreateDbContext(string basePath, string? environmentName)
     {
-        Configuration = new ConfigurationBuilder()
+        IConfigurationBuilder builder = new ConfigurationBuilder()
             .SetBasePath(basePath)
-            .AddJsonFile("appsettings.json")
-            .AddJsonFile($"appsettings.{environmentName}.json", true)
-            .AddEnvironmentVariables()
-            .Build();
+            .AddJsonFile("appsettings.json");
+
+        if (environmentName is not null)
+        {
+            builder = builder.AddJsonFile($"appsettings.{environmentName}.json", true);
+        }
+
+        builder = builder.AddEnvironmentVariables();
+
+        Configuration = builder.Build();
 
         return CreateNewInstance(new DbContextOptionsBuilder<TContext>());
     }

@@ -11,7 +11,7 @@ namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
 
 public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>, IAsyncQueryProvider
 {
-    private IEnumerable<T> _enumerable;
+    private IEnumerable<T> _enumerable = null!;
 
     public TestAsyncEnumerable(Expression expression)
     {
@@ -32,7 +32,9 @@ public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>,
             Type resultType = m.Method.ReturnType; // it should be IQueryable<T>
             Type tElement = resultType.GetGenericArguments().First();
             Type queryType = typeof(TestAsyncEnumerable<>).MakeGenericType(tElement);
-            return (IQueryable)Activator.CreateInstance(queryType, expression);
+
+            return (IQueryable?)Activator.CreateInstance(queryType, expression)
+                ?? throw new InvalidOperationException("Query expression cannot be null");
         }
 
         return new TestAsyncEnumerable<T>(expression);
@@ -47,17 +49,16 @@ public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>,
     public TResult ExecuteAsync<TResult>(Expression expression, CancellationToken cancellationToken = default)
     {
         Type expectedResultType = typeof(TResult).GetGenericArguments()[0];
-        object executionResult = typeof(IQueryProvider)
-            .GetMethod(
-                name: nameof(IQueryProvider.Execute),
-                genericParameterCount: 1,
-                types: new[] { typeof(Expression) })
-            .MakeGenericMethod(expectedResultType)
-            .Invoke(this, new[] { expression });
 
-        return (TResult)typeof(Task).GetMethod(nameof(Task.FromResult))
-            .MakeGenericMethod(expectedResultType)
-            .Invoke(null, new[] { executionResult });
+        object? executionResult = typeof(IQueryProvider)
+            .GetMethod(nameof(IQueryProvider.Execute), 1, [typeof(Expression)])
+            ?.MakeGenericMethod(expectedResultType)
+            ?.Invoke(this, new[] { expression });
+
+        return (TResult?)typeof(Task).GetMethod(nameof(Task.FromResult))
+            ?.MakeGenericMethod(expectedResultType)
+            ?.Invoke(null, [executionResult])
+            ?? throw new InvalidOperationException("Query expression cannot be null");
     }
 
     IEnumerator<T> IEnumerable<T>.GetEnumerator()
@@ -76,7 +77,7 @@ public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>,
 
     public Type ElementType => typeof(T);
 
-    public Expression Expression { get; }
+    public Expression Expression { get; } = null!;
 
     public IQueryProvider Provider => this;
 
@@ -84,7 +85,7 @@ public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>,
     {
         var rewriter = new TestExpressionVisitor();
         Expression body = rewriter.Visit(expression);
-        var f = Expression.Lambda<Func<TResult>>(body, (IEnumerable<ParameterExpression>)null);
+        var f = Expression.Lambda<Func<TResult>>(body, (IEnumerable<ParameterExpression>)null!);
         return f.Compile()();
     }
 }

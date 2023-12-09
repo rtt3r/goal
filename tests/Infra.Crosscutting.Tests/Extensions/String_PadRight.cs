@@ -18,7 +18,7 @@ public class String_PadRight
     [Fact]
     public void ReturnPaddedGivenNull()
     {
-        string text = null;
+        string text = null!;
         string paddedText = text.PadLeft(5, "0");
 
         paddedText.Should().NotBeNull().And.Be("00000");

@@ -10,14 +10,14 @@ public class Ensure_That
     public void ThrowExceptionGivenFalse()
     {
         Action act = () => Ensure.That(false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]
     public void ThrowExceptionGivenFalseAndNotEmptyMessage()
     {
         Action act = () => Ensure.That(false, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]
@@ -38,28 +38,28 @@ public class Ensure_That
     public void ThrowExceptionGivenFalsePredicate()
     {
         Action act = () => Ensure.That(() => false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("");
+        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
     }
 
     [Fact]
     public void ThrowExceptionGivenFalsePredicateAndNotEmptyMessage()
     {
         Action act = () => Ensure.That(() => false, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]
     public void ThrowApplicationExceptionGivenFalsePredicate()
     {
         Action act = () => Ensure.That<ApplicationException>(() => false);
-        act.Should().Throw<ApplicationException>().And.Message.Should().Be("");
+        act.Should().Throw<ApplicationException>().And.Message.Should().Be("Exception of type 'System.ApplicationException' was thrown.");
     }
 
     [Fact]
     public void ThrowApplicationExceptionGivenFalsePredicateAndNotEmptyMessage()
     {
         Action act = () => Ensure.That<ApplicationException>(() => false, "Test");
-        act.Should().Throw<ApplicationException>().And.Message.Should().Be("Test");
+        act.Should().Throw<ApplicationException>().WithMessage("Test");
     }
 
     [Fact]

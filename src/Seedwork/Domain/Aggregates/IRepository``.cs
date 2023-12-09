@@ -8,26 +8,27 @@ namespace Goal.Seedwork.Domain.Aggregates;
 
 public interface IRepository<TEntity, TKey> : IRepository
     where TEntity : class
+    where TKey : struct
 {
-    TEntity Load(TKey key);
+    TEntity? Load(TKey key);
 
     ICollection<TEntity> Query();
 
     ICollection<TEntity> Query(ISpecification<TEntity> specification);
 
-    IPagedCollection<TEntity> Query(IPageSearch pageSearch);
+    IPagedList<TEntity> Query(IPageSearch pageSearch);
 
-    IPagedCollection<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
+    IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
 
-    Task<TEntity> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
+    Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
 
     Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken());
 
     Task<ICollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<IPagedCollection<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<IPagedCollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
     bool Any();
 

@@ -32,7 +32,7 @@ public class Repository_Dispose
         repository.Dispose();
 
         // Assert
-        repository.Context.Should().BeNull();
+        repository.PublicContext.Should().BeNull();
     }
 
     public static UniverseContext CreateContext()
@@ -45,13 +45,8 @@ public class Repository_Dispose
             .Options;
     }
 
-    public class UniverseContext : DbContext
+    public class UniverseContext(DbContextOptions options) : DbContext(options)
     {
-        public UniverseContext(DbContextOptions options)
-            : base(options)
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -67,7 +62,7 @@ public class Repository_Dispose
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string? Type { get; set; }
     }
 
     private class TestRepository : Repository
@@ -78,11 +73,8 @@ public class Repository_Dispose
             => IsDisposed = true;
     }
 
-    private class SingularityRepository : Repository<Singularity>
+    private class SingularityRepository(DbContext context) : Repository<Singularity>(context)
     {
-        public SingularityRepository(DbContext context)
-            : base(context)
-        {
-        }
+        public DbContext PublicContext => Context;
     }
 }

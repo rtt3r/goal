@@ -30,7 +30,7 @@ public class Pagination_ToPagedList
         var paginateResult = values.ToPagedList(pagination) as PagedList<TestObject1>;
 
         paginateResult.Should().NotBeNull().And.HaveCount(10).And.HaveElementAt(0, values.ElementAt(0));
-        paginateResult.TotalCount.Should().Be(values.Count());
+        paginateResult?.TotalCount.Should().Be(values.Count());
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public class Pagination_ToPagedList
         var paginateResult = values.ToPagedList(pagination) as PagedList<TestObject1>;
 
         paginateResult.Should().NotBeNull().And.HaveCount(10).And.HaveElementAt(0, values.ElementAt(99));
-        paginateResult.TotalCount.Should().Be(values.Count());
+        paginateResult?.TotalCount.Should().Be(values.Count());
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class Pagination_ToPagedList
         var paginateResult = values.ToPagedList(pagination) as PagedList<TestObject1>;
 
         paginateResult.Should().NotBeNull();
-        paginateResult.TotalCount.Should().Be(100);
+        paginateResult?.TotalCount.Should().Be(100);
     }
 
     private static IQueryable<TestObject1> GetQuery() => GetQuery(100);

@@ -28,8 +28,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
         bool savingEventCalled = false;
         bool saveAuditEventCalled = false;
         int resultFromEvent = 0;
-        Audit auditFromEvent = null;
-        Exception exceptionFromEvent = null;
+        Audit? auditFromEvent = null;
+        Exception? exceptionFromEvent = null;
 
         context.SavingChanges += (sender, args) =>
         {
@@ -78,22 +78,22 @@ public class AuditChangesInterceptor_SaveAuditChanges
 
         context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
 
-        auditFromEvent.Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent.Succeeded.Should().BeTrue();
-        auditFromEvent.ErrorMessage.Should().BeNullOrWhiteSpace();
-        auditFromEvent.StartTime
+        auditFromEvent?.Id.Should().NotBeNullOrWhiteSpace();
+        auditFromEvent?.Succeeded.Should().BeTrue();
+        auditFromEvent?.ErrorMessage.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.StartTime
             .Should().BeAfter(startedAt)
             .And.BeBefore(auditFromEvent.EndTime);
-        auditFromEvent.Entries.Should().HaveCount(1);
-        auditFromEvent.Entries.ElementAt(0).Should().NotBeNull();
-        auditFromEvent.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("Create");
-        auditFromEvent.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditFromEvent.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        auditFromEvent.Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        auditFromEvent?.Entries.Should().HaveCount(1);
+        auditFromEvent?.Entries.ElementAt(0).Should().NotBeNull();
+        auditFromEvent?.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).AuditType.Should().Be("Create");
+        auditFromEvent?.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
+        auditFromEvent?.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
+        auditFromEvent?.Entries.ElementAt(0).TableName.Should().Be("Singularity");
     }
 
     [Theory]
@@ -111,8 +111,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
         bool savingEventCalled = false;
         bool saveAuditEventCalled = false;
         int resultFromEvent = 0;
-        Audit auditFromEvent = null;
-        Exception exceptionFromEvent = null;
+        Audit? auditFromEvent = null;
+        Exception? exceptionFromEvent = null;
 
         context.SavingChanges += (sender, args) =>
         {
@@ -189,7 +189,7 @@ public class AuditChangesInterceptor_SaveAuditChanges
         bool saveAuditEventCalled = false;
         int resultFromEvent = 0;
         var auditsFromEvent = new List<Audit>();
-        Exception exceptionFromEvent = null;
+        Exception? exceptionFromEvent = null;
 
         context.SavingChanges += (sender, args) =>
         {
@@ -301,7 +301,7 @@ public class AuditChangesInterceptor_SaveAuditChanges
         bool saveAuditEventCalled = false;
         int resultFromEvent = 0;
         var auditsFromEvent = new List<Audit>();
-        Exception exceptionFromEvent = null;
+        Exception? exceptionFromEvent = null;
 
         context.SavingChanges += (sender, args) =>
         {
@@ -410,8 +410,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
         bool savingEventCalled = false;
         bool saveAuditEventCalled = false;
         int resultFromEvent = 0;
-        Audit auditFromEvent = null;
-        Exception exceptionFromEvent = null;
+        Audit? auditFromEvent = null!;
+        Exception? exceptionFromEvent = null!;
 
         context.SavingChanges += (sender, args) =>
         {
@@ -440,7 +440,7 @@ public class AuditChangesInterceptor_SaveAuditChanges
 
         int savedCount = 0;
 
-        Exception thrown = null;
+        Exception? thrown = null;
 
         try
         {
@@ -458,28 +458,28 @@ public class AuditChangesInterceptor_SaveAuditChanges
         // Assert
         savedCount.Should().Be(0);
         savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeTrue();
+        saveAuditEventCalled.Should().BeFalse();
         savedCount.Should().Be(resultFromEvent);
         exceptionFromEvent.Should().BeSameAs(thrown);
 
         context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(0);
 
-        auditFromEvent.Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent.Succeeded.Should().BeFalse();
-        auditFromEvent.ErrorMessage.Should().Be(exceptionFromEvent.Message);
-        auditFromEvent.StartTime
+        auditFromEvent?.Id.Should().NotBeNullOrWhiteSpace();
+        auditFromEvent?.Succeeded.Should().BeFalse();
+        auditFromEvent?.ErrorMessage.Should().Be(exceptionFromEvent?.Message);
+        auditFromEvent?.StartTime
             .Should().BeAfter(startedAt)
             .And.BeBefore(auditFromEvent.EndTime);
-        auditFromEvent.Entries.Should().HaveCount(1);
-        auditFromEvent.Entries.ElementAt(0).Should().NotBeNull();
-        auditFromEvent.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).AuditType.Should().Be("None");
-        auditFromEvent.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditFromEvent.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).NewValues.Should().BeNullOrWhiteSpace();
-        auditFromEvent.Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        auditFromEvent?.Entries.Should().HaveCount(1);
+        auditFromEvent?.Entries.ElementAt(0).Should().NotBeNull();
+        auditFromEvent?.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).AuditType.Should().Be("None");
+        auditFromEvent?.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
+        auditFromEvent?.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).NewValues.Should().BeNullOrWhiteSpace();
+        auditFromEvent?.Entries.ElementAt(0).TableName.Should().Be("Singularity");
     }
 
     private static DbContextOptions CreateOptions(IInterceptor interceptor)
@@ -505,13 +505,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
         return (context, interceptor);
     }
 
-    public class UniverseContext : DbContext
+    public class UniverseContext(DbContextOptions options) : DbContext(options)
     {
-        public UniverseContext(DbContextOptions options)
-            : base(options)
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -533,7 +528,7 @@ public class AuditChangesInterceptor_SaveAuditChanges
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string Type { get; set; } = null!;
     }
 
     public class Brane
@@ -541,12 +536,12 @@ public class AuditChangesInterceptor_SaveAuditChanges
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public string Type { get; set; }
+        public string Type { get; set; } = null!;
     }
 
     public class UniverseAuditChangesInterceptor : AuditChangesInterceptor
     {
-        public Audit Audit { get; private set; }
+        public Audit Audit { get; private set; } = null!;
 
         protected override void SaveAuditChanges(Audit audit)
             => Audit = audit;

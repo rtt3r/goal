@@ -20,9 +20,9 @@ public class String_RemoveSpecialCharacters
     [Theory]
     [InlineData("")]
     [InlineData(null)]
-    public void RemoveRemoveSpecialCharactersGivenEmptyOrNullString(string test)
+    public void RemoveRemoveSpecialCharactersGivenEmptyOrNullString(string? test)
     {
-        test.RemoveSpecialCharacters()
+        test?.RemoveSpecialCharacters()
             .Should()
             .BeNullOrWhiteSpace();
     }

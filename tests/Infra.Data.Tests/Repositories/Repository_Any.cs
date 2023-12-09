@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
 using Goal.Seedwork.Infra.Data.Tests.Extensions;
@@ -31,7 +32,7 @@ public class Repository_Any
     }
 
     [Fact]
-    public void ReturnsTrueGivenAnyEntityAsync()
+    public async Task ReturnsTrueGivenAnyEntityAsync()
     {
         List<Test> mockedTests = MockTests();
 
@@ -41,7 +42,7 @@ public class Repository_Any
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        bool any = testRepository.AnyAsync().GetAwaiter().GetResult();
+        bool any = await testRepository.AnyAsync();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         any.Should().BeTrue();
@@ -65,7 +66,7 @@ public class Repository_Any
     }
 
     [Fact]
-    public void ReturnsFalseGivenNoneEntityAsync()
+    public async Task ReturnsFalseGivenNoneEntityAsync()
     {
         List<Test> mockedTests = MockTests(0);
 
@@ -75,7 +76,7 @@ public class Repository_Any
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        bool any = testRepository.AnyAsync().GetAwaiter().GetResult();
+        bool any = await testRepository.AnyAsync();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         any.Should().BeFalse();
@@ -101,7 +102,7 @@ public class Repository_Any
     }
 
     [Fact]
-    public void ReturnsTrueGivenAnyActiveEntityAsync()
+    public async Task ReturnsTrueGivenAnyActiveEntityAsync()
     {
         List<Test> mockedTests = MockTests();
         mockedTests.First().Deactivate();
@@ -113,7 +114,7 @@ public class Repository_Any
 
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         var testRepository = new TestRepository(mockDbContext.Object);
-        bool any = testRepository.AnyAsync(spec).GetAwaiter().GetResult();
+        bool any = await testRepository.AnyAsync(spec);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         any.Should().BeTrue();
@@ -139,7 +140,7 @@ public class Repository_Any
     }
 
     [Fact]
-    public void ReturnsFalseGivenNoneActiveEntityAsync()
+    public async Task ReturnsFalseGivenNoneActiveEntityAsync()
     {
         List<Test> mockedTests = MockTests(1);
         mockedTests.First().Deactivate();
@@ -151,7 +152,7 @@ public class Repository_Any
 
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         var testRepository = new TestRepository(mockDbContext.Object);
-        bool any = testRepository.AnyAsync(spec).GetAwaiter().GetResult();
+        bool any = await testRepository.AnyAsync(spec);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         any.Should().BeFalse();
@@ -164,27 +165,28 @@ public class Repository_Any
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Any(spec);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]
-    public void ThrowsArgumentNullExceptionGivenNullSpecificationAsync()
+    public async Task ThrowsArgumentNullExceptionGivenNullSpecificationAsync()
     {
         var mockDbContext = new Mock<DbContext>();
 
-        Action act = () =>
+        Func<Task> act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.AnyAsync(spec).GetAwaiter().GetResult();
+
+            return testRepository.AnyAsync(spec);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        await act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("specification");
     }
 
     private static List<Test> MockTests(int count)

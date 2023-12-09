@@ -13,9 +13,9 @@ public class Projection_ProjectAsCollection
     public void AdaptCollectionGivenSourceAndTarget()
     {
         var mockAdapter = new Mock<ITypeAdapter>();
-        mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns(new List<TestMapClass> { new TestMapClass() });
+        mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns([new TestMapClass()]);
 
-        ICollection<TestMapClass> adapted = mockAdapter.Object.ProjectAsCollection<TestClass, TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
+        ICollection<TestMapClass> adapted = mockAdapter.Object.AdaptList<TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
 
         mockAdapter.Verify(x => x.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>()), Times.Once);
         adapted.Should().NotBeNullOrEmpty();
@@ -25,9 +25,9 @@ public class Projection_ProjectAsCollection
     public void AdaptCollectionGivenTarget()
     {
         var mockAdapter = new Mock<ITypeAdapter>();
-        mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns(new List<TestMapClass> { new TestMapClass() });
+        mockAdapter.Setup(p => p.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>())).Returns([new TestMapClass()]);
 
-        ICollection<TestMapClass> adapted = mockAdapter.Object.ProjectAsCollection<TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
+        ICollection<TestMapClass> adapted = mockAdapter.Object.AdaptList<TestMapClass>(It.IsAny<IEnumerable<TestClass>>());
 
         mockAdapter.Verify(x => x.Adapt<List<TestMapClass>>(It.IsAny<IEnumerable<TestClass>>()), Times.Once);
         adapted.Should().NotBeNullOrEmpty();
@@ -35,11 +35,11 @@ public class Projection_ProjectAsCollection
 
     internal class TestClass
     {
-        public string Test { get; set; }
+        public string? Test { get; set; }
     }
 
     internal class TestMapClass
     {
-        public string Test { get; set; }
+        public string? Test { get; set; }
     }
 }

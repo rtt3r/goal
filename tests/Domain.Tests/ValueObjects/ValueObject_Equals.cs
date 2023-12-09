@@ -10,7 +10,7 @@ public class ValueObject_Equals
     public void ReturnFalseGivenNullObject()
     {
         var obj1 = new ValueObject1();
-        object obj2 = null;
+        object obj2 = null!;
 
         bool areEquals = obj1.Equals(obj2);
 
@@ -65,7 +65,7 @@ public class ValueObject_Equals
     public void ReturnFalseGivenNullValueObject()
     {
         var obj1 = new ValueObject1();
-        ValueObject1 obj2 = null;
+        ValueObject1 obj2 = null!;
 
         bool areEquals = obj1.Equals(obj2);
 

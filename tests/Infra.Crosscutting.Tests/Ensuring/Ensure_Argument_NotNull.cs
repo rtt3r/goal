@@ -37,7 +37,7 @@ public class Ensure_Argument_NotNull
     {
         Action act = () => Ensure.Argument.IsNotNull(null);
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().BeNull();
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null");
     }
 
     [Fact]
@@ -47,7 +47,7 @@ public class Ensure_Argument_NotNull
 
         Action act = () => Ensure.Argument.IsNotNull(obj.TestObject2, nameof(TestObject1.TestObject2));
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be(nameof(TestObject1.TestObject2));
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'TestObject2')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'TestObject2')");
     }
 
     [Fact]
@@ -57,6 +57,6 @@ public class Ensure_Argument_NotNull
 
         Action act = () => Ensure.Argument.IsNotNull(obj.TestObject2, nameof(TestObject1.TestObject2), "Test");
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be(nameof(TestObject1.TestObject2));
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Test (Parameter 'TestObject2')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Test (Parameter 'TestObject2')");
     }
 }

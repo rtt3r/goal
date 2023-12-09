@@ -5,6 +5,6 @@ namespace Goal.Seedwork.Infra.Http.Swagger;
 
 public sealed class PolicySelectorWithLabel<T> where T : Attribute
 {
-    public Func<IEnumerable<T>, IEnumerable<string>> Selector { get; set; }
-    public string Label { get; set; }
+    public required Func<IEnumerable<T>, IEnumerable<string?>> Selector { get; set; }
+    public required string Label { get; set; }
 }

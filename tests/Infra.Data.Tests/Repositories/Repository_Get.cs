@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Data.Tests.Extensions;
 using Goal.Seedwork.Infra.Data.Tests.Mocks;
@@ -29,11 +30,11 @@ public class Repository_Get
 
         Guid id = tests[2].Id;
 
-        Test test = testRepository.Load(id);
+        Test? test = testRepository.Load(id);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().NotBeNull();
-        test.Id.Should().Be(id);
+        test?.Id.Should().Be(id);
     }
 
     [Fact]
@@ -50,14 +51,14 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test test = testRepository.Load(Guid.NewGuid());
+        Test? test = testRepository.Load(Guid.NewGuid());
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().BeNull();
     }
 
     [Fact]
-    public void ReturnsAnEntityGivenIdAsync()
+    public async Task ReturnsAnEntityGivenIdAsync()
     {
         List<Test> tests = MockTests();
 
@@ -73,15 +74,15 @@ public class Repository_Get
         Guid id = tests[2].Id;
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test test = testRepository.LoadAsync(id).Result;
+        Test? test = await testRepository.LoadAsync(id);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().NotBeNull();
-        test.Id.Should().Be(id);
+        test?.Id.Should().Be(id);
     }
 
     [Fact]
-    public void ReturnsNullGivenIdAsync()
+    public async Task ReturnsNullGivenIdAsync()
     {
         List<Test> tests = MockTests();
 
@@ -93,7 +94,7 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test test = testRepository.LoadAsync(Guid.NewGuid()).GetAwaiter().GetResult();
+        Test? test = await testRepository.LoadAsync(Guid.NewGuid());
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().BeNull();
@@ -101,13 +102,13 @@ public class Repository_Get
 
     private static List<Test> MockTests()
     {
-        return new List<Test>
-        {
+        return
+        [
             new Test(1),
             new Test(2),
             new Test(3),
             new Test(4),
             new Test(5)
-        };
+        ];
     }
 }

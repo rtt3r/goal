@@ -41,7 +41,7 @@ public static class QueryableExtensions
         return queryableList;
     }
 
-    public static IPagedCollection<T> ToPagedList<T>(this IQueryable<T> source, IPageSearch pageSearch)
+    public static IPagedList<T> ToPagedList<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 

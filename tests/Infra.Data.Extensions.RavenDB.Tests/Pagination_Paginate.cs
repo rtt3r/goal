@@ -124,10 +124,10 @@ public class Pagination_Paginate : RavenTestDriver
         Action act = () =>
         {
             IQueryable<TestObject1> values = GetQuery(100);
-            values.Paginate(null);
+            values.Paginate(null!);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("pageSearch");
 
         // Arrange
         using IDocumentStore store = GetDocumentStore();
@@ -147,7 +147,7 @@ public class Pagination_Paginate : RavenTestDriver
         using (IDocumentSession session = store.OpenSession())
         {
             // Act && Assert
-            FluentActions.Invoking(() => session.Query<TestObject1>().Paginate(null).ToList())
+            FluentActions.Invoking(() => session.Query<TestObject1>().Paginate(null!).ToList())
                 .Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
         }
     }

@@ -12,8 +12,8 @@ public static partial class CustomValidations
 
     public static bool IsValidCnpj(string cnpj)
     {
-        int[] multiplier1 = new int[12] { 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
-        int[] multiplier2 = new int[13] { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplier1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+        int[] multiplier2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
 
         string tempCnpj, digit;
         int sum, rest;
@@ -58,8 +58,8 @@ public static partial class CustomValidations
 
     public static bool IsValidCpf(string cpf)
     {
-        int[] multiplier1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-        int[] multiplier2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+        int[] multiplier1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+        int[] multiplier2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
 
         string tempCpf, digit;
         int sum, rest;

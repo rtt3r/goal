@@ -7,20 +7,13 @@ namespace Goal.Seedwork.Infra.Crosscutting.Collections;
 
 [DebuggerStepThrough]
 [DebuggerDisplay("PageCount = {PageCount}; TotalCount = {TotalCount}")]
-public class PagedList<T> : IPagedCollection<T>
+public class PagedList<T>(IEnumerable<T>? items, long totalCount) : IPagedList<T>
 {
-    private readonly IEnumerable<T> items;
+    private readonly IEnumerable<T> items = items ?? new List<T>();
 
-    public PagedList(IEnumerable<T> items, int totalCount)
-    {
-        this.items = items ?? new List<T>();
-        PageCount = items?.Count() ?? 0;
-        TotalCount = totalCount;
-    }
+    public long TotalCount { get; private set; } = totalCount;
 
-    public int TotalCount { get; private set; } = 0;
-
-    public int PageCount { get; private set; } = 0;
+    public int PageCount { get; private set; } = items?.Count() ?? 0;
 
     public IEnumerator<T> GetEnumerator() => items.GetEnumerator();
 

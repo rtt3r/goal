@@ -1,11 +1,9 @@
+using System.Collections.Generic;
+using Goal.Seedwork.Infra.Crosscutting.Notifications;
+
 namespace Goal.Seedwork.Application.Commands;
 
-public class CommandResult<T> : CommandResult, ICommandResult<T>
+public record CommandResult<T>(bool IsSucceeded, T? Data, IEnumerable<Notification> Notifications) 
+    : CommandResult(IsSucceeded, Notifications), ICommandResult<T>
 {
-    internal CommandResult()
-        : base()
-    {
-    }
-
-    public T Data { get; set; }
 }

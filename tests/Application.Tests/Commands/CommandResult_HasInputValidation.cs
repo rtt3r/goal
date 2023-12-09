@@ -32,7 +32,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasInputValidation = commandResult.HasInputValidation();
+        bool hasInputValidation = commandResult.HasInputValidation;
 
         // Assert
         hasInputValidation.Should().BeTrue();
@@ -51,7 +51,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasExternalError = commandResult.HasExternalError();
+        bool hasExternalError = commandResult.HasExternalError;
 
         // Assert
         hasExternalError.Should().BeTrue();
@@ -70,7 +70,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasInternalError = commandResult.HasInternalError();
+        bool hasInternalError = commandResult.HasInternalError;
 
         // Assert
         hasInternalError.Should().BeTrue();
@@ -89,7 +89,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasInputValidation = commandResult.HasInputValidation();
+        bool hasInputValidation = commandResult.HasInputValidation;
 
         // Assert
         hasInputValidation.Should().BeTrue();
@@ -108,7 +108,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasResourceNotFound = commandResult.HasResourceNotFound();
+        bool hasResourceNotFound = commandResult.HasResourceNotFound;
 
         // Assert
         hasResourceNotFound.Should().BeTrue();
@@ -127,7 +127,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasInformation = commandResult.HasInformation();
+        bool hasInformation = commandResult.HasInformation;
 
         // Assert
         hasInformation.Should().BeTrue();
@@ -146,7 +146,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool hasInputValidation = commandResult.HasInputValidation();
+        bool hasInputValidation = commandResult.HasInputValidation;
 
         // Assert
         hasInputValidation.Should().BeFalse();
@@ -163,7 +163,7 @@ public class CommandResult_HasInputValidation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool result = commandResult.HasInputValidation();
+        bool result = commandResult.HasInputValidation;
 
         // Assert
         result.Should().BeTrue();

@@ -3,18 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Goal.Seedwork.Infra.Http.Controllers.Results;
 
-public class OkPagedCollectionResult : OkObjectResult
+public class OkPagedCollectionResult(IPagedList value) : OkObjectResult(new PagedResponse(value))
 {
-    public OkPagedCollectionResult(IPagedCollection value)
-        : base(new PagedResponse(value))
-    {
-    }
 }
 
-public class OkPagedCollectionResult<T> : OkObjectResult
+public class OkPagedCollectionResult<T>(IPagedList<T> value) : OkObjectResult(new PagedResponse<T>(value))
 {
-    public OkPagedCollectionResult(IPagedCollection<T> value)
-        : base(new PagedResponse<T>(value))
-    {
-    }
 }

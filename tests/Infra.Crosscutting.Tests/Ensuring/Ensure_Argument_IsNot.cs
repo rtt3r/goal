@@ -24,13 +24,13 @@ public class Ensure_Argument_IsNot
     public void ThrowsArgumentExceptionGivenTrueCondition()
     {
         Action act = () => Ensure.Argument.IsNot(true);
-        act.Should().Throw<ArgumentException>().And.Message.Should().Be("");
+        act.Should().Throw<ArgumentException>().WithMessage("Value does not fall within the expected range.");
     }
 
     [Fact]
     public void ThrowsArgumentExceptionGivenTrueConditionAndAMessage()
     {
         Action act = () => Ensure.Argument.IsNot(true, "Test");
-        act.Should().Throw<ArgumentException>().And.Message.Should().Be("Test");
+        act.Should().Throw<ArgumentException>().WithMessage("Test");
     }
 }

@@ -12,7 +12,7 @@ public class Command_ValidateCommand
     public async Task ShouldReturnValidResult_IfNoValidationErrors()
     {
         // Arrange
-        var command = new TestCommand { Prop1 = "value", Prop2 = 123 };
+        var command = new TestCommand("value", 123);
         var validator = new TestValidator();
 
         // Act
@@ -26,7 +26,7 @@ public class Command_ValidateCommand
     public async Task ShouldReturnInvalidResult_IfValidationErrorsExist()
     {
         // Arrange
-        var command = new TestCommand { Prop1 = "", Prop2 = -1 };
+        var command = new TestCommand("", -1);
         var validator = new TestValidator();
 
         // Act
@@ -41,7 +41,7 @@ public class Command_ValidateCommand
     public async Task ShouldReturnValidResult_IfNoValidationErrors_Generic()
     {
         // Arrange
-        var command = new TestCommand { Prop1 = "value", Prop2 = 123 };
+        var command = new TestCommand("value", 123);
 
         // Act
         FluentValidation.Results.ValidationResult result = await command.ValidateCommandAsync<TestValidator, TestCommand>();
@@ -54,7 +54,7 @@ public class Command_ValidateCommand
     public async Task ShouldReturnInvalidResult_IfValidationErrorsExist_Generic()
     {
         // Arrange
-        var command = new TestCommand { Prop1 = "", Prop2 = -1 };
+        var command = new TestCommand("", -1);
 
         // Act
         FluentValidation.Results.ValidationResult result = await command.ValidateCommandAsync<TestValidator, TestCommand>();
@@ -64,11 +64,8 @@ public class Command_ValidateCommand
         result.Errors.Should().NotBeEmpty();
     }
 
-    private class TestCommand : ICommand
-    {
-        public string Prop1 { get; set; }
-        public int Prop2 { get; set; }
-    }
+    private record TestCommand(string Prop1, int Prop2) : ICommand;
+
 
     private class TestValidator : AbstractValidator<TestCommand>
     {

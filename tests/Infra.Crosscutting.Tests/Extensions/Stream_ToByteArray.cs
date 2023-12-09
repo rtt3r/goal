@@ -23,7 +23,7 @@ public class Stream_ToByteArray
     {
         Action act = () =>
         {
-            MemoryStream stream = null;
+            MemoryStream stream = null!;
             stream.ToByteArray();
         };
 

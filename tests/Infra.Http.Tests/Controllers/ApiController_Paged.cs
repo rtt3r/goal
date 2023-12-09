@@ -23,7 +23,7 @@ public class ApiController_Paged
             new Test { Name = "Test4", Age = 20 },
         };
         IEnumerable<Test> page = all.Take(2).ToList();
-        IPagedCollection pagedList = new PagedList<Test>(page, all.Count);
+        IPagedList pagedList = new PagedList<Test>(page, all.Count);
 
         // Act
         OkPagedCollectionResult actionResult = controller.PagedWrapper(pagedList);
@@ -72,16 +72,16 @@ public class ApiController_Paged
 
     public class TestController : ApiController
     {
-        public OkPagedCollectionResult PagedWrapper(IPagedCollection collection)
+        public OkPagedCollectionResult PagedWrapper(IPagedList collection)
             => Paged(collection);
 
-        public OkPagedCollectionResult<T> PagedWrapper<T>(IPagedCollection<T> collection)
+        public OkPagedCollectionResult<T> PagedWrapper<T>(IPagedList<T> collection)
             => Paged<T>(collection);
     }
 
     public class Test
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public int Age { get; set; }
     }
 }

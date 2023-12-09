@@ -12,7 +12,7 @@ public class Notification_Constructor
     {
         // Arrange, Act, & Assert
         FluentActions.Invoking(() => Notification.Information("", "Info"))
-            .Should().Throw<ArgumentException>().WithMessage("'code' cannot be null or empty. (Parameter 'code')");
+            .Should().Throw<ArgumentException>().WithMessage("String value cannot be null or whitespace (Parameter 'code')");
     }
 
     [Fact]
@@ -20,7 +20,7 @@ public class Notification_Constructor
     {
         // Arrange, Act, & Assert
         FluentActions.Invoking(() => Notification.Information("I001", ""))
-            .Should().Throw<ArgumentException>().WithMessage("'message' cannot be null or empty. (Parameter 'message')");
+            .Should().Throw<ArgumentException>().WithMessage("String value cannot be null or whitespace (Parameter 'message')");
     }
 
     [Fact]
@@ -28,6 +28,6 @@ public class Notification_Constructor
     {
         // Arrange, Act, & Assert
         FluentActions.Invoking(() => Notification.InputValidation("I001", "InputValidation", ""))
-            .Should().Throw<ArgumentException>().WithMessage("'paramName' cannot be null or empty. (Parameter 'paramName')");
+            .Should().Throw<ArgumentException>().WithMessage("String value cannot be null or whitespace (Parameter 'paramName')");
     }
 }

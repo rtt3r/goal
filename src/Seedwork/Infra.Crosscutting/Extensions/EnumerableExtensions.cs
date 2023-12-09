@@ -34,7 +34,7 @@ public static class EnumerableExtensions
         return source;
     }
 
-    public static IPagedCollection<TResult> SelectPaged<TSource, TResult>(this IPagedCollection<TSource> source, Func<TSource, TResult> selector)
+    public static IPagedList<TResult> SelectPaged<TSource, TResult>(this IPagedList<TSource> source, Func<TSource, TResult> selector)
     {
         IEnumerable<TResult> items = source.Select(selector);
         return new PagedList<TResult>(items, source.TotalCount);

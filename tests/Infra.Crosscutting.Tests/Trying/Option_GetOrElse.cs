@@ -10,18 +10,18 @@ public class Option_GetOrElse
     [InlineData(42, true)]
     [InlineData("hello world", true)]
     [InlineData(null, false)]
-    public void WithSome_ReturnsValue(object value, bool useFallback)
+    public void WithSome_ReturnsValue(object? value, bool useFallback)
     {
         var option = Option.Of(value);
 
         if (useFallback)
         {
-            object result = option.GetOrElse(() => 123);
+            object? result = option.GetOrElse(() => 123);
             result.Should().Be(value);
         }
         else
         {
-            object result = option.GetOrElse(456);
+            object? result = option.GetOrElse(456);
             result.Should().Be(456);
         }
     }

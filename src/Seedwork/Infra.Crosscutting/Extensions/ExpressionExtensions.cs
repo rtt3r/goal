@@ -9,11 +9,14 @@ public static partial class ExtensionManager
     {
         Ensure.Argument.IsNotNull(predicate, nameof(predicate));
 
-        if (predicate.Body is MemberExpression memberExpression)
-            return memberExpression.Member.Name;
+        if (predicate.Body is MemberExpression bodyMemberExpression)
+            return bodyMemberExpression.Member.Name;
 
         if (predicate.Body is UnaryExpression unaryExpression)
-            return (unaryExpression.Operand as MemberExpression).Member.Name;
+        {
+            if (unaryExpression.Operand is MemberExpression operandMemberExpression)
+                return operandMemberExpression.Member.Name;
+        }
 
         throw new ArgumentException($"Expression not supported.", nameof(predicate));
     }

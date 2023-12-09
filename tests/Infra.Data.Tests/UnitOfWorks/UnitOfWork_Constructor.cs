@@ -7,18 +7,15 @@ namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks;
 
 public class UnitOfWork_Constructor
 {
-    public class MockUnitOfWork : UnitOfWork
+    public class MockUnitOfWork(DbContext context) : UnitOfWork(context)
     {
-        public MockUnitOfWork(DbContext context) : base(context)
-        {
-        }
     }
 
     [Fact]
     public void ContextIsNull_ThrowsArgumentNullException()
     {
         // Act and Assert
-        FluentActions.Invoking(() => new MockUnitOfWork(null))
+        FluentActions.Invoking(() => new MockUnitOfWork(null!))
             .Should().Throw<ArgumentNullException>()
             .WithMessage("Object value cannot be null (Parameter 'context')");
     }

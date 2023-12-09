@@ -106,7 +106,7 @@ public class Ordering_OrderingHelper
     public class Foo
     {
         public int MyProperty { get; set; }
-        public OtherFoo OtherFoo { get; set; }
+        public OtherFoo OtherFoo { get; set; } = null!;
     }
 
     public class OtherFoo

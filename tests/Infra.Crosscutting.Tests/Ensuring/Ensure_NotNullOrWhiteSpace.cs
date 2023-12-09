@@ -17,7 +17,7 @@ public class Ensure_NotNullOrWhiteSpace
     public void ThrowExceptionGivenNullAndNotWhiteSpaceMessage()
     {
         Action act = () => Ensure.NotNullOrWhiteSpace(null, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class Ensure_NotNullOrWhiteSpace
     public void ThrowExceptionGivenWhiteSpaceAndNotWhiteSpaceMessage()
     {
         Action act = () => Ensure.NotNullOrWhiteSpace("", "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]

@@ -18,7 +18,7 @@ public class PaginationExtensions_ToPagedList
         Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10);
-        IPagedCollection<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
+        IPagedList<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
 
         paginateResult.Should().NotBeNull().And.BeOfType<PagedList<TestObject1>>();
         paginateResult.As<PagedList<TestObject1>>().Should().HaveCount(10).And.HaveElementAt(0, query.ElementAt(0));
@@ -32,7 +32,7 @@ public class PaginationExtensions_ToPagedList
         Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10);
-        IPagedCollection<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
+        IPagedList<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
 
         paginateResult.Should().NotBeNull().And.BeOfType<PagedList<TestObject1>>();
         paginateResult.As<PagedList<TestObject1>>().Should().HaveCount(10).And.HaveElementAt(0, query.ElementAt(0));
@@ -46,7 +46,7 @@ public class PaginationExtensions_ToPagedList
         Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
-        IPagedCollection<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
+        IPagedList<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
 
         paginateResult.Should().NotBeNull().And.BeOfType<PagedList<TestObject1>>();
         paginateResult.As<PagedList<TestObject1>>().Should().HaveCount(10).And.HaveElementAt(0, query.ElementAt(0));
@@ -60,7 +60,7 @@ public class PaginationExtensions_ToPagedList
         Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
-        IPagedCollection<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
+        IPagedList<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
 
         paginateResult.Should().NotBeNull().And.BeOfType<PagedList<TestObject1>>();
         paginateResult.As<PagedList<TestObject1>>().Should().HaveCount(10).And.HaveElementAt(0, query.ElementAt(99));
@@ -74,7 +74,7 @@ public class PaginationExtensions_ToPagedList
         Mock<IQueryable<TestObject1>> mock = query.BuildMock();
 
         var pagination = new PageSearch(0, 0);
-        IPagedCollection<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
+        IPagedList<TestObject1> paginateResult = await mock.Object.ToPagedListAsync(pagination);
 
         paginateResult.Should().NotBeNull().And.BeOfType<PagedList<TestObject1>>();
         paginateResult.As<PagedList<TestObject1>>().TotalCount.Should().Be(100);

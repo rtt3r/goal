@@ -6,23 +6,15 @@ namespace Goal.Seedwork.Domain.Tests.Event;
 
 public class EventTests
 {
-    private class SampleEvent : Domain.Events.Event
+    private record SampleEvent(string AggregateId) : Events.Event(AggregateId, nameof(SampleEvent))
     {
-        public SampleEvent()
-        {
-        }
-
-        public SampleEvent(string aggregateId)
-        {
-            AggregateId = aggregateId;
-        }
     }
 
     [Fact]
     public void Event_Should_Set_Default_Timestamp()
     {
         // Arrange & Act
-        var @event = new SampleEvent();
+        var @event = new SampleEvent(string.Empty);
 
         // Assert
         @event.Timestamp.Should().BeCloseTo(DateTimeOffset.UtcNow, TimeSpan.FromSeconds(1));
@@ -32,7 +24,7 @@ public class EventTests
     public void Event_Should_Set_EventType()
     {
         // Arrange & Act
-        var @event = new SampleEvent();
+        var @event = new SampleEvent(string.Empty);
 
         // Assert
         @event.EventType.Should().Be(nameof(SampleEvent));

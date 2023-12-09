@@ -29,7 +29,7 @@ public static class PaginationExtensions
         return queryableList;
     }
 
-    public static IPagedCollection<T> ToPagedList<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
+    public static IPagedList<T> ToPagedList<T>(this IRavenQueryable<T> source, IPageSearch pageSearch)
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 
@@ -43,7 +43,7 @@ public static class PaginationExtensions
             stats.TotalResults);
     }
 
-    public static async Task<IPagedCollection<T>> ToPagedListAsync<T>(this IRavenQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
+    public static async Task<IPagedList<T>> ToPagedListAsync<T>(this IRavenQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
     {
         Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
 

@@ -15,7 +15,7 @@ public class CommandResult_HasInformation
         ICommandResult commandResult = CommandResult.Success();
 
         // Act
-        bool result = commandResult.HasInformation();
+        bool result = commandResult.HasInformation;
 
         // Assert
         result.Should().BeFalse();
@@ -33,7 +33,7 @@ public class CommandResult_HasInformation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool result = commandResult.HasInformation();
+        bool result = commandResult.HasInformation;
 
         // Assert
         result.Should().BeFalse();
@@ -51,7 +51,7 @@ public class CommandResult_HasInformation
         ICommandResult commandResult = CommandResult.Failure(notifications);
 
         // Act
-        bool result = commandResult.HasInformation();
+        bool result = commandResult.HasInformation;
 
         // Assert
         result.Should().BeTrue();

@@ -47,7 +47,7 @@ public class Entity_EqualityOperator
     public void OperatorEquals_NullLeftObjects_ReturnsFalse()
     {
         //Given
-        EntityTest obj1 = null;
+        EntityTest obj1 = null!;
         var obj2 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
 
         //When
@@ -62,7 +62,7 @@ public class Entity_EqualityOperator
     {
         //Given
         var obj1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
-        EntityTest obj2 = null;
+        EntityTest obj2 = null!;
 
         //When
         bool areEquals = obj1 == obj2;
@@ -75,8 +75,8 @@ public class Entity_EqualityOperator
     public void OperatorEquals_NullBothObjects_ReturnsTrue()
     {
         //Given
-        EntityTest obj1 = null;
-        EntityTest obj2 = null;
+        EntityTest obj1 = null!;
+        EntityTest obj2 = null!;
 
         //When
         bool areEquals = obj1 == obj2;

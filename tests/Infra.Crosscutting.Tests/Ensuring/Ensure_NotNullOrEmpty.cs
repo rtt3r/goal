@@ -17,7 +17,7 @@ public class Ensure_NotNullOrEmpty
     public void ThrowExceptionGivenNullAndNotEmptyMessage()
     {
         Action act = () => Ensure.NotNullOrEmpty(null, "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class Ensure_NotNullOrEmpty
     public void ThrowExceptionGivenEmptyAndNotEmptyMessage()
     {
         Action act = () => Ensure.NotNullOrEmpty("", "Test");
-        act.Should().Throw<Exception>().And.Message.Should().Be("Test");
+        act.Should().Throw<Exception>().WithMessage("Test");
     }
 
     [Fact]

@@ -30,16 +30,17 @@ public static class MoqExtensions
         mock.ConfigureDbSetCalls();
 
         mock.Setup(m => m.Find(It.IsAny<object[]>()))
-            .Returns<object[]>(key => data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString())));
+            .Returns<object[]>(key => data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString()!)));
 
         mock.Setup(m => m.FindAsync(It.IsAny<object[]>()))
-            .Returns<object[]>(async key => await Task.FromResult(data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString()))));
+            .Returns<object[]>(async key => await Task.FromResult(data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString()!))));
 
         return mock;
     }
 
     public static Mock<DbSet<TEntity>> BuildMockDbSet<TEntity, TKey>(this IQueryable<TEntity> data)
         where TEntity : class, IEntity<TKey>
+        where TKey : struct
     {
         var mock = new Mock<DbSet<TEntity>>();
         var enumerable = new TestAsyncEnumerable<TEntity>(data);
@@ -67,9 +68,9 @@ public static class MoqExtensions
         IQueryable<TEntity> data) where TEntity : class
     {
         mock.Setup(m => m.Provider).Returns(queryProvider);
-        mock.Setup(m => m.Expression).Returns(data?.Expression);
-        mock.Setup(m => m.ElementType).Returns(data?.ElementType);
-        mock.Setup(m => m.GetEnumerator()).Returns(() => data?.GetEnumerator());
+        mock.Setup(m => m.Expression).Returns(data.Expression);
+        mock.Setup(m => m.ElementType).Returns(data.ElementType);
+        mock.Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
     }
 
     private static void ConfigureAsyncEnumerableCalls<TEntity>(

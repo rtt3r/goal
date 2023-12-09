@@ -5,5 +5,5 @@ public interface INotification
     NotificationType Type { get; }
     string Code { get; }
     string Message { get; }
-    string ParamName { get; }
+    string? ParamName { get; }
 }

@@ -13,11 +13,11 @@ public class NotificationHandler_GetNotificationsAsync
     {
         // Arrange
         var handler = new TestNotificationHandler();
-        Notification[] notifications = new[]
-        {
+        Notification[] notifications =
+        [
             Notification.Information("test1", "Test message 1"),
             Notification.InternalError("test2", "Test message 2")
-        };
+        ];
 
         foreach (Notification notification in notifications)
         {

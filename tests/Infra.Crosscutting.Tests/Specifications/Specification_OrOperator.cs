@@ -41,30 +41,30 @@ public class Specification_OrOperator
         var orSpec = (spec1 || spec2) as OrSpecification<TestObject1>;
 
         orSpec.Should().NotBeNull();
-        orSpec.IsSatisfiedBy(new TestObject1()).Should().BeTrue();
-        orSpec.LeftSideSpecification.Should().Be(spec1);
-        orSpec.RightSideSpecification.Should().Be(spec2);
+        orSpec?.IsSatisfiedBy(new TestObject1()).Should().BeTrue();
+        orSpec?.LeftSideSpecification.Should().Be(spec1);
+        orSpec?.RightSideSpecification.Should().Be(spec2);
     }
 
     [Fact]
     public void GivenNullRightSpecificationThenThrowArgumentNullException()
     {
         Specification<TestObject1> spec1 = new TrueSpecification<TestObject1>();
-        Specification<TestObject1> spec2 = null;
+        Specification<TestObject1> spec2 = null!;
 
-        Func<AndSpecification<TestObject1>> act = () => (spec1 || spec2) as AndSpecification<TestObject1>;
+        Func<AndSpecification<TestObject1>?> act = () => (spec1 || spec2) as AndSpecification<TestObject1>;
 
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'rightSideSpecification')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'rightSideSpecification')");
     }
 
     [Fact]
     public void GivenNullLeftSpecificationThenThrowArgumentNullException()
     {
-        Specification<TestObject1> spec1 = null;
+        Specification<TestObject1> spec1 = null!;
         Specification<TestObject1> spec2 = new DirectSpecification<TestObject1>(e => e.Id == 0);
 
-        Func<AndSpecification<TestObject1>> act = () => (spec1 || spec2) as AndSpecification<TestObject1>;
+        Func<AndSpecification<TestObject1>?> act = () => (spec1 || spec2) as AndSpecification<TestObject1>;
 
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Be("Object value cannot be null (Parameter 'leftSideSpecification')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'leftSideSpecification')");
     }
 }

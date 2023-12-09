@@ -2,14 +2,7 @@ using System;
 
 namespace Goal.Seedwork.Domain.Events;
 
-public abstract class Event : IEvent
+public abstract record Event(string AggregateId, string EventType) : IEvent
 {
-    public DateTimeOffset Timestamp { get; protected set; } = DateTimeOffset.UtcNow;
-    public string AggregateId { get; protected set; }
-    public string EventType { get; protected set; }
-
-    protected Event()
-    {
-        EventType = GetType().Name;
-    }
+    public DateTimeOffset Timestamp { get; init; } = DateTimeOffset.UtcNow;
 }

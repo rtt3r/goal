@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
@@ -52,7 +53,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsAllEntitiesAsync()
+    public async Task ReturnsAllEntitiesAsync()
     {
         List<Test> mockedTests = MockTests();
 
@@ -64,14 +65,14 @@ public class Repository_Find
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        ICollection<Test> tests = testRepository.QueryAsync().GetAwaiter().GetResult();
+        ICollection<Test> tests = await testRepository.QueryAsync();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
     }
 
     [Fact]
-    public void ReturnsEmptyAsync()
+    public async Task ReturnsEmptyAsync()
     {
         Mock<DbSet<Test>> mockDbSet = Enumerable.Empty<Test>()
             .AsQueryable()
@@ -81,7 +82,7 @@ public class Repository_Find
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        ICollection<Test> tests = testRepository.QueryAsync().GetAwaiter().GetResult();
+        ICollection<Test> tests = await testRepository.QueryAsync();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.BeEmpty();
@@ -123,16 +124,16 @@ public class Repository_Find
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Query(spec);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]
-    public void ReturnsAllEntitiesGivenSpecificationAsync()
+    public async Task ReturnsAllEntitiesGivenSpecificationAsync()
     {
         List<Test> mockedTests = MockTests();
         mockedTests.Skip(1).Take(2).ForEach(t => t.Deactivate());
@@ -146,25 +147,25 @@ public class Repository_Find
 
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         var testRepository = new TestRepository(mockDbContext.Object);
-        ICollection<Test> tests = testRepository.QueryAsync(spec).GetAwaiter().GetResult();
+        ICollection<Test> tests = await testRepository.QueryAsync(spec);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveSameCount(mockedTests.Where(p => p.Active));
     }
 
     [Fact]
-    public void ThrowsArgumentNullExceptionGivenNullSpecificationAsync()
+    public async Task ThrowsArgumentNullExceptionGivenNullSpecificationAsync()
     {
         var mockDbContext = new Mock<DbContext>();
 
-        Action act = () =>
+        Func<Task> act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.QueryAsync(spec).GetAwaiter().GetResult();
+            return testRepository.QueryAsync(spec);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        await act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]
@@ -188,7 +189,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsEmptyGivenSpecificationAsync()
+    public async Task ReturnsEmptyGivenSpecificationAsync()
     {
         List<Test> mockedTests = MockTests();
 
@@ -202,7 +203,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid());
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        ICollection<Test> tests = testRepository.QueryAsync(spec).GetAwaiter().GetResult();
+        ICollection<Test> tests = await testRepository.QueryAsync(spec);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.BeEmpty();
@@ -222,7 +223,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(pageSearch);
+        IPagedList<Test> tests = testRepository.Query(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -245,7 +246,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(pageSearch);
+        IPagedList<Test> tests = testRepository.Query(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -255,7 +256,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal100Async()
+    public async Task ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -268,7 +269,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -278,7 +279,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal100Async()
+    public async Task ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -291,7 +292,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -314,7 +315,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(1, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(pageSearch);
+        IPagedList<Test> tests = testRepository.Query(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -337,7 +338,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(1, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(pageSearch);
+        IPagedList<Test> tests = testRepository.Query(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -347,7 +348,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsSecondPageOrderedAscendingGivenPageSize10AndTotal100Async()
+    public async Task ReturnsSecondPageOrderedAscendingGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -360,7 +361,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(1, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -370,7 +371,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsSecondPageOrderedDescendingGivenPageSize10AndTotal100Async()
+    public async Task ReturnsSecondPageOrderedDescendingGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -383,7 +384,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(1, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(10);
@@ -406,7 +407,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(pageSearch);
+        IPagedList<Test> tests = testRepository.Query(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(9);
@@ -416,7 +417,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal9Async()
+    public async Task ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal9Async()
     {
         List<Test> mockedTests = MockTests(9);
 
@@ -429,7 +430,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(9);
@@ -452,7 +453,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(pageSearch);
+        IPagedList<Test> tests = testRepository.Query(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(9);
@@ -462,7 +463,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal9Async()
+    public async Task ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal9Async()
     {
         List<Test> mockedTests = MockTests(9);
 
@@ -475,7 +476,7 @@ public class Repository_Find
 
         IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNull().And.HaveCount(9);
@@ -501,7 +502,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         IPageSearch pageSearch = new PageSearch(0, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(spec, pageSearch);
+        IPagedList<Test> tests = testRepository.Query(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -527,7 +528,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         IPageSearch pageSearch = new PageSearch(-1, -1);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(spec, pageSearch);
+        IPagedList<Test> tests = testRepository.Query(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(98);
@@ -544,28 +545,29 @@ public class Repository_Find
         Action act = () =>
         {
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            IPageSearch pageSearch = null;
+            IPageSearch pageSearch = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Query(spec, pageSearch);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("pageSearch");
     }
 
     [Fact]
-    public void ThrowsArgumentNullExceptionGivenSpecificationAndNullPaginationAsync()
+    public async Task ThrowsArgumentNullExceptionGivenSpecificationAndNullPaginationAsync()
     {
         var mockDbContext = new Mock<DbContext>();
 
-        Action act = () =>
+        Func<Task> act = () =>
         {
             ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-            IPageSearch pageSearch = null;
+            IPageSearch pageSearch = null!;
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
+
+            return testRepository.QueryAsync(spec, pageSearch);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("pageSearch");
+        await act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("pageSearch");
     }
 
     [Fact]
@@ -575,33 +577,34 @@ public class Repository_Find
 
         Action act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             IPageSearch pageSearch = new PageSearch(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
             testRepository.Query(spec, pageSearch);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]
-    public void ThrowsArgumentNullExceptionGivenPaginationAndNullSpecificationAsync()
+    public async Task ThrowsArgumentNullExceptionGivenPaginationAndNullSpecificationAsync()
     {
         var mockDbContext = new Mock<DbContext>();
 
-        Action act = () =>
+        Func<Task> act = () =>
         {
-            ISpecification<Test> spec = null;
+            ISpecification<Test> spec = null!;
             IPageSearch pageSearch = new PageSearch(0, 10);
             var testRepository = new TestRepository(mockDbContext.Object);
-            testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
+
+            return testRepository.QueryAsync(spec, pageSearch);
         };
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("specification");
+        await act.Should().ThrowAsync<ArgumentNullException>().WithParameterName("specification");
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedAscendingActivesGivenPageSize10AndTotal100Async()
+    public async Task ReturnsFirstPageOrderedAscendingActivesGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -617,7 +620,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         IPageSearch pageSearch = new PageSearch(0, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -644,7 +647,7 @@ public class Repository_Find
         IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
 
-        IPagedCollection<Test> tests = testRepository.Query(spec, pageSearch);
+        IPagedList<Test> tests = testRepository.Query(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -654,7 +657,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedDescendingActivesGivenPageSize10AndTotal100Async()
+    public async Task ReturnsFirstPageOrderedDescendingActivesGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -670,7 +673,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
@@ -696,7 +699,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         IPageSearch pageSearch = new PageSearch(9, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.Query(spec, pageSearch);
+        IPagedList<Test> tests = testRepository.Query(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(8);
@@ -706,7 +709,7 @@ public class Repository_Find
     }
 
     [Fact]
-    public void ReturnsLastPageOrderedAscendingActivesGivenPageSize10AndTotal100Async()
+    public async Task ReturnsLastPageOrderedAscendingActivesGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -722,7 +725,7 @@ public class Repository_Find
         ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
         IPageSearch pageSearch = new PageSearch(9, 10);
         var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedCollection<Test> tests = testRepository.QueryAsync(spec, pageSearch).GetAwaiter().GetResult();
+        IPagedList<Test> tests = await testRepository.QueryAsync(spec, pageSearch);
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(8);

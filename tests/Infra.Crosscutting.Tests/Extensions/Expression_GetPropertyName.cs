@@ -12,7 +12,7 @@ public class Expression_GetPropertyName
     [Fact]
     public void ReturnPropertyNameGivenMemberExpression()
     {
-        Expression<Func<TestObject1, string>> expression = p => p.Value;
+        Expression<Func<TestObject1, string?>> expression = p => p.Value;
         string propertyName = expression.GetPropertyName();
 
         propertyName.Should().NotBeNull().And.Be("Value");
@@ -30,10 +30,10 @@ public class Expression_GetPropertyName
     [Fact]
     public void ThrowsArgumentNullExceptionGivenNullExpression()
     {
-        Expression<Func<TestObject1, string>> expression = null;
+        Expression<Func<TestObject1, string>> expression = null!;
         Action act = () => expression.GetPropertyName();
 
-        act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("predicate");
+        act.Should().Throw<ArgumentNullException>().WithParameterName("predicate");
     }
 
     [Fact]
