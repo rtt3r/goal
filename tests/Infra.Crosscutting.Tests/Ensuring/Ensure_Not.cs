@@ -10,7 +10,7 @@ public class Ensure_Not
     public void ThrowExceptionGivenTrue()
     {
         Action act = () => Ensure.Not(true);
-        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
+        act.Should().Throw<Exception>().And.Message.Should().Be("The expected condition was not exceeded");
     }
 
     [Fact]
@@ -31,6 +31,20 @@ public class Ensure_Not
     public void EnsureGivenFalseAndNotEmptyMessage()
     {
         Action act = () => Ensure.Not(false, "Test");
+        act.Should().NotThrow<Exception>();
+    }
+
+    [Fact]
+    public void ThrowExceptionGivenTruePredicate()
+    {
+        Action act = () => Ensure.Not(() => true);
+        act.Should().Throw<Exception>().And.Message.Should().Be("The expected condition was not exceeded");
+    }
+
+    [Fact]
+    public void EnsureGivenFalsePredicate()
+    {
+        Action act = () => Ensure.Not(() => false);
         act.Should().NotThrow<Exception>();
     }
 }

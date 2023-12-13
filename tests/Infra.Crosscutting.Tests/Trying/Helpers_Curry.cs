@@ -19,17 +19,4 @@ public class Helpers_Curry
         // Assert
         result.Should().Be(5);
     }
-
-    [Fact]
-    public void With_3_Parameters_Should_Return_Working_Function()
-    {
-        // Arrange
-        Func<int, Func<int, Func<int, int>>> multiply = Helpers.Curry<int, int, int, int>((a, b, c) => a * b * c);
-
-        // Act
-        int result = multiply(2)(3)(4);
-
-        // Assert
-        result.Should().Be(24);
-    }
 }

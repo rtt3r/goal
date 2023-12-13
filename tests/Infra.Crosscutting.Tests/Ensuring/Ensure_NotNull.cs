@@ -10,7 +10,7 @@ public class Ensure_NotNull
     public void ThrowExceptionGivenNull()
     {
         Action act = () => Ensure.NotNull(null);
-        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.NullReferenceException' was thrown.");
+        act.Should().Throw<Exception>().And.Message.Should().Be("The value provided can't be null");
     }
 
     [Fact]

@@ -24,7 +24,7 @@ public class Ensure_Argument_IsNot
     public void ThrowsArgumentExceptionGivenTrueCondition()
     {
         Action act = () => Ensure.Argument.IsNot(true);
-        act.Should().Throw<ArgumentException>().WithMessage("Value does not fall within the expected range.");
+        act.Should().Throw<ArgumentException>().WithMessage("The expected condition was not exceeded");
     }
 
     [Fact]

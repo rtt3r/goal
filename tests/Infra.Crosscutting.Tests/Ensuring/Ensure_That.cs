@@ -7,10 +7,24 @@ namespace Goal.Seedwork.Infra.Crosscutting.Tests.Ensuring;
 public class Ensure_That
 {
     [Fact]
+    public void ThrowExceptionGivenFalseWithoutMessage()
+    {
+        Action act = () => Ensure.That<InvalidOperationException>(false);
+        act.Should().Throw<InvalidOperationException>().And.Message.Should().Be("The expected condition was not exceeded");
+    }
+
+    [Fact]
+    public void EnsureExceptionGivenTrueWithoutMessage()
+    {
+        Action act = () => Ensure.That<InvalidOperationException>(true);
+        act.Should().NotThrow<InvalidOperationException>();
+    }
+
+    [Fact]
     public void ThrowExceptionGivenFalse()
     {
-        Action act = () => Ensure.That(false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
+        Action act = () => Ensure.That<InvalidOperationException>(false);
+        act.Should().Throw<InvalidOperationException>().And.Message.Should().Be("The expected condition was not exceeded");
     }
 
     [Fact]
@@ -38,7 +52,7 @@ public class Ensure_That
     public void ThrowExceptionGivenFalsePredicate()
     {
         Action act = () => Ensure.That(() => false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("Exception of type 'System.Exception' was thrown.");
+        act.Should().Throw<Exception>().And.Message.Should().Be("The expected condition was not exceeded");
     }
 
     [Fact]
@@ -52,7 +66,7 @@ public class Ensure_That
     public void ThrowApplicationExceptionGivenFalsePredicate()
     {
         Action act = () => Ensure.That<ApplicationException>(() => false);
-        act.Should().Throw<ApplicationException>().And.Message.Should().Be("Exception of type 'System.ApplicationException' was thrown.");
+        act.Should().Throw<ApplicationException>().And.Message.Should().Be("The expected condition was not exceeded");
     }
 
     [Fact]

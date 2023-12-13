@@ -10,7 +10,7 @@ public class Ensure_NotNullOrEmpty
     public void ThrowExceptionGivenNull()
     {
         Action act = () => Ensure.NotNullOrEmpty(null);
-        act.Should().Throw<Exception>().And.Message.Should().Be(Messages.StringCannotBeNullOrEmpty);
+        act.Should().Throw<Exception>().And.Message.Should().Be(Messages.ValueProvidedCannotBeNullOrEmpty);
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public class Ensure_NotNullOrEmpty
     public void ThrowExceptionGivenEmpty()
     {
         Action act = () => Ensure.NotNullOrEmpty("");
-        act.Should().Throw<Exception>().And.Message.Should().Be(Messages.StringCannotBeNullOrEmpty);
+        act.Should().Throw<Exception>().And.Message.Should().Be(Messages.ValueProvidedCannotBeNullOrEmpty);
     }
 
     [Fact]

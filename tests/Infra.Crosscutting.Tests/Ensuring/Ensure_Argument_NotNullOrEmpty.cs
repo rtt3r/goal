@@ -40,7 +40,7 @@ public class Ensure_Argument_NotNullOrEmpty
     {
         Action act = () => Ensure.Argument.IsNotNullOrEmpty(null);
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().BeNull();
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrEmpty);
+        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrEmpty);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class Ensure_Argument_NotNullOrEmpty
 
         Action act = () => Ensure.Argument.IsNotNullOrEmpty(obj.Value, nameof(TestObject1.Value));
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrEmpty);
+        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrEmpty);
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public class Ensure_Argument_NotNullOrEmpty
     {
         Action act = () => Ensure.Argument.IsNotNullOrEmpty("");
         act.Should().Throw<ArgumentException>().And.ParamName.Should().BeNullOrEmpty();
-        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrEmpty);
+        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrEmpty);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class Ensure_Argument_NotNullOrEmpty
 
         Action act = () => Ensure.Argument.IsNotNullOrEmpty(obj.Value, nameof(TestObject1.Value));
         act.Should().Throw<ArgumentException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
-        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrEmpty);
+        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrEmpty);
     }
 
     [Fact]

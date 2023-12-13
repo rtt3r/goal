@@ -10,7 +10,7 @@ public class Ensure_NotNullOrWhiteSpace
     public void ThrowExceptionGivenNull()
     {
         Action act = () => Ensure.NotNullOrWhiteSpace(null);
-        act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]
@@ -24,14 +24,14 @@ public class Ensure_NotNullOrWhiteSpace
     public void ThrowExceptionGivenEmpty()
     {
         Action act = () => Ensure.NotNullOrWhiteSpace("");
-        act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]
     public void ThrowExceptionGivenWhiteSpace()
     {
         Action act = () => Ensure.NotNullOrWhiteSpace(" ");
-        act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<Exception>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]

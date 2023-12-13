@@ -40,7 +40,7 @@ public class Ensure_Argument_NotNullOrWhiteSpace
     {
         Action act = () => Ensure.Argument.IsNotNullOrWhiteSpace(null);
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().BeNull();
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]
@@ -50,7 +50,7 @@ public class Ensure_Argument_NotNullOrWhiteSpace
 
         Action act = () => Ensure.Argument.IsNotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value));
         act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
-        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<ArgumentNullException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]
@@ -68,7 +68,7 @@ public class Ensure_Argument_NotNullOrWhiteSpace
     {
         Action act = () => Ensure.Argument.IsNotNullOrWhiteSpace("");
         act.Should().Throw<ArgumentException>().And.ParamName.Should().BeNullOrEmpty();
-        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class Ensure_Argument_NotNullOrWhiteSpace
 
         Action act = () => Ensure.Argument.IsNotNullOrWhiteSpace(obj.Value, nameof(TestObject1.Value));
         act.Should().Throw<ArgumentException>().And.ParamName.Should().Be(nameof(TestObject1.Value));
-        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.StringCannotBeNullOrWhitespace);
+        act.Should().Throw<ArgumentException>().And.Message.Should().Contain(Messages.ValueProvidedCannotBeNullOrWhitespace);
     }
 
     [Fact]
