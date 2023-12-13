@@ -13,7 +13,7 @@ public abstract class UnitOfWork : IUnitOfWork
 
     protected UnitOfWork(DbContext context)
     {
-        ArgumentNullException.ThrowIfNull(context, nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
         this.context = context;
     }
 

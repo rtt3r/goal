@@ -27,7 +27,7 @@ public static class QueryableExtensions
 
     public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
-        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         IQueryable<T> queryableList = source;
 
@@ -44,7 +44,7 @@ public static class QueryableExtensions
 
     public static IPagedList<T> ToPagedList<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
-        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         return new PagedList<T>(
             source.Paginate(pageSearch).ToList(),

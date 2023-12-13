@@ -21,7 +21,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     protected Repository(DbContext context)
     {
-        ArgumentNullException.ThrowIfNull(context, nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
         Context = context;
     }
 
@@ -39,7 +39,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     public virtual IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch)
     {
-        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         return FindSpecific(specification)
             .ToPagedList(pageSearch);
@@ -75,7 +75,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
         IPageSearch pageSearch,
         CancellationToken cancellationToken = new CancellationToken())
     {
-        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         return await FindSpecific(specification)
             .ToPagedListAsync(pageSearch, cancellationToken);
@@ -105,55 +105,55 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     public virtual void Add(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Set<TEntity>().Add(entity);
     }
 
     public virtual void Add(IEnumerable<TEntity> entities)
     {
-        ArgumentNullException.ThrowIfNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         Context.Set<TEntity>().AddRange(entities);
     }
 
     public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = new CancellationToken())
     {
-        ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         await Context.Set<TEntity>().AddAsync(entity, cancellationToken);
     }
 
     public virtual async Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = new CancellationToken())
     {
-        ArgumentNullException.ThrowIfNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         await Context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
     }
 
     public virtual void Update(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Set<TEntity>().Update(entity);
     }
 
     public virtual void Update(IEnumerable<TEntity> entities)
     {
-        ArgumentNullException.ThrowIfNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         Context.Set<TEntity>().UpdateRange(entities);
     }
 
     public virtual void Remove(TEntity entity)
     {
-        ArgumentNullException.ThrowIfNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Set<TEntity>().Remove(entity);
     }
 
     public virtual void Remove(IEnumerable<TEntity> entities)
     {
-        ArgumentNullException.ThrowIfNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         Context.Set<TEntity>().RemoveRange(entities);
     }
 
     public virtual void Remove(ISpecification<TEntity> specification)
     {
-        ArgumentNullException.ThrowIfNull(specification, nameof(specification));
+        ArgumentNullException.ThrowIfNull(specification);
 
         var entities = Context
             .Set<TEntity>()
@@ -165,7 +165,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     private IQueryable<TEntity> FindSpecific(ISpecification<TEntity> specification)
     {
-        ArgumentNullException.ThrowIfNull(specification, nameof(specification));
+        ArgumentNullException.ThrowIfNull(specification);
         return Context.Set<TEntity>().Where(specification.SatisfiedBy());
     }
 

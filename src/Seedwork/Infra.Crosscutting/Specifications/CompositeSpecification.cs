@@ -7,8 +7,8 @@ public abstract class CompositeSpecification<TEntity> : Specification<TEntity>
 {
     protected CompositeSpecification(ISpecification<TEntity> leftSideSpecification, ISpecification<TEntity> rightSideSpecification)
     {
-        ArgumentNullException.ThrowIfNull(leftSideSpecification, nameof(leftSideSpecification));
-        ArgumentNullException.ThrowIfNull(rightSideSpecification, nameof(rightSideSpecification));
+        ArgumentNullException.ThrowIfNull(leftSideSpecification);
+        ArgumentNullException.ThrowIfNull(rightSideSpecification);
 
         LeftSideSpecification = leftSideSpecification;
         RightSideSpecification = rightSideSpecification;

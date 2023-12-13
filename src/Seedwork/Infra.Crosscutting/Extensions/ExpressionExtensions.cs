@@ -7,7 +7,7 @@ public static partial class ExtensionManager
 {
     public static string GetPropertyName<TSource, TProp>(this Expression<Func<TSource, TProp>> predicate)
     {
-        ArgumentNullException.ThrowIfNull(predicate, nameof(predicate));
+        ArgumentNullException.ThrowIfNull(predicate);
 
         if (predicate.Body is MemberExpression bodyMemberExpression)
             return bodyMemberExpression.Member.Name;

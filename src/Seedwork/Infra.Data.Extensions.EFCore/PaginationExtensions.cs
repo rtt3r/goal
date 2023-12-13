@@ -12,7 +12,7 @@ public static class PaginationExtensions
 {
     public static async Task<IPagedList<T>> ToPagedListAsync<T>(this IQueryable<T> source, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken())
     {
-        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         return new PagedList<T>(
             await source.Paginate(pageSearch).ToListAsync(cancellationToken),
