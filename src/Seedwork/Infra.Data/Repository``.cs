@@ -14,7 +14,6 @@ namespace Goal.Seedwork.Infra.Data;
 
 public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntity, TKey>
     where TEntity : class
-    where TKey : struct
 {
     private bool disposed;
 

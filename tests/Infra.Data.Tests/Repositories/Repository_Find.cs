@@ -180,7 +180,7 @@ public class Repository_Find
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid());
+        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid().ToString());
         var testRepository = new TestRepository(mockDbContext.Object);
         ICollection<Test> tests = testRepository.Query(spec);
 
@@ -200,7 +200,7 @@ public class Repository_Find
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid());
+        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid().ToString());
 
         var testRepository = new TestRepository(mockDbContext.Object);
         ICollection<Test> tests = await testRepository.QueryAsync(spec);

@@ -8,7 +8,6 @@ namespace Goal.Seedwork.Domain.Aggregates;
 
 public interface IRepository<TEntity, TKey> : IRepository
     where TEntity : class
-    where TKey : struct
 {
     TEntity? Load(TKey key);
 

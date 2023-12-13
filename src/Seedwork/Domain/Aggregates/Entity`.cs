@@ -3,9 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Goal.Seedwork.Domain.Aggregates;
 
 public abstract class Entity<TKey> : IEntity<TKey>
-    where TKey : struct
 {
-    public virtual TKey Id { get; protected set; } = default;
+    public virtual TKey Id { get; init; } = default!;
 
     public override bool Equals(object? obj)
     {
@@ -14,9 +13,14 @@ public abstract class Entity<TKey> : IEntity<TKey>
             return false;
         }
 
-        if (obj is IEntity<TKey> item)
+        if (ReferenceEquals(this, obj))
         {
-            return ReferenceEquals(this, obj) || item.Id.Equals(Id);
+            return true;
+        }
+
+        if (obj is IEntity<TKey> item && item.Id is not null)
+        {
+            return item.Id.Equals(Id);
         }
 
         return false;
@@ -26,7 +30,7 @@ public abstract class Entity<TKey> : IEntity<TKey>
     {
         unchecked
         {
-            return (GetType().GetHashCode() * 397) ^ Id.GetHashCode();
+            return (GetType().GetHashCode() * 397) ^ (Id?.GetHashCode() ?? 0);
         }
     }
 

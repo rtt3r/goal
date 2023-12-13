@@ -91,7 +91,7 @@ public class Repository_Remove
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        Guid id = mockedTests[2].Id;
+        string id = mockedTests[2].Id;
 
         ISpecification<Test> spec = new DirectSpecification<Test>(p => p.Id == id);
         var testRepository = new TestRepository(mockDbContext.Object);

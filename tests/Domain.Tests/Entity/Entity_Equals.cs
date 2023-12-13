@@ -20,7 +20,7 @@ public class Entity_Equals
     public void Equals_NotEntity_ReturnsFalse()
     {
         //Given
-        IEntity entity = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+        IEntity entity = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
         object obj = new();
 
         //When
@@ -34,7 +34,7 @@ public class Entity_Equals
     public void Equals_IntransientSameReference_ReturnsTrue()
     {
         //Given
-        IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+        IEntity entity1 = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
         IEntity entity2 = entity1;
 
         //When
@@ -49,7 +49,7 @@ public class Entity_Equals
     {
         //Given
         IEntity entity1 = new EntityTest();
-        IEntity entity2 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+        IEntity entity2 = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
 
         //When
         bool areEquals = entity1.Equals(entity2);
@@ -62,7 +62,7 @@ public class Entity_Equals
     public void Equals_RightTransient_ReturnsFalse()
     {
         //Given
-        IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+        IEntity entity1 = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
         IEntity entity2 = new EntityTest();
 
         //When
@@ -76,8 +76,8 @@ public class Entity_Equals
     public void Equals_BothIntransient_ReturnsTrue()
     {
         //Given
-        IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
-        IEntity entity2 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
+        IEntity entity1 = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
+        IEntity entity2 = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
 
         //When
         bool areEquals = entity1.Equals(entity2);
@@ -90,8 +90,8 @@ public class Entity_Equals
     public void Equals_BothIntransient_ReturnsFalse()
     {
         //Given
-        IEntity entity1 = new EntityTest(Guid.Parse("8309d707-91b4-4494-b3cc-dc5f349fa816"));
-        IEntity entity2 = new EntityTest(Guid.Parse("09927327-c55b-4c17-8171-ca32131f4357"));
+        IEntity entity1 = new EntityTest("8309d707-91b4-4494-b3cc-dc5f349fa816");
+        IEntity entity2 = new EntityTest("09927327-c55b-4c17-8171-ca32131f4357");
 
         //When
         bool areEquals = entity1.Equals(entity2);

@@ -30,10 +30,10 @@ public static class MoqExtensions
         mock.ConfigureDbSetCalls();
 
         mock.Setup(m => m.Find(It.IsAny<object[]>()))
-            .Returns<object[]>(key => data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString()!)));
+            .Returns<object[]>(key => data.FirstOrDefault(d => d.Id == key[0].ToString()));
 
         mock.Setup(m => m.FindAsync(It.IsAny<object[]>()))
-            .Returns<object[]>(async key => await Task.FromResult(data.FirstOrDefault(d => d.Id == Guid.Parse(key[0].ToString()!))));
+            .Returns<object[]>(async key => await Task.FromResult(data.FirstOrDefault(d => d.Id == key[0].ToString())));
 
         return mock;
     }
