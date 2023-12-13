@@ -12,12 +12,8 @@ public static partial class ExtensionManager
         if (predicate.Body is MemberExpression bodyMemberExpression)
             return bodyMemberExpression.Member.Name;
 
-        if (predicate.Body is UnaryExpression unaryExpression)
-        {
-            if (unaryExpression.Operand is MemberExpression operandMemberExpression)
-                return operandMemberExpression.Member.Name;
-        }
-
-        throw new ArgumentException($"Expression not supported.", nameof(predicate));
+        return predicate.Body is UnaryExpression unaryExpression && unaryExpression.Operand is MemberExpression operandMemberExpression
+            ? operandMemberExpression.Member.Name
+            : throw new ArgumentException($"Expression not supported.", nameof(predicate));
     }
 }
