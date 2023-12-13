@@ -75,8 +75,7 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
 
     private static Audit? CreateAudit(DbContext? context)
     {
-        if (context is null)
-            throw new ArgumentNullException(nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
 
         context?.ChangeTracker.DetectChanges();
         var audit = new Audit { StartTime = DateTimeOffset.UtcNow };

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using GoalQueryable = Goal.Seedwork.Infra.Crosscutting.Collections.Queryable;
@@ -26,7 +27,7 @@ public static class QueryableExtensions
 
     public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
-        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
 
         IQueryable<T> queryableList = source;
 
@@ -43,7 +44,7 @@ public static class QueryableExtensions
 
     public static IPagedList<T> ToPagedList<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
-        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch, nameof(pageSearch));
 
         return new PagedList<T>(
             source.Paginate(pageSearch).ToList(),

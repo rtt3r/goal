@@ -1,3 +1,5 @@
+using System;
+
 namespace Goal.Seedwork.Infra.Crosscutting.Specifications;
 
 public abstract class CompositeSpecification<TEntity> : Specification<TEntity>
@@ -5,8 +7,8 @@ public abstract class CompositeSpecification<TEntity> : Specification<TEntity>
 {
     protected CompositeSpecification(ISpecification<TEntity> leftSideSpecification, ISpecification<TEntity> rightSideSpecification)
     {
-        Ensure.Argument.IsNotNull(leftSideSpecification, nameof(leftSideSpecification));
-        Ensure.Argument.IsNotNull(rightSideSpecification, nameof(rightSideSpecification));
+        ArgumentNullException.ThrowIfNull(leftSideSpecification, nameof(leftSideSpecification));
+        ArgumentNullException.ThrowIfNull(rightSideSpecification, nameof(rightSideSpecification));
 
         LeftSideSpecification = leftSideSpecification;
         RightSideSpecification = rightSideSpecification;

@@ -47,46 +47,4 @@ public class Ensure_That
         Action act = () => Ensure.That(true, "Test");
         act.Should().NotThrow<Exception>();
     }
-
-    [Fact]
-    public void ThrowExceptionGivenFalsePredicate()
-    {
-        Action act = () => Ensure.That(() => false);
-        act.Should().Throw<Exception>().And.Message.Should().Be("The expected condition was not exceeded");
-    }
-
-    [Fact]
-    public void ThrowExceptionGivenFalsePredicateAndNotEmptyMessage()
-    {
-        Action act = () => Ensure.That(() => false, "Test");
-        act.Should().Throw<Exception>().WithMessage("Test");
-    }
-
-    [Fact]
-    public void ThrowApplicationExceptionGivenFalsePredicate()
-    {
-        Action act = () => Ensure.That<ApplicationException>(() => false);
-        act.Should().Throw<ApplicationException>().And.Message.Should().Be("The expected condition was not exceeded");
-    }
-
-    [Fact]
-    public void ThrowApplicationExceptionGivenFalsePredicateAndNotEmptyMessage()
-    {
-        Action act = () => Ensure.That<ApplicationException>(() => false, "Test");
-        act.Should().Throw<ApplicationException>().WithMessage("Test");
-    }
-
-    [Fact]
-    public void EnsureGivenTruePredicate()
-    {
-        Action act = () => Ensure.That(() => true);
-        act.Should().NotThrow<Exception>();
-    }
-
-    [Fact]
-    public void EnsureGivenTruePredicateAndNotEmptyMessage()
-    {
-        Action act = () => Ensure.That(() => true, "Test");
-        act.Should().NotThrow<Exception>();
-    }
 }
