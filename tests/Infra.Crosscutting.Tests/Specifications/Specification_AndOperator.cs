@@ -54,7 +54,7 @@ public class Specification_AndOperator
 
         Func<AndSpecification<TestObject1>?> act = () => (spec1 && spec2) as AndSpecification<TestObject1>;
 
-        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'rightSideSpecification')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Value cannot be null. (Parameter 'rightSideSpecification')");
     }
 
     [Fact]
@@ -65,6 +65,6 @@ public class Specification_AndOperator
 
         Func<AndSpecification<TestObject1>?> act = () => (spec1 && spec2) as AndSpecification<TestObject1>;
 
-        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'leftSideSpecification')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Value cannot be null. (Parameter 'leftSideSpecification')");
     }
 }
