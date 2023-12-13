@@ -8,12 +8,12 @@ public class Test : Entity
     public bool Active { get; set; }
     public int TId { get; private set; }
 
-    public Test(Guid id, int tId)
+    public Test(string id, int tId)
         : this(id, tId, true)
     {
     }
 
-    public Test(Guid id, int tId, bool active)
+    public Test(string id, int tId, bool active)
         : base()
     {
         Id = id;
@@ -22,11 +22,9 @@ public class Test : Entity
     }
 
     public Test(int tId)
-        : this(Guid.NewGuid(), tId)
+        : this(Guid.NewGuid().ToString(), tId)
     {
     }
 
     public void Deactivate() => Active = false;
-
-    public void SetId(Guid id) => Id = id;
 }

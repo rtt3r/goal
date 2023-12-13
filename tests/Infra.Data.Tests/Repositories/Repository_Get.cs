@@ -28,7 +28,7 @@ public class Repository_Get
 
         var testRepository = new TestRepository(mockDbContext.Object);
 
-        Guid id = tests[2].Id;
+        string id = tests[2].Id;
 
         Test? test = testRepository.Load(id);
 
@@ -51,7 +51,7 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = testRepository.Load(Guid.NewGuid());
+        Test? test = testRepository.Load(Guid.NewGuid().ToString());
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().BeNull();
@@ -71,7 +71,7 @@ public class Repository_Get
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        Guid id = tests[2].Id;
+        string id = tests[2].Id;
 
         var testRepository = new TestRepository(mockDbContext.Object);
         Test? test = await testRepository.LoadAsync(id);
@@ -94,7 +94,7 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = await testRepository.LoadAsync(Guid.NewGuid());
+        Test? test = await testRepository.LoadAsync(Guid.NewGuid().ToString());
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
         test.Should().BeNull();

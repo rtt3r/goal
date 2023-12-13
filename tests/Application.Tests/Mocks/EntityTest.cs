@@ -3,7 +3,7 @@ using Goal.Seedwork.Domain.Aggregates;
 
 namespace Goal.Seedwork.Application.Tests.Mocks;
 
-internal class EntityTest : Entity
+internal class EntityTest : Entity<Guid>
 {
     public EntityTest()
         : base()
@@ -15,6 +15,4 @@ internal class EntityTest : Entity
     {
         Id = id;
     }
-
-    public void SetId(Guid id) => Id = id;
 }
