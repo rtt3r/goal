@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Infra.Data</AssemblyName>
-		<VersionPrefix>0.4.1</VersionPrefix>
-		<AssemblyVersion>0.4.1.0</AssemblyVersion>
+		<VersionPrefix>0.4.2</VersionPrefix>
+		<AssemblyVersion>0.4.2.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Infra.Data</PackageId>
