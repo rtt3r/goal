@@ -32,9 +32,8 @@ public class ValueObject : IEquatable<ValueObject>
 
         PropertyInfo[] properties = GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
 
-        return properties.Any()
-            ? properties.All(p => Equals(p.GetValue(this, null), p.GetValue(obj, null)))
-            : true;
+        return properties.Length == 0
+            || properties.All(p => Equals(p.GetValue(this, null), p.GetValue(obj, null)));
     }
 
     public override int GetHashCode()
@@ -45,7 +44,7 @@ public class ValueObject : IEquatable<ValueObject>
 
         PropertyInfo[] properties = GetType().GetProperties();
 
-        if (properties.Any())
+        if (properties.Length > 0)
         {
             foreach (PropertyInfo item in properties)
             {

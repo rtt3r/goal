@@ -1,9 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Goal.Seedwork.Domain.Aggregates;
-using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
@@ -21,7 +21,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     protected Repository(DbContext context)
     {
-        Ensure.Argument.IsNotNull(context, nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
         Context = context;
     }
 
@@ -39,7 +39,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     public virtual IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch)
     {
-        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         return FindSpecific(specification)
             .ToPagedList(pageSearch);
@@ -75,7 +75,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
         IPageSearch pageSearch,
         CancellationToken cancellationToken = new CancellationToken())
     {
-        Ensure.Argument.IsNotNull(pageSearch, nameof(pageSearch));
+        ArgumentNullException.ThrowIfNull(pageSearch);
 
         return await FindSpecific(specification)
             .ToPagedListAsync(pageSearch, cancellationToken);
@@ -105,55 +105,55 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     public virtual void Add(TEntity entity)
     {
-        Ensure.Argument.IsNotNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Set<TEntity>().Add(entity);
     }
 
     public virtual void Add(IEnumerable<TEntity> entities)
     {
-        Ensure.Argument.IsNotNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         Context.Set<TEntity>().AddRange(entities);
     }
 
     public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = new CancellationToken())
     {
-        Ensure.Argument.IsNotNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         await Context.Set<TEntity>().AddAsync(entity, cancellationToken);
     }
 
     public virtual async Task AddAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = new CancellationToken())
     {
-        Ensure.Argument.IsNotNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         await Context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
     }
 
     public virtual void Update(TEntity entity)
     {
-        Ensure.Argument.IsNotNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Set<TEntity>().Update(entity);
     }
 
     public virtual void Update(IEnumerable<TEntity> entities)
     {
-        Ensure.Argument.IsNotNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         Context.Set<TEntity>().UpdateRange(entities);
     }
 
     public virtual void Remove(TEntity entity)
     {
-        Ensure.Argument.IsNotNull(entity, nameof(entity));
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Set<TEntity>().Remove(entity);
     }
 
     public virtual void Remove(IEnumerable<TEntity> entities)
     {
-        Ensure.Argument.IsNotNull(entities, nameof(entities));
+        ArgumentNullException.ThrowIfNull(entities);
         Context.Set<TEntity>().RemoveRange(entities);
     }
 
     public virtual void Remove(ISpecification<TEntity> specification)
     {
-        Ensure.Argument.IsNotNull(specification, nameof(specification));
+        ArgumentNullException.ThrowIfNull(specification);
 
         var entities = Context
             .Set<TEntity>()
@@ -165,7 +165,7 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
 
     private IQueryable<TEntity> FindSpecific(ISpecification<TEntity> specification)
     {
-        Ensure.Argument.IsNotNull(specification, nameof(specification));
+        ArgumentNullException.ThrowIfNull(specification);
         return Context.Set<TEntity>().Where(specification.SatisfiedBy());
     }
 

@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "aritters",
+        "projectKey": "ritter-ti_goal"
+    }
+}

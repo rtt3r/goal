@@ -17,7 +17,7 @@ public class UnitOfWork_Constructor
         // Act and Assert
         FluentActions.Invoking(() => new MockUnitOfWork(null!))
             .Should().Throw<ArgumentNullException>()
-            .WithMessage("Object value cannot be null (Parameter 'context')");
+            .WithMessage("Value cannot be null. (Parameter 'context')");
     }
 
     [Fact]

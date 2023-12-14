@@ -1,6 +1,4 @@
-using System;
 using FluentAssertions;
-using Goal.Seedwork.Domain.Tests.Mocks;
 using Xunit;
 
 namespace Goal.Seedwork.Domain.Tests.Entity;

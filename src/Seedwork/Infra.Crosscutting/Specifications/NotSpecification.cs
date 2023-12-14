@@ -11,7 +11,7 @@ public sealed class NotSpecification<TEntity> : Specification<TEntity>
 
     public NotSpecification(ISpecification<TEntity> originalSpecification)
     {
-        Ensure.Argument.IsNotNull(originalSpecification, nameof(originalSpecification));
+        ArgumentNullException.ThrowIfNull(originalSpecification);
         originalCriteria = originalSpecification.SatisfiedBy();
     }
 

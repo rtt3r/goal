@@ -10,8 +10,8 @@ public static class EnumerableExtensions
 {
     public static IEnumerable ForEach(this IEnumerable source, Action<object> action)
     {
-        Ensure.Argument.IsNotNull(source, nameof(source));
-        Ensure.Argument.IsNotNull(action, nameof(action));
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(action);
 
         foreach (object item in source)
         {
@@ -23,8 +23,8 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> ForEach<T>(this IEnumerable<T> source, Action<T> action)
     {
-        Ensure.Argument.IsNotNull(source, nameof(source));
-        Ensure.Argument.IsNotNull(action, nameof(action));
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(action);
 
         foreach (T element in source)
         {

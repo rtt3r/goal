@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Goal.Seedwork.Domain;
-using Goal.Seedwork.Infra.Crosscutting;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Seedwork.Infra.Data;
@@ -14,7 +13,7 @@ public abstract class UnitOfWork : IUnitOfWork
 
     protected UnitOfWork(DbContext context)
     {
-        Ensure.Argument.IsNotNull(context, nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
         this.context = context;
     }
 

@@ -1,4 +1,3 @@
-using System;
 using Goal.Seedwork.Domain.Aggregates;
 using Microsoft.EntityFrameworkCore;
 

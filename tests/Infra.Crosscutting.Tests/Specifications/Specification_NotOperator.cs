@@ -37,6 +37,6 @@ public class Specification_NotOperator
 
         Func<Specification<TestObject1>> act = () => !spec2;
 
-        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'originalSpecification')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Value cannot be null. (Parameter 'originalSpecification')");
     }
 }

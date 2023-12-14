@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Goal.Seedwork.Infra.Crosscutting;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +11,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddTypeAdapterFactory(this IServiceCollection services, ITypeAdapterFactory typeAdapterFactory)
     {
-        Ensure.Argument.IsNotNull(typeAdapterFactory, nameof(typeAdapterFactory));
+        ArgumentNullException.ThrowIfNull(typeAdapterFactory);
 
         services.AddSingleton(typeof(ITypeAdapterFactory), typeAdapterFactory);
         services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>()!.Create());
@@ -31,7 +30,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddNotificationHandler(this IServiceCollection services, IDefaultNotificationHandler notificationHandler)
     {
-        Ensure.Argument.IsNotNull(notificationHandler, nameof(notificationHandler));
+        ArgumentNullException.ThrowIfNull(notificationHandler);
 
         services.AddScoped(typeof(IDefaultNotificationHandler), serviceProvider => notificationHandler);
         return services;
@@ -60,20 +59,20 @@ public static class ServiceCollectionExtensions
     public static void RegisterAllTypesOf<TService>(this IServiceCollection services, Assembly assembly, ServiceLifetime lifetime = ServiceLifetime.Scoped)
         where TService : class
     {
-        Ensure.Argument.IsNotNull(assembly, nameof(assembly));
+        ArgumentNullException.ThrowIfNull(assembly);
         services.RegisterAllTypes(typeof(TService), assembly, lifetime);
     }
 
     public static void RegisterAllTypes(this IServiceCollection services, Type serviceType, ServiceLifetime lifetime = ServiceLifetime.Scoped)
     {
-        Ensure.Argument.IsNotNull(serviceType, nameof(serviceType));
+        ArgumentNullException.ThrowIfNull(serviceType);
         services.RegisterAllTypes(serviceType, serviceType.Assembly, lifetime);
     }
 
     public static void RegisterAllTypes(this IServiceCollection services, Type serviceType, Assembly assembly, ServiceLifetime lifetime = ServiceLifetime.Scoped)
     {
-        Ensure.Argument.IsNotNull(serviceType, nameof(serviceType));
-        Ensure.Argument.IsNotNull(assembly, nameof(assembly));
+        ArgumentNullException.ThrowIfNull(serviceType);
+        ArgumentNullException.ThrowIfNull(assembly);
 
         var types = assembly.GetTypes()
            .Where(

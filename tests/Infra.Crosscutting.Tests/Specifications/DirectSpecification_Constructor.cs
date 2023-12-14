@@ -27,6 +27,6 @@ public class DirectSpecification_Constructor
 
         Action act = () => spec1 = new DirectSpecification<TestObject1>(null!);
 
-        act.Should().Throw<ArgumentNullException>().WithMessage("Object value cannot be null (Parameter 'matchingCriteria')");
+        act.Should().Throw<ArgumentNullException>().WithMessage("Value cannot be null. (Parameter 'matchingCriteria')");
     }
 }

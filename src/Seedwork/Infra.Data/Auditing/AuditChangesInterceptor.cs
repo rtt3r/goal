@@ -31,7 +31,7 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
         DbContextEventData eventData,
         InterceptionResult<int> result)
     {
-        _audit = CreateAudit(eventData.Context);
+        _audit = CreateAudit(eventData.Context!);
         return result;
     }
 
@@ -73,12 +73,11 @@ public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditCh
 
     protected abstract void SaveAuditChanges(Audit audit);
 
-    private static Audit? CreateAudit(DbContext? context)
+    private static Audit CreateAudit(DbContext context)
     {
-        if (context is null)
-            throw new ArgumentNullException(nameof(context));
+        ArgumentNullException.ThrowIfNull(context);
 
-        context?.ChangeTracker.DetectChanges();
+        context.ChangeTracker.DetectChanges();
         var audit = new Audit { StartTime = DateTimeOffset.UtcNow };
 
         foreach (EntityEntry entry in context!.ChangeTracker
