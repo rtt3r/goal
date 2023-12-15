@@ -31,7 +31,7 @@ public record CommandResult(bool IsSucceeded, IEnumerable<Notification> Notifica
     public static ICommandResult Failure(IEnumerable<Notification> notifications)
         => Failure(notifications.ToArray());
 
-    public static ICommandResult<TData> Failure<TData>(TData data, IEnumerable<Notification> notifications)
+    public static ICommandResult<TData> Failure<TData>(TData? data, IEnumerable<Notification> notifications)
     {
         return notifications.Any(n => n.Type != NotificationType.Information)
             ? new CommandResult<TData>(false, data, notifications)
