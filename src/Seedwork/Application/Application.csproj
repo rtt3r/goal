@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Seedwork.Application</RootNamespace>
 		<AssemblyName>Goal.Seedwork.Application</AssemblyName>
-		<VersionPrefix>0.4.8</VersionPrefix>
-		<AssemblyVersion>0.4.8.0</AssemblyVersion>
+		<VersionPrefix>0.4.9</VersionPrefix>
+		<AssemblyVersion>0.4.9.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Seedwork.Application</PackageId>
