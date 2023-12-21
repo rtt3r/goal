@@ -10,7 +10,7 @@ variables:
 
 stages:
 - stage: 'Build'
-  displayName: 'Build stage'
+  displayName: 'Build'
   jobs: 
   - job: 'Build'
     displayName: 'Build job'
@@ -34,7 +34,7 @@ stages:
         arguments: '--configuration $(buildConfiguration)'
 
 - stage: 'CodeAnalisys'
-  displayName: 'Code analisys stage'
+  displayName: 'Code analisys'
   jobs: 
   - job: 'CodeAnalisys'
     displayName: 'Code analisys job'
@@ -79,7 +79,7 @@ stages:
         summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
 
 - stage: 'Deploy'
-  displayName: 'Deploy stage'
+  displayName: 'Deploy'
   jobs:
   - job: 'Deploy'
     displayName: 'Deploy job'
