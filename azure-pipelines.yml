@@ -33,7 +33,7 @@ stages:
         projects: 'Goal.sln'
         arguments: '--configuration $(buildConfiguration)'
 
-  - job: 'Code Analisys'
+  - job: 'CodeAnalisys'
     displayName: 'Code analisys job'
     pool:
       vmImage: 'ubuntu-latest'
