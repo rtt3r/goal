@@ -33,6 +33,9 @@ stages:
         projects: 'Goal.sln'
         arguments: '--configuration $(buildConfiguration)'
 
+- stage: 'CodeAnalisys'
+  displayName: 'Code analisys stage'
+  jobs: 
   - job: 'CodeAnalisys'
     displayName: 'Code analisys job'
     pool:
@@ -75,6 +78,9 @@ stages:
         codeCoverageTool: 'Cobertura'
         summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
 
+- stage: 'Deploy'
+  displayName: 'Deploy stage'
+  jobs:
   - job: 'Deploy'
     displayName: 'Deploy job'
     pool:
