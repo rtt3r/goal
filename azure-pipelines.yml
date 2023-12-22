@@ -72,8 +72,10 @@ stages:
         publishTestResults: true
 
     - task: SonarCloudAnalyze@1
+      displayName: 'SonarCloud analyze'
 
     - task: SonarCloudPublish@1
+      displayName: 'SonarCloud publish'
       inputs:
         pollingTimeoutSec: '300'
 
