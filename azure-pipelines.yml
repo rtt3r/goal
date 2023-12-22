@@ -102,10 +102,11 @@ stages:
       inputs:
         command: 'pack'
         packagesToPack: '**/*.csproj'
-
-    - task: PublishBuildArtifacts@1
-      displayName: Publish Artifacts
+    
+    - task: DotNetCoreCLI@2
+      displayName: Push Goal Packages
       inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+        command: 'push'
+        packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+        nuGetFeedType: 'internal'
+        publishVstsFeed: 'd3b22fff-b5da-4bee-b8b3-82c0594da490'
