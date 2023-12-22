@@ -72,8 +72,22 @@ stages:
         arguments: '--collect "Code Coverage"'
         publishTestResults: true
 
+    - task: PublishCodeCoverageResults@1
+      displayName: 'Publish code coverage report'
+      inputs:
+        codeCoverageTool: 'Cobertura'
+        summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
+
     - task: SonarCloudAnalyze@1
       displayName: 'SonarCloud analyze'
+
+    - task: SonarCloudPublish@1
+      displayName: 'SonarCloud publish'
+      inputs:
+        pollingTimeoutSec: '300'
+
+    - publish: '$(Build.ArtifactStagingDirectory)'
+      artifact: drop
 
 - stage: 'Deploy'
   displayName: 'Deploy'
@@ -102,24 +116,3 @@ stages:
         packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
         nuGetFeedType: 'internal'
         publishVstsFeed: 'd3b22fff-b5da-4bee-b8b3-82c0594da490'
-
-- stage: 'PublishResults'
-  displayName: 'Publish results'
-
-  jobs:
-  - job: 'PublishResults'
-    displayName: 'Publish results'
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    steps:
-    - task: PublishCodeCoverageResults@1
-      displayName: 'Publish code coverage report'
-      inputs:
-        codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
-
-    - task: SonarCloudPublish@1
-      displayName: 'SonarCloud publish'
-      inputs:
-        pollingTimeoutSec: '300'
