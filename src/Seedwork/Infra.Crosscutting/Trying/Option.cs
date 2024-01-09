@@ -27,7 +27,8 @@ public static class Option
     public static Option<Func<TB, TResult>> Map<TA, TB, TResult>(this Option<TA> @this, Func<TA, TB, TResult> func)
         => @this.Map(func.Curry());
 
-    public static Option<TR> Bind<T, TR>(this Option<T> @this, Func<T, Option<TR>> bindfunc) => !@this.IsSome ? (Option<TR>)Option.None() : bindfunc(@this.Value);
+    public static Option<TR> Bind<T, TR>(this Option<T> @this, Func<T, Option<TR>> bindfunc)
+        => !@this.IsSome ? (Option<TR>)None() : bindfunc(@this.Value);
 
     public static T GetOrElse<T>(this Option<T> @this, Func<T> fallback)
         => @this.Match((T value) => value, fallback);
