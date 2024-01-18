@@ -1,7 +1,7 @@
 using System;
-using Goal.Domain.Abstractions.Aggregates;
+using Goal.Domain.Aggregates;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
+namespace Goal.Infra.Data.Tests.Mocks;
 
 public class Test : Entity
 {

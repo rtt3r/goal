@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 
-namespace Goal.Seedwork.Infra.Data.Query;
+namespace Goal.Infra.Data.Query;
 
 public abstract class QueryRepository<TEntity, TKey> : QueryRepository, IQueryRepository<TEntity, TKey>
     where TEntity : class

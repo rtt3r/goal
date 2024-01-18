@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Data.Auditing;
+using Goal.Infra.Data.Auditing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Auditing;
+namespace Goal.Infra.Data.Tests.Auditing;
 
 public class AuditChangesInterceptor_SaveAuditChanges
 {

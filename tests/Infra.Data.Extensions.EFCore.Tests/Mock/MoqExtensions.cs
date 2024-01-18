@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading;
 using Moq;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.EFCore.Tests.Mock;
+namespace Goal.Infra.Data.Extensions.EFCore.Tests.Mock;
 
 public static class MoqExtensions
 {

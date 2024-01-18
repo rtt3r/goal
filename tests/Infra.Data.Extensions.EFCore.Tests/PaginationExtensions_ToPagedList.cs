@@ -3,11 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Data.Extensions.EFCore.Tests.Mock;
+using Goal.Infra.Data.Extensions.EFCore.Tests.Mock;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.EFCore.Tests;
+namespace Goal.Infra.Data.Extensions.EFCore.Tests;
 
 public class PaginationExtensions_ToPagedList
 {

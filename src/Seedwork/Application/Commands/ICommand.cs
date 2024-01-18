@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Goal.Application.Abstractions.Commands;
+namespace Goal.Application.Commands;
 
 public interface ICommand : IBaseRequest
 {

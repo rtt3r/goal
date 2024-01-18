@@ -1,4 +1,4 @@
-namespace Goal.Domain.Abstractions.Events;
+namespace Goal.Domain.Events;
 
 public interface IEventStore
 {

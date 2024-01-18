@@ -1,4 +1,4 @@
-namespace Goal.Domain.Abstractions.Services;
+namespace Goal.Domain.Services;
 
 public interface IDomainService
 {

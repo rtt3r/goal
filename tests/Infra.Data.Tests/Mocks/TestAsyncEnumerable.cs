@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
+namespace Goal.Infra.Data.Tests.Mocks;
 
 public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>, IAsyncQueryProvider
 {

@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Goal.Seedwork.Infra.Data.Query;
+using Goal.Infra.Data.Query;
 using Xunit;
 
 namespace Goal.Seedwork.Infra.Http.Tests.Repositories;

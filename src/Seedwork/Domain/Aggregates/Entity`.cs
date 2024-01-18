@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Goal.Domain.Abstractions.Aggregates;
+namespace Goal.Domain.Aggregates;
 
 public abstract class Entity<TKey> : IEntity<TKey>
 {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests.Mocks;
+namespace Goal.Infra.Data.Extensions.RavenDB.Tests.Mocks;
 
 [Display]
 internal class TestObject1

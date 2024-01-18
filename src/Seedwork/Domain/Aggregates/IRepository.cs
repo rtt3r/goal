@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Domain.Abstractions.Aggregates;
+namespace Goal.Domain.Aggregates;
 
 public interface IRepository : IDisposable
 {

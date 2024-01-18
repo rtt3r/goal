@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
+namespace Goal.Infra.Data.Tests.Mocks;
 
 internal class TestRepository(DbContext context) : Repository<Test>(context)
 {

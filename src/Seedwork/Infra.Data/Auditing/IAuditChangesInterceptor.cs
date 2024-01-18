@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace Goal.Seedwork.Infra.Data.Auditing;
+namespace Goal.Infra.Data.Auditing;
 
 public interface IAuditChangesInterceptor : ISaveChangesInterceptor
 {

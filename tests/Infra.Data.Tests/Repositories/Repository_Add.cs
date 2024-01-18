@@ -5,12 +5,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Data.Tests.Extensions;
-using Goal.Seedwork.Infra.Data.Tests.Mocks;
+using Goal.Infra.Data.Tests.Extensions;
+using Goal.Infra.Data.Tests.Mocks;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Repositories;
+namespace Goal.Infra.Data.Tests.Repositories;
 
 public class Repository_Add
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.EFCore.Tests.Mock;
+namespace Goal.Infra.Data.Extensions.EFCore.Tests.Mock;
 
 public class TestAsyncEnumerator<T>(IEnumerator<T> enumerator) : IAsyncEnumerator<T>
 {

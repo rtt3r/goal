@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Data.Auditing;
+namespace Goal.Infra.Data.Auditing;
 
 public class AuditEntry : AuditEntry<string>
 {

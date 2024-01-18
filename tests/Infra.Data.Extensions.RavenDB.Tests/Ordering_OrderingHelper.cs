@@ -7,7 +7,7 @@ using Raven.Client.Documents.Session;
 using Raven.TestDriver;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests;
+namespace Goal.Infra.Data.Extensions.RavenDB.Tests;
 
 public class Ordering_OrderingHelper : RavenTestDriver
 {

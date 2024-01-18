@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Goal.Seedwork.Infra.Data.Auditing;
+namespace Goal.Infra.Data.Auditing;
 
 public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditChangesInterceptor
 {

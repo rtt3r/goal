@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Domain.Abstractions.Aggregates;
-using Goal.Seedwork.Infra.Data.Tests.Mocks;
+using Goal.Domain.Aggregates;
+using Goal.Infra.Data.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Extensions;
+namespace Goal.Infra.Data.Tests.Extensions;
 
 public static class MoqExtensions
 {

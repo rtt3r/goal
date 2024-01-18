@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 
-namespace Goal.Application.Abstractions.Commands;
+namespace Goal.Application.Commands;
 
 public interface ICommandResult
 {

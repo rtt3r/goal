@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests.Mocks;
+namespace Goal.Infra.Data.Extensions.RavenDB.Tests.Mocks;
 
 internal class TestObject2
 {

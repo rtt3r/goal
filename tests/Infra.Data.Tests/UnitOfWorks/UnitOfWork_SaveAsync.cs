@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.UnitOfWorks;
+namespace Goal.Infra.Data.Tests.UnitOfWorks;
 
 public class UnitOfWork_SaveAsync
 {

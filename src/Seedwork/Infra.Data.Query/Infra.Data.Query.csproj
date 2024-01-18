@@ -3,13 +3,13 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Seedwork.Infra.Data.Query</RootNamespace>
-		<AssemblyName>Goal.Seedwork.Infra.Data.Query</AssemblyName>
+		<RootNamespace>Goal.Infra.Data.Query</RootNamespace>
+		<AssemblyName>Goal.Infra.Data.Query</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Seedwork.Infra.Data.Query</PackageId>
+		<PackageId>Goal.Infra.Data.Query</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>

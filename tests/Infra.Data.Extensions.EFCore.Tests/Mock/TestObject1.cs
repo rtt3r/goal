@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.EFCore.Tests.Mock;
+namespace Goal.Infra.Data.Extensions.EFCore.Tests.Mock;
 
 [Display]
 public class TestObject1

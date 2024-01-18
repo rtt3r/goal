@@ -2,7 +2,7 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Raven.Client.Documents.Linq;
 using GoalQueryable = Goal.Seedwork.Infra.Crosscutting.Collections.Queryable;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB;
+namespace Goal.Infra.Data.Extensions.RavenDB;
 
 public static class OrderingExtensions
 {

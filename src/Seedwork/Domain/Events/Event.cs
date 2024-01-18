@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Domain.Abstractions.Events;
+namespace Goal.Domain.Events;
 
 public abstract record Event(string AggregateId, string EventType) : IEvent
 {

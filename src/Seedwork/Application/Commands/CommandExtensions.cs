@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace Goal.Application.Abstractions.Commands;
+namespace Goal.Application.Commands;
 
 public static class CommandExtensions
 {

@@ -4,7 +4,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Repositories;
+namespace Goal.Infra.Data.Tests.Repositories;
 
 public class Repository_Dispose
 {

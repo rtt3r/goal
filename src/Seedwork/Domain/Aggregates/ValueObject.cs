@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Goal.Domain.Abstractions.Aggregates;
+namespace Goal.Domain.Aggregates;
 
 public class ValueObject : IEquatable<ValueObject>
 {

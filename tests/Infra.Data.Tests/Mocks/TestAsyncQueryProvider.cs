@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
+namespace Goal.Infra.Data.Tests.Mocks;
 
 internal class TestAsyncQueryProvider<TEntity> : IAsyncQueryProvider
 {

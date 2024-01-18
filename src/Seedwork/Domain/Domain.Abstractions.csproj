@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Domain.Abstractions</RootNamespace>
+		<RootNamespace>Goal.Domain</RootNamespace>
 		<AssemblyName>Goal.Domain.Abstractions</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>

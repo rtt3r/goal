@@ -3,13 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests.Mocks;
+using Goal.Infra.Data.Extensions.RavenDB.Tests.Mocks;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
 using Raven.TestDriver;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Extensions.RavenDB.Tests;
+namespace Goal.Infra.Data.Extensions.RavenDB.Tests;
 
 public class Pagination_ToPagedListAsync : RavenTestDriver
 {

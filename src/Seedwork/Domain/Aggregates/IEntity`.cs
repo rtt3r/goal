@@ -1,4 +1,4 @@
-namespace Goal.Domain.Abstractions.Aggregates;
+namespace Goal.Domain.Aggregates;
 
 public interface IEntity<out TKey>
 {

@@ -1,4 +1,4 @@
-namespace Goal.Application.Abstractions.Services;
+namespace Goal.Application.Services;
 
 public interface IAppService
 {

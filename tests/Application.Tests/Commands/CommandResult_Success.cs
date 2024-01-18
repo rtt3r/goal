@@ -1,6 +1,6 @@
 using System;
 using FluentAssertions;
-using Goal.Application.Abstractions.Commands;
+using Goal.Application.Commands;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 using Xunit;
 

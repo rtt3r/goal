@@ -1,4 +1,4 @@
-﻿namespace Goal.Seedwork.Infra.Data.Auditing;
+﻿namespace Goal.Infra.Data.Auditing;
 
 public enum AuditType
 {

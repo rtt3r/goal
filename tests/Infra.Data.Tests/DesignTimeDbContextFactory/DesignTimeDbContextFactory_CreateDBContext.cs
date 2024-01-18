@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.DesignTimeDbContextFactory;
+namespace Goal.Infra.Data.Tests.DesignTimeDbContextFactory;
 
 public class DesignTimeDbContextFactory_CreateDBContext
 {

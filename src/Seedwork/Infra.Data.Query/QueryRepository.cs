@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Data.Query;
+namespace Goal.Infra.Data.Query;
 
 public abstract class QueryRepository : IQueryRepository
 {

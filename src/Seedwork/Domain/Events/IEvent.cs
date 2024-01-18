@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Goal.Domain.Abstractions.Events;
+namespace Goal.Domain.Events;
 
 public interface IEvent : INotification
 {

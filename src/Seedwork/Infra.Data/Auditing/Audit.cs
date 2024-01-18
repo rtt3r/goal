@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Goal.Seedwork.Infra.Data.Auditing;
+namespace Goal.Infra.Data.Auditing;
 
 public class Audit<TKey>
 {

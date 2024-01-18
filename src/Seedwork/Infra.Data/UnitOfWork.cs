@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Goal.Seedwork.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Seedwork.Infra.Data;
+namespace Goal.Infra.Data;
 
 public abstract class UnitOfWork : IUnitOfWork
 {

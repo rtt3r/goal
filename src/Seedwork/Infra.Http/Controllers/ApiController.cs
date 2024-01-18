@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Http.Controllers.Results;
-using Goal.Application.Abstractions.Commands;
+using Goal.Application.Commands;
 
 namespace Goal.Seedwork.Infra.Http.Controllers;
 

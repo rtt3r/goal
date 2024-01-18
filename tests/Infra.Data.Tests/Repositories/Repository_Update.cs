@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Data.Tests.Extensions;
-using Goal.Seedwork.Infra.Data.Tests.Mocks;
+using Goal.Infra.Data.Tests.Extensions;
+using Goal.Infra.Data.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Data.Tests.Repositories;
+namespace Goal.Infra.Data.Tests.Repositories;
 
 public class Repository_Update
 {
