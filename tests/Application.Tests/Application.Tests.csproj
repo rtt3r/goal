@@ -29,7 +29,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Seedwork\Application\Application.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\Abstractions\Application\Application.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>

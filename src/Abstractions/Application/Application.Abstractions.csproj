@@ -3,30 +3,31 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Domain</RootNamespace>
-		<AssemblyName>Goal.Domain.Abstractions</AssemblyName>
+		<RootNamespace>Goal.Application</RootNamespace>
+		<AssemblyName>Goal.Application.Abstractions</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Domain.Abstractions</PackageId>
+		<PackageId>Goal.Application.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Domain abstractions library</Description>
-		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<Description>Application abstractions library</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<PackageLicenseExpression></PackageLicenseExpression>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MediatR" Version="12.2.0" />
-		<PackageReference Include="FluentValidation" Version="11.9.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+		<ProjectReference Include="..\Domain\Domain.Abstractions.csproj" />
+		<ProjectReference Include="..\..\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

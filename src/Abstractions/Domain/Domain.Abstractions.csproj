@@ -1,18 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
+
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Infra.Data</RootNamespace>
-		<AssemblyName>Goal.Infra.Data.RavenDB</AssemblyName>
+		<RootNamespace>Goal.Domain</RootNamespace>
+		<AssemblyName>Goal.Domain.Abstractions</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Infra.Data.RavenDB</PackageId>
+		<PackageId>Goal.Domain.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>RavenDB extensions</Description>
+		<Description>Domain abstractions library</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
@@ -20,11 +21,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RavenDB.Client" Version="6.0.2" />
+		<PackageReference Include="MediatR" Version="12.2.0" />
+		<PackageReference Include="FluentValidation" Version="11.9.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+		<ProjectReference Include="..\..\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

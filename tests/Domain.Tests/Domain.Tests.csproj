@@ -28,7 +28,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Seedwork\Domain\Domain.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\Abstractions\Domain\Domain.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -31,8 +31,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Domain\Domain.Abstractions.csproj" />
-		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\Infra.Data.EntityFrameworkCore\Infra.Data.EntityFrameworkCore.csproj" />
+		<ProjectReference Include="..\..\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+		<ProjectReference Include="..\..\Extensions\Infra.Data.EntityFrameworkCore\Infra.Data.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

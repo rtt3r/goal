@@ -30,8 +30,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\..\src\Seedwork\Infra.Data.Query\Infra.Data.Query.Abstractions.csproj" />
+		<ProjectReference Include="..\..\src\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+		<ProjectReference Include="..\..\src\Abstractions\Infra.Data.Query\Infra.Data.Query.Abstractions.csproj" />
 	</ItemGroup>
 
 </Project>

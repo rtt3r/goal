@@ -1,33 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Infra.Http</RootNamespace>
-		<AssemblyName>Goal.Infra.Http.Abstractions</AssemblyName>
+		<RootNamespace>Goal.Infra.Data.EntityFrameworkCore</RootNamespace>
+		<AssemblyName>Goal.Infra.Data.EntityFrameworkCore</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Infra.Http.Abstractions</PackageId>
+		<PackageId>Goal.Infra.Data.EntityFrameworkCore</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Http seedwork layer for Domain Driven Design</Description>
+		<Description>EntityFrameworkCore extensions</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
-		<OpenApiGenerateDocumentsOnBuild>false</OpenApiGenerateDocumentsOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Application\Application.Abstractions.csproj" />
-		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+		<ProjectReference Include="..\..\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
