@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Goal.Seedwork.Domain.Events;
+namespace Goal.Domain.Abstractions.Events;
 
 public interface IEvent : INotification
 {

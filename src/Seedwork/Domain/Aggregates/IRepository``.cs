@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
 
-namespace Goal.Seedwork.Domain.Aggregates;
+namespace Goal.Domain.Abstractions.Aggregates;
 
 public interface IRepository<TEntity, TKey> : IRepository
     where TEntity : class

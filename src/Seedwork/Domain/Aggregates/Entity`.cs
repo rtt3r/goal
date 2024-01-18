@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Goal.Seedwork.Domain.Aggregates;
+namespace Goal.Domain.Abstractions.Aggregates;
 
 public abstract class Entity<TKey> : IEntity<TKey>
 {
@@ -9,19 +9,13 @@ public abstract class Entity<TKey> : IEntity<TKey>
     public override bool Equals(object? obj)
     {
         if (obj is null)
-        {
             return false;
-        }
 
         if (ReferenceEquals(this, obj))
-        {
             return true;
-        }
 
         if (obj is IEntity<TKey> item && item.Id is not null)
-        {
             return item.Id.Equals(Id);
-        }
 
         return false;
     }
@@ -30,7 +24,7 @@ public abstract class Entity<TKey> : IEntity<TKey>
     {
         unchecked
         {
-            return (GetType().GetHashCode() * 397) ^ (Id?.GetHashCode() ?? 0);
+            return GetType().GetHashCode() * 397 ^ (Id?.GetHashCode() ?? 0);
         }
     }
 

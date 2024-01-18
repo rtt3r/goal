@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Domain.Aggregates;
+namespace Goal.Domain.Abstractions.Aggregates;
 
 public interface IEntity<out TKey>
 {

@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Domain.Aggregates;
+namespace Goal.Domain.Abstractions.Aggregates;
 
 public interface IRepository<TEntity> : IRepository<TEntity, string>
     where TEntity : class

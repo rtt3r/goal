@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Domain.Events;
+namespace Goal.Domain.Abstractions.Events;
 
 public abstract record Event(string AggregateId, string EventType) : IEvent
 {

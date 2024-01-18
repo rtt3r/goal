@@ -1,5 +1,5 @@
 using System;
-using Goal.Seedwork.Domain.Aggregates;
+using Goal.Domain.Abstractions.Aggregates;
 
 namespace Goal.Seedwork.Infra.Data.Tests.Mocks;
 

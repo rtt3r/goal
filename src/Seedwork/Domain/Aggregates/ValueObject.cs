@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Goal.Seedwork.Domain.Aggregates;
+namespace Goal.Domain.Abstractions.Aggregates;
 
 public class ValueObject : IEquatable<ValueObject>
 {
@@ -11,9 +11,7 @@ public class ValueObject : IEquatable<ValueObject>
     public override bool Equals(object? obj)
     {
         if (obj is null)
-        {
             return false;
-        }
 
         return obj is ValueObject valueObject && Equals(valueObject);
     }
@@ -21,14 +19,10 @@ public class ValueObject : IEquatable<ValueObject>
     public virtual bool Equals(ValueObject? obj)
     {
         if (obj is null)
-        {
             return false;
-        }
 
         if (ReferenceEquals(this, obj))
-        {
             return true;
-        }
 
         PropertyInfo[] properties = GetType().GetProperties(BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.Instance);
 
@@ -51,12 +45,10 @@ public class ValueObject : IEquatable<ValueObject>
                 object? value = item.GetValue(this, null);
 
                 if (value is null)
-                {
                     hashCode ^= index * 13;
-                }
                 else
                 {
-                    hashCode = (hashCode * (changeMultiplier ? 59 : 114)) + value.GetHashCode();
+                    hashCode = hashCode * (changeMultiplier ? 59 : 114) + value.GetHashCode();
                     changeMultiplier = !changeMultiplier;
                 }
             }

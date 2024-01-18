@@ -1,11 +1,12 @@
 using FluentAssertions;
+using Goal.Domain.Abstractions.Aggregates;
 using Xunit;
 
 namespace Goal.Seedwork.Domain.Tests.Entity;
 
 public class Entity_OperatorNotEquals
 {
-    private class TestEntity : Domain.Aggregates.Entity<int>
+    private class TestEntity : Entity<int>
     {
         public TestEntity(int id)
         {

@@ -6,7 +6,7 @@ namespace Goal.Seedwork.Domain.Tests.Event;
 
 public class EventTests
 {
-    private record SampleEvent(string AggregateId) : Events.Event(AggregateId, nameof(SampleEvent))
+    private record SampleEvent(string AggregateId) : Goal.Domain.Abstractions.Events.Event(AggregateId, nameof(SampleEvent))
     {
     }
 

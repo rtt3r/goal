@@ -1,4 +1,4 @@
-using Goal.Seedwork.Domain.Aggregates;
+using Goal.Domain.Abstractions.Aggregates;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Seedwork.Infra.Data;

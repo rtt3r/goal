@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Seedwork.Domain.Aggregates;
+using Goal.Domain.Abstractions.Aggregates;
 using Goal.Seedwork.Infra.Data.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;
 using Moq;
