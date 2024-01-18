@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using GoalQueryable = Goal.Seedwork.Infra.Crosscutting.Collections.Queryable;
 

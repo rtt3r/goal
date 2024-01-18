@@ -42,7 +42,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Seedwork
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Http", "src\Seedwork\Infra.Http\Infra.Http.csproj", "{37B398BC-792B-4339-A0A9-19717B4880DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.Query", "src\Seedwork\Infra.Data.Query\Infra.Data.Query.csproj", "{706012A7-98D1-4FD9-AD6F-6861C3E8492A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.Query", "src\Seedwork\Infra.Data.Query\Infra.Data.Query.Abstractions.csproj", "{706012A7-98D1-4FD9-AD6F-6861C3E8492A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{565982FA-8115-4608-9A08-FB1E148752EB}"
 EndProject
@@ -60,7 +60,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.Query.Tests", "t
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.EntityFrameworkCore", "src\Seedwork\Infra.Data.EntityFrameworkCore\Infra.Data.EntityFrameworkCore.csproj", "{6F72223A-A7AF-4D4E-A821-8921166EE5CD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.Extensions.RavenDB", "src\Seedwork\Infra.Data.Extensions.RavenDB\Infra.Data.Extensions.RavenDB.csproj", "{8CF04D3C-94FE-404B-A6E9-75FBDD6DCF79}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.Extensions.RavenDB", "src\Seedwork\Infra.Data.Raven\Infra.Data.Raven.csproj", "{8CF04D3C-94FE-404B-A6E9-75FBDD6DCF79}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.Data.Extensions.EFCore.Tests", "tests\Infra.Data.Extensions.EFCore.Tests\Infra.Data.Extensions.EFCore.Tests.csproj", "{EA5D349B-5EFE-4F1E-AAED-DC1EDD97A627}"
 EndProject

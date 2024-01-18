@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Infra.Data.Extensions.RavenDB.Tests.Mocks;
+using Goal.Infra.Data.Raven;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
 using Raven.TestDriver;

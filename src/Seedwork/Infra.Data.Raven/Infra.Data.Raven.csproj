@@ -1,19 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Infra.Data.Query</RootNamespace>
-		<AssemblyName>Goal.Infra.Data.Query</AssemblyName>
+		<RootNamespace>Goal.Infra.Data</RootNamespace>
+		<AssemblyName>Goal.Infra.Data.RavenDB</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Infra.Data.Query</PackageId>
+		<PackageId>Goal.Infra.Data.RavenDB</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Data query layer for Domain Driven Design</Description>
+		<Description>RavenDB extensions</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
@@ -21,7 +20,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Domain\Domain.Abstractions.csproj" />
+		<PackageReference Include="RavenDB.Client" Version="6.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Infra.Crosscutting\Infra.Crosscutting.csproj" />
 	</ItemGroup>
 

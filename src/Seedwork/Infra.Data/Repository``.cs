@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Goal.Domain.Aggregates;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Infra.Data.EntityFrameworkCore;
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
 using Microsoft.EntityFrameworkCore;
 

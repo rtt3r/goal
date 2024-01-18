@@ -34,7 +34,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\..\src\Seedwork\Infra.Data.Extensions.RavenDB\Infra.Data.Extensions.RavenDB.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Infra.Data.Raven\Infra.Data.Raven.csproj" />
 	</ItemGroup>
 
 </Project>

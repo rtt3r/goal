@@ -6,7 +6,7 @@ using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Goal.Infra.Data;
+namespace Goal.Infra.Data.EntityFrameworkCore;
 
 public static class PaginationExtensions
 {

@@ -8,7 +8,7 @@ using Raven.Client.Documents;
 using Raven.Client.Documents.Linq;
 using Raven.Client.Documents.Session;
 
-namespace Goal.Infra.Data.Extensions.RavenDB;
+namespace Goal.Infra.Data.Raven;
 
 public static class PaginationExtensions
 {
