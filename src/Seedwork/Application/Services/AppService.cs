@@ -1,6 +1,6 @@
 using System.Transactions;
 
-namespace Goal.Seedwork.Application.Services;
+namespace Goal.Application.Abstractions.Services;
 
 public abstract class AppService : IAppService
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Transactions;
 using FluentAssertions;
-using Goal.Seedwork.Application.Services;
+using Goal.Application.Abstractions.Services;
 using Xunit;
 
 namespace Goal.Seedwork.Application.Tests.Services;

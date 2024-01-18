@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Goal.Seedwork.Application.Commands;
+using Goal.Application.Abstractions.Commands;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 using Goal.Seedwork.Infra.Http.Controllers;
 using Goal.Seedwork.Infra.Http.Controllers.Results;

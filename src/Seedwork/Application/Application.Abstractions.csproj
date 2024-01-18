@@ -3,17 +3,17 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Seedwork.Application</RootNamespace>
-		<AssemblyName>Goal.Seedwork.Application</AssemblyName>
+		<RootNamespace>Goal.Application.Abstractions</RootNamespace>
+		<AssemblyName>Goal.Application.Abstractions</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Seedwork.Application</PackageId>
+		<PackageId>Goal.Application.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Application seedwork layer for Domain Driven Design</Description>
+		<Description>Application abstractions library</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageLicenseExpression></PackageLicenseExpression>

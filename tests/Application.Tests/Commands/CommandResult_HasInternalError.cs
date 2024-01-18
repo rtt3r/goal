@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using Goal.Seedwork.Application.Commands;
+using Goal.Application.Abstractions.Commands;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 using Xunit;
 

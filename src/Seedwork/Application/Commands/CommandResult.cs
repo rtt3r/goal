@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 
-namespace Goal.Seedwork.Application.Commands;
+namespace Goal.Application.Abstractions.Commands;
 
 public record CommandResult(bool IsSucceeded, IEnumerable<Notification> Notifications) : ICommandResult
 {

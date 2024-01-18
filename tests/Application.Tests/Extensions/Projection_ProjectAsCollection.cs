@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using Goal.Seedwork.Application.Extensions;
+using Goal.Application.Abstractions.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Moq;
 using Xunit;

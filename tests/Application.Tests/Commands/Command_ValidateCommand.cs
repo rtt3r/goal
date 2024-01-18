@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation;
-using Goal.Seedwork.Application.Commands;
+using Goal.Application.Abstractions.Commands;
 using Xunit;
 
 namespace Goal.Seedwork.Application.Tests.Commands;

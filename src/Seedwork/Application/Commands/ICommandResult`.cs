@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Application.Commands;
+namespace Goal.Application.Abstractions.Commands;
 
 public interface ICommandResult<T> : ICommandResult
 {
