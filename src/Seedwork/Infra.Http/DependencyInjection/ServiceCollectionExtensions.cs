@@ -5,7 +5,7 @@ using Goal.Seedwork.Infra.Crosscutting.Adapters;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Goal.Seedwork.Infra.Http.DependencyInjection;
+namespace Goal.Infra.Http.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {

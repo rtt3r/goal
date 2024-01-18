@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Http.Controllers.Requests;
+using Goal.Infra.Http.Controllers.Requests;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Controllers;
+namespace Goal.Infra.Http.Tests.Controllers;
 
 public class PageSearchRequest_Instance
 {

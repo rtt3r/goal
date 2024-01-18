@@ -1,6 +1,6 @@
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 
-namespace Goal.Seedwork.Infra.Http.Controllers.Requests;
+namespace Goal.Infra.Http.Controllers.Requests;
 
 public sealed class PageSearchRequest
 {

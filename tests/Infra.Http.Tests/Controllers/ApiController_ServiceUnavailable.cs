@@ -1,12 +1,12 @@
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
-using Goal.Seedwork.Infra.Http.Controllers;
-using Goal.Seedwork.Infra.Http.Controllers.Results;
+using Goal.Infra.Http.Controllers;
+using Goal.Infra.Http.Controllers.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Controllers;
+namespace Goal.Infra.Http.Tests.Controllers;
 
 public class ApiController_ServiceUnavailable
 {

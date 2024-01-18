@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Http.Controllers;
+using Goal.Infra.Http.Controllers;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Controllers;
+namespace Goal.Infra.Http.Tests.Controllers;
 
 public class ApiController_OkOrNotFound
 {

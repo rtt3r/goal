@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Http.Controllers.Results;
+using Goal.Infra.Http.Controllers.Results;
 using Goal.Application.Commands;
 
-namespace Goal.Seedwork.Infra.Http.Controllers;
+namespace Goal.Infra.Http.Controllers;
 
 public class ApiController : ControllerBase
 {

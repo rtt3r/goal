@@ -1,11 +1,11 @@
 using FluentAssertions;
-using Goal.Seedwork.Infra.Http.Swagger;
+using Goal.Infra.Http.Swagger;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Swagger;
+namespace Goal.Infra.Http.Tests.Swagger;
 
 public class LowerCaseDocumentFilter_Apply
 {

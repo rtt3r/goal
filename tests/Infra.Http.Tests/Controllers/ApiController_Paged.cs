@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Http.Controllers;
-using Goal.Seedwork.Infra.Http.Controllers.Results;
+using Goal.Infra.Http.Controllers;
+using Goal.Infra.Http.Controllers.Results;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Controllers;
+namespace Goal.Infra.Http.Tests.Controllers;
 
 public class ApiController_Paged
 {

@@ -40,7 +40,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Seedwork\Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Seedwork\Application\Application.Abstractions.csproj", "{6BFD4F41-D5C0-4E3A-A867-9215D4018AA5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Http", "src\Seedwork\Infra.Http\Infra.Http.csproj", "{37B398BC-792B-4339-A0A9-19717B4880DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Http", "src\Seedwork\Infra.Http\Infra.Http.Abstractions.csproj", "{37B398BC-792B-4339-A0A9-19717B4880DB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data.Query", "src\Seedwork\Infra.Data.Query\Infra.Data.Query.Abstractions.csproj", "{706012A7-98D1-4FD9-AD6F-6861C3E8492A}"
 EndProject

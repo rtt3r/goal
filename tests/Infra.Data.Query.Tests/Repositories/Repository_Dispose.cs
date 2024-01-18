@@ -2,7 +2,7 @@ using FluentAssertions;
 using Goal.Infra.Data.Query;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Repositories;
+namespace Goal.Infra.Http.Tests.Repositories;
 
 public class Repository_Dispose
 {

@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Http.Controllers.Requests;
-using Goal.Seedwork.Infra.Http.Extensions;
+using Goal.Infra.Http.Controllers.Requests;
+using Goal.Infra.Http.Extensions;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.Extensions;
+namespace Goal.Infra.Http.Tests.Extensions;
 
 public class PaginationExtensions_ToPageSearch
 {

@@ -1,10 +1,10 @@
 using FluentAssertions;
 using Goal.Seedwork.Infra.Crosscutting.Notifications;
-using Goal.Seedwork.Infra.Http.DependencyInjection;
+using Goal.Infra.Http.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Http.Tests.DependencyInjection;
+namespace Goal.Infra.Http.Tests.DependencyInjection;
 
 public class ServiceCollectionExtensions_AddDefaultNotificationHandler
 {

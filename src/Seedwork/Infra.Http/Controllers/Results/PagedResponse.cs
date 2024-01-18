@@ -1,6 +1,6 @@
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 
-namespace Goal.Seedwork.Infra.Http.Controllers.Results;
+namespace Goal.Infra.Http.Controllers.Results;
 
 public class PagedResponse(IPagedList source) : PagedCollectionResponse<IPagedList>(source)
 {

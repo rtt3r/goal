@@ -4,7 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
-		<RootNamespace>Goal.Seedwork.Infra.Http.Tests</RootNamespace>
+		<RootNamespace>Goal.Infra.Http.Abstractions.csproj.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
@@ -37,7 +37,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\..\src\Seedwork\Infra.Http\Infra.Http.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Infra.Http\Infra.Http.Abstractions.csproj" />
 		<ProjectReference Include="..\..\src\Seedwork\Application\Application.Abstractions.csproj" />
 	</ItemGroup>
 

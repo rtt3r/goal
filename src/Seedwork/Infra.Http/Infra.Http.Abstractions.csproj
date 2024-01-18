@@ -3,13 +3,13 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Seedwork.Infra.Http</RootNamespace>
-		<AssemblyName>Goal.Seedwork.Infra.Http</AssemblyName>
+		<RootNamespace>Goal.Infra.Http</RootNamespace>
+		<AssemblyName>Goal.Infra.Http.Abstractions</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Seedwork.Infra.Http</PackageId>
+		<PackageId>Goal.Infra.Http.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>

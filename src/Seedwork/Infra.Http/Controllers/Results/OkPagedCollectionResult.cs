@@ -1,7 +1,7 @@
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Goal.Seedwork.Infra.Http.Controllers.Results;
+namespace Goal.Infra.Http.Controllers.Results;
 
 public class OkPagedCollectionResult(IPagedList value) : OkObjectResult(new PagedResponse(value))
 {
