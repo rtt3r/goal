@@ -7,7 +7,6 @@ using Goal.Domain.Aggregates;
 using Goal.Seedwork.Infra.Crosscutting.Collections;
 using Goal.Seedwork.Infra.Crosscutting.Extensions;
 using Goal.Seedwork.Infra.Crosscutting.Specifications;
-using Goal.Infra.Data.Extensions.EFCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data;

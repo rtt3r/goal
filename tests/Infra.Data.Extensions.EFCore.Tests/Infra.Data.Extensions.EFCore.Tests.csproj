@@ -33,7 +33,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\..\src\Seedwork\Infra.Data.Extensions.EFCore\Infra.Data.Extensions.EFCore.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Infra.Data.EntityFrameworkCore\Infra.Data.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 
 </Project>
