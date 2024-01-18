@@ -34,7 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infrastructure", "4. Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Crosscutting", "src\Seedwork\Infra.Crosscutting\Infra.Crosscutting.csproj", "{79E890BA-BD0E-4429-A770-81899AD59E72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data", "src\Seedwork\Infra.Data\Infra.Data.csproj", "{DA9A91BD-1B6D-4634-91F8-6224F0416E65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Data", "src\Seedwork\Infra.Data\Infra.Data.Abstractions.csproj", "{DA9A91BD-1B6D-4634-91F8-6224F0416E65}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Seedwork\Domain\Domain.Abstractions.csproj", "{8F3403A8-F07D-4CEF-B15E-E454BF979CB4}"
 EndProject

@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Seedwork\Infra.Data\Infra.Data.csproj" />
+		<ProjectReference Include="..\..\src\Seedwork\Infra.Data\Infra.Data.Abstractions.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

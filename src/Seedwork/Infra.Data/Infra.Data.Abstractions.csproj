@@ -2,13 +2,13 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Seedwork.Infra.Data</RootNamespace>
-		<AssemblyName>Goal.Seedwork.Infra.Data</AssemblyName>
+		<RootNamespace>Goal.Infra.Data.Abstractions</RootNamespace>
+		<AssemblyName>Goal.Infra.Data.Abstractions</AssemblyName>
 		<VersionPrefix>0.4.10</VersionPrefix>
 		<AssemblyVersion>0.4.10.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Seedwork.Infra.Data</PackageId>
+		<PackageId>Goal.Infra.Data.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
