@@ -4,6 +4,6 @@ namespace Goal.Seedwork.Infra.Crosscutting.Collections;
 
 public interface IPagedList : IEnumerable
 {
-    int PageCount { get; }
+    int PageLength { get; }
     long TotalCount { get; }
 }
