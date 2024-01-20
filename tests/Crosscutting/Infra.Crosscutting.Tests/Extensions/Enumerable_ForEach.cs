@@ -139,6 +139,6 @@ public class Enumerable_ForEach
         Action action = () => source.ForEach(null!);
 
         // assert
-        action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("action");
+        action.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("body");
     }
 }
