@@ -2,13 +2,13 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Seedwork.Infra.Crosscutting</RootNamespace>
-		<AssemblyName>Goal.Seedwork.Infra.Crosscutting</AssemblyName>
+		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
+		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
 		<VersionPrefix>1.0.0</VersionPrefix>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
-		<PackageId>Goal.Seedwork.Infra.Crosscutting</PackageId>
+		<PackageId>Goal.Infra.Crosscutting</PackageId>
 		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
