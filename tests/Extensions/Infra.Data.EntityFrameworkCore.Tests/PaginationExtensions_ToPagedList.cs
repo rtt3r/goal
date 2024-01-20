@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Data.EntityFrameworkCore;
 using Goal.Infra.Data.Extensions.EFCore.Tests.Mock;
 using Moq;

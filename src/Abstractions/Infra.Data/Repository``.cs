@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Goal.Domain.Aggregates;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Data.EntityFrameworkCore;
-using Goal.Seedwork.Infra.Crosscutting.Specifications;
+using Goal.Infra.Crosscutting.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data;

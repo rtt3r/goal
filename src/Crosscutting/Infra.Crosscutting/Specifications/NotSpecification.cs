@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Specifications;
+namespace Goal.Infra.Crosscutting.Specifications;
 
 public sealed class NotSpecification<TEntity> : Specification<TEntity>
     where TEntity : class

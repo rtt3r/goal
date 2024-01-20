@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Notifications;
+namespace Goal.Infra.Crosscutting.Notifications;
 
 public interface INotificationHandler<TNotification>
     where TNotification : class, INotification

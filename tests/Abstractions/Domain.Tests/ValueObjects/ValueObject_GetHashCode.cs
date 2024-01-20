@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Goal.Seedwork.Domain.Tests.Mocks;
+using Goal.Domain.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Domain.Tests.ValueObjects;
+namespace Goal.Domain.Tests.ValueObjects;
 
 public class ValueObject_GetHashCode
 {

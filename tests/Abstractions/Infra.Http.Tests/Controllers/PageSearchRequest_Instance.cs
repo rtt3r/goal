@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Http.Controllers.Requests;
 using Xunit;
 

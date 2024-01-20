@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Http.DependencyInjection;
 using Xunit;
 

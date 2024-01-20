@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Goal.Seedwork.Infra.Crosscutting;
+namespace Goal.Infra.Crosscutting;
 
 [DebuggerStepThrough]
 public static class Ensure

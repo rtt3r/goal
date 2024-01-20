@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Data.Raven;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;

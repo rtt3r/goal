@@ -1,7 +1,7 @@
 using FluentValidation;
 using FluentValidation.Validators;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Validations.Fluent.Validators;
+namespace Goal.Infra.Crosscutting.Validations.Fluent.Validators;
 
 internal class CnpjValidator<T> : PropertyValidator<T, string>, IPropertyValidator
 {

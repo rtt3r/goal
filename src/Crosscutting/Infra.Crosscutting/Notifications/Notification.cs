@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Notifications;
+namespace Goal.Infra.Crosscutting.Notifications;
 
 public record Notification(NotificationType Type, string Code, string Message, string? ParamName) : INotification
 {

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Linq.Expressions;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Collections;
+namespace Goal.Infra.Crosscutting.Collections;
 
 public static class Queryable
 {

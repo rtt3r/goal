@@ -1,6 +1,6 @@
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 using Raven.Client.Documents.Linq;
-using GoalQueryable = Goal.Seedwork.Infra.Crosscutting.Collections.Queryable;
+using GoalQueryable = Goal.Infra.Crosscutting.Collections.Queryable;
 
 namespace Goal.Infra.Data.Raven;
 

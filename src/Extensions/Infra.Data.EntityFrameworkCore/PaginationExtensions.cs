@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
-using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data.EntityFrameworkCore;

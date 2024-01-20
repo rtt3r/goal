@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Goal.Seedwork.Infra.Crosscutting.Adapters;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Collections;
 
 namespace Goal.Application.Extensions;
 

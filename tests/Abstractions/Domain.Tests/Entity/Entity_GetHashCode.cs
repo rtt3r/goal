@@ -2,7 +2,7 @@ using FluentAssertions;
 using Goal.Domain.Aggregates;
 using Xunit;
 
-namespace Goal.Seedwork.Domain.Tests.Entity;
+namespace Goal.Domain.Tests.Entity;
 
 public class Entity_GetHashCode
 {

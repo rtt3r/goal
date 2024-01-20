@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
+namespace Goal.Infra.Crosscutting.Tests.Mocks;
 
 internal class TestObject2
 {

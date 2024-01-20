@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Goal.Seedwork.Infra.Crosscutting.Notifications;
+using Goal.Infra.Crosscutting.Notifications;
 
 namespace Goal.Application.Commands;
 

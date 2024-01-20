@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Goal.Seedwork.Infra.Crosscutting.Adapters;
-using Goal.Seedwork.Infra.Crosscutting.Notifications;
+using Goal.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Infra.Http.DependencyInjection;

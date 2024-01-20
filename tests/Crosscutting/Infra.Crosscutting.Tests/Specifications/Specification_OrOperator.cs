@@ -1,10 +1,10 @@
 using System;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Specifications;
-using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
+using Goal.Infra.Crosscutting.Specifications;
+using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Specifications;
+namespace Goal.Infra.Crosscutting.Tests.Specifications;
 
 public class Specification_OrOperator
 {

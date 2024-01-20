@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Notifications;
+using Goal.Infra.Crosscutting.Notifications;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Notifications;
+namespace Goal.Infra.Crosscutting.Tests.Notifications;
 
 public class NotificationHandler_GetNotificationsAsync
 {

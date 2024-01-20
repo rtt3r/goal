@@ -1,9 +1,9 @@
 using System;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Tests.Mocks;
+using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Ensuring;
+namespace Goal.Infra.Crosscutting.Tests.Ensuring;
 
 public class Ensure_Equal
 {

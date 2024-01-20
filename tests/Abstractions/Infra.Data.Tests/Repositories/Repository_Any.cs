@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Specifications;
+using Goal.Infra.Crosscutting.Specifications;
 using Goal.Infra.Data.Tests.Extensions;
 using Goal.Infra.Data.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;

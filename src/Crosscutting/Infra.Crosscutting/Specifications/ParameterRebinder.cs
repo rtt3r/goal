@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Specifications;
+namespace Goal.Infra.Crosscutting.Specifications;
 
 public sealed class ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map) : ExpressionVisitor
 {

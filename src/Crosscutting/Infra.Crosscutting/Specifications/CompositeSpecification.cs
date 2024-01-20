@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Specifications;
+namespace Goal.Infra.Crosscutting.Specifications;
 
 public abstract class CompositeSpecification<TEntity> : Specification<TEntity>
      where TEntity : class

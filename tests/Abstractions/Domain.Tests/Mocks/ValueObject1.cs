@@ -1,6 +1,6 @@
 using Goal.Domain.Aggregates;
 
-namespace Goal.Seedwork.Domain.Tests.Mocks;
+namespace Goal.Domain.Tests.Mocks;
 
 internal class ValueObject1 : ValueObject
 {

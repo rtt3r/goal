@@ -1,5 +1,5 @@
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Notifications;
+using Goal.Infra.Crosscutting.Notifications;
 using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Results;
 using Microsoft.AspNetCore.Http;

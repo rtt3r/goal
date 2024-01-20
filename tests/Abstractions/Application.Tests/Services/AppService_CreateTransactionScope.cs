@@ -4,7 +4,7 @@ using FluentAssertions;
 using Goal.Application.Services;
 using Xunit;
 
-namespace Goal.Seedwork.Application.Tests.Services;
+namespace Goal.Application.Tests.Services;
 
 public class AppService_CreateTransactionScope
 {

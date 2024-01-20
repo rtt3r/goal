@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Data.Extensions.RavenDB.Tests.Mocks;
 using Goal.Infra.Data.Raven;
 using Raven.Client.Documents;

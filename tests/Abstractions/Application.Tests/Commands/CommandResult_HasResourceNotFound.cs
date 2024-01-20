@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using FluentAssertions;
 using Goal.Application.Commands;
-using Goal.Seedwork.Infra.Crosscutting.Notifications;
+using Goal.Infra.Crosscutting.Notifications;
 using Xunit;
 
-namespace Goal.Seedwork.Application.Tests.Commands;
+namespace Goal.Application.Tests.Commands;
 
 public class CommandResult_HasResourceNotFound
 {

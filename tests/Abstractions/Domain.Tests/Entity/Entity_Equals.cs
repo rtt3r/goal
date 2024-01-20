@@ -1,9 +1,9 @@
 using FluentAssertions;
 using Goal.Domain.Aggregates;
-using Goal.Seedwork.Domain.Tests.Mocks;
+using Goal.Domain.Tests.Mocks;
 using Xunit;
 
-namespace Goal.Seedwork.Domain.Tests.Entity;
+namespace Goal.Domain.Tests.Entity;
 
 public class Entity_Equals
 {

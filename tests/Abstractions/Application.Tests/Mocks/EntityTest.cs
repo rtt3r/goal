@@ -1,7 +1,7 @@
 using System;
 using Goal.Domain.Aggregates;
 
-namespace Goal.Seedwork.Application.Tests.Mocks;
+namespace Goal.Application.Tests.Mocks;
 
 internal class EntityTest : Entity<Guid>
 {

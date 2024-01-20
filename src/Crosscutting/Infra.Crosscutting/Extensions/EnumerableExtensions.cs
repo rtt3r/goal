@@ -2,9 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Extensions;
+namespace Goal.Infra.Crosscutting.Extensions;
 
 public static class EnumerableExtensions
 {

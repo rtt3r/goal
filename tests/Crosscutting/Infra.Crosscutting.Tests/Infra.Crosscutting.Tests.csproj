@@ -4,7 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
-		<RootNamespace>Goal.Seedwork.Infra.Crosscutting.Tests</RootNamespace>
+		<RootNamespace>Goal.Infra.Crosscutting.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>

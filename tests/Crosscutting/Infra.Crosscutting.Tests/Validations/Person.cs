@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Validations;
+namespace Goal.Infra.Crosscutting.Tests.Validations;
 
 public class Person
 {

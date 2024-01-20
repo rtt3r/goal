@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Trying;
+using Goal.Infra.Crosscutting.Trying;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Trying;
+namespace Goal.Infra.Crosscutting.Tests.Trying;
 
 public class Option_OrElse
 {

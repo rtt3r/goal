@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Trying;
+namespace Goal.Infra.Crosscutting.Trying;
 
 public readonly struct Try<TFailure, TSuccess>
 {

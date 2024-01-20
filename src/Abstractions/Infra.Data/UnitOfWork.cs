@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Seedwork.Domain;
+using Goal.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Goal.Infra.Data;

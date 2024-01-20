@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Collections;
+namespace Goal.Infra.Crosscutting.Collections;
 
 public class PageSearch(int pageIndex, int pageSize) : IPageSearch
 {

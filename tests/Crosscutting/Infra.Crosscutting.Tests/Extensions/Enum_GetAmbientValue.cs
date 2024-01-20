@@ -1,10 +1,10 @@
 using System;
 using System.ComponentModel;
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Extensions;
+using Goal.Infra.Crosscutting.Extensions;
 using Xunit;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Tests.Extensions;
+namespace Goal.Infra.Crosscutting.Tests.Extensions;
 
 public class Enum_GetAmbientValue
 {

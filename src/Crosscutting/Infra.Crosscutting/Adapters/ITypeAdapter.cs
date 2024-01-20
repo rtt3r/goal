@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Adapters;
+namespace Goal.Infra.Crosscutting.Adapters;
 
 public interface ITypeAdapter
 {

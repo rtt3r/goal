@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Goal.Seedwork.Domain;
+namespace Goal.Domain;
 
 public interface IUnitOfWork : IDisposable
 {

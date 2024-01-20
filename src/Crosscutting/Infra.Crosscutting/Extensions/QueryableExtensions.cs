@@ -2,10 +2,10 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Goal.Seedwork.Infra.Crosscutting.Collections;
-using GoalQueryable = Goal.Seedwork.Infra.Crosscutting.Collections.Queryable;
+using Goal.Infra.Crosscutting.Collections;
+using GoalQueryable = Goal.Infra.Crosscutting.Collections.Queryable;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Extensions;
+namespace Goal.Infra.Crosscutting.Extensions;
 
 public static class QueryableExtensions
 {

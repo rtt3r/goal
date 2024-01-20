@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Collections;
+namespace Goal.Infra.Crosscutting.Collections;
 
 public interface IPagedList : IEnumerable
 {

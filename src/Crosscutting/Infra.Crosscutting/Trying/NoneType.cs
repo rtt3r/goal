@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Trying;
+namespace Goal.Infra.Crosscutting.Trying;
 
 [StructLayout(LayoutKind.Sequential, Size = 1)]
 public struct NoneType

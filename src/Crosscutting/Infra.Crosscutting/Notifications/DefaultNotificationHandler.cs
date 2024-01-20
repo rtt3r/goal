@@ -1,4 +1,4 @@
-namespace Goal.Seedwork.Infra.Crosscutting.Notifications;
+namespace Goal.Infra.Crosscutting.Notifications;
 
 public sealed class DefaultNotificationHandler : NotificationHandler<Notification>, IDefaultNotificationHandler
 {

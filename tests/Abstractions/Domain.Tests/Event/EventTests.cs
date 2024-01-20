@@ -2,7 +2,7 @@ using System;
 using FluentAssertions;
 using Xunit;
 
-namespace Goal.Seedwork.Domain.Tests.Event;
+namespace Goal.Domain.Tests.Event;
 
 public class EventTests
 {

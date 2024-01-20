@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Specifications;
+namespace Goal.Infra.Crosscutting.Specifications;
 
 public sealed class AndSpecification<TEntity>(ISpecification<TEntity> leftSideSpecification, ISpecification<TEntity> rightSideSpecification) : CompositeSpecification<TEntity>(leftSideSpecification, rightSideSpecification)
     where TEntity : class

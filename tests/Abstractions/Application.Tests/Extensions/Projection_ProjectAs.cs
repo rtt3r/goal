@@ -1,9 +1,9 @@
 using FluentAssertions;
-using Goal.Seedwork.Infra.Crosscutting.Adapters;
+using Goal.Infra.Crosscutting.Adapters;
 using Moq;
 using Xunit;
 
-namespace Goal.Seedwork.Application.Tests.Extensions;
+namespace Goal.Application.Tests.Extensions;
 
 public class Projection_ProjectAs
 {

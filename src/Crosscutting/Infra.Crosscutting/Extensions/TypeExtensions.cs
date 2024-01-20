@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Extensions;
+namespace Goal.Infra.Crosscutting.Extensions;
 
 public static class TypeExtensions
 {

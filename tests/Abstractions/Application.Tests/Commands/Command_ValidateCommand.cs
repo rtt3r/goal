@@ -4,7 +4,7 @@ using FluentValidation;
 using Goal.Application.Commands;
 using Xunit;
 
-namespace Goal.Seedwork.Application.Tests.Commands;
+namespace Goal.Application.Tests.Commands;
 
 public class Command_ValidateCommand
 {

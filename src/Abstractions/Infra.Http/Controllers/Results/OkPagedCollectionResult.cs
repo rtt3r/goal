@@ -1,4 +1,4 @@
-using Goal.Seedwork.Infra.Crosscutting.Collections;
+using Goal.Infra.Crosscutting.Collections;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Goal.Infra.Http.Controllers.Results;

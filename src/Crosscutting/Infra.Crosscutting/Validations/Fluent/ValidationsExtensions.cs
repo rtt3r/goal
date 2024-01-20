@@ -1,7 +1,7 @@
 using FluentValidation;
-using Goal.Seedwork.Infra.Crosscutting.Validations.Fluent.Validators;
+using Goal.Infra.Crosscutting.Validations.Fluent.Validators;
 
-namespace Goal.Seedwork.Infra.Crosscutting.Validations.Fluent;
+namespace Goal.Infra.Crosscutting.Validations.Fluent;
 
 public static class ValidationsExtensions
 {
