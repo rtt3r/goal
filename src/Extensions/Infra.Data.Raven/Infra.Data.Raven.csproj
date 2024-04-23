@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.RavenDB</AssemblyName>
-		<VersionPrefix>1.0.2</VersionPrefix>
-		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Data.RavenDB</PackageId>
@@ -20,7 +20,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="RavenDB.Client" Version="6.0.2" />
+		<PackageReference Include="RavenDB.Client" Version="6.0.101" />
 	</ItemGroup>
 
 	<ItemGroup>
