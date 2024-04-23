@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Http</RootNamespace>
 		<AssemblyName>Goal.Infra.Http.Abstractions</AssemblyName>
-		<VersionPrefix>1.0.2</VersionPrefix>
-		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<VersionPrefix>1.0.3</VersionPrefix>
+		<AssemblyVersion>1.0.3.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Http.Abstractions</PackageId>
