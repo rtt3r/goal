@@ -2,7 +2,9 @@ using System;
 
 namespace Goal.Domain.Events;
 
-public abstract record Event(string AggregateId, string EventType) : IEvent
+public abstract class Event(string aggregateId, string eventType) : IEvent
 {
-    public DateTimeOffset Timestamp { get; init; } = DateTimeOffset.UtcNow;
+    public DateTimeOffset Timestamp { get; private set; } = DateTimeOffset.UtcNow;
+    public string AggregateId { get; protected set; } = aggregateId;
+    public string EventType { get; protected set; } = eventType;
 }
