@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Goal.Domain.Events;
+namespace Goal.Application.Events;
 
 public interface IEventHandler<in TEvent> : INotificationHandler<TEvent>
     where TEvent : class, IEvent

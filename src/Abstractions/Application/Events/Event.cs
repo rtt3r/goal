@@ -1,8 +1,9 @@
 using System;
 
-namespace Goal.Domain.Events;
+namespace Goal.Application.Events;
 
-public abstract class Event(string aggregateId, string eventType) : IEvent
+public abstract class Event(string aggregateId, string eventType)
+    : IEvent
 {
     public DateTimeOffset Timestamp { get; private set; } = DateTimeOffset.UtcNow;
     public string AggregateId { get; protected set; } = aggregateId;

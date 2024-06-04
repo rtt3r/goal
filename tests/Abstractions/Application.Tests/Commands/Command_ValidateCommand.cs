@@ -66,7 +66,6 @@ public class Command_ValidateCommand
 
     private record TestCommand(string Prop1, int Prop2) : ICommand;
 
-
     private class TestValidator : AbstractValidator<TestCommand>
     {
         public TestValidator()

@@ -1,13 +1,14 @@
 using System;
 using FluentAssertions;
+using Goal.Application.Events;
 using Xunit;
 
-namespace Goal.Domain.Tests.Event;
+namespace Goal.Application.Tests.Events;
 
 public class EventTests
 {
     private class SampleEvent(string AggregateId)
-        : Events.Event(AggregateId, nameof(SampleEvent))
+        : Event(AggregateId, nameof(SampleEvent))
     {
     }
 
