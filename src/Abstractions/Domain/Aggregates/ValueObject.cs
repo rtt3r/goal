@@ -10,10 +10,9 @@ public class ValueObject : IEquatable<ValueObject>
 
     public override bool Equals(object? obj)
     {
-        if (obj is null)
-            return false;
-
-        return obj is ValueObject valueObject && Equals(valueObject);
+        return obj is not null
+            && obj is ValueObject valueObject
+            && Equals(valueObject);
     }
 
     public virtual bool Equals(ValueObject? obj)
@@ -45,10 +44,12 @@ public class ValueObject : IEquatable<ValueObject>
                 object? value = item.GetValue(this, null);
 
                 if (value is null)
+                {
                     hashCode ^= index * 13;
+                }
                 else
                 {
-                    hashCode = hashCode * (changeMultiplier ? 59 : 114) + value.GetHashCode();
+                    hashCode = (hashCode * (changeMultiplier ? 59 : 114)) + value.GetHashCode();
                     changeMultiplier = !changeMultiplier;
                 }
             }

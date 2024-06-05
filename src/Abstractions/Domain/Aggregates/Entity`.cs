@@ -1,5 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-
 namespace Goal.Domain.Aggregates;
 
 public abstract class Entity<TKey> : IEntity<TKey>
@@ -14,21 +12,19 @@ public abstract class Entity<TKey> : IEntity<TKey>
         if (ReferenceEquals(this, obj))
             return true;
 
-        if (obj is IEntity<TKey> item && item.Id is not null)
-            return item.Id.Equals(Id);
-
-        return false;
+        return obj is IEntity<TKey> item
+            && item.Id is not null 
+            && item.Id.Equals(Id);
     }
 
     public override int GetHashCode()
     {
         unchecked
         {
-            return GetType().GetHashCode() * 397 ^ (Id?.GetHashCode() ?? 0);
+            return (GetType().GetHashCode() * 397) ^ (Id?.GetHashCode() ?? 0);
         }
     }
 
-    [SuppressMessage("Blocker Code Smell", "S3875:\"operator==\" should not be overloaded on reference types", Justification = "<Pending>")]
     public static bool operator ==(Entity<TKey> left, Entity<TKey> right)
     {
         return Equals(left, null)

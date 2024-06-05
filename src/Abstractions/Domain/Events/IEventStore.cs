@@ -1,4 +1,4 @@
-namespace Goal.Application.Events;
+namespace Goal.Domain.Events;
 
 public interface IEventStore
 {

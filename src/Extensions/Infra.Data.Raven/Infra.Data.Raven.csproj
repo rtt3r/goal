@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.RavenDB</AssemblyName>
-		<VersionPrefix>1.2.0</VersionPrefix>
-		<AssemblyVersion>1.2.0.0</AssemblyVersion>
+		<VersionPrefix>1.2.1</VersionPrefix>
+		<AssemblyVersion>1.2.1.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Data.RavenDB</PackageId>

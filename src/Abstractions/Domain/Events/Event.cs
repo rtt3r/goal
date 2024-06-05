@@ -1,6 +1,6 @@
 using System;
 
-namespace Goal.Application.Events;
+namespace Goal.Domain.Events;
 
 public abstract class Event(string aggregateId, string eventType)
     : IEvent
