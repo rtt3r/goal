@@ -5,7 +5,7 @@ namespace Goal.Infra.Crosscutting.Collections;
 
 public static class Queryable
 {
-    public static TQueryable OrderingHelper<TQueryable, T>(IQueryable<T> source, string fieldName, SortDirection direction, bool anotherLevel)
+    public static TQueryable Order<TQueryable, T>(IQueryable<T> source, string fieldName, SortDirection direction, bool anotherLevel)
         where TQueryable : IQueryable<T>
     {
         ParameterExpression param = Expression.Parameter(typeof(T), string.Empty);

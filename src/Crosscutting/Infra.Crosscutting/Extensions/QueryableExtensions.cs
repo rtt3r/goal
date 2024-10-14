@@ -10,22 +10,22 @@ namespace Goal.Infra.Crosscutting.Extensions;
 public static class QueryableExtensions
 {
     public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string fieldName, SortDirection direction)
-        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, direction, false);
+        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, direction, false);
 
     public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string fieldName)
-        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, false);
+        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, false);
 
     public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> source, string fieldName)
-        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, false);
+        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, false);
 
     public static IOrderedQueryable<T> ThenBy<T>(this IQueryable<T> source, string fieldName, SortDirection direction)
-        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, direction, true);
+        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, direction, true);
 
     public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string fieldName)
-        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, true);
+        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, true);
 
     public static IOrderedQueryable<T> ThenByDescending<T>(this IOrderedQueryable<T> source, string fieldName)
-        => GoalQueryable.OrderingHelper<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, true);
+        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, true);
 
     public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
