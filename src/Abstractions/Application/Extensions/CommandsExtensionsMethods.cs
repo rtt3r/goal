@@ -2,10 +2,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using FluentValidation;
 using FluentValidation.Results;
+using Goal.Application.Commands;
 
-namespace Goal.Application.Commands;
+namespace Goal.Application.Extensions;
 
-public static class CommandExtensions
+public static class CommandsExtensionsMethods
 {
     public static async Task<ValidationResult> ValidateCommandAsync<TValidator, TCommand>(
         this TCommand command,

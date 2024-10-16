@@ -35,28 +35,6 @@ public class ApiController : ControllerBase
             : Ok(value);
     }
 
-    protected virtual ActionResult CommandFailure(ICommandResult result)
-    {
-        if (result.HasInputValidation)
-        {
-            return BadRequest(result.Notifications);
-        }
-
-        if (result.HasResourceNotFound)
-        {
-            return NotFound(result.Notifications);
-        }
-
-        if (result.HasDomainViolation)
-        {
-            return UnprocessableEntity(result.Notifications);
-        }
-
-        return result.HasExternalError 
-            ? ServiceUnavailable(result.Notifications) 
-            : InternalServerError(result.Notifications);
-    }
-
     protected virtual ActionResult InternalServerError(object result)
         => new InternalServerErrorObjectResult(result);
 

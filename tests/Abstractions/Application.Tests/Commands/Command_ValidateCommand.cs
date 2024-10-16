@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using FluentValidation;
 using Goal.Application.Commands;
+using Goal.Application.Extensions;
 using Xunit;
 
 namespace Goal.Application.Tests.Commands;

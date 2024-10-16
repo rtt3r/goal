@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Notifications;
 using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Results;
 using Microsoft.AspNetCore.Http;
@@ -10,22 +9,6 @@ namespace Goal.Infra.Http.Tests.Controllers;
 
 public class ApiController_InternalServerError
 {
-    [Fact]
-    public void WithObjectResult_ReturnsInternalServerErrorObjectResult()
-    {
-        // Arrange
-        var controller = new TestController();
-        var result = Notification.InternalError("001", "Internal error");
-
-        // Act
-        ActionResult actionResult = controller.InternalServerErrorWrapper(result);
-
-        // Assert
-        actionResult.Should().BeOfType<InternalServerErrorObjectResult>();
-        actionResult.As<InternalServerErrorObjectResult>().StatusCode.Should().Be(StatusCodes.Status500InternalServerError);
-        actionResult.As<InternalServerErrorObjectResult>().Value.Should().Be(result);
-    }
-
     [Fact]
     public void ReturnsInternalServerErrorResult()
     {

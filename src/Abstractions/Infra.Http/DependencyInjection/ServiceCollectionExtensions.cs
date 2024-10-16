@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Goal.Infra.Crosscutting.Adapters;
-using Goal.Infra.Crosscutting.Notifications;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Goal.Infra.Http.DependencyInjection;
@@ -25,27 +24,6 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ITypeAdapterFactory, TTypeAdapterFactory>();
         services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>()!.Create());
 
-        return services;
-    }
-
-    public static IServiceCollection AddNotificationHandler(this IServiceCollection services, IDefaultNotificationHandler notificationHandler)
-    {
-        ArgumentNullException.ThrowIfNull(notificationHandler);
-
-        services.AddScoped(typeof(IDefaultNotificationHandler), serviceProvider => notificationHandler);
-        return services;
-    }
-
-    public static IServiceCollection AddNotificationHandler<TNotificationHandler>(this IServiceCollection services)
-        where TNotificationHandler : class, IDefaultNotificationHandler
-    {
-        services.AddScoped<IDefaultNotificationHandler, TNotificationHandler>();
-        return services;
-    }
-
-    public static IServiceCollection AddDefaultNotificationHandler(this IServiceCollection services)
-    {
-        services.AddScoped<IDefaultNotificationHandler, DefaultNotificationHandler>();
         return services;
     }
 

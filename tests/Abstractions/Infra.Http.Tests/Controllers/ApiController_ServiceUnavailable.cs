@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Notifications;
 using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Results;
 using Microsoft.AspNetCore.Http;
@@ -10,22 +9,6 @@ namespace Goal.Infra.Http.Tests.Controllers;
 
 public class ApiController_ServiceUnavailable
 {
-    [Fact]
-    public void WithObjectResult_ReturnsServiceUnavailableObjectResult()
-    {
-        // Arrange
-        var controller = new TestController();
-        var result = Notification.ExternalError("001", "External error");
-
-        // Act
-        ActionResult actionResult = controller.ServiceUnavailableWrapper(result);
-
-        // Assert
-        actionResult.Should().BeOfType<ServiceUnavailableObjectResult>();
-        actionResult.As<ServiceUnavailableObjectResult>().StatusCode.Should().Be(StatusCodes.Status503ServiceUnavailable);
-        actionResult.As<ServiceUnavailableObjectResult>().Value.Should().Be(result);
-    }
-
     [Fact]
     public void ReturnsServiceUnavailableResult()
     {
