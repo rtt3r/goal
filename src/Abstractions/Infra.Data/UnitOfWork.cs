@@ -17,11 +17,11 @@ public abstract class UnitOfWork : IUnitOfWork
         this.context = context;
     }
 
-    public bool Save()
-        => context.SaveChanges() > 0;
+    public int Commit()
+        => context.SaveChanges();
 
-    public async Task<bool> SaveAsync(CancellationToken cancellationToken = default)
-        => await context.SaveChangesAsync(cancellationToken) > 0;
+    public async Task<int> CommitAsync(CancellationToken cancellationToken = default)
+        => await context.SaveChangesAsync(cancellationToken);
 
     protected virtual void Dispose(bool disposing)
     {

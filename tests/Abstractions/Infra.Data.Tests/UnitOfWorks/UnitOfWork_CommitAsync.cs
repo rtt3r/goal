@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Goal.Infra.Data.Tests.UnitOfWorks;
 
-public class UnitOfWork_SaveAsync
+public class UnitOfWork_CommitAsync
 {
     public class MockUnitOfWork(DbContext context) : UnitOfWork(context)
     {
@@ -22,10 +22,10 @@ public class UnitOfWork_SaveAsync
         contextMock.Setup(c => c.SaveChangesAsync(default)).ReturnsAsync(1);
 
         // Act
-        bool result = await unitOfWork.SaveAsync();
+        int result = await unitOfWork.CommitAsync();
 
         // Assert
-        result.Should().BeTrue();
+        result.Should().BeGreaterThan(0);
     }
 
     [Fact]
@@ -37,9 +37,9 @@ public class UnitOfWork_SaveAsync
         var cancellationToken = new CancellationToken(true);
 
         // Act
-        bool result = await unitOfWork.SaveAsync(cancellationToken);
+        int result = await unitOfWork.CommitAsync(cancellationToken);
 
         // Assert
-        result.Should().BeFalse();
+        result.Should().Be(0);
     }
 }

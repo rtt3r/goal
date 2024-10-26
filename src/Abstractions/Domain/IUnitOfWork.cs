@@ -6,6 +6,6 @@ namespace Goal.Domain;
 
 public interface IUnitOfWork : IDisposable
 {
-    bool Save();
-    Task<bool> SaveAsync(CancellationToken cancellationToken = default);
+    int Commit();
+    Task<int> CommitAsync(CancellationToken cancellationToken = default);
 }

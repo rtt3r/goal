@@ -5,13 +5,13 @@ using Xunit;
 
 namespace Goal.Infra.Data.Tests.UnitOfWorks;
 
-public class UnitOfWork_Save
+public class UnitOfWork_Commit
 {
     public class MockDbContext : DbContext
     {
     }
 
-    public class MockUnitOfWork(UnitOfWork_Save.MockDbContext context) : UnitOfWork(context)
+    public class MockUnitOfWork(UnitOfWork_Commit.MockDbContext context) : UnitOfWork(context)
     {
     }
 
@@ -24,10 +24,10 @@ public class UnitOfWork_Save
         contextMock.Setup(c => c.SaveChanges()).Returns(1);
 
         // Act
-        bool result = unitOfWork.Save();
+        int result = unitOfWork.Commit();
 
         // Assert
-        result.Should().BeTrue();
+        result.Should().BeGreaterThan(0);
     }
 
     [Fact]
@@ -39,9 +39,9 @@ public class UnitOfWork_Save
         contextMock.Setup(c => c.SaveChanges()).Returns(0);
 
         // Act
-        bool result = unitOfWork.Save();
+        int result = unitOfWork.Commit();
 
         // Assert
-        result.Should().BeFalse();
+        result.Should().Be(0);
     }
 }
