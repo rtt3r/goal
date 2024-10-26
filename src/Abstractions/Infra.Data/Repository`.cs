@@ -25,19 +25,19 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
         Context = context;
     }
 
-    public virtual TEntity? Load(TKey key)
+    public virtual TEntity? Get(TKey key)
         => Context.Set<TEntity>().Find(key);
 
-    public virtual ICollection<TEntity> Query()
+    public virtual ICollection<TEntity> List()
         => Context.Set<TEntity>().ToList();
 
-    public virtual ICollection<TEntity> Query(ISpecification<TEntity> specification)
+    public virtual ICollection<TEntity> Search(ISpecification<TEntity> specification)
     {
         return FindSpecific(specification)
             .ToList();
     }
 
-    public virtual IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch)
+    public virtual IPagedList<TEntity> Search(ISpecification<TEntity> specification, IPageSearch pageSearch)
     {
         ArgumentNullException.ThrowIfNull(pageSearch);
 
@@ -45,19 +45,19 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             .ToPagedList(pageSearch);
     }
 
-    public virtual IPagedList<TEntity> Query(IPageSearch pageSearch)
-        => Query(new TrueSpecification<TEntity>(), pageSearch);
+    public virtual IPagedList<TEntity> Search(IPageSearch pageSearch)
+        => Search(new TrueSpecification<TEntity>(), pageSearch);
 
-    public virtual async Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
+    public virtual async Task<TEntity?> GetAsync(TKey key, CancellationToken cancellationToken = new CancellationToken())
     {
         cancellationToken.ThrowIfCancellationRequested();
         return await Context.Set<TEntity>().FindAsync([key], cancellationToken);
     }
 
-    public virtual async Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken())
+    public virtual async Task<ICollection<TEntity>> ListAsync(CancellationToken cancellationToken = new CancellationToken())
         => await Context.Set<TEntity>().ToListAsync(cancellationToken: cancellationToken);
 
-    public virtual async Task<ICollection<TEntity>> QueryAsync(
+    public virtual async Task<ICollection<TEntity>> SearchAsync(
         ISpecification<TEntity> specification,
         CancellationToken cancellationToken = new CancellationToken())
     {
@@ -65,12 +65,12 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
             .ToListAsync(cancellationToken);
     }
 
-    public virtual async Task<IPagedList<TEntity>> QueryAsync(
+    public virtual async Task<IPagedList<TEntity>> SearchAsync(
         IPageSearch pageSearch,
         CancellationToken cancellationToken = new CancellationToken())
-        => await QueryAsync(new TrueSpecification<TEntity>(), pageSearch, cancellationToken);
+        => await SearchAsync(new TrueSpecification<TEntity>(), pageSearch, cancellationToken);
 
-    public virtual async Task<IPagedList<TEntity>> QueryAsync(
+    public virtual async Task<IPagedList<TEntity>> SearchAsync(
         ISpecification<TEntity> specification,
         IPageSearch pageSearch,
         CancellationToken cancellationToken = new CancellationToken())

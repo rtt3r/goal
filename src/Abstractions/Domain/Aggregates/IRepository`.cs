@@ -9,25 +9,25 @@ namespace Goal.Domain.Aggregates;
 public interface IRepository<TEntity, TKey> : IRepository
     where TEntity : class
 {
-    TEntity? Load(TKey key);
+    TEntity? Get(TKey key);
 
-    ICollection<TEntity> Query();
+    ICollection<TEntity> List();
 
-    ICollection<TEntity> Query(ISpecification<TEntity> specification);
+    ICollection<TEntity> Search(ISpecification<TEntity> specification);
 
-    IPagedList<TEntity> Query(IPageSearch pageSearch);
+    IPagedList<TEntity> Search(IPageSearch pageSearch);
 
-    IPagedList<TEntity> Query(ISpecification<TEntity> specification, IPageSearch pageSearch);
+    IPagedList<TEntity> Search(ISpecification<TEntity> specification, IPageSearch pageSearch);
 
-    Task<TEntity?> LoadAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
+    Task<TEntity?> GetAsync(TKey key, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<ICollection<TEntity>> QueryAsync(CancellationToken cancellationToken = new CancellationToken());
+    Task<ICollection<TEntity>> ListAsync(CancellationToken cancellationToken = new CancellationToken());
 
-    Task<ICollection<TEntity>> QueryAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
+    Task<ICollection<TEntity>> SearchAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<IPagedList<TEntity>> QueryAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> SearchAsync(IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
-    Task<IPagedList<TEntity>> QueryAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
+    Task<IPagedList<TEntity>> SearchAsync(ISpecification<TEntity> specification, IPageSearch pageSearch, CancellationToken cancellationToken = new CancellationToken());
 
     bool Any();
 

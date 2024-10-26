@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Goal.Infra.Data.Tests.Extensions;
@@ -12,14 +10,14 @@ using Xunit;
 
 namespace Goal.Infra.Data.Tests.Repositories;
 
-public class Repository_Get
+public class Repository_List
 {
     [Fact]
-    public void ReturnsAnEntityGivenId()
+    public void ReturnsAllEntities()
     {
-        List<Test> tests = MockTests();
+        List<Test> mockedTests = MockTests();
 
-        Mock<DbSet<Test>> mockDbSet = tests
+        Mock<DbSet<Test>> mockDbSet = mockedTests
             .AsQueryable()
             .BuildMockDbSet();
 
@@ -27,66 +25,52 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-
-        string id = tests[2].Id;
-
-        Test? test = testRepository.Get(id);
+        ICollection<Test> tests = testRepository.List();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        test.Should().NotBeNull();
-        test?.Id.Should().Be(id);
+        tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
     }
 
     [Fact]
-    public void ReturnsNullGivenId()
+    public void ReturnsEmpty()
     {
-        List<Test> tests = MockTests();
-
-        Mock<DbSet<Test>> mockDbSet = tests
+        Mock<DbSet<Test>> mockDbSet = Enumerable.Empty<Test>()
             .AsQueryable()
             .BuildMockDbSet();
 
         var mockDbContext = new Mock<DbContext>();
-
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = testRepository.Get(Guid.NewGuid().ToString());
+        ICollection<Test> tests = testRepository.List();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        test.Should().BeNull();
+        tests.Should().NotBeNull().And.BeEmpty();
     }
 
     [Fact]
-    public async Task ReturnsAnEntityGivenIdAsync()
+    public async Task ReturnsAllEntitiesAsync()
     {
-        List<Test> tests = MockTests();
+        List<Test> mockedTests = MockTests();
 
-        Mock<DbSet<Test>> mockDbSet = tests
+        Mock<DbSet<Test>> mockDbSet = mockedTests
             .AsQueryable()
             .BuildMockDbSet();
-
-        mockDbSet.Setup(s => s.FindAsync(It.IsAny<object[]>(), It.IsAny<CancellationToken>())).ReturnsAsync(tests[2]);
 
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        string id = tests[2].Id;
-
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = await testRepository.GetAsync(id);
+        ICollection<Test> tests = await testRepository.ListAsync();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        test.Should().NotBeNull();
-        test?.Id.Should().Be(id);
+        tests.Should().NotBeNull().And.HaveSameCount(mockedTests);
     }
 
     [Fact]
-    public async Task ReturnsNullGivenIdAsync()
+    public async Task ReturnsEmptyAsync()
     {
-        List<Test> tests = MockTests();
-
-        Mock<DbSet<Test>> mockDbSet = tests
+        Mock<DbSet<Test>> mockDbSet = Enumerable.Empty<Test>()
             .AsQueryable()
             .BuildMockDbSet();
 
@@ -94,21 +78,24 @@ public class Repository_Get
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
         var testRepository = new TestRepository(mockDbContext.Object);
-        Test? test = await testRepository.GetAsync(Guid.NewGuid().ToString());
+        ICollection<Test> tests = await testRepository.ListAsync();
 
         mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        test.Should().BeNull();
+        tests.Should().NotBeNull().And.BeEmpty();
+    }
+
+    private static List<Test> MockTests(int count)
+    {
+        var tests = new List<Test>();
+
+        for (int i = 1; i <= count; i++)
+        {
+            tests.Add(new Test(i));
+        }
+
+        return tests;
     }
 
     private static List<Test> MockTests()
-    {
-        return
-        [
-            new Test(1),
-            new Test(2),
-            new Test(3),
-            new Test(4),
-            new Test(5)
-        ];
-    }
+        => MockTests(5);
 }
