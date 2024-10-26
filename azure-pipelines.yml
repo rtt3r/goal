@@ -51,12 +51,12 @@ stages:
       inputs:
         version: '8.x'
 
-    - task: SonarCloudPrepare@1
+    - task: SonarCloudPrepare@3
       displayName: 'SonarCloud Prepare'
       inputs:
         SonarCloud: 'SonarCloud'
         organization: 'aritters'
-        scannerMode: 'MSBuild'
+        scannerMode: 'dotnet'
         projectKey: 'ritter-ti_goal'
 
     - task: DotNetCoreCLI@2
@@ -67,16 +67,15 @@ stages:
         arguments: '--collect "Code Coverage"'
         publishTestResults: true
 
-    - task: PublishCodeCoverageResults@1
+    - task: PublishCodeCoverageResults@2
       displayName: 'Publish code coverage report'
       inputs:
-        codeCoverageTool: 'Cobertura'
         summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
 
-    - task: SonarCloudAnalyze@1
+    - task: SonarCloudAnalyze@3
       displayName: 'SonarCloud analyze'
 
-    - task: SonarCloudPublish@1
+    - task: SonarCloudPublish@3
       displayName: 'SonarCloud publish'
       inputs:
         pollingTimeoutSec: '300'
