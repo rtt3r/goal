@@ -1,3 +1,4 @@
+using System.Globalization;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Trying;
 using Xunit;
@@ -26,7 +27,7 @@ public class Try_Of
         string message = "Something went wrong.";
 
         // Act
-        var result = Try<int, string>.Of(message);
+        var result = Try<string, int>.Of(message);
 
         // Assert
         result.IsSuccess.Should().BeTrue();
@@ -41,7 +42,7 @@ public class Try_Of
         int value = 42;
 
         // Act
-        var result = Try<int, string>.Of(value);
+        var result = Try<string, int>.Of(value);
 
         // Assert
         result.IsSuccess.Should().BeFalse();

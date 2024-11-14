@@ -10,7 +10,7 @@ public class Try_OptionalFailure
     public void IsNullForSuccessTry()
     {
         int value = 456;
-        Try<string, int> success = value;
+        Try<int, string> success = value;
 
         Option<string?> optionalFailure = success.OptionalFailure;
 
@@ -21,7 +21,7 @@ public class Try_OptionalFailure
     public void IsSomeForFailureTry()
     {
         string errorMessage = "Failed!";
-        Try<string, int> failure = errorMessage;
+        Try<int, string> failure = errorMessage;
 
         Option<string?> optionalFailure = failure.OptionalFailure;
 

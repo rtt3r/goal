@@ -11,7 +11,7 @@ public class Try_ImplicitOperation
     {
         int value = 42;
 
-        Try<string, int> result = value;
+        Try<int, string> result = value;
 
         result.IsSuccess.Should().BeTrue();
         result.GetSuccess().Should().Be(value);
@@ -22,7 +22,7 @@ public class Try_ImplicitOperation
     {
         string error = "oops!";
 
-        Try<string, int> result = error;
+        Try<int, string> result = error;
 
         result.IsFailure.Should().BeTrue();
         result.GetFailure().Should().Be(error);

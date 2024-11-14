@@ -10,7 +10,7 @@ public class Try_OptionalSuccess
     public void IsNoneForFailureTry()
     {
         string errorMessage = "Failed!";
-        Try<string, int> failure = errorMessage;
+        Try<int, string> failure = errorMessage;
 
         Option<int> optionalSuccess = failure.OptionalSuccess;
 
@@ -21,7 +21,7 @@ public class Try_OptionalSuccess
     public void IsSomeForSuccessTry()
     {
         int value = 123;
-        Try<string, int> success = value;
+        Try<int, string> success = value;
 
         Option<int> optionalSuccess = success.OptionalSuccess;
 

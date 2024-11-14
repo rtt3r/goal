@@ -2,7 +2,7 @@ using System;
 
 namespace Goal.Infra.Crosscutting.Trying;
 
-public readonly struct Try<TFailure, TSuccess>
+public readonly struct Try<TSuccess, TFailure>
 {
     internal TFailure? Failure { get; }
 
@@ -12,12 +12,12 @@ public readonly struct Try<TFailure, TSuccess>
 
     public bool IsSuccess => !IsFailure;
 
-    public Option<TFailure?> OptionalFailure => !IsFailure 
+    public Option<TFailure?> OptionalFailure => !IsFailure
         ? (Option<TFailure?>)Option.None()
         : Option.Of(Failure);
 
     public Option<TSuccess?> OptionalSuccess => !IsSuccess
-        ? (Option<TSuccess?>)Option.None() 
+        ? (Option<TSuccess?>)Option.None()
         : Option.Of(Success);
 
     internal Try(TFailure failure)
@@ -34,11 +34,11 @@ public readonly struct Try<TFailure, TSuccess>
         Success = success;
     }
 
-    public TResult Match<TResult>(Func<TFailure?, TResult> failure, Func<TSuccess?, TResult> success) 
+    public TResult Match<TResult>(Func<TSuccess?, TResult> success, Func<TFailure?, TResult> failure)
         => !IsFailure ? success(Success) : failure(Failure);
 
-    public UnitType Match(Action<TFailure?> failure, Action<TSuccess?> success)
-        => Match(Helpers.ToFunc(failure), Helpers.ToFunc(success));
+    public UnitType Match(Action<TSuccess?> success, Action<TFailure?> failure)
+        => Match(Helpers.ToFunc(success), Helpers.ToFunc(failure));
 
     public TSuccess? GetSuccess()
         => Success;
@@ -46,15 +46,15 @@ public readonly struct Try<TFailure, TSuccess>
     public TFailure? GetFailure()
         => Failure;
 
-    public static implicit operator Try<TFailure, TSuccess>(TFailure failure)
+    public static implicit operator Try<TSuccess, TFailure>(TFailure failure)
         => new(failure);
 
-    public static implicit operator Try<TFailure, TSuccess>(TSuccess success)
+    public static implicit operator Try<TSuccess, TFailure>(TSuccess success)
         => new(success);
 
-    public static Try<TFailure, TSuccess> Of(TSuccess obj)
+    public static Try<TSuccess, TFailure> Of(TSuccess obj)
         => obj;
 
-    public static Try<TFailure, TSuccess> Of(TFailure obj)
+    public static Try<TSuccess, TFailure> Of(TFailure obj)
         => obj;
 }
