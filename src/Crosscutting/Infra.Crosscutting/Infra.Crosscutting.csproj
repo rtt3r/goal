@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
 		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
-		<VersionPrefix>2.0.1</VersionPrefix>
-		<AssemblyVersion>2.0.1.0</AssemblyVersion>
+		<VersionPrefix>2.1.0</VersionPrefix>
+		<AssemblyVersion>2.1.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Crosscutting</PackageId>
@@ -18,11 +18,6 @@
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.10.0" />
-		<PackageReference Include="OneOf" Version="3.0.271" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<None Include="..\..\..\LICENSE.txt">
