@@ -47,9 +47,9 @@ stages:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET SDK 8.x'
+      displayName: 'Use .NET SDK 9.x'
       inputs:
-        version: '8.x'
+        version: '9.x'
 
     - task: SonarCloudPrepare@3
       displayName: 'SonarCloud Prepare'
