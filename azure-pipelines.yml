@@ -97,6 +97,11 @@ stages:
       dotnetSdkVersion: '9.x'
 
     steps:
+    - task: UseDotNet@2
+      displayName: 'Use .NET SDK 9.x'
+      inputs:
+        version: '9.x'
+
     - task: DotNetCoreCLI@2
       displayName: Generate Goal Packages
       inputs:
