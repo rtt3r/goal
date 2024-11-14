@@ -5,17 +5,17 @@ namespace Goal.Infra.Crosscutting.Extensions;
 
 public static class OneOfExtensions
 {
-    public static bool IsSuccess<TResult>(this OneOf<TResult, AppError> obj)
-       => obj.IsT0;
+    public static bool IsSuccess<TResult, TError>(this OneOf<TResult, TError> obj)
+        where TError : AppError
+        => obj.IsT0;
 
-    public static bool IsError<TResult>(this OneOf<TResult, AppError> obj)
+    public static bool IsError<TResult, TError>(this OneOf<TResult, TError> obj)
+        where TError : AppError
         => obj.IsT1;
 
-    public static TResult GetSuccess<TResult>(this OneOf<TResult, AppError> obj)
-       => obj.AsT0;
-
-    public static AppError GetError<TResult>(this OneOf<TResult, AppError> obj)
-        => obj.AsT1;
+    public static TResult GetSuccess<TResult, TError>(this OneOf<TResult, TError> obj)
+        where TError : AppError
+        => obj.AsT0;
 
     public static TError GetError<TResult, TError>(this OneOf<TResult, TError> obj)
         where TError : AppError

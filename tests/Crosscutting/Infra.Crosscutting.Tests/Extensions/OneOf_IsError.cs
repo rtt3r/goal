@@ -9,9 +9,17 @@ namespace Goal.Infra.Crosscutting.Tests.Extensions;
 public class OneOf_IsError
 {
     [Fact]
-    public void ReturnTrueGivenError()
+    public void ReturnTrueGivenAppError()
     {
         OneOf<bool, AppError> oneOf = new AppError(ErrorType.UnexpectedError, "Something went wrong", nameof(ErrorType.UnexpectedError));
+
+        oneOf.IsError().Should().BeTrue();
+    }
+
+    [Fact]
+    public void ReturnTrueGivenTestAppError()
+    {
+        OneOf<bool, TestAppError> oneOf = new TestAppError("Something went wrong");
 
         oneOf.IsError().Should().BeTrue();
     }
@@ -23,4 +31,7 @@ public class OneOf_IsError
 
         oneOf.IsError().Should().BeFalse();
     }
+
+    private record TestAppError(string Detail)
+        : AppError(ErrorType.UnexpectedError, Detail, "TEST_ERROR");
 }
