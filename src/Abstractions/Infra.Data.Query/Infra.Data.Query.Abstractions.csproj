@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data.Query</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.Query.Abstractions</AssemblyName>
-		<VersionPrefix>1.7.0</VersionPrefix>
-		<AssemblyVersion>1.7.0.0</AssemblyVersion>
+		<VersionPrefix>1.8.0</VersionPrefix>
+		<AssemblyVersion>1.8.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Infra.Data.Query.Abstractions</PackageId>
