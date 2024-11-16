@@ -15,7 +15,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
         var factory = new InMemoryDbContextFactory();
 
         // Act
-        TestDbContext context = factory.CreateDbContext(Array.Empty<string>());
+        TestDbContext context = factory.CreateDbContext([]);
 
         // Assert
         context.Should().NotBeNull();
@@ -28,7 +28,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
         var factory = new DefaultDbContextFactory();
 
         // Act
-        TestDbContext context = factory.CreateDbContext(Array.Empty<string>());
+        TestDbContext context = factory.CreateDbContext([]);
 
         // Assert
         context.Should().NotBeNull();
@@ -41,7 +41,7 @@ public class DesignTimeDbContextFactory_CreateDBContext
         var factory = new NotFoundDbContextFactory();
 
         // Act & Assert
-        FluentActions.Invoking(() => factory.CreateDbContext(Array.Empty<string>()))
+        FluentActions.Invoking(() => factory.CreateDbContext([]))
             .Should().Throw<ArgumentNullException>().WithMessage($"Value cannot be null. (Parameter 'databaseName')");
     }
 

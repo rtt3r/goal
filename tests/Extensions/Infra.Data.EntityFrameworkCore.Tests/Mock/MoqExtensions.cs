@@ -24,12 +24,12 @@ public static class MoqExtensions
         mock.Setup(m => m.Provider).Returns(queryProvider);
         mock.Setup(m => m.Expression).Returns(data.Expression);
         mock.Setup(m => m.ElementType).Returns(data.ElementType);
-        mock.Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+        mock.Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator);
     }
 
     private static void ConfigureAsyncEnumerableCalls<TEntity>(
         this Mock<IAsyncEnumerable<TEntity>> mock,
-        IAsyncEnumerable<TEntity> enumerable)
+        TestAsyncEnumerable<TEntity> enumerable)
     {
         mock.Setup(d => d.GetAsyncEnumerator(It.IsAny<CancellationToken>()))
             .Returns(() => enumerable.GetAsyncEnumerator());

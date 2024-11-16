@@ -10,5 +10,5 @@ public class Audit<TKey>
     public DateTimeOffset EndTime { get; set; }
     public bool Succeeded { get; set; }
     public string? ErrorMessage { get; set; }
-    public ICollection<AuditEntry<TKey>> Entries { get; } = new List<AuditEntry<TKey>>();
+    public ICollection<AuditEntry<TKey>> Entries { get; } = [];
 }

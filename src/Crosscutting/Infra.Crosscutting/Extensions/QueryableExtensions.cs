@@ -49,7 +49,7 @@ public static class QueryableExtensions
         ArgumentNullException.ThrowIfNull(pageSearch);
 
         return new PagedList<T>(
-            source.Paginate(pageSearch).ToList(),
+            [.. source.Paginate(pageSearch)],
             source.Count());
     }
 }

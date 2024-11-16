@@ -15,6 +15,6 @@ internal static class OperationFilterContextExtensions
 
         return controllerAttributes
             ?.Concat(actionAttributes)
-            ?? Enumerable.Empty<T>();
+            ?? [];
     }
 }

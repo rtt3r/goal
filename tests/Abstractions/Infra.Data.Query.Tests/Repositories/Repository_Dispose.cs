@@ -2,7 +2,7 @@ using FluentAssertions;
 using Goal.Infra.Data.Query;
 using Xunit;
 
-namespace Goal.Infra.Http.Tests.Repositories;
+namespace Goal.Infra.Http.Abstractions.csproj.Tests.Repositories;
 
 public class Repository_Dispose
 {
@@ -26,9 +26,7 @@ public class Repository_Dispose
         protected override void Dispose(bool disposing)
         {
             if (disposing && !Disposed)
-            {
                 Disposed = true;
-            }
         }
     }
 }

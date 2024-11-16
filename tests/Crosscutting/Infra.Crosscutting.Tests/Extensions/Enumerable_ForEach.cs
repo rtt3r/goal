@@ -14,11 +14,11 @@ public class Enumerable_ForEach
     [Fact]
     public void ForEach_NotEmptyEnumerable_NotThrowException()
     {
-        IEnumerable<TestObject1> source = new List<TestObject1>
-        {
+        IEnumerable<TestObject1> source =
+        [
             new TestObject1 { Id = 1 },
             new TestObject1 { Id = 2 }
-        };
+        ];
 
         source.ForEach(p => p.Value = p.Id.ToString());
 
@@ -30,7 +30,7 @@ public class Enumerable_ForEach
     [Fact]
     public void ForEach_EmptyEnumerable_NotThrowException()
     {
-        IEnumerable<TestObject1> source = new List<TestObject1>();
+        IEnumerable<TestObject1> source = [];
         source.ForEach(p => { });
 
         source.Should().NotBeNull().And.BeEmpty();
@@ -71,7 +71,7 @@ public class Enumerable_ForEach
     [Fact]
     public void ForEach_EmptyObjectEnumerable_NotThrowException()
     {
-        TestObject1[] source = Array.Empty<TestObject1>();
+        TestObject1[] source = [];
         source.ForEach(p => { });
 
         source.Should().NotBeNull().And.BeEmpty();

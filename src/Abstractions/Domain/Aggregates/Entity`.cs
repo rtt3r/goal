@@ -6,15 +6,9 @@ public abstract class Entity<TKey> : IEntity<TKey>
 
     public override bool Equals(object? obj)
     {
-        if (obj is null)
-            return false;
-
-        if (ReferenceEquals(this, obj))
-            return true;
-
-        return obj is IEntity<TKey> item
-            && item.Id is not null 
-            && item.Id.Equals(Id);
+        return obj is not null
+            && (ReferenceEquals(this, obj)
+            || (obj is IEntity<TKey> item && item.Id is not null && item.Id.Equals(Id)));
     }
 
     public override int GetHashCode()

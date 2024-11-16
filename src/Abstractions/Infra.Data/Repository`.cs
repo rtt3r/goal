@@ -29,13 +29,10 @@ public abstract class Repository<TEntity, TKey> : Repository, IRepository<TEntit
         => Context.Set<TEntity>().Find(key);
 
     public virtual ICollection<TEntity> List()
-        => Context.Set<TEntity>().ToList();
+        => [.. Context.Set<TEntity>()];
 
     public virtual ICollection<TEntity> Search(ISpecification<TEntity> specification)
-    {
-        return FindSpecific(specification)
-            .ToList();
-    }
+        => [.. FindSpecific(specification)];
 
     public virtual IPagedList<TEntity> Search(ISpecification<TEntity> specification, IPageSearch pageSearch)
     {

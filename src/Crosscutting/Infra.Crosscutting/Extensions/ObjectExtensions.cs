@@ -66,7 +66,7 @@ public static class ObjectExtensions
     public static TAttribute? GetAttribute<TAttribute>(this object source)
         where TAttribute : Attribute
     {
-        Attribute? attr = source.GetType().GetCustomAttribute(typeof(TAttribute), false);
+        Attribute? attr = source.GetType().GetCustomAttribute<TAttribute>(false);
 
         return attr is null
             ? null

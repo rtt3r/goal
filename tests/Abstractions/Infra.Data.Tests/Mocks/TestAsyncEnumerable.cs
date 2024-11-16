@@ -53,7 +53,7 @@ public class TestAsyncEnumerable<T> : IAsyncEnumerable<T>, IOrderedQueryable<T>,
         object? executionResult = typeof(IQueryProvider)
             .GetMethod(nameof(IQueryProvider.Execute), 1, [typeof(Expression)])
             ?.MakeGenericMethod(expectedResultType)
-            ?.Invoke(this, new[] { expression });
+            ?.Invoke(this, [expression]);
 
         return (TResult?)typeof(Task).GetMethod(nameof(Task.FromResult))
             ?.MakeGenericMethod(expectedResultType)

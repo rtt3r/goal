@@ -18,8 +18,8 @@ public class Type_GetAllTypesOf
             .Should().NotBeNullOrEmpty()
             .And.HaveCount(2);
 
-        types[0].Should().BeAssignableTo(typeof(ExtendedClass1));
-        types[1].Should().BeAssignableTo(typeof(ExtendedClass2));
+        types[0].Should().BeAssignableTo<ExtendedClass1>();
+        types[1].Should().BeAssignableTo<ExtendedClass2>();
     }
 }
 

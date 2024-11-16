@@ -1,32 +1,12 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using Goal.Infra.Crosscutting.Adapters;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Goal.Infra.Http.DependencyInjection;
+namespace Goal.Extensions.DependencyInjection;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddTypeAdapterFactory(this IServiceCollection services, ITypeAdapterFactory typeAdapterFactory)
-    {
-        ArgumentNullException.ThrowIfNull(typeAdapterFactory);
-
-        services.AddSingleton(typeof(ITypeAdapterFactory), typeAdapterFactory);
-        services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>()!.Create());
-
-        return services;
-    }
-
-    public static IServiceCollection AddTypeAdapterFactory<TTypeAdapterFactory>(this IServiceCollection services)
-        where TTypeAdapterFactory : class, ITypeAdapterFactory
-    {
-        services.AddSingleton<ITypeAdapterFactory, TTypeAdapterFactory>();
-        services.AddSingleton(factory => factory.GetService<ITypeAdapterFactory>()!.Create());
-
-        return services;
-    }
-
     public static void RegisterAllTypesOf<TService>(this IServiceCollection services, ServiceLifetime lifetime = ServiceLifetime.Scoped)
         where TService : class
     {
