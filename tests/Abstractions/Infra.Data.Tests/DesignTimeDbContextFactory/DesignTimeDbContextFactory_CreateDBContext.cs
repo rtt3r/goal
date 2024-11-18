@@ -47,11 +47,9 @@ public class DesignTimeDbContextFactory_CreateDBContext
 
     private class InMemoryDbContextFactory : DesignTimeDbContextFactory<TestDbContext>
     {
-        protected override string ConnectionStringName => "InMemoryDatabaseName";
-
         protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName)!);
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString("InMemoryDatabaseName")!);
             return new TestDbContext(optionsBuilder.Options);
         }
     }
@@ -60,18 +58,16 @@ public class DesignTimeDbContextFactory_CreateDBContext
     {
         protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName)!);
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString("InMemoryDatabaseName")!);
             return new TestDbContext(optionsBuilder.Options);
         }
     }
 
     private class NotFoundDbContextFactory : DesignTimeDbContextFactory<TestDbContext>
     {
-        protected override string ConnectionStringName => "NotFoundDatabaseName";
-
         protected override TestDbContext CreateNewInstance(DbContextOptionsBuilder<TestDbContext> optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString(ConnectionStringName)!);
+            optionsBuilder.UseInMemoryDatabase(databaseName: Configuration.GetConnectionString("NotFoundDatabaseName")!);
             return new TestDbContext(optionsBuilder.Options);
         }
     }

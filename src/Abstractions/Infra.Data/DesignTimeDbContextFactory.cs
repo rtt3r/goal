@@ -9,33 +9,34 @@ namespace Goal.Infra.Data;
 public abstract class DesignTimeDbContextFactory<TContext> : IDesignTimeDbContextFactory<TContext> where TContext : DbContext
 {
     private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
-    private const string DefaultConnectionStringName = "DefaultConnection";
+    private const string AppSettingsFileName = "appsettings.json";
 
-    protected virtual string ConnectionStringName
-        => DefaultConnectionStringName;
+    private IConfiguration? _configuration;
 
-    public IConfiguration Configuration { get; private set; } = null!;
+    protected IConfiguration Configuration => _configuration ??= BuildConfiguration();
 
     public TContext CreateDbContext(string[] args)
-        => CreateDbContext(Directory.GetCurrentDirectory(), Environment.GetEnvironmentVariable(AspNetCoreEnvironment));
+        => CreateDbContext();
 
     protected abstract TContext CreateNewInstance(DbContextOptionsBuilder<TContext> optionsBuilder);
 
-    private TContext CreateDbContext(string basePath, string? environmentName)
-    {
-        IConfigurationBuilder builder = new ConfigurationBuilder()
-            .SetBasePath(basePath)
-            .AddJsonFile("appsettings.json");
+    private TContext CreateDbContext()
+        => CreateNewInstance(new DbContextOptionsBuilder<TContext>());
 
-        if (environmentName is not null)
+    private static IConfiguration BuildConfiguration()
+    {
+        string? environmentName = Environment.GetEnvironmentVariable(AspNetCoreEnvironment);
+
+        IConfigurationBuilder builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(AppSettingsFileName)
+            .AddEnvironmentVariables();
+
+        if (!string.IsNullOrEmpty(environmentName))
         {
-            builder = builder.AddJsonFile($"appsettings.{environmentName}.json", true);
+            builder.AddJsonFile($"appsettings.{environmentName}.json", optional: true);
         }
 
-        builder = builder.AddEnvironmentVariables();
-
-        Configuration = builder.Build();
-
-        return CreateNewInstance(new DbContextOptionsBuilder<TContext>());
+        return builder.Build();
     }
 }
