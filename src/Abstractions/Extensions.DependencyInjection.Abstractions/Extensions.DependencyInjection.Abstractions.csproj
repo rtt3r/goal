@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Extensions.DependencyInjection</RootNamespace>
 		<AssemblyName>Goal.Extensions.DependencyInjection.Abstractions</AssemblyName>
-		<VersionPrefix>3.0.1</VersionPrefix>
-		<AssemblyVersion>3.0.1.0</AssemblyVersion>
+		<VersionPrefix>3.1.0</VersionPrefix>
+		<AssemblyVersion>3.1.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Extensions.DependencyInjection.Abstractions</PackageId>
