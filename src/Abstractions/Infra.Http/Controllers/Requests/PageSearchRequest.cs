@@ -1,5 +1,3 @@
-using Goal.Infra.Crosscutting.Collections;
-
 namespace Goal.Infra.Http.Controllers.Requests;
 
 public sealed class PageSearchRequest
@@ -13,14 +11,4 @@ public sealed class PageSearchRequest
     /// The number of page items
     /// </summary>
     public int PageSize { get; set; } = int.MaxValue;
-
-    /// <summary>
-    /// The field name to sort
-    /// </summary>
-    public string? SortBy { get; set; }
-
-    /// <summary>
-    /// The sort direction (Asc | Desc)
-    /// </summary>
-    public SortDirection? SortDirection { get; set; }
 }

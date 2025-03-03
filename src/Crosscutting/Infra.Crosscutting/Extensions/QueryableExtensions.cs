@@ -1,55 +1,52 @@
 using System;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using Goal.Infra.Crosscutting.Collections;
-using GoalQueryable = Goal.Infra.Crosscutting.Collections.Queryable;
 
 namespace Goal.Infra.Crosscutting.Extensions;
 
 public static class QueryableExtensions
 {
-    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string fieldName, SortDirection direction)
-        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, direction, false);
-
-    public static IOrderedQueryable<T> OrderBy<T>(this IQueryable<T> source, string fieldName)
-        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, false);
-
-    public static IOrderedQueryable<T> OrderByDescending<T>(this IQueryable<T> source, string fieldName)
-        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, false);
-
-    public static IOrderedQueryable<T> ThenBy<T>(this IQueryable<T> source, string fieldName, SortDirection direction)
-        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, direction, true);
-
-    public static IOrderedQueryable<T> ThenBy<T>(this IOrderedQueryable<T> source, string fieldName)
-        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Asc, true);
-
-    public static IOrderedQueryable<T> ThenByDescending<T>(this IOrderedQueryable<T> source, string fieldName)
-        => GoalQueryable.Order<IOrderedQueryable<T>, T>(source, fieldName, SortDirection.Desc, true);
-
     public static IQueryable<T> Paginate<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
         ArgumentNullException.ThrowIfNull(pageSearch);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageSearch.PageIndex);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageSearch.PageSize);
 
-        IQueryable<T> queryableList = source;
+        source = source.Skip(pageSearch.PageIndex * pageSearch.PageSize);
+        source = source.Take(pageSearch.PageSize);
 
-        if (!string.IsNullOrWhiteSpace(pageSearch.SortBy))
-        {
-            queryableList = queryableList.OrderBy(pageSearch.SortBy, pageSearch.SortDirection);
-        }
+        return source;
+    }
 
-        queryableList = queryableList.Skip(pageSearch.PageIndex * pageSearch.PageSize);
-        queryableList = queryableList.Take(pageSearch.PageSize);
+    public static IQueryable<T> Paginate<T>(this IQueryable<T> source, int pageIndex, int pageSize)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(pageIndex);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageSize);
 
-        return queryableList;
+        source = source.Skip(pageIndex * pageSize);
+        source = source.Take(pageSize);
+
+        return source;
     }
 
     public static IPagedList<T> ToPagedList<T>(this IQueryable<T> source, IPageSearch pageSearch)
     {
         ArgumentNullException.ThrowIfNull(pageSearch);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageSearch.PageIndex);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageSearch.PageSize);
 
         return new PagedList<T>(
             [.. source.Paginate(pageSearch)],
+            source.Count());
+    }
+
+    public static IPagedList<T> ToPagedList<T>(this IQueryable<T> source, int pageIndex, int pageSize)
+    {
+        ArgumentOutOfRangeException.ThrowIfNegative(pageIndex);
+        ArgumentOutOfRangeException.ThrowIfNegative(pageSize);
+
+        return new PagedList<T>(
+            [.. source.Paginate(pageIndex, pageSize)],
             source.Count());
     }
 }

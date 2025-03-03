@@ -16,7 +16,7 @@ public class PagedList<T> : IPagedList<T>
     {
     }
 
-    public PagedList(IEnumerable<T>? items, long? totalCount)
+    public PagedList(IEnumerable<T>? items, int? totalCount)
     {
         this.items = items ?? [];
 
@@ -24,11 +24,13 @@ public class PagedList<T> : IPagedList<T>
         PageLength = this.items.Count();
     }
 
-    public long TotalCount { get; init; }
+    public int TotalCount { get; init; }
 
     public int PageLength { get; init; }
 
-    public IEnumerator<T> GetEnumerator() => items.GetEnumerator();
+    public IEnumerator<T> GetEnumerator()
+        => items.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator() => items.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator()
+        => items.GetEnumerator();
 }

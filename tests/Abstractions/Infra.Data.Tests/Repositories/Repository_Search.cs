@@ -138,7 +138,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal100()
+    public void ReturnsFirstPageGivenPageSize10AndTotal100()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -161,30 +161,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal100()
-    {
-        List<Test> mockedTests = MockTests(100);
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = testRepository.Search(pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNull().And.HaveCount(10);
-        tests.TotalCount.Should().Be(100);
-        tests.First().Should().Be(mockedTests[99]);
-        tests.Last().Should().Be(mockedTests[90]);
-    }
-
-    [Fact]
-    public async Task ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal100Async()
+    public async Task ReturnsFirstPageGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -207,30 +184,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public async Task ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal100Async()
-    {
-        List<Test> mockedTests = MockTests(100);
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = await testRepository.SearchAsync(pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNull().And.HaveCount(10);
-        tests.TotalCount.Should().Be(100);
-        tests.First().Should().Be(mockedTests[99]);
-        tests.Last().Should().Be(mockedTests[90]);
-    }
-
-    [Fact]
-    public void ReturnsSecondPageOrderedAscendingGivenPageSize10AndTotal100()
+    public void ReturnsSecondPageGivenPageSize10AndTotal100()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -253,30 +207,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public void ReturnsSecondPageOrderedDescendingGivenPageSize10AndTotal100()
-    {
-        List<Test> mockedTests = MockTests(100);
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        IPageSearch pageSearch = new PageSearch(1, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = testRepository.Search(pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNull().And.HaveCount(10);
-        tests.TotalCount.Should().Be(100);
-        tests.First().Should().Be(mockedTests[89]);
-        tests.Last().Should().Be(mockedTests[80]);
-    }
-
-    [Fact]
-    public async Task ReturnsSecondPageOrderedAscendingGivenPageSize10AndTotal100Async()
+    public async Task ReturnsSecondPageGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
 
@@ -299,30 +230,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public async Task ReturnsSecondPageOrderedDescendingGivenPageSize10AndTotal100Async()
-    {
-        List<Test> mockedTests = MockTests(100);
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        IPageSearch pageSearch = new PageSearch(1, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = await testRepository.SearchAsync(pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNull().And.HaveCount(10);
-        tests.TotalCount.Should().Be(100);
-        tests.First().Should().Be(mockedTests[89]);
-        tests.Last().Should().Be(mockedTests[80]);
-    }
-
-    [Fact]
-    public void ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal9()
+    public void ReturnsFirstPageGivenPageSize10AndTotal9()
     {
         List<Test> mockedTests = MockTests(9);
 
@@ -345,7 +253,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public async Task ReturnsFirstPageOrderedAscendingGivenPageSize10AndTotal9Async()
+    public async Task ReturnsFirstPageGivenPageSize10AndTotal9Async()
     {
         List<Test> mockedTests = MockTests(9);
 
@@ -368,53 +276,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal9()
-    {
-        List<Test> mockedTests = MockTests(9);
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = testRepository.Search(pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNull().And.HaveCount(9);
-        tests.TotalCount.Should().Be(9);
-        tests.First().Should().Be(mockedTests[8]);
-        tests.Last().Should().Be(mockedTests[0]);
-    }
-
-    [Fact]
-    public async Task ReturnsFirstPageOrderedDescendingGivenPageSize10AndTotal9Async()
-    {
-        List<Test> mockedTests = MockTests(9);
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = await testRepository.SearchAsync(pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNull().And.HaveCount(9);
-        tests.TotalCount.Should().Be(9);
-        tests.First().Should().Be(mockedTests[8]);
-        tests.Last().Should().Be(mockedTests[0]);
-    }
-
-    [Fact]
-    public void ReturnsFirstPageOrderedAscendingActivesGivenPageSize10AndTotal100()
+    public void ReturnsFirstPageActivesGivenPageSize10AndTotal100()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -440,7 +302,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public void GivenDefaultPageThenReturnsFirstPageOrderedAscendingActivesAndTotal100()
+    public void GivenDefaultPageThenReturnsFirstPageActivesAndTotal100()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -532,7 +394,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public async Task ReturnsFirstPageOrderedAscendingActivesGivenPageSize10AndTotal100Async()
+    public async Task ReturnsFirstPageActivesGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -558,60 +420,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public void ReturnsFirstPageOrderedDescendingActivesGivenPageSize10AndTotal100()
-    {
-        List<Test> mockedTests = MockTests(100);
-        mockedTests.First().Deactivate();
-        mockedTests.Last().Deactivate();
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-        IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-
-        IPagedList<Test> tests = testRepository.Search(spec, pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
-        tests.TotalCount.Should().Be(98);
-        tests.First().Should().Be(mockedTests[98]);
-        tests.Last().Should().Be(mockedTests[89]);
-    }
-
-    [Fact]
-    public async Task ReturnsFirstPageOrderedDescendingActivesGivenPageSize10AndTotal100Async()
-    {
-        List<Test> mockedTests = MockTests(100);
-        mockedTests.First().Deactivate();
-        mockedTests.Last().Deactivate();
-
-        Mock<DbSet<Test>> mockDbSet = mockedTests
-            .AsQueryable()
-            .BuildMockDbSet();
-
-        var mockDbContext = new Mock<DbContext>();
-        mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
-
-        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Active);
-        IPageSearch pageSearch = new PageSearch(0, 10, "TId", SortDirection.Desc);
-        var testRepository = new TestRepository(mockDbContext.Object);
-        IPagedList<Test> tests = await testRepository.SearchAsync(spec, pageSearch);
-
-        mockDbContext.Verify(x => x.Set<Test>(), Times.Once);
-        tests.Should().NotBeNullOrEmpty().And.OnlyContain(x => x.Active, "Any test is not active").And.HaveCount(10);
-        tests.TotalCount.Should().Be(98);
-        tests.First().Should().Be(mockedTests[98]);
-        tests.Last().Should().Be(mockedTests[89]);
-    }
-
-    [Fact]
-    public void ReturnsLastPageOrderedAscendingActivesGivenPageSize10AndTotal100()
+    public void ReturnsLastPageActivesGivenPageSize10AndTotal100()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();
@@ -637,7 +446,7 @@ public class Repository_Search
     }
 
     [Fact]
-    public async Task ReturnsLastPageOrderedAscendingActivesGivenPageSize10AndTotal100Async()
+    public async Task ReturnsLastPageActivesGivenPageSize10AndTotal100Async()
     {
         List<Test> mockedTests = MockTests(100);
         mockedTests.First().Deactivate();

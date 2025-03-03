@@ -28,24 +28,21 @@ public static class ObjectExtensions
 
     public static IDictionary<string, TValue?> ToDictionary<TValue>(this object source)
     {
-        var dictionary = new Dictionary<string, TValue?>();
-
         if (source is not null)
         {
             IEnumerable<PropertyInfo> properties = source.GetType().GetTypeInfo().DeclaredProperties;
+            IEnumerable<KeyValuePair<string, TValue?>> values = properties.Select(p =>
+            {
+                return new KeyValuePair<string, TValue?>(
+                    p.Name,
+                    p.GetValue(source).ConvertTo(default(TValue))
+                );
+            });
 
-            dictionary = new Dictionary<string, TValue?>(
-                properties.Select(p =>
-                {
-                    return new KeyValuePair<string, TValue?>(
-                        p.Name,
-                        p.GetValue(source).ConvertTo(default(TValue))
-                    );
-                })
-            );
+            return new Dictionary<string, TValue?>(values);
         }
 
-        return dictionary;
+        return new Dictionary<string, TValue?>();
     }
 
     public static TType? ConvertTo<TType>(this object? value)

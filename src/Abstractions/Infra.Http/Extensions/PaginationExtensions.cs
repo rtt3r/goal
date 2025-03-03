@@ -9,11 +9,6 @@ public static class PaginationExtensions
     {
         return request is null
             ? new PageSearch()
-            : new PageSearch(
-                request.PageIndex,
-                request.PageSize,
-                request.SortBy,
-                request.SortDirection.GetValueOrDefault(SortDirection.Asc)
-            );
+            : new PageSearch(request.PageIndex, request.PageSize);
     }
 }

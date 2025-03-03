@@ -22,26 +22,14 @@ public class Pagination_ToPagedList
     }
 
     [Fact]
-    public void ReturnListOrderedAscendingGivenIndexAndSize()
+    public void ReturnListGivenIndexAndSize()
     {
         IQueryable<TestObject1> values = GetQuery();
-        var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
+        var pagination = new PageSearch(0, 10);
 
         var paginateResult = values.ToPagedList(pagination) as PagedList<TestObject1>;
 
         paginateResult.Should().NotBeNull().And.HaveCount(10).And.HaveElementAt(0, values.ElementAt(0));
-        paginateResult?.TotalCount.Should().Be(values.Count());
-    }
-
-    [Fact]
-    public void ReturnListOrderedDescendingGivenIndexAndSize()
-    {
-        IQueryable<TestObject1> values = GetQuery();
-        var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
-
-        var paginateResult = values.ToPagedList(pagination) as PagedList<TestObject1>;
-
-        paginateResult.Should().NotBeNull().And.HaveCount(10).And.HaveElementAt(0, values.ElementAt(99));
         paginateResult?.TotalCount.Should().Be(values.Count());
     }
 
@@ -55,6 +43,33 @@ public class Pagination_ToPagedList
 
         paginateResult.Should().NotBeNull();
         paginateResult?.TotalCount.Should().Be(100);
+    }
+
+    [Fact]
+    public void ToPagedList_WithPageSearch_ShouldReturnPagedList()
+    {
+        List<int> data = [.. Enumerable.Range(1, 100)];
+
+        var pageSearch = new PageSearch(1, 10);
+        IPagedList<int> result = data.AsQueryable().ToPagedList(pageSearch);
+
+        result.Should().NotBeNull();
+        result.PageLength.Should().Be(10);
+        result.TotalCount.Should().Be(100);
+        result.Should().ContainInOrder(Enumerable.Range(11, 10).ToArray());
+    }
+
+    [Fact]
+    public void ToPagedList_WithPageIndexAndPageSize_ShouldReturnPagedList()
+    {
+        List<int> data = [.. Enumerable.Range(1, 100)];
+
+        IPagedList<int> result = data.AsQueryable().ToPagedList(1, 10);
+
+        result.Should().NotBeNull();
+        result.PageLength.Should().Be(10);
+        result.TotalCount.Should().Be(100);
+        result.Should().ContainInOrder(Enumerable.Range(11, 10));
     }
 
     private static IQueryable<TestObject1> GetQuery() => GetQuery(100);

@@ -32,7 +32,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\src\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-		<ProjectReference Include="..\..\..\src\Extensions\Infra.Data.EntityFrameworkCore\Infra.Data.EntityFrameworkCore.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -45,6 +45,31 @@ public class Pagination_Paginate
     }
 
     [Fact]
+    public void Paginate_WithPageSearch_ShouldReturnCorrectPage()
+    {
+        List<int> data = [.. Enumerable.Range(1, 100)];
+
+        var pageSearch = new PageSearch(1, 10);
+        var result = data.AsQueryable().Paginate(pageSearch).ToList();
+
+        result.Should().HaveCount(10);
+        result.First().Should().Be(11);
+        result.Last().Should().Be(20);
+    }
+
+    [Fact]
+    public void Paginate_WithPageIndexAndPageSize_ShouldReturnCorrectPage()
+    {
+        List<int> data = [.. Enumerable.Range(1, 100)];
+
+        var result = data.AsQueryable().Paginate(1, 10).ToList();
+
+        result.Should().HaveCount(10);
+        result.First().Should().Be(11);
+        result.Last().Should().Be(20);
+    }
+
+    [Fact]
     public void ThrowExceptionGivenNull()
     {
         Action act = () =>
@@ -54,28 +79,6 @@ public class Pagination_Paginate
         };
 
         act.Should().Throw<ArgumentNullException>().WithParameterName("pageSearch");
-    }
-
-    [Fact]
-    public void ReturnPaginatedOrderingAscendingGivenIndexAndSize()
-    {
-        IQueryable<TestObject1> values = GetQuery();
-        var pagination = new PageSearch(0, 10, "Id", SortDirection.Asc);
-
-        var paginateResult = values.Paginate(pagination).ToList();
-
-        paginateResult.Should().NotBeNull().And.HaveCount(10).And.HaveElementAt(0, values.ElementAt(0));
-    }
-
-    [Fact]
-    public void ReturnPaginatedOrderingDescendingGivenIndexAndSize()
-    {
-        IQueryable<TestObject1> values = GetQuery();
-        var pagination = new PageSearch(0, 10, "Id", SortDirection.Desc);
-
-        var paginateResult = values.Paginate(pagination).ToList();
-
-        paginateResult.Should().NotBeNull().And.HaveCount(10).And.HaveElementAt(0, values.ElementAt(99));
     }
 
     private static IQueryable<TestObject1> GetQuery()

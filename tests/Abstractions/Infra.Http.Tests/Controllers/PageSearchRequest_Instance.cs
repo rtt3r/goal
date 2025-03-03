@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Http.Controllers.Requests;
 using Xunit;
 
@@ -16,8 +15,6 @@ public class PageSearchRequest_Instance
         // Assert
         request.PageIndex.Should().Be(0);
         request.PageSize.Should().Be(int.MaxValue);
-        request.SortBy.Should().BeNull();
-        request.SortDirection.Should().BeNull();
     }
 
     [Fact]
@@ -28,15 +25,11 @@ public class PageSearchRequest_Instance
         {
             // Act
             PageIndex = 1,
-            PageSize = 10,
-            SortBy = "name",
-            SortDirection = SortDirection.Desc
+            PageSize = 10
         };
 
         // Assert
         request.PageIndex.Should().Be(1);
         request.PageSize.Should().Be(10);
-        request.SortBy.Should().Be("name");
-        request.SortDirection.Should().Be(SortDirection.Desc);
     }
 }

@@ -22,7 +22,7 @@ public class ApiController_Paged
             new Test { Name = "Test3", Age = 20 },
             new Test { Name = "Test4", Age = 20 },
         };
-        IEnumerable<Test> page = all.Take(2).ToList();
+        IEnumerable<Test> page = [.. all.Take(2)];
         IPagedList pagedList = new PagedList<Test>(page, all.Count);
 
         // Act
@@ -52,7 +52,7 @@ public class ApiController_Paged
             new Test { Name = "Test3", Age = 20 },
             new Test { Name = "Test4", Age = 20 },
         };
-        IEnumerable<Test> page = all.Take(2).ToList();
+        IEnumerable<Test> page = [.. all.Take(2)];
         var pagedList = new PagedList<Test>(page, all.Count);
 
         // Act
