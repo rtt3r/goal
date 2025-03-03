@@ -5,8 +5,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Domain</RootNamespace>
 		<AssemblyName>Goal.Domain.Abstractions</AssemblyName>
-		<VersionPrefix>3.1.0</VersionPrefix>
-		<AssemblyVersion>3.1.0.0</AssemblyVersion>
+		<VersionPrefix>3.2.0</VersionPrefix>
+		<AssemblyVersion>3.2.0.0</AssemblyVersion>
 		<Authors>Ritter Soluções em TI</Authors>
 		<Company>Ritter Soluções em TI</Company>
 		<PackageId>Goal.Domain.Abstractions</PackageId>
