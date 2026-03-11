@@ -1,20 +1,5 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
+# Goal
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -22,183 +7,164 @@
 [![MIT License][license-shield]][license-url]
 [![Quality Gate Status][sonarcloud-shield]][sonarcloud-url]
 
+**Goal** is a .NET infrastructure library that provides reusable abstractions and base implementations for building enterprise applications. It follows Domain-Driven Design (DDD) and CQRS patterns, with support for Entity Framework Core, MediatR, and standardized HTTP API responses.
 
+## Table of Contents
 
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/ritter-ti/goal">
-    <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+- [About](#about)
+- [Packages](#packages)
+- [Getting Started](#getting-started)
+- [Architecture](#architecture)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-  <h3 align="center">Best-README-Template</h3>
+## About
 
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/ritter-ti/goal"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/ritter-ti/goal">View Demo</a>
-    ·
-    <a href="https://github.com/ritter-ti/goal/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/ritter-ti/goal/issues">Request Feature</a>
-  </p>
-</p>
+Goal offers a set of NuGet packages that help you structure .NET applications with:
 
+- **Domain layer** — Entities, value objects, domain events, and repository contracts
+- **Application layer** — Command handlers (CQRS), app services, and projection extensions
+- **Infrastructure** — Repository implementations with EF Core, query repositories, HTTP controller base classes, and auditing
+- **Crosscutting** — Specification pattern, pagination, validation (Ensure), and extension utilities
 
+Built by [Ritter Soluções em TI](https://github.com/ritter-ti).
 
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
+## Packages
 
+| Package | Description |
+|---------|-------------|
+| `Goal.Domain.Abstractions` | Domain entities, value objects, events, and repository interfaces |
+| `Goal.Application.Abstractions` | Command/query handlers, app services, and MediatR integration |
+| `Goal.Infra.Data.Abstractions` | Repository pattern, unit of work, and EF Core auditing |
+| `Goal.Infra.Data.Query.Abstractions` | Read-only query repository abstractions |
+| `Goal.Infra.Http.Abstractions` | API controller base classes, pagination, and standardized responses |
+| `Goal.Infra.Crosscutting` | Specifications, collections, Ensure validation, and extensions |
 
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
-
-### Built With
-
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
-
-
-
-<!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/ritter-ti/goal.git
+   cd goal
    ```
 
+2. Restore and build:
 
+   ```bash
+   dotnet restore
+   dotnet build
+   ```
 
-<!-- USAGE EXAMPLES -->
+3. Run tests:
+
+   ```bash
+   dotnet test
+   ```
+
+### Using as NuGet Packages
+
+Add the packages you need to your project:
+
+```xml
+<PackageReference Include="Goal.Domain.Abstractions" Version="3.2.2" />
+<PackageReference Include="Goal.Application.Abstractions" Version="3.2.2" />
+<PackageReference Include="Goal.Infra.Data.Abstractions" Version="3.2.2" />
+<PackageReference Include="Goal.Infra.Http.Abstractions" Version="3.2.2" />
+<PackageReference Include="Goal.Infra.Crosscutting" Version="3.2.2" />
+```
+
+## Architecture
+
+```
+src/
+├── Crosscutting/
+│   └── Infra.Crosscutting/          # Specifications, pagination, Ensure, extensions
+└── Abstractions/
+    ├── Domain/                       # Entities, value objects, events, IRepository
+    ├── Application/                 # ICommand, ICommandHandler, IAppService
+    ├── Infra.Data/                  # Repository<TEntity,TKey>, UnitOfWork, auditing
+    ├── Infra.Data.Query/            # IQueryRepository
+    └── Infra.Http/                  # ApiController, PagedResponse, result types
+```
+
+### Key Concepts
+
+- **Specification pattern** — Composable query logic with `&`, `|`, and `!` operators
+- **Repository** — Generic CRUD and search with specifications and pagination
+- **Commands** — MediatR-based command handlers for write operations
+- **Paged responses** — Standardized pagination for HTTP APIs
+
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Domain Entity
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```csharp
+public class Product : Entity<Guid>
+{
+    public string Name { get; init; } = string.Empty;
+}
+```
 
+### Specification
 
+```csharp
+public class ActiveProductsSpec : Specification<Product>
+{
+    public override Expression<Func<Product, bool>> SatisfiedBy() =>
+        p => p.IsActive;
+}
+```
 
-<!-- ROADMAP -->
-## Roadmap
+### Repository
 
-See the [open issues](https://github.com/ritter-ti/goal/issues) for a list of proposed features (and known issues).
+```csharp
+public class ProductRepository : Repository<Product, Guid>
+{
+    public ProductRepository(DbContext context) : base(context) { }
+}
+```
 
+### API Controller with Pagination
 
+```csharp
+public class ProductsController : ApiController
+{
+    [HttpGet]
+    public async Task<IActionResult> Get([FromQuery] PageSearchRequest request)
+    {
+        var pageSearch = request.ToPageSearch();
+        var result = await _queryRepository.SearchAsync(pageSearch, HttpContext.RequestAborted);
+        return OkOrNotFound(result);
+    }
+}
+```
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on code style and commit messages.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'feat(scope): add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-
-
-<!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more information.
 
+---
 
+**Project Link:** [https://github.com/ritter-ti/goal](https://github.com/ritter-ti/goal)
 
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/ritter-ti/goal.svg?style=for-the-badge
 [contributors-url]: https://github.com/ritter-ti/goal/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ritter-ti/goal.svg?style=for-the-badge
@@ -209,8 +175,5 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [issues-url]: https://github.com/ritter-ti/goal/issues
 [license-shield]: https://img.shields.io/github/license/ritter-ti/goal.svg?style=for-the-badge
 [license-url]: https://github.com/ritter-ti/goal/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: docs/images/screenshot.png
 [sonarcloud-shield]: https://sonarcloud.io/api/project_badges/measure?project=ritter-ti_goal&metric=alert_status
 [sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=ritter-ti_goal
