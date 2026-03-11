@@ -47,17 +47,17 @@ stages:
 
         steps:
           - task: UseDotNet@2
-            displayName: 'Use .NET SDK 10.x'
+            displayName: 'Use .NET SDK $(dotnetSdkVersion)'
             inputs:
-              version: '10.x'
+              version: '$(dotnetSdkVersion)'
 
-          - task: SonarCloudPrepare@3
-            displayName: 'SonarCloud Prepare'
+          - task: SonarCloudPrepare@4
             inputs:
-              SonarCloud: 'SonarCloud'
-              organization: 'aritters'
+              SonarQube: 'SonarCloud'
+              organization: 'rtt3r'
               scannerMode: 'dotnet'
-              projectKey: 'ritter-ti_goal'
+              projectKey: 'rtt3r_goal'
+              extraProperties: 'sonar.token=05f75ae9ea6f97f8e031ba3190cfcf12251aec5a'
 
           - task: DotNetCoreCLI@2
             displayName: Test
