@@ -28,7 +28,7 @@ Goal offers a set of NuGet packages that help you structure .NET applications wi
 - **Infrastructure** — Repository implementations with EF Core, query repositories, HTTP controller base classes, and auditing
 - **Crosscutting** — Specification pattern, pagination, validation (Ensure), and extension utilities
 
-Built by [Ritter Soluções em TI](https://github.com/ritter-ti).
+Built by [Ritter](https://github.com/ritter-ti).
 
 ## Packages
 
@@ -52,7 +52,7 @@ Built by [Ritter Soluções em TI](https://github.com/ritter-ti).
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ritter-ti/goal.git
+   git clone https://github.com/rtt3r/goal.git
    cd goal
    ```
 
@@ -163,17 +163,17 @@ Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more infor
 
 ---
 
-**Project Link:** [https://github.com/ritter-ti/goal](https://github.com/ritter-ti/goal)
+**Project Link:** [https://github.com/rtt3r/goal](https://github.com/rtt3r/goal)
 
 [contributors-shield]: https://img.shields.io/github/contributors/ritter-ti/goal.svg?style=for-the-badge
-[contributors-url]: https://github.com/ritter-ti/goal/graphs/contributors
+[contributors-url]: https://github.com/rtt3r/goal/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ritter-ti/goal.svg?style=for-the-badge
-[forks-url]: https://github.com/ritter-ti/goal/network/members
+[forks-url]: https://github.com/rtt3r/goal/network/members
 [stars-shield]: https://img.shields.io/github/stars/ritter-ti/goal.svg?style=for-the-badge
-[stars-url]: https://github.com/ritter-ti/goal/stargazers
+[stars-url]: https://github.com/rtt3r/goal/stargazers
 [issues-shield]: https://img.shields.io/github/issues/ritter-ti/goal.svg?style=for-the-badge
-[issues-url]: https://github.com/ritter-ti/goal/issues
+[issues-url]: https://github.com/rtt3r/goal/issues
 [license-shield]: https://img.shields.io/github/license/ritter-ti/goal.svg?style=for-the-badge
-[license-url]: https://github.com/ritter-ti/goal/blob/master/LICENSE.txt
+[license-url]: https://github.com/rtt3r/goal/blob/master/LICENSE.txt
 [sonarcloud-shield]: https://sonarcloud.io/api/project_badges/measure?project=rtt3r_goal&metric=alert_status
 [sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=rtt3r_goal

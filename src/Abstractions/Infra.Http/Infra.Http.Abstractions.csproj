@@ -1,22 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Http</RootNamespace>
 		<AssemblyName>Goal.Infra.Http.Abstractions</AssemblyName>
 		<VersionPrefix>3.2.2</VersionPrefix>
 		<AssemblyVersion>3.2.2.0</AssemblyVersion>
-		<Authors>Ritter Soluções em TI</Authors>
-		<Company>Ritter Soluções em TI</Company>
+		<Authors>Ritter</Authors>
+		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Http.Abstractions</PackageId>
-		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Http seedwork layer for Domain Driven Design</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
@@ -33,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.9" />
 	</ItemGroup>
 
 </Project>

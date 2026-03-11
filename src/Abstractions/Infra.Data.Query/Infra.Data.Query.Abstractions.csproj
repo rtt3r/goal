@@ -1,22 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data.Query</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.Query.Abstractions</AssemblyName>
 		<VersionPrefix>3.2.2</VersionPrefix>
 		<AssemblyVersion>3.2.2.0</AssemblyVersion>
-		<Authors>Ritter Soluções em TI</Authors>
-		<Company>Ritter Soluções em TI</Company>
+		<Authors>Ritter</Authors>
+		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Data.Query.Abstractions</PackageId>
-		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Data query library</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 

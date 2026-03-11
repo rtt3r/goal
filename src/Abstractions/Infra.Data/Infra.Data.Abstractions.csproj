@@ -1,31 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.Abstractions</AssemblyName>
 		<VersionPrefix>3.2.2</VersionPrefix>
 		<AssemblyVersion>3.2.2.0</AssemblyVersion>
-		<Authors>Ritter Soluções em TI</Authors>
-		<Company>Ritter Soluções em TI</Company>
+		<Authors>Ritter</Authors>
+		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Data.Abstractions</PackageId>
-		<RepositoryUrl>https://github.com/ritter-ti/goal</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/ritter-ti/goal</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<Description>Data layer for Domain Driven Design</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="FluentValidation" Version="11.11.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
+		<PackageReference Include="FluentValidation" Version="12.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.4" />
 	</ItemGroup>
 
 	<ItemGroup>
