@@ -23,7 +23,7 @@ public class ApiController_InternalServerError
         actionResult.As<InternalServerErrorResult>().StatusCode.Should().Be(StatusCodes.Status500InternalServerError);
     }
 
-    public class TestController : ApiController
+    public class TestController : Http.Controllers.ApiController
     {
         public ActionResult InternalServerErrorWrapper(object result)
             => InternalServerError(result);

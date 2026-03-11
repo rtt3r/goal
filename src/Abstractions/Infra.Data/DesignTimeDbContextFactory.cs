@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
@@ -11,9 +9,7 @@ public abstract class DesignTimeDbContextFactory<TContext> : IDesignTimeDbContex
     private const string AspNetCoreEnvironment = "ASPNETCORE_ENVIRONMENT";
     private const string AppSettingsFileName = "appsettings.json";
 
-    private IConfiguration? _configuration;
-
-    protected IConfiguration Configuration => _configuration ??= BuildConfiguration();
+    protected IConfiguration Configuration => field ??= BuildConfiguration();
 
     public TContext CreateDbContext(string[] args)
         => CreateDbContext();

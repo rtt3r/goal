@@ -6,14 +6,14 @@ namespace Goal.Infra.Http.Controllers;
 
 public class ApiController : ControllerBase
 {
-    protected virtual IActionResult OkOrNotFound(object? value, string message)
+    protected virtual ActionResult OkOrNotFound(object? value, string message)
     {
         return value is null
             ? NotFound(message)
             : Ok(value);
     }
 
-    protected virtual IActionResult OkOrNotFound(object? value)
+    protected virtual ActionResult OkOrNotFound(object? value)
     {
         return value is null
             ? NotFound()
@@ -34,21 +34,21 @@ public class ApiController : ControllerBase
             : Ok(value);
     }
 
-    protected virtual ActionResult InternalServerError(object result)
+    protected virtual InternalServerErrorObjectResult InternalServerError(object result)
         => new InternalServerErrorObjectResult(result);
 
-    protected virtual ActionResult InternalServerError()
+    protected virtual InternalServerErrorResult InternalServerError()
         => new InternalServerErrorResult();
 
     protected virtual ActionResult ServiceUnavailable(object result)
         => new ServiceUnavailableObjectResult(result);
 
-    protected virtual ActionResult ServiceUnavailable()
+    protected virtual ServiceUnavailableResult ServiceUnavailable()
         => new ServiceUnavailableResult();
 
     protected virtual OkPagedCollectionResult Paged(IPagedList collection)
-        => new(collection);
+        => new OkPagedCollectionResult(collection);
 
     protected virtual OkPagedCollectionResult<T> Paged<T>(IPagedList<T> collection)
-        => new(collection);
+        => new OkPagedCollectionResult<T>(collection);
 }

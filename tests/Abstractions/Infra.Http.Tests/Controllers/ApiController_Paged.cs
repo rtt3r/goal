@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Http.Controllers;
@@ -56,7 +54,7 @@ public class ApiController_Paged
         var pagedList = new PagedList<Test>(page, all.Count);
 
         // Act
-        OkPagedCollectionResult<Test> actionResult = controller.PagedWrapper<Test>(pagedList);
+        OkPagedCollectionResult<Test> actionResult = controller.PagedWrapper(pagedList);
 
         // Assert
         actionResult.Should().BeOfType<OkPagedCollectionResult<Test>>();
@@ -76,7 +74,7 @@ public class ApiController_Paged
             => Paged(collection);
 
         public OkPagedCollectionResult<T> PagedWrapper<T>(IPagedList<T> collection)
-            => Paged<T>(collection);
+            => Paged(collection);
     }
 
     public class Test

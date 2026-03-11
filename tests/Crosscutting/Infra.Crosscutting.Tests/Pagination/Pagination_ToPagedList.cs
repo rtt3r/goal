@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;
@@ -56,7 +54,7 @@ public class Pagination_ToPagedList
         result.Should().NotBeNull();
         result.PageLength.Should().Be(10);
         result.TotalCount.Should().Be(100);
-        result.Should().ContainInOrder(Enumerable.Range(11, 10).ToArray());
+        result.Should().ContainInOrder([.. Enumerable.Range(11, 10)]);
     }
 
     [Fact]

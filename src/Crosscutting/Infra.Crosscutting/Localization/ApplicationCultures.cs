@@ -4,9 +4,6 @@ namespace Goal.Infra.Crosscutting.Localization;
 
 public static class ApplicationCultures
 {
-    private static CultureInfo portugues = null!;
-    private static CultureInfo english = null!;
-
-    public static CultureInfo Portugues => portugues ??= new CultureInfo("pt-BR");
-    public static CultureInfo English => english ??= new CultureInfo("en-US");
+    public static CultureInfo Portugues { get => field ??= new CultureInfo("pt-BR"); } = null!;
+    public static CultureInfo English { get => field ??= new CultureInfo("en-US"); } = null!;
 }
