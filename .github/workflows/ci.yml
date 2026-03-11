@@ -1,0 +1,118 @@
+name: CI
+
+on:
+  push:
+    branches: ['main', 'develop', 'feature/**', 'release/**', 'hotfix/**']
+  pull_request:
+    branches: ['main', 'develop', 'feature/**', 'release/**', 'hotfix/**']
+
+env:
+  DOTNET_VERSION: '10.x'
+  BUILD_CONFIGURATION: Release
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore Goal.slnx
+
+      - name: Build
+        run: dotnet build Goal.slnx --configuration ${{ env.BUILD_CONFIGURATION }} --no-restore
+
+  code-analysis:
+    name: Code Analysis
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Install SonarCloud scanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: SonarCloud Begin
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          dotnet sonarscanner begin \
+            /k:"ritter-ti_goal" \
+            /o:"aritters" \
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml"
+
+      - name: Build
+        run: dotnet build Goal.slnx --configuration ${{ env.BUILD_CONFIGURATION }} --no-incremental
+
+      - name: Test
+        run: dotnet test tests/**/*Tests.csproj --configuration ${{ env.BUILD_CONFIGURATION }} --no-build --verbosity normal --collect:"XPlat Code Coverage;Format=cobertura,opencover" --results-directory ./TestResults
+
+      - name: SonarCloud End
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+
+      - name: Publish test results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: TestResults/**/*.trx
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: TestResults/
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [build, code-analysis]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Build
+        run: dotnet build Goal.slnx --configuration ${{ env.BUILD_CONFIGURATION }}
+
+      - name: Pack
+        run: dotnet pack Goal.slnx --configuration ${{ env.BUILD_CONFIGURATION }} --output ./artifacts --no-build
+
+      - name: Upload NuGet packages
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuget-packages
+          path: ./artifacts/*.nupkg
+
+      # Uncomment and configure secrets to push to your NuGet feed:
+      # - name: Push to NuGet
+      #   run: |
+      #     for f in ./artifacts/*.nupkg; do
+      #       dotnet nuget push "$f" \
+      #         --source ${{ secrets.NUGET_SOURCE_URL }} \
+      #         --api-key ${{ secrets.NUGET_API_KEY }} \
+      #         --skip-duplicate
+      #     done
