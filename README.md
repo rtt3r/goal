@@ -175,5 +175,5 @@ Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more infor
 [issues-url]: https://github.com/ritter-ti/goal/issues
 [license-shield]: https://img.shields.io/github/license/ritter-ti/goal.svg?style=for-the-badge
 [license-url]: https://github.com/ritter-ti/goal/blob/master/LICENSE.txt
-[sonarcloud-shield]: https://sonarcloud.io/api/project_badges/measure?project=ritter-ti_goal&metric=alert_status
+[sonarcloud-shield]: https://sonarcloud.io/api/project_badges/measure?project=rtt3r_goal&metric=alert_status
 [sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=rtt3r_goal
