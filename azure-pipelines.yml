@@ -57,7 +57,6 @@ stages:
               organization: 'rtt3r'
               scannerMode: 'dotnet'
               projectKey: 'rtt3r_goal'
-              extraProperties: 'sonar.token=05f75ae9ea6f97f8e031ba3190cfcf12251aec5a'
 
           - task: DotNetCoreCLI@2
             displayName: Test
