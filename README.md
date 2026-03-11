@@ -5,6 +5,9 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+
+[![SonarQube Cloud][sonarcloud-light]]([sonarcloud-url])
+
 [![Quality Gate Status][sonarcloud-shield]][sonarcloud-url]
 
 **Goal** is a .NET infrastructure library that provides reusable abstractions and base implementations for building enterprise applications. It follows Domain-Driven Design (DDD) and CQRS patterns, with support for Entity Framework Core, MediatR, and standardized HTTP API responses.
@@ -176,4 +179,5 @@ Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more infor
 [license-shield]: https://img.shields.io/github/license/ritter-ti/goal.svg?style=for-the-badge
 [license-url]: https://github.com/rtt3r/goal/blob/master/LICENSE.txt
 [sonarcloud-shield]: https://sonarcloud.io/api/project_badges/measure?project=rtt3r_goal&metric=alert_status
+[sonarcloud-light]: https://sonarcloud.io/images/project_badges/sonarcloud-light.svg
 [sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=rtt3r_goal
