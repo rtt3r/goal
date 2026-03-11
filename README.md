@@ -32,14 +32,14 @@ Built by [Ritter Soluções em TI](https://github.com/ritter-ti).
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `Goal.Domain.Abstractions` | Domain entities, value objects, events, and repository interfaces |
-| `Goal.Application.Abstractions` | Command/query handlers, app services, and MediatR integration |
-| `Goal.Infra.Data.Abstractions` | Repository pattern, unit of work, and EF Core auditing |
-| `Goal.Infra.Data.Query.Abstractions` | Read-only query repository abstractions |
-| `Goal.Infra.Http.Abstractions` | API controller base classes, pagination, and standardized responses |
-| `Goal.Infra.Crosscutting` | Specifications, collections, Ensure validation, and extensions |
+| Package                              | Description                                                         |
+| ------------------------------------ | ------------------------------------------------------------------- |
+| `Goal.Domain.Abstractions`           | Domain entities, value objects, events, and repository interfaces   |
+| `Goal.Application.Abstractions`      | Command/query handlers, app services, and MediatR integration       |
+| `Goal.Infra.Data.Abstractions`       | Repository pattern, unit of work, and EF Core auditing              |
+| `Goal.Infra.Data.Query.Abstractions` | Read-only query repository abstractions                             |
+| `Goal.Infra.Http.Abstractions`       | API controller base classes, pagination, and standardized responses |
+| `Goal.Infra.Crosscutting`            | Specifications, collections, Ensure validation, and extensions      |
 
 ## Getting Started
 
@@ -176,4 +176,4 @@ Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more infor
 [license-shield]: https://img.shields.io/github/license/ritter-ti/goal.svg?style=for-the-badge
 [license-url]: https://github.com/ritter-ti/goal/blob/master/LICENSE.txt
 [sonarcloud-shield]: https://sonarcloud.io/api/project_badges/measure?project=ritter-ti_goal&metric=alert_status
-[sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=ritter-ti_goal
+[sonarcloud-url]: https://sonarcloud.io/summary/new_code?id=rtt3r_goal
