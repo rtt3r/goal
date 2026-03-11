@@ -72,7 +72,7 @@ stages:
             inputs:
               summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
 
-          - task: SonarCloudAnalyze@3
+          - task: SonarCloudAnalyze@4
             displayName: 'SonarCloud analyze'
 
           - task: SonarCloudPublish@4
