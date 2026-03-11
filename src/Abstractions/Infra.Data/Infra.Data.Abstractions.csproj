@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.Abstractions</AssemblyName>
-		<VersionPrefix>3.2.2</VersionPrefix>
-		<AssemblyVersion>3.2.2.0</AssemblyVersion>
+		<VersionPrefix>10.0.4</VersionPrefix>
+		<AssemblyVersion>10.0.4.0</AssemblyVersion>
 		<Authors>Ritter</Authors>
 		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Data.Abstractions</PackageId>
@@ -24,8 +24,10 @@
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.4" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="10.0.4" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="10.0.4" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
+			Version="10.0.4" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions"
+			Version="10.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.4" />
 	</ItemGroup>
 
