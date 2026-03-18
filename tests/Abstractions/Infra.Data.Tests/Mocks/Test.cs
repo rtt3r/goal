@@ -1,4 +1,3 @@
-using System;
 using Goal.Domain.Aggregates;
 
 namespace Goal.Infra.Data.Tests.Mocks;

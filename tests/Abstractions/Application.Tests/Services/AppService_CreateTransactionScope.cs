@@ -1,4 +1,3 @@
-using System;
 using System.Transactions;
 using FluentAssertions;
 using Goal.Application.Services;

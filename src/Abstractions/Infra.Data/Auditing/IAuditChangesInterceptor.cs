@@ -1,4 +1,3 @@
-using System;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Goal.Infra.Data.Auditing;

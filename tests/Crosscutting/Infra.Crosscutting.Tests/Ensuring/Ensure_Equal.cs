@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Tests.Mocks;
 using Xunit;

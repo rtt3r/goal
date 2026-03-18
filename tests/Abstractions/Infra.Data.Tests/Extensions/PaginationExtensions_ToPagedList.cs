@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Data.Extensions;
 using Goal.Infra.Data.Tests.Mocks;

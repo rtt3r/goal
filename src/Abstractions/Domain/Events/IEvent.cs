@@ -1,5 +1,4 @@
-using System;
-using MediatR;
+using ConduitR.Abstractions;
 
 namespace Goal.Domain.Events;
 

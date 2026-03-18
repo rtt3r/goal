@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Goal.Infra.Data.Tests.Extensions;
 using Goal.Infra.Data.Tests.Mocks;

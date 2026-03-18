@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Extensions;
 using Goal.Infra.Crosscutting.Tests.Mocks;

@@ -22,7 +22,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MediatR" Version="14.1.0" />
+		<PackageReference Include="ConduitR" Version="1.0.3" />
+		<PackageReference Include="ConduitR.Abstractions" Version="1.0.3" />
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
 	</ItemGroup>
 

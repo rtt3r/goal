@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Goal.Infra.Data.Tests.Mocks;
 using Microsoft.EntityFrameworkCore;

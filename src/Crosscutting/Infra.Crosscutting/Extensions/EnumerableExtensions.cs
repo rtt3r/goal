@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Goal.Infra.Crosscutting.Collections;
 
 namespace Goal.Infra.Crosscutting.Extensions;

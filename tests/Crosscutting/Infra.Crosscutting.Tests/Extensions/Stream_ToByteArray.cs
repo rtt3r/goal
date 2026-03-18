@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Extensions;
 using Xunit;

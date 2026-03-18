@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace Goal.Infra.Data.Auditing;
 
 public class Audit<TKey>

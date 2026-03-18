@@ -1,4 +1,3 @@
-using System.Linq;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Collections;
 using Goal.Infra.Crosscutting.Extensions;

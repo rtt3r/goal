@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Extensions;

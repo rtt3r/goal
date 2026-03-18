@@ -1,5 +1,3 @@
-using System;
-
 namespace Goal.Domain.Events;
 
 public abstract class Event(string aggregateId, string eventType)

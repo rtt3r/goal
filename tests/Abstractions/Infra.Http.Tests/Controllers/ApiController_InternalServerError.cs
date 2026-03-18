@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Goal.Infra.Http.Controllers;
 using Goal.Infra.Http.Controllers.Results;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

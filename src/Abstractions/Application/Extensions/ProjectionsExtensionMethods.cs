@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Goal.Infra.Crosscutting.Adapters;
 using Goal.Infra.Crosscutting.Collections;
 

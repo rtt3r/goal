@@ -1,5 +1,3 @@
-using System;
-
 namespace Goal.Infra.Crosscutting.Specifications;
 
 public abstract class CompositeSpecification<TEntity> : Specification<TEntity>

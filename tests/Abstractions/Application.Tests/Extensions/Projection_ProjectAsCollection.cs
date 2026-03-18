@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using FluentAssertions;
 using Goal.Application.Extensions;
 using Goal.Infra.Crosscutting.Adapters;

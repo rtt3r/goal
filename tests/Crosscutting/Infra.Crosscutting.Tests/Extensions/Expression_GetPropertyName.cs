@@ -1,4 +1,3 @@
-using System;
 using System.Linq.Expressions;
 using FluentAssertions;
 using Goal.Infra.Crosscutting.Extensions;

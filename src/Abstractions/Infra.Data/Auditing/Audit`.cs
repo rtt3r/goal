@@ -1,5 +1,3 @@
-using System;
-
 namespace Goal.Infra.Data.Auditing;
 
 public class Audit : Audit<string>

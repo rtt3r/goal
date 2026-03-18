@@ -1,5 +1,3 @@
-using System;
-
 namespace Goal.Infra.Data.Query;
 
 public abstract class QueryRepository : IQueryRepository

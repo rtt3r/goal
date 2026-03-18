@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using Goal.Domain.Events;
 using Xunit;

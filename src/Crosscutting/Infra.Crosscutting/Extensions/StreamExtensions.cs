@@ -1,5 +1,3 @@
-using System.IO;
-
 namespace Goal.Infra.Crosscutting.Extensions;
 
 public static class StreamExtensions
