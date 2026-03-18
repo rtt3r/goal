@@ -1,118 +1,117 @@
 trigger:
-- main
-- develop
-- feature/*
-- release/*
-- hotfix/*
+  - main
+  - develop
+  - feature/*
+  - release/*
+  - hotfix/*
 
 variables:
   buildConfiguration: 'Release'
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
 stages:
-- stage: 'Build'
-  displayName: 'Build'
-  jobs: 
-  - job: 'Build'
-    displayName: 'Build job'
-    pool:
-      vmImage: 'ubuntu-latest'
+  - stage: 'Build'
+    displayName: 'Build'
+    jobs:
+      - job: 'Build'
+        displayName: 'Build job'
+        pool:
+          vmImage: 'ubuntu-latest'
 
-    variables:
-      dotnetSdkVersion: '9.x'
+        variables:
+          dotnetSdkVersion: '10.x'
 
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET SDK $(dotnetSdkVersion)'
-      inputs:
-        version: '$(dotnetSdkVersion)'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+            inputs:
+              version: '$(dotnetSdkVersion)'
 
-    - task: DotNetCoreCLI@2
-      displayName: Build
-      inputs:
-        command: 'build'
-        projects: 'Goal.sln'
-        arguments: '--configuration $(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+              command: 'build'
+              projects: 'Goal.slnx'
+              arguments: '--configuration $(buildConfiguration)'
 
-- stage: 'CodeAnalisys'
-  displayName: 'Code analisys'
-  jobs: 
-  - job: 'CodeAnalisys'
-    displayName: 'Code analisys job'
-    pool:
-      vmImage: 'ubuntu-latest'
+  - stage: 'CodeAnalisys'
+    displayName: 'Code analisys'
+    jobs:
+      - job: 'CodeAnalisys'
+        displayName: 'Code analisys job'
+        pool:
+          vmImage: 'ubuntu-latest'
 
-    variables:
-      dotnetSdkVersion: '9.x'
+        variables:
+          dotnetSdkVersion: '10.x'
 
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET SDK 9.x'
-      inputs:
-        version: '9.x'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+            inputs:
+              version: '$(dotnetSdkVersion)'
 
-    - task: SonarCloudPrepare@3
-      displayName: 'SonarCloud Prepare'
-      inputs:
-        SonarCloud: 'SonarCloud'
-        organization: 'aritters'
-        scannerMode: 'dotnet'
-        projectKey: 'ritter-ti_goal'
+          - task: SonarCloudPrepare@4
+            inputs:
+              SonarQube: 'SonarCloud'
+              organization: 'rtt3r'
+              scannerMode: 'dotnet'
+              projectKey: 'rtt3r_goal'
 
-    - task: DotNetCoreCLI@2
-      displayName: Test
-      inputs:
-        command: 'test'
-        projects: 'tests/**/*Tests.csproj'
-        arguments: '--collect "XPlat Code Coverage"'
-        publishTestResults: true
+          - task: DotNetCoreCLI@2
+            displayName: Test
+            inputs:
+              command: 'test'
+              projects: 'tests/**/*Tests.csproj'
+              arguments: '--collect "XPlat Code Coverage"'
+              publishTestResults: true
 
-    - task: PublishCodeCoverageResults@2
-      displayName: 'Publish code coverage report'
-      inputs:
-        summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
+          - task: PublishCodeCoverageResults@2
+            displayName: 'Publish code coverage report'
+            inputs:
+              summaryFileLocation: '$(Agent.TempDirectory)/**/*cobertura.xml'
 
-    - task: SonarCloudAnalyze@3
-      displayName: 'SonarCloud analyze'
+          - task: SonarCloudAnalyze@4
+            displayName: 'SonarCloud analyze'
 
-    - task: SonarCloudPublish@3
-      displayName: 'SonarCloud publish'
-      inputs:
-        pollingTimeoutSec: '300'
+          - task: SonarCloudPublish@4
+            displayName: 'SonarCloud publish'
+            inputs:
+              pollingTimeoutSec: '300'
 
-    - publish: '$(Build.ArtifactStagingDirectory)'
-      artifact: drop
+          - publish: '$(Build.ArtifactStagingDirectory)'
+            artifact: drop
 
-- stage: 'Deploy'
-  displayName: 'Deploy'
-  condition: and(succeeded(), eq(variables.isMain, true))
+  - stage: 'Deploy'
+    displayName: 'Deploy'
+    condition: and(succeeded(), eq(variables.isMain, true))
 
-  jobs:
-  - job: 'Deploy'
-    displayName: 'Deploy job'
-    pool:
-      vmImage: 'ubuntu-latest'
+    jobs:
+      - job: 'Deploy'
+        displayName: 'Deploy job'
+        pool:
+          vmImage: 'ubuntu-latest'
 
-    variables:
-      dotnetSdkVersion: '9.x'
+        variables:
+          dotnetSdkVersion: '10.x'
 
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Use .NET SDK 9.x'
-      inputs:
-        version: '9.x'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Use .NET SDK 10.x'
+            inputs:
+              version: '10.x'
 
-    - task: DotNetCoreCLI@2
-      displayName: Generate Goal Packages
-      inputs:
-        command: 'pack'
-        packagesToPack: '**/*.csproj'
-    
-    - task: DotNetCoreCLI@2
-      displayName: Push Goal Packages
-      inputs:
-        command: 'push'
-        packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-        nuGetFeedType: 'internal'
-        publishVstsFeed: 'd3b22fff-b5da-4bee-b8b3-82c0594da490'
-        allowPackageConflicts: true
+          - task: DotNetCoreCLI@2
+            displayName: Generate Goal Packages
+            inputs:
+              command: 'pack'
+              packagesToPack: '**/*.csproj'
+
+          - task: DotNetCoreCLI@2
+            displayName: Push Goal Packages
+            inputs:
+              command: 'push'
+              packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+              nuGetFeedType: 'internal'
+              publishVstsFeed: 'd3b22fff-b5da-4bee-b8b3-82c0594da490'
+              allowPackageConflicts: true
