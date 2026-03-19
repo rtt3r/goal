@@ -1,19 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Http</RootNamespace>
 		<AssemblyName>Goal.Infra.Http.Abstractions</AssemblyName>
-		<VersionPrefix>10.0.7</VersionPrefix>
-		<AssemblyVersion>10.0.7.0</AssemblyVersion>
+		<VersionPrefix>10.0.8</VersionPrefix>
+		<AssemblyVersion>10.0.8.0</AssemblyVersion>
 		<Authors>Ritter</Authors>
 		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Http.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Http seedwork layer for Domain Driven Design</Description>
+		<Description>API controller base classes, pagination, and standardized HTTP responses.</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>

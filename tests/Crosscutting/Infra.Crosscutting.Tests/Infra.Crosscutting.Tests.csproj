@@ -4,6 +4,7 @@
 		<TargetFramework>net10.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<IsPackable>false</IsPackable>
+		<Description>Unit tests for Goal.Infra.Crosscutting.</Description>
 		<RootNamespace>Goal.Infra.Crosscutting.Tests</RootNamespace>
 		<LangVersion>latest</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>

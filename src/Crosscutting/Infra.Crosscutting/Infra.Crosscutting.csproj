@@ -4,15 +4,15 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Crosscutting</RootNamespace>
 		<AssemblyName>Goal.Infra.Crosscutting</AssemblyName>
-		<VersionPrefix>10.0.7</VersionPrefix>
-		<AssemblyVersion>10.0.7.0</AssemblyVersion>
+		<VersionPrefix>10.0.8</VersionPrefix>
+		<AssemblyVersion>10.0.8.0</AssemblyVersion>
 		<Authors>Ritter</Authors>
 		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Crosscutting</PackageId>
 		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Crosscutting layer</Description>
+		<Description>Specification pattern, pagination, Ensure validation, and extension utilities.</Description>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<LangVersion>latest</LangVersion>

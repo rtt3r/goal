@@ -1,19 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net10.0</TargetFramework>
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Application</RootNamespace>
 		<AssemblyName>Goal.Application.Abstractions</AssemblyName>
-		<VersionPrefix>10.0.7</VersionPrefix>
-		<AssemblyVersion>10.0.7.0</AssemblyVersion>
+		<VersionPrefix>10.0.8</VersionPrefix>
+		<AssemblyVersion>10.0.8.0</AssemblyVersion>
 		<Authors>Ritter</Authors>
 		<Company>Ritter</Company>
 		<PackageId>Goal.Application.Abstractions</PackageId>
 		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
 		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Application abstractions library</Description>
+		<Description>Command/query handlers and app services for CQRS-style application layers.</Description>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
 		<PackageLicenseExpression></PackageLicenseExpression>

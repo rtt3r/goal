@@ -10,7 +10,7 @@
 
 [![Quality Gate Status][sonarcloud-shield]][sonarcloud-url]
 
-**Goal** is a .NET infrastructure library that provides reusable abstractions and base implementations for building enterprise applications. It follows Domain-Driven Design (DDD) and CQRS patterns, with support for Entity Framework Core, MediatR, and standardized HTTP API responses.
+**Goal** is a .NET infrastructure library that provides reusable abstractions and base implementations for building enterprise applications. It follows Domain-Driven Design (DDD) and CQRS patterns, with support for Entity Framework Core and standardized HTTP API responses.
 
 ## Table of Contents
 
@@ -38,7 +38,7 @@ Built by [Ritter](https://github.com/ritter-ti).
 | Package                              | Description                                                         |
 | ------------------------------------ | ------------------------------------------------------------------- |
 | `Goal.Domain.Abstractions`           | Domain entities, value objects, events, and repository interfaces   |
-| `Goal.Application.Abstractions`      | Command/query handlers, app services, and MediatR integration       |
+| `Goal.Application.Abstractions`      | Command/query handlers and app services                            |
 | `Goal.Infra.Data.Abstractions`       | Repository pattern, unit of work, and EF Core auditing              |
 | `Goal.Infra.Data.Query.Abstractions` | Read-only query repository abstractions                             |
 | `Goal.Infra.Http.Abstractions`       | API controller base classes, pagination, and standardized responses |
@@ -102,7 +102,7 @@ src/
 
 - **Specification pattern** — Composable query logic with `&`, `|`, and `!` operators
 - **Repository** — Generic CRUD and search with specifications and pagination
-- **Commands** — MediatR-based command handlers for write operations
+- **Commands** — Command handlers for write operations
 - **Paged responses** — Standardized pagination for HTTP APIs
 
 ## Usage
