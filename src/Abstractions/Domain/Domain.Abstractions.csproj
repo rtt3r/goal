@@ -1,41 +1,35 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net10.0</TargetFramework>
-		<DebugType>Full</DebugType>
-		<RootNamespace>Goal.Domain</RootNamespace>
-		<AssemblyName>Goal.Domain.Abstractions</AssemblyName>
-		<VersionPrefix>10.0.6</VersionPrefix>
-		<AssemblyVersion>10.0.6.0</AssemblyVersion>
-		<Authors>Ritter</Authors>
-		<Company>Ritter</Company>
-		<PackageId>Goal.Domain.Abstractions</PackageId>
-		<RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
-		<PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
-		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-		<Description>Domain abstractions library</Description>
-		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<LangVersion>latest</LangVersion>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <DebugType>Full</DebugType>
+    <RootNamespace>Goal.Domain</RootNamespace>
+    <AssemblyName>Goal.Domain.Abstractions</AssemblyName>
+    <VersionPrefix>10.0.6</VersionPrefix>
+    <AssemblyVersion>10.0.6.0</AssemblyVersion>
+    <Authors>Ritter</Authors>
+    <Company>Ritter</Company>
+    <PackageId>Goal.Domain.Abstractions</PackageId>
+    <RepositoryUrl>https://github.com/rtt3r/goal</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/rtt3r/goal</PackageProjectUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>Domain abstractions library</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="ConduitR" Version="1.0.3" />
-		<PackageReference Include="ConduitR.Abstractions" Version="1.0.3" />
-		<PackageReference Include="FluentValidation" Version="12.1.1" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\Crosscutting\Infra.Crosscutting\Infra.Crosscutting.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\..\..\LICENSE.txt">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

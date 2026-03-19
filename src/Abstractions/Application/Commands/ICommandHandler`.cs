@@ -1,8 +1,6 @@
-﻿using ConduitR.Abstractions;
+﻿namespace Goal.Application.Commands;
 
-namespace Goal.Application.Commands;
-
-public interface ICommandHandler<in TCommand, TResponse> : IRequestHandler<TCommand, TResponse>
+public interface ICommandHandler<in TCommand, TResponse>
     where TCommand : ICommand<TResponse>
 {
 }

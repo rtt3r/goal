@@ -1,8 +1,8 @@
 using FluentAssertions;
-using Goal.Domain.Events;
+using Goal.Application.Events;
 using Xunit;
 
-namespace Goal.Domain.Tests.Events;
+namespace Goal.Application.Tests.Events;
 
 public class EventTests
 {

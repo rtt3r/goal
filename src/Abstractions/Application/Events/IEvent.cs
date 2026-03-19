@@ -1,8 +1,6 @@
-using ConduitR.Abstractions;
+namespace Goal.Application.Events;
 
-namespace Goal.Domain.Events;
-
-public interface IEvent : INotification
+public interface IEvent
 {
     string AggregateId { get; }
     string EventType { get; }
