@@ -9,16 +9,16 @@ public class PagedList<T> : IPagedList<T>
 {
     private readonly IEnumerable<T> items;
 
-    public PagedList(IEnumerable<T> items)
-        : this(items, items.Count())
+    public PagedList(IEnumerable<T>? items)
+        : this(items, items?.Count())
     {
     }
 
-    public PagedList(IEnumerable<T> items, long totalCount)
+    public PagedList(IEnumerable<T>? items, long? totalCount)
     {
         this.items = items ?? [];
 
-        TotalCount = totalCount;
+        TotalCount = totalCount ?? 0;
         PageLength = this.items.Count();
     }
 

@@ -4,8 +4,8 @@
 		<DebugType>Full</DebugType>
 		<RootNamespace>Goal.Infra.Data</RootNamespace>
 		<AssemblyName>Goal.Infra.Data.Abstractions</AssemblyName>
-		<VersionPrefix>10.0.10</VersionPrefix>
-		<AssemblyVersion>10.0.10.0</AssemblyVersion>
+		<VersionPrefix>10.0.11</VersionPrefix>
+		<AssemblyVersion>10.0.11.0</AssemblyVersion>
 		<Authors>Ritter</Authors>
 		<Company>Ritter</Company>
 		<PackageId>Goal.Infra.Data.Abstractions</PackageId>
