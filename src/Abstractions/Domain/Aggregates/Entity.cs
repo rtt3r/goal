@@ -4,6 +4,6 @@ public abstract class Entity : Entity<string>, IEntity
 {
     protected Entity()
     {
-        Id = Guid.NewGuid().ToString();
+        Id = Guid.CreateVersion7().ToString();
     }
 }

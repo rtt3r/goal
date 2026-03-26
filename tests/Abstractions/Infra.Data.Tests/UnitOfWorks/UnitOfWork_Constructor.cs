@@ -31,7 +31,7 @@ public class UnitOfWork_Constructor
     private static DbContextOptions CreateOptions()
     {
         return new DbContextOptionsBuilder()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString())
+            .UseInMemoryDatabase(Guid.CreateVersion7().ToString())
             .Options;
     }
 }

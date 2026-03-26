@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 using FluentAssertions;
 using Goal.Infra.Data.Auditing;
 using Microsoft.EntityFrameworkCore;
@@ -14,159 +15,28 @@ public class AuditChangesInterceptor_SaveAuditChanges
     [InlineData(false)]
     public async Task ShouldAuditAddEntries(bool async)
     {
-        // Arrange
-        (UniverseContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
-        DateTimeOffset startedAt = DateTimeOffset.UtcNow;
-
-        // Act
-        using DbContext _ = context;
-
-        bool savingEventCalled = false;
-        bool saveAuditEventCalled = false;
-        int resultFromEvent = 0;
-        Audit? auditFromEvent = null;
-        Exception? exceptionFromEvent = null;
-
-        context.SavingChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            savingEventCalled = true;
-        };
-
-        context.SavedChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            resultFromEvent = args.EntitiesSavedCount;
-        };
-
-        context.SaveChangesFailed += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            exceptionFromEvent = args.Exception;
-        };
-
-        interceptor.SaveAudit += (sender, args) =>
-        {
-            args.Audit.Should().NotBeNull();
-            auditFromEvent = args.Audit;
-            saveAuditEventCalled = true;
-        };
-
-        int savedCount = 0;
+        (UniverseContext context, _) = CreateContext();
+        using UniverseContext _db = context;
 
         if (async)
         {
             await context.AddAsync(new Singularity { Id = 35, Type = "Red Dwarf" });
-            savedCount = await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
         else
         {
             context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
-            savedCount = context.SaveChanges();
+            context.SaveChanges();
         }
 
-        // Assert
-        savedCount.Should().Be(1);
-        savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeTrue();
-        savedCount.Should().Be(resultFromEvent);
-        exceptionFromEvent.Should().BeNull();
+        AuditLog audit = GetAudits(context).Should().ContainSingle().Subject;
 
-        context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
-
-        auditFromEvent?.Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent?.Succeeded.Should().BeTrue();
-        auditFromEvent?.ErrorMessage.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(auditFromEvent.EndTime);
-        auditFromEvent?.Entries.Should().HaveCount(1);
-        auditFromEvent?.Entries.ElementAt(0).Should().NotBeNull();
-        auditFromEvent?.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).AuditType.Should().Be("Create");
-        auditFromEvent?.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditFromEvent?.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        auditFromEvent?.Entries.ElementAt(0).TableName.Should().Be("Singularity");
-    }
-
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public async Task ShouldAuditAddEntriesWithoutEvent(bool async)
-    {
-        // Arrange
-        (UniverseContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
-        DateTimeOffset startedAt = DateTimeOffset.UtcNow;
-
-        // Act
-        using DbContext _ = context;
-
-        bool savingEventCalled = false;
-        bool saveAuditEventCalled = false;
-        int resultFromEvent = 0;
-        Audit? auditFromEvent = null;
-        Exception? exceptionFromEvent = null;
-
-        context.SavingChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            savingEventCalled = true;
-        };
-
-        context.SavedChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            resultFromEvent = args.EntitiesSavedCount;
-        };
-
-        context.SaveChangesFailed += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            exceptionFromEvent = args.Exception;
-        };
-
-        int savedCount = 0;
-
-        if (async)
-        {
-            await context.AddAsync(new Singularity { Id = 35, Type = "Red Dwarf" });
-            savedCount = await context.SaveChangesAsync();
-        }
-        else
-        {
-            context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
-            savedCount = context.SaveChanges();
-        }
-
-        // Assert
-        savedCount.Should().Be(1);
-        savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeFalse();
-        savedCount.Should().Be(resultFromEvent);
-        auditFromEvent.Should().BeNull();
-        exceptionFromEvent.Should().BeNull();
-
-        context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
-
-        interceptor.Audit.Id.Should().NotBeNullOrWhiteSpace();
-        interceptor.Audit.Succeeded.Should().BeTrue();
-        interceptor.Audit.ErrorMessage.Should().BeNullOrWhiteSpace();
-        interceptor.Audit.StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(interceptor.Audit.EndTime);
-        interceptor.Audit.Entries.Should().HaveCount(1);
-        interceptor.Audit.Entries.ElementAt(0).Should().NotBeNull();
-        interceptor.Audit.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        interceptor.Audit.Entries.ElementAt(0).AuditType.Should().Be("Create");
-        interceptor.Audit.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        interceptor.Audit.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        interceptor.Audit.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        interceptor.Audit.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        interceptor.Audit.Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        interceptor.Audit.Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        audit.ChangeType.Should().Be(nameof(EntityState.Added));
+        audit.EntityName.Should().Be(nameof(Singularity));
+        audit.ChangedBy.Should().BeNullOrWhiteSpace();
+        AssertJsonKeyValues(audit.KeyValues!, ("Id", JsonValueKind.Number, "35"));
+        audit.OldValues.Should().BeNull();
+        AssertJsonSnapshot(audit.NewValues!, ("Id", 35), ("Type", "Red Dwarf"));
     }
 
     [Theory]
@@ -174,45 +44,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
     [InlineData(false)]
     public async Task ShouldAuditUpdateEntries(bool async)
     {
-        // Arrange
-        (UniverseContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
-        DateTimeOffset startedAt = DateTimeOffset.UtcNow;
-
-        // Act
-        using DbContext _ = context;
-
-        bool savingEventCalled = false;
-        bool saveAuditEventCalled = false;
-        int resultFromEvent = 0;
-        var auditsFromEvent = new List<Audit>();
-        Exception? exceptionFromEvent = null;
-
-        context.SavingChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            savingEventCalled = true;
-        };
-
-        context.SavedChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            resultFromEvent = args.EntitiesSavedCount;
-        };
-
-        context.SaveChangesFailed += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            exceptionFromEvent = args.Exception;
-        };
-
-        interceptor.SaveAudit += (sender, args) =>
-        {
-            args.Audit.Should().NotBeNull();
-            auditsFromEvent.Add(args.Audit);
-            saveAuditEventCalled = true;
-        };
-
-        int savedCount = 0;
+        (UniverseContext context, _) = CreateContext();
+        using UniverseContext _db = context;
 
         var entity = new Singularity { Id = 35, Type = "Red Dwarf" };
 
@@ -223,62 +56,33 @@ public class AuditChangesInterceptor_SaveAuditChanges
 
             entity.Type = "Red Giant";
             context.Update(entity);
-            savedCount = await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
         else
         {
             context.Add(entity);
-            await context.SaveChangesAsync();
+            context.SaveChanges();
 
             entity.Type = "Red Giant";
             context.Update(entity);
-            savedCount = context.SaveChanges();
+            context.SaveChanges();
         }
 
-        // Assert
-        savedCount.Should().Be(1);
-        savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeTrue();
-        savedCount.Should().Be(resultFromEvent);
-        exceptionFromEvent.Should().BeNull();
+        List<AuditLog> audits = GetAudits(context);
+        audits.Should().HaveCount(2);
 
-        context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(1);
+        audits[0].ChangeType.Should().Be(nameof(EntityState.Added));
+        audits[0].EntityName.Should().Be(nameof(Singularity));
+        audits[0].OldValues.Should().BeNull();
 
-        auditsFromEvent.Should().HaveCount(2);
+        AssertJsonSnapshot(audits[0].NewValues!, ("Id", 35), ("Type", "Red Dwarf"));
 
-        auditsFromEvent[0].Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[0].Succeeded.Should().BeTrue();
-        auditsFromEvent[0].ErrorMessage.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(auditsFromEvent[0].EndTime);
-        auditsFromEvent[0].Entries.Should().HaveCount(1);
-        auditsFromEvent[0].Entries.ElementAt(0).Should().NotBeNull();
-        auditsFromEvent[0].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).AuditType.Should().Be("Create");
-        auditsFromEvent[0].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditsFromEvent[0].Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        auditsFromEvent[0].Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        audits[1].ChangeType.Should().Be(nameof(EntityState.Modified));
+        audits[1].EntityName.Should().Be(nameof(Singularity));
 
-        auditsFromEvent[1].Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[1].Succeeded.Should().BeTrue();
-        auditsFromEvent[1].ErrorMessage.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[1].StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(auditsFromEvent[1].EndTime);
-        auditsFromEvent[1].Entries.Should().HaveCount(1);
-        auditsFromEvent[1].Entries.ElementAt(0).Should().NotBeNull();
-        auditsFromEvent[1].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[1].Entries.ElementAt(0).AuditType.Should().Be("Update");
-        auditsFromEvent[1].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[1].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditsFromEvent[1].Entries.ElementAt(0).ChangedColumns.Should().Be("[\"Type\"]");
-        auditsFromEvent[1].Entries.ElementAt(0).OldValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        auditsFromEvent[1].Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Giant\"}");
-        auditsFromEvent[1].Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        AssertJsonKeyValues(audits[1].KeyValues!, ("Id", JsonValueKind.Number, "35"));
+        AssertJsonSnapshot(audits[1].OldValues!, ("Type", "Red Dwarf"));
+        AssertJsonSnapshot(audits[1].NewValues!, ("Type", "Red Giant"));
     }
 
     [Theory]
@@ -286,45 +90,8 @@ public class AuditChangesInterceptor_SaveAuditChanges
     [InlineData(false)]
     public async Task ShouldAuditDeleteEntries(bool async)
     {
-        // Arrange
-        (UniverseContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
-        DateTimeOffset startedAt = DateTimeOffset.UtcNow;
-
-        // Act
-        using DbContext _ = context;
-
-        bool savingEventCalled = false;
-        bool saveAuditEventCalled = false;
-        int resultFromEvent = 0;
-        var auditsFromEvent = new List<Audit>();
-        Exception? exceptionFromEvent = null;
-
-        context.SavingChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            savingEventCalled = true;
-        };
-
-        context.SavedChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            resultFromEvent = args.EntitiesSavedCount;
-        };
-
-        context.SaveChangesFailed += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            exceptionFromEvent = args.Exception;
-        };
-
-        interceptor.SaveAudit += (sender, args) =>
-        {
-            args.Audit.Should().NotBeNull();
-            auditsFromEvent.Add(args.Audit);
-            saveAuditEventCalled = true;
-        };
-
-        int savedCount = 0;
+        (UniverseContext context, _) = CreateContext();
+        using UniverseContext _db = context;
 
         var entity = new Singularity { Id = 35, Type = "Red Dwarf" };
 
@@ -332,179 +99,92 @@ public class AuditChangesInterceptor_SaveAuditChanges
         {
             await context.AddAsync(entity);
             await context.SaveChangesAsync();
-
             context.Remove(entity);
-            savedCount = await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
         }
         else
         {
             context.Add(entity);
-            await context.SaveChangesAsync();
-
+            context.SaveChanges();
             context.Remove(entity);
-            savedCount = context.SaveChanges();
+            context.SaveChanges();
         }
 
-        // Assert
-        savedCount.Should().Be(1);
-        savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeTrue();
-        savedCount.Should().Be(resultFromEvent);
-        exceptionFromEvent.Should().BeNull();
+        context.Set<Singularity>().AsNoTracking().Any(e => e.Id == 35).Should().BeFalse();
 
-        context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(0);
+        List<AuditLog> audits = GetAudits(context);
+        audits.Should().HaveCount(2);
 
-        auditsFromEvent.Should().HaveCount(2);
+        audits[0].ChangeType.Should().Be(nameof(EntityState.Added));
+        audits[1].ChangeType.Should().Be(nameof(EntityState.Deleted));
+        audits[1].EntityName.Should().Be(nameof(Singularity));
+        audits[1].NewValues.Should().BeNull();
 
-        auditsFromEvent[0].Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[0].Succeeded.Should().BeTrue();
-        auditsFromEvent[0].ErrorMessage.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(auditsFromEvent[0].EndTime);
-        auditsFromEvent[0].Entries.Should().HaveCount(1);
-        auditsFromEvent[0].Entries.ElementAt(0).Should().NotBeNull();
-        auditsFromEvent[0].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).AuditType.Should().Be("Create");
-        auditsFromEvent[0].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditsFromEvent[0].Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[0].Entries.ElementAt(0).NewValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        auditsFromEvent[0].Entries.ElementAt(0).TableName.Should().Be("Singularity");
-
-        auditsFromEvent[0].Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[1].Succeeded.Should().BeTrue();
-        auditsFromEvent[1].ErrorMessage.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[1].StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(auditsFromEvent[1].EndTime);
-        auditsFromEvent[1].Entries.Should().HaveCount(1);
-        auditsFromEvent[1].Entries.ElementAt(0).Should().NotBeNull();
-        auditsFromEvent[0].Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditsFromEvent[1].Entries.ElementAt(0).AuditType.Should().Be("Delete");
-        auditsFromEvent[1].Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[1].Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditsFromEvent[1].Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[1].Entries.ElementAt(0).OldValues.Should().Be("{\"Type\":\"Red Dwarf\"}");
-        auditsFromEvent[1].Entries.ElementAt(0).NewValues.Should().BeNullOrWhiteSpace();
-        auditsFromEvent[1].Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        AssertJsonKeyValues(audits[1].KeyValues!, ("Id", JsonValueKind.Number, "35"));
+        AssertJsonSnapshot(audits[1].OldValues!, ("Id", 35), ("Type", "Red Dwarf"));
     }
 
-    [Theory]
-    [InlineData(true)]
-    [InlineData(false)]
-    public async Task ShouldThrownAuditAddEntries(bool async)
+    private static void AssertJsonKeyValues(string json, params (string Key, JsonValueKind Kind, string Raw)[] expected)
     {
-        // Arrange
-        (UniverseContext context, UniverseAuditChangesInterceptor interceptor) = CreateContext<UniverseAuditChangesInterceptor>();
-        DateTimeOffset startedAt = DateTimeOffset.UtcNow;
+        using var doc = JsonDocument.Parse(json);
 
-        // Act
-        using DbContext _ = context;
-
-        bool savingEventCalled = false;
-        bool saveAuditEventCalled = false;
-        int resultFromEvent = 0;
-        Audit? auditFromEvent = null!;
-        Exception? exceptionFromEvent = null!;
-
-        context.SavingChanges += (sender, args) =>
+        foreach ((string? key, JsonValueKind kind, string? raw) in expected)
         {
-            context.Should().BeSameAs(sender);
-            savingEventCalled = true;
-        };
-
-        context.SavedChanges += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            resultFromEvent = args.EntitiesSavedCount;
-        };
-
-        context.SaveChangesFailed += (sender, args) =>
-        {
-            context.Should().BeSameAs(sender);
-            exceptionFromEvent = args.Exception;
-        };
-
-        interceptor.SaveAudit += (sender, args) =>
-        {
-            args.Audit.Should().NotBeNull();
-            auditFromEvent = args.Audit;
-            saveAuditEventCalled = true;
-        };
-
-        int savedCount = 0;
-
-        Exception? thrown = null;
-
-        try
-        {
-            context.Update(new Singularity { Id = 35, Type = "Red Dwarf" });
-
-            savedCount = async
-                ? await context.SaveChangesAsync()
-                : context.SaveChanges();
+            doc.RootElement.TryGetProperty(key, out JsonElement prop).Should().BeTrue();
+            prop.ValueKind.Should().Be(kind);
+            prop.GetRawText().Should().Be(raw);
         }
-        catch (Exception e)
+    }
+
+    private static void AssertJsonSnapshot(string json, params (string Key, object Value)[] pairs)
+    {
+        using var doc = JsonDocument.Parse(json);
+        foreach ((string? key, object? value) in pairs)
         {
-            thrown = e;
+            doc.RootElement.TryGetProperty(key, out JsonElement prop).Should().BeTrue();
+            switch (value)
+            {
+                case int i:
+                    prop.GetInt32().Should().Be(i);
+                    break;
+                case string s:
+                    prop.GetString().Should().Be(s);
+                    break;
+                default:
+                    throw new ArgumentException(nameof(value));
+            }
         }
 
-        // Assert
-        savedCount.Should().Be(0);
-        savingEventCalled.Should().BeTrue();
-        saveAuditEventCalled.Should().BeFalse();
-        savedCount.Should().Be(resultFromEvent);
-        exceptionFromEvent.Should().BeSameAs(thrown);
-
-        context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35).Should().Be(0);
-
-        auditFromEvent?.Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent?.Succeeded.Should().BeFalse();
-        auditFromEvent?.ErrorMessage.Should().Be(exceptionFromEvent?.Message);
-        auditFromEvent?.StartTime
-            .Should().BeAfter(startedAt)
-            .And.BeBefore(auditFromEvent.EndTime);
-        auditFromEvent?.Entries.Should().HaveCount(1);
-        auditFromEvent?.Entries.ElementAt(0).Should().NotBeNull();
-        auditFromEvent?.Entries.ElementAt(0).Id.Should().NotBeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).AuditType.Should().Be("None");
-        auditFromEvent?.Entries.ElementAt(0).AuditUser.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).KeyValues.Should().Be("{\"Id\":35}");
-        auditFromEvent?.Entries.ElementAt(0).ChangedColumns.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).OldValues.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).NewValues.Should().BeNullOrWhiteSpace();
-        auditFromEvent?.Entries.ElementAt(0).TableName.Should().Be("Singularity");
+        doc.RootElement.EnumerateObject().Count().Should().Be(pairs.Length);
     }
 
     private static DbContextOptions CreateOptions(IInterceptor interceptor)
     {
         return new DbContextOptionsBuilder()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseInMemoryDatabase(databaseName: Guid.CreateVersion7().ToString())
             .AddInterceptors(interceptor)
             .Options;
     }
 
-    protected static (UniverseContext, TInterceptor) CreateContext<TInterceptor>()
-        where TInterceptor : class, IAuditChangesInterceptor, new()
+    private static (UniverseContext Context, UniverseAuditChangesInterceptor Interceptor) CreateContext()
     {
-        var interceptor = new TInterceptor();
-        (UniverseContext context, IAuditChangesInterceptor _) = CreateContext(interceptor);
-
-        return (context, interceptor);
-    }
-
-    public static (UniverseContext, IAuditChangesInterceptor) CreateContext(IAuditChangesInterceptor interceptor)
-    {
+        var interceptor = new UniverseAuditChangesInterceptor();
         UniverseContext context = new(CreateOptions(interceptor));
         return (context, interceptor);
     }
+
+    private static List<AuditLog> GetAudits(UniverseContext context)
+        => context.Set<AuditLog>().AsNoTracking()
+            .OrderBy(a => a.Timestamp)
+            .ThenBy(a => a.Id)
+            .ToList();
 
     public class UniverseContext(DbContextOptions options) : DbContext(options)
     {
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AuditLog>();
+
             modelBuilder
                 .Entity<Singularity>()
                 .HasData(
@@ -537,9 +217,6 @@ public class AuditChangesInterceptor_SaveAuditChanges
 
     public class UniverseAuditChangesInterceptor : AuditChangesInterceptor
     {
-        public Audit Audit { get; private set; } = null!;
-
-        protected override void SaveAuditChanges(Audit audit)
-            => Audit = audit;
+        public override string GetCurrentUserId() => string.Empty;
     }
 }

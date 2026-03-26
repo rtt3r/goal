@@ -6,160 +6,142 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Goal.Infra.Data.Auditing;
 
-public abstract class AuditChangesInterceptor : SaveChangesInterceptor, IAuditChangesInterceptor
+public abstract class AuditChangesInterceptor : SaveChangesInterceptor
 {
-    protected Audit? _audit;
+    private bool _isSaving;
 
-    public event EventHandler<SaveAuditEventArgs>? SaveAudit;
-
-    protected AuditChangesInterceptor()
-    {
-    }
-
-    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
-        DbContextEventData eventData,
-        InterceptionResult<int> result,
-        CancellationToken cancellationToken = new CancellationToken())
-        => await Task.Run(() => SavingChanges(eventData, result), cancellationToken).ConfigureAwait(false);
+    public abstract string GetCurrentUserId();
 
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
         InterceptionResult<int> result)
     {
-        _audit = CreateAudit(eventData.Context!);
-        return result;
+        if (_isSaving || eventData.Context is null)
+            return base.SavingChanges(eventData, result);
+
+        try
+        {
+            _isSaving = true;
+
+            SaveAudits(
+                eventData.Context,
+                CollectAudits(eventData.Context));
+
+            return base.SavingChanges(eventData, result);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
     }
 
-    public override async ValueTask<int> SavedChangesAsync(
-        SaveChangesCompletedEventData eventData,
-        int result,
-        CancellationToken cancellationToken = new CancellationToken())
-        => await Task.Run(() => SavedChanges(eventData, result), cancellationToken).ConfigureAwait(false);
-
-    public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
+    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
     {
-        if (_audit is null)
-            return result;
+        if (_isSaving || eventData.Context is null)
+            return await base.SavingChangesAsync(eventData, result, cancellationToken);
 
-        _audit.Succeeded = true;
-        _audit.EndTime = DateTime.UtcNow;
+        try
+        {
+            _isSaving = true;
 
-        SaveAuditChangesInternal(_audit);
+            await SaveAuditsAsync(
+                eventData.Context,
+                CollectAudits(eventData.Context),
+                cancellationToken);
 
-        return result;
+            return await base.SavingChangesAsync(eventData, result, cancellationToken);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
     }
 
-    public override async Task SaveChangesFailedAsync(
-        DbContextErrorEventData eventData,
-        CancellationToken cancellationToken = new CancellationToken())
-        => await Task.Run(() => SaveChangesFailed(eventData), cancellationToken).ConfigureAwait(false);
-
-    public override void SaveChangesFailed(DbContextErrorEventData eventData)
+    private List<AuditLog> CollectAudits(DbContext context)
     {
-        if (_audit is null)
+        var audits = new List<AuditLog>();
+
+        foreach (EntityEntry entry in context.ChangeTracker.Entries())
+        {
+            if (ShouldAudit(entry))
+                audits.Add(CreateAuditEntry(entry));
+        }
+
+        return audits;
+    }
+
+    private static void SaveAudits(DbContext context, List<AuditLog> audits)
+    {
+        if (audits.Count == 0)
             return;
 
-        _audit.Succeeded = false;
-        _audit.EndTime = DateTime.UtcNow;
-        _audit.ErrorMessage = eventData.Exception.Message;
-
-        SaveAuditChangesInternal(_audit);
+        context.Set<AuditLog>().AddRange(audits);
+        context.SaveChanges();
     }
 
-    protected abstract void SaveAuditChanges(Audit audit);
-
-    private static Audit CreateAudit(DbContext context)
+    private static async Task SaveAuditsAsync(DbContext context, List<AuditLog> audits, CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(context);
+        if (audits.Count == 0)
+            return;
 
-        context.ChangeTracker.DetectChanges();
-        var audit = new Audit { StartTime = DateTimeOffset.UtcNow };
+        await context.Set<AuditLog>().AddRangeAsync(audits, cancellationToken);
+        await context.SaveChangesAsync(cancellationToken);
+    }
 
-        foreach (EntityEntry entry in context!.ChangeTracker
-            .Entries()
-            .Where(x => x.State is EntityState.Added or EntityState.Modified or EntityState.Deleted))
+    private AuditLog CreateAuditEntry(EntityEntry entry)
+    {
+        string tableName = entry.Metadata.GetTableName()!;
+        string? schema = entry.Metadata.GetSchema();
+        var identifier = StoreObjectIdentifier.Table(tableName, schema);
+
+        var audit = new AuditLog()
         {
-            audit.Entries.Add(CreateAuditEntry(entry));
+            EntityName = tableName,
+            ChangeType = entry.State.ToString(),
+            ChangedBy = GetCurrentUserId(),
+            Timestamp = DateTime.UtcNow,
+            KeyValues = JsonSerializer.Serialize(
+                entry.Properties
+                    .Where(p => p.Metadata.IsPrimaryKey())
+                    .ToDictionary(p => p.Metadata.GetColumnName(identifier)!, p => p.CurrentValue))
+        };
+
+        if (entry.State == EntityState.Added)
+        {
+            audit.NewValues = JsonSerializer.Serialize(entry.CurrentValues.ToObject());
+            return audit;
         }
+
+        if (entry.State == EntityState.Deleted)
+        {
+            audit.OldValues = JsonSerializer.Serialize(entry.OriginalValues.ToObject());
+            return audit;
+        }
+
+        var changes = entry.Properties
+            .Where(p => p.IsModified && !Equals(p.OriginalValue, p.CurrentValue))
+            .ToDictionary(
+                p => p.Metadata.GetColumnName(identifier)!,
+                p => new { Old = p.OriginalValue, New = p.CurrentValue }
+            );
+
+        audit.OldValues = changes.Count != 0
+            ? JsonSerializer.Serialize(changes.ToDictionary(k => k.Key, k => k.Value.Old))
+            : null;
+
+        audit.NewValues = changes.Count != 0
+            ? JsonSerializer.Serialize(changes.ToDictionary(k => k.Key, k => k.Value.New))
+            : null;
 
         return audit;
     }
 
-    private static AuditEntry CreateAuditEntry(EntityEntry entry)
+    private static bool ShouldAudit(EntityEntry entry)
     {
-        string tableName = entry.Metadata.GetTableName()
-            ?? throw new InvalidOperationException("Cannot obtain the table name");
-
-        string? schema = entry.Metadata.GetSchema();
-
-        var keyValues = new Dictionary<string, object?>();
-        var oldValues = new Dictionary<string, object?>();
-        var newValues = new Dictionary<string, object?>();
-        var changedColumns = new List<string>();
-        AuditType auditType = AuditType.None;
-
-        var identifier = StoreObjectIdentifier.Table(tableName, schema);
-
-        string propertyName;
-        string? columnName;
-
-        foreach (PropertyEntry property in entry.Properties)
-        {
-            propertyName = property.Metadata.Name;
-            columnName = property.Metadata.GetColumnName(identifier)
-                ?? throw new InvalidOperationException("Cannot obtain the column name");
-
-            if (property.Metadata.IsPrimaryKey())
-            {
-                keyValues[propertyName] = property.CurrentValue;
-                continue;
-            }
-
-            switch (entry.State)
-            {
-                case EntityState.Added:
-                    newValues[propertyName] = property.CurrentValue;
-                    auditType = AuditType.Create;
-                    break;
-
-                case EntityState.Deleted:
-                    oldValues[propertyName] = property.OriginalValue;
-                    auditType = AuditType.Delete;
-                    break;
-
-                case EntityState.Modified when property.IsModified
-                    && property.OriginalValue is not null
-                    && !property.OriginalValue.Equals(property.CurrentValue):
-
-                    changedColumns.Add(columnName);
-
-                    oldValues[propertyName] = property.OriginalValue;
-                    newValues[propertyName] = property.CurrentValue;
-                    auditType = AuditType.Update;
-                    break;
-            }
-        }
-
-        return new AuditEntry
-        {
-            AuditType = auditType.ToString(),
-            TableName = tableName,
-            KeyValues = JsonSerializer.Serialize(keyValues),
-            OldValues = oldValues.Count == 0 ? null : JsonSerializer.Serialize(oldValues),
-            NewValues = newValues.Count == 0 ? null : JsonSerializer.Serialize(newValues),
-            ChangedColumns = changedColumns.Count == 0 ? null : JsonSerializer.Serialize(changedColumns)
-        };
-    }
-
-    private void SaveAuditChangesInternal(Audit audit)
-    {
-        SaveAudit?.Invoke(this, new SaveAuditEventArgs(audit));
-        SaveAuditChanges(audit);
-    }
-
-    public class SaveAuditEventArgs(Audit audit) : EventArgs
-    {
-
-        public Audit Audit { get; } = audit;
+        return entry.Entity is not AuditLog
+            && (entry.State is EntityState.Added or EntityState.Modified or EntityState.Deleted);
     }
 }

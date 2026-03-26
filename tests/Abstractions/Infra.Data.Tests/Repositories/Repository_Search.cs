@@ -104,7 +104,7 @@ public class Repository_Search
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid().ToString());
+        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.CreateVersion7().ToString());
         var testRepository = new TestRepository(mockDbContext.Object);
         ICollection<Test> tests = testRepository.Search(spec);
 
@@ -124,7 +124,7 @@ public class Repository_Search
         var mockDbContext = new Mock<DbContext>();
         mockDbContext.Setup(p => p.Set<Test>()).Returns(mockDbSet.Object);
 
-        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.NewGuid().ToString());
+        ISpecification<Test> spec = new DirectSpecification<Test>(t => t.Id == Guid.CreateVersion7().ToString());
 
         var testRepository = new TestRepository(mockDbContext.Object);
         ICollection<Test> tests = await testRepository.SearchAsync(spec);

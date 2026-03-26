@@ -21,7 +21,7 @@ public class Test : Entity
     }
 
     public Test(int tId)
-        : this(Guid.NewGuid().ToString(), tId)
+        : this(Guid.CreateVersion7().ToString(), tId)
     {
     }
 

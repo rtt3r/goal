@@ -40,7 +40,7 @@ public class Repository_Dispose
     private static DbContextOptions CreateOptions()
     {
         return new DbContextOptionsBuilder()
-            .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
+            .UseInMemoryDatabase(databaseName: Guid.CreateVersion7().ToString())
             .Options;
     }
 
