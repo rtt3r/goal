@@ -35,7 +35,7 @@ public class EventTests
     public void Event_Should_Set_AggregateId_Property()
     {
         // Arrange
-        string aggregateId = Guid.NewGuid().ToString();
+        string aggregateId = Guid.CreateVersion7().ToString();
 
         // Act
         var @event = new SampleEvent(aggregateId);
